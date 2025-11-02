@@ -1,6 +1,7 @@
 <script lang="ts">
   import { artData } from '$lib/art-data';
   import { onMount, onDestroy } from 'svelte';
+  import { browser } from '$app/environment';
 
   let lightboxActive = false;
   let currentArtIndex = 0;
@@ -14,11 +15,17 @@
     currentArtIndex = index;
     lightboxActive = true;
     imageLoaded = false;
+    if (browser) {
+      document.body.style.overflow = 'hidden';
+    }
   };
 
   const closeLightbox = () => {
     lightboxActive = false;
     imageLoaded = false;
+    if (browser) {
+      document.body.style.overflow = '';
+    }
   };
 
   const goToNext = () => {
@@ -50,22 +57,16 @@
   };
 
   onMount(() => {
-    window.addEventListener('keydown', handleKeyDown);
+    if (browser) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
   });
 
   onDestroy(() => {
-    window.removeEventListener('keydown', handleKeyDown);
-  });
-
-  $: {
-    if (typeof document !== 'undefined') {
-      if (lightboxActive) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
+    if (browser) {
+      window.removeEventListener('keydown', handleKeyDown);
     }
-  }
+  });
 
   $: currentArtData = artEntries[currentArtIndex][1];
 </script>

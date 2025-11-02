@@ -8,9 +8,9 @@ const config = {
 	preprocess: vitePreprocess(),
 	kit: { 
 		adapter: adapter({
-			fallback: 'index.html',
-			pages: 'build',
-			assets: 'build',
+			fallback: undefined,
+			pages: 'public',
+			assets: 'public',
 			precompress: false,
 			strict: false
 		}),
