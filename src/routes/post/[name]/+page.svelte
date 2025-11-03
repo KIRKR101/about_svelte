@@ -13,11 +13,6 @@
 
   export let data: PageData;
 
-  function processWikilinks(content: string): string {
-    // Process wikilinks ![[file]] to standard markdown images
-    return content.replace(/!\[\[([^\]]+)\]\]/g, '![](posts/$1)');
-  }
-
   function parseFrontmatter(content: string): { frontmatter: any, body: string } {
     const frontmatterMatch = content.match(/^---\s*([\s\S]*?)\s*---/);
     if (frontmatterMatch) {
@@ -40,10 +35,7 @@
   }
 
   const { meta, content } = data;
-  const { frontmatter, body } = parseFrontmatter(content);
-
-  // Process wikilinks
-  const processedContent = processWikilinks(body);
+  const { body } = parseFrontmatter(content);
 </script>
 
 <svelte:head>
@@ -70,7 +62,7 @@
 
     <hr class="border-border mb-6 sm:mb-10" />
 
-    <PostContent content={processedContent} />
+    <PostContent content={body} />
 
     <hr class="border-border mb-4" />
     <footer class="text-right mr-0 sm:mr-8 text-muted-foreground text-sm">
