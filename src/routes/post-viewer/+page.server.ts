@@ -1,32 +1,21 @@
 import { error } from '@sveltejs/kit';
-import { readFileSync } from 'fs';
-import { join } from 'path';
 
 export const prerender = false;
 
-export async function load({ url }) {
+export async function load({ fetch, url }) {
   const postName = url.searchParams.get('name');
+  if (!postName) throw error(400, 'No post specified');
 
-  if (!postName) {
-    throw error(400, 'No post specified');
-  }
+  const manifestRes = await fetch('/posts/manifest.json');
+  if (!manifestRes.ok) throw error(404, 'Manifest not found');
+  const manifest = await manifestRes.json();
 
-  try {
-    // Fetch manifest
-    const manifestPath = join('static', 'posts', 'manifest.json');
-    const manifestContent = readFileSync(manifestPath, 'utf8');
-    const manifest = JSON.parse(manifestContent);
-    const postMeta = manifest.find((p: any) => p.file === postName);
+  const postMeta = manifest.find((p: any) => p.file === postName);
+  if (!postMeta) throw error(404, 'Post not found');
 
-    // Fetch markdown content
-    const postPath = join('static', 'posts', `${postName}.md`);
-    const markdownContent = readFileSync(postPath, 'utf8');
+  const postRes = await fetch(`/posts/${postName}.md`);
+  if (!postRes.ok) throw error(404, 'Post not found');
+  const markdownContent = await postRes.text();
 
-    return {
-      meta: postMeta,
-      content: markdownContent
-    };
-  } catch (err) {
-    throw error(404, 'Post not found');
-  }
+  return { meta: postMeta, content: markdownContent };
 }
