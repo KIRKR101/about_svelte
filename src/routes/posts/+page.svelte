@@ -71,7 +71,7 @@
       <div class="space-y-0 divide-y divide-border/40">
           {#each data.posts as post}
               <a
-                  href={`/post-viewer?name=${post.file}`}
+                  href={`/post/${post.file}`}
                   class="group block py-4 transition-colors hover:bg-accent/50 -mx-4 px-4 rounded-lg"
               >
                   <article class="grid grid-cols-1 gap-3 md:grid-cols-[180px_1fr] md:gap-6">

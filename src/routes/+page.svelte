@@ -128,7 +128,7 @@
                                 >
                                     <h3 class="m-0 text-base font-normal text-foreground">
                                         <a
-                                            href={`/post-viewer?name=${post.file}`}
+                                            href={`/post/${post.file}`}
                                             class="text-foreground no-underline hover:text-foreground transition-colors hover:underline"
                                         >
                                             {post.title}
