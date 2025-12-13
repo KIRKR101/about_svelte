@@ -23,7 +23,7 @@
 
   onMount(async () => {
     try {
-      const response = await fetch('http://lastfm.kirkr.xyz/api/lastfm-track');
+      const response = await fetch('https://lastfm.kirkr.xyz/api/lastfm-track');
 
       if (!response.ok) {
         throw new Error(`API responded with ${response.status}`);
