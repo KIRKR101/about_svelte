@@ -223,5 +223,37 @@ export const artData = {
 			['dimensions', '61.9 x 92 cm']
 		],
 		aspectRatio: '320/213'
+	},
+	'trompe-loeil-ferdinand-bol': {
+		title: "Trompe l'Oeil of an Etching by Ferdinand Bol",
+		thumbnail:
+			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg/500px-Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg',
+		image:
+			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg/960px-Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg',
+		description:
+			"This vertical composition presents a trompe l'oeil of a printed portrait of an older, bearded man, seemingly stuck to a wood panel with a red wax seal. The realistic depiction of crinkled paper and the three-dimensional wax seal creates a convincing illusion, only to be revealed as a single painting upon closer inspection. The print within the painting is signed 'F. Bol. F 1642.'",
+		data: [
+			['artist', 'Dutch or Flemish 17th Century'],
+			['year', 'c. 1675'],
+			['medium', 'Oil on panel'],
+			['dimensions', '37.5 x 31.4 cm']
+		],
+		aspectRatio: '31.4/37.5'
+	},
+	'young-man-with-a-skull': {
+		title: 'Young Man with a Skull',
+		thumbnail:
+			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg/500px-Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg',
+		image:
+			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg/1080px-Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg',
+		description:
+			"This oil on canvas painting by Frans Hals, created in 1626-1628, depicts a young man in a feathered red bonnet and cloak, gesturing towards the viewer while holding a skull. Once thought to be Hamlet, it's now considered a vanitas, a symbolic reminder of life's fragility and death's inevitability. The work is notable for its dramatic composition and the expressive quality of Hals' brushwork.",
+		data: [
+			['artist', 'Frans Hals'],
+			['year', '1626–1628'],
+			['medium', 'Oil on canvas'],
+			['dimensions', '92 x 81 cm']
+		],
+		aspectRatio: '36/41'
 	}
 };
