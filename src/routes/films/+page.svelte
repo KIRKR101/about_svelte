@@ -120,6 +120,7 @@
   <title>Films | kirkr.xyz</title>
   <meta name="description" content="A log of recently watched films." />
   <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://a.ltrbxd.com" />
 </svelte:head>
 
 <div class="flex flex-col items-center p-4 md:p-8">
@@ -134,7 +135,17 @@
     {#if loading}
       <div class="text-center text-muted-foreground">Loading films...</div>
     {:else if error}
-      <div class="text-center text-destructive">Failed to load films. {error}</div>
+      <div class="text-center">
+        <p class="text-destructive mb-4">Failed to load films. {error} Just see my profile instead.</p>
+        <iframe
+          src="https://embed.letterboxd.com/kirkr101"
+          width="100%"
+          height="600"
+          allow="fullscreen"
+          title="Letterboxd film diary embed"
+          class="rounded-lg border-none"
+        ></iframe>
+      </div>
     {:else}
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 justify-items-center">
         {#each films as film, index}

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { recentPosts } from '$lib/posts-data';
+   import { onMount, onDestroy } from 'svelte';
+   import { recentPosts } from '$lib/posts-data';
 
   interface TrackData {
     status: string;
@@ -11,28 +11,40 @@
   }
 
   let trackData: TrackData | null = null;
+  let intervalId: ReturnType<typeof setInterval>;
+
+  async function fetchTrack() {
+      try {
+          const response = await fetch('https://lastfm.kirkr.xyz/api/lastfm-track');
+
+          if (!response.ok) {
+              throw new Error(`API responded with ${response.status}`);
+          }
+
+          trackData = await response.json();
+      } catch (error) {
+          console.error('Error fetching Last.fm track:', error);
+      }
+  }
 
   function formatDate(dateString: string) {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
+    return date.toLocaleDateString('en-GB', {
       year: 'numeric',
       month: 'short',
       day: 'numeric'
     });
   }
 
-  onMount(async () => {
-    try {
-      const response = await fetch('https://lastfm.kirkr.xyz/api/lastfm-track');
+  onMount(() => {
+      fetchTrack();
+      intervalId = setInterval(fetchTrack, 60000);
+  });
 
-      if (!response.ok) {
-        throw new Error(`API responded with ${response.status}`);
+  onDestroy(() => {
+      if (intervalId) {
+          clearInterval(intervalId);
       }
-
-      trackData = await response.json();
-    } catch (error) {
-      console.error('Error fetching Last.fm track:', error);
-    }
   });
 </script>
 
@@ -83,27 +95,36 @@
                 </div>
 
                 <div class="flex items-center gap-4 w-full">
-                    <img
-                        src={trackData?.albumArtUrl || "https://lastfm.freetls.fastly.net/i/u/64s/40564dd1a58f969fc3ee3c49bddffd23.png"}
-                        alt={trackData ? `Album art for ${trackData.title}` : "Album art for Duvet"}
-                        class="w-16 h-16 rounded-lg shrink-0 object-cover"
-                    />
+                    {#if trackData}
+                        <img
+                            src={trackData.albumArtUrl}
+                            alt={`Album art for ${trackData.title}`}
+                            class="w-16 h-16 rounded-lg shrink-0 object-cover"
+                        />
 
-                    <div class="flex flex-col min-w-0 flex-1">
-                        <h4 class="m-0 text-lg font-normal text-foreground min-w-0">
-                            <a
-                                href={trackData?.trackUrl || "https://www.last.fm/music/b%C3%B4a/_/Duvet"}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-foreground no-underline hover:underline"
-                            >
-                                {trackData?.title || 'Duvet'}
-                            </a>
-                        </h4>
-                        <p class="m-0 text-base text-muted-foreground whitespace-normal wrap-break-word min-w-0">
-                            {trackData?.artist || 'bôa'}
-                        </p>
-                    </div>
+                        <div class="flex flex-col min-w-0 flex-1">
+                            <h4 class="m-0 text-lg font-normal text-foreground min-w-0">
+                                <a
+                                    href={trackData.trackUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-foreground no-underline hover:underline"
+                                >
+                                    {trackData.title}
+                                </a>
+                            </h4>
+                            <p class="m-0 text-base text-muted-foreground whitespace-normal wrap-break-word min-w-0">
+                                {trackData.artist}
+                            </p>
+                        </div>
+                    {:else}
+                        <div class="w-16 h-16 rounded-lg bg-muted animate-pulse shrink-0"></div>
+
+                        <div class="flex flex-col min-w-0 flex-1 gap-2">
+                            <div class="h-5 bg-muted animate-pulse rounded"></div>
+                            <div class="h-4 bg-muted animate-pulse rounded w-3/4"></div>
+                        </div>
+                    {/if}
                 </div>
             </div>
 
