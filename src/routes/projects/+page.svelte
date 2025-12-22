@@ -74,7 +74,7 @@
 </svelte:head>
 
 <div class="flex flex-col items-center p-4 md:p-8">
-  <div class="w-full max-w-4xl mx-auto">
+  <div class="w-full max-w-5xl mx-auto">
     <header class="flex items-center justify-center p-0 mb-8 md:mb-12 mt-8 sm:mt-0">
       <div class="text-center">
         <h1 class="text-xl sm:text-2xl mb-2 font-normal">Projects</h1>

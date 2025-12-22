@@ -68,7 +68,7 @@
             </div>
         </div>
     {:else}
-      <div class="space-y-0 divide-y divide-border/40">
+      <div class="space-y-0 divide-y divide-border">
           {#each data.posts as post}
               <a
                   href={`/post/${post.file}`}
