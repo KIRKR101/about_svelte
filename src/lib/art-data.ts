@@ -129,9 +129,9 @@ export const artData = {
 	'suzukawa-river': {
 		title: 'Suzukawa River',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Yoshida_Hiroshi_Suzukawa%2C_1935.jpg/640px-Yoshida_Hiroshi_Suzukawa%2C_1935.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Yoshida_Hiroshi_Suzukawa%2C_1935.jpg/640px-Yoshida_Hiroshi_Suzukawa%2C_1935.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Yoshida_Hiroshi_Suzukawa%2C_1935.jpg/1280px-Yoshida_Hiroshi_Suzukawa%2C_1935.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Yoshida_Hiroshi_Suzukawa%2C_1935.jpg/1280px-Yoshida_Hiroshi_Suzukawa%2C_1935.jpg',
 		description:
 			'Another leading figure of the shin-hanga movement, Hiroshi Yoshida was known for his landscape prints. This work presents a serene and majestic view of Mount Fuji, its snow-capped peak perfectly reflected in the calm waters.',
 		data: [
