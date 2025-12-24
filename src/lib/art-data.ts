@@ -113,9 +113,9 @@ export const artData = {
 	'nikko-kaido': {
 		title: 'Nikkō Kaidō',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Nikko_kaido_hasui_kawase.jpg/330px-Nikko_kaido_hasui_kawase.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Nikko_kaido_hasui_kawase.jpg/330px-Nikko_kaido_hasui_kawase.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Nikko_kaido_hasui_kawase.jpg/800px-Nikko_kaido_hasui_kawase.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Nikko_kaido_hasui_kawase.jpg/800px-Nikko_kaido_hasui_kawase.jpg',
 		description:
 			'An iconic work of the shin-hanga ("new prints") movement. Hasui Kawase was a master of capturing the atmosphere of Japanese landscapes, conveying the tranquil and almost mystical quality of the historic Nikkō highway.',
 		data: [
@@ -243,9 +243,9 @@ export const artData = {
 	'young-man-with-a-skull': {
 		title: 'Young Man with a Skull',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg/500px-Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg/500px-Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg/1080px-Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg/1080px-Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg',
 		description:
 			"This oil on canvas painting by Frans Hals, created in 1626-1628, depicts a young man in a feathered red bonnet and cloak, gesturing towards the viewer while holding a skull. Once thought to be Hamlet, it's now considered a vanitas, a symbolic reminder of life's fragility and death's inevitability. The work is notable for its dramatic composition and the expressive quality of Hals' brushwork.",
 		data: [
