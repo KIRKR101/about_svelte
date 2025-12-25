@@ -49,7 +49,7 @@
 </script>
 
 <div class="flex justify-center items-center min-h-[calc(100vh-4rem)] p-4 md:p-8">
-    <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 lg:px-8 xl:px-0 max-w-[90vw] lg:max-w-340 lg:w-full items-center">
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 lg:px-8 max-w-[90vw] lg:max-w-340 lg:w-full items-center">
         <!-- Intro Section -->
         <section class="flex-1 flex flex-col justify-center w-full">
             <div class="mb-2">

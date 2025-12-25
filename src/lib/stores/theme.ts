@@ -3,7 +3,7 @@ import { browser } from '$app/environment';
 
 const userTheme = browser && localStorage.getItem('theme');
 
-export const theme = writable(userTheme || 'light');
+export const theme = writable(userTheme || 'dark');
 
 theme.subscribe((value) => {
   if (browser) {

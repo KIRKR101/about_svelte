@@ -8,7 +8,7 @@
 	// Initialize theme on mount
 	onMount(() => {
 		if (browser) {
-			const userTheme = localStorage.getItem('theme') || 'light';
+			const userTheme = localStorage.getItem('theme') || 'dark';
 			theme.set(userTheme);
 			document.documentElement.classList.toggle('dark', userTheme === 'dark');
 		}

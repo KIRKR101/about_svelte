@@ -136,7 +136,7 @@
       <div class="text-center text-muted-foreground">Loading films...</div>
     {:else if error}
       <div class="text-center">
-        <p class="text-destructive mb-4">Failed to load films. {error} Just see my profile instead.</p>
+        <p class="text-destructive mb-4">Failed to load films. Just see my profile instead.</p>
         <iframe
           src="https://embed.letterboxd.com/kirkr101"
           width="100%"

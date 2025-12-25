@@ -59,8 +59,8 @@
     {
         id: "wasmagick",
         title: "WASMagick",
-        link: null,
-        github: "https://github.com/KIRKR101/WASMagick",
+        link: "https://wasmagick.kirkr.xyz",
+        github: "github.com/Kirkr101/WASMagick",
         description:
             "A client-side image converter using a WASM implementation of Magick, featuring compression, dynamic resizing, transformations, filters, colour effects, etc.",
     },
