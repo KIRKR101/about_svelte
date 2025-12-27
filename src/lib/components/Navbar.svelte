@@ -137,6 +137,12 @@
           >
             Art
           </a>
+          <a 
+            href="/photography" 
+            class={`px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-ring transition-colors ${isActive('/photography') ? 'text-(--text-color) dark:bg-(--card-bg-color) bg-(--button-hover-bg-color)' : 'text-(--subtle-text-color) hover:text-(--text-color)'}`}
+          >
+            Photography
+          </a>
         </nav>
       </div>
 
@@ -296,6 +302,15 @@
           class={getLinkClassName('/art')}
         >
           Art
+        </a>
+      </li>
+      <li>
+        <a
+          href="/photography"
+          on:click={handleMobileLinkClick}
+          class={getLinkClassName('/photography')}
+        >
+          Photography
         </a>
       </li>
     </ul>
