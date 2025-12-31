@@ -2,7 +2,18 @@
    import { onMount, onDestroy } from 'svelte';
    import { recentPosts } from '$lib/posts-data';
 
-  interface TrackData {
+  interface SpotifyTrackData {
+    isPlaying: boolean;
+    title: string;
+    artist: string;
+    album: string;
+    albumArt: string;
+    progress: number;
+    duration: number;
+    uri: string;
+  }
+
+  interface LastFmTrackData {
     status: string;
     title: string;
     artist: string;
@@ -10,21 +21,82 @@
     trackUrl: string;
   }
 
-  let trackData: TrackData | null = null;
+  let spotifyData: SpotifyTrackData | null = null;
+  let lastFmData: LastFmTrackData | null = null;
+  let useLastFm = false;
   let intervalId: ReturnType<typeof setInterval>;
+  let progressIntervalId: ReturnType<typeof setInterval>;
+  let localProgress = 0;
+  let lastFetchTime = 0;
 
-  async function fetchTrack() {
+  async function fetchSpotifyTrack() {
+      try {
+          const response = await fetch('https://spotify.kirkr.xyz/api/now-playing');
+
+          if (!response.ok) {
+              throw new Error(`Spotify API responded with ${response.status}`);
+          }
+
+          const data = await response.json();
+          
+          if (data.isPlaying !== undefined) {
+              spotifyData = data;
+              localProgress = data.progress || 0;
+              lastFetchTime = Date.now();
+              useLastFm = false;
+              
+              // Set up progress interpolation
+              setupProgressInterpolation();
+              return;
+          }
+          
+          throw new Error('Invalid Spotify response');
+      } catch (error) {
+          console.error('Error fetching Spotify track, falling back to Last.fm:', error);
+          useLastFm = true;
+          fetchLastFmTrack();
+      }
+  }
+
+  async function fetchLastFmTrack() {
       try {
           const response = await fetch('https://lastfm.kirkr.xyz/api/lastfm-track');
 
           if (!response.ok) {
-              throw new Error(`API responded with ${response.status}`);
+              throw new Error(`Last.fm API responded with ${response.status}`);
           }
 
-          trackData = await response.json();
+          lastFmData = await response.json();
       } catch (error) {
           console.error('Error fetching Last.fm track:', error);
       }
+  }
+
+  function setupProgressInterpolation() {
+      if (progressIntervalId) {
+          clearInterval(progressIntervalId);
+      }
+
+      if (spotifyData?.isPlaying) {
+          progressIntervalId = setInterval(() => {
+              const elapsed = Date.now() - lastFetchTime;
+              const newProgress = (spotifyData?.progress || 0) + elapsed;
+              
+              if (newProgress >= (spotifyData?.duration || 0)) {
+                  // Song likely finished, fetch new data
+                  fetchSpotifyTrack();
+              } else {
+                  localProgress = newProgress;
+              }
+          }, 100);
+      }
+  }
+
+  function formatTime(ms: number) {
+      const totalSeconds = Math.floor(ms / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   }
 
   function formatDate(dateString: string) {
@@ -37,15 +109,20 @@
   }
 
   onMount(() => {
-      fetchTrack();
-      intervalId = setInterval(fetchTrack, 60000);
+      fetchSpotifyTrack();
+      intervalId = setInterval(fetchSpotifyTrack, 60000);
   });
 
   onDestroy(() => {
       if (intervalId) {
           clearInterval(intervalId);
       }
+      if (progressIntervalId) {
+          clearInterval(progressIntervalId);
+      }
   });
+
+  $: progressPercentage = spotifyData ? (localProgress / spotifyData.duration) * 100 : 0;
 </script>
 
 <div class="flex justify-center items-center min-h-[calc(100vh-4rem)] p-4 md:p-8">
@@ -80,52 +157,116 @@
         </section>
 
         <div class="flex flex-col gap-8">
-            <!-- Last.fm Container -->
+            <!-- Music Container (Spotify or Last.fm) -->
             <div class="lg:max-w-xl w-full bg-card p-4 rounded-lg border border-border">
-                <div class="flex justify-between items-center text-sm text-muted-foreground uppercase tracking-wider font-bold mb-3 flex-wrap gap-2">
-                    <span>{trackData?.status || 'Currently playing'}</span>
-                    <a
-                        href="https://www.last.fm/user/Kirkr101"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-sm font-normal text-muted-foreground no-underline hover:text-foreground hover:underline transition-colors"
-                    >
-                        last.fm
-                    </a>
-                </div>
+                {#if !useLastFm && spotifyData}
+                    <!-- Spotify Display -->
+                    <div class="flex justify-between items-center text-sm text-muted-foreground uppercase tracking-wider font-bold mb-3 flex-wrap gap-2">
+                        <span>{spotifyData.isPlaying ? 'Currently playing' : 'Last played'}</span>
+                        <a
+                            href="https://open.spotify.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-sm font-normal text-muted-foreground no-underline hover:text-foreground hover:underline transition-colors inline-flex items-center gap-1.5"
+                        >
+                            <svg viewBox="0 0 24 24" class="w-4 h-4 fill-current">
+                                <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                            </svg>
+                            <span>spotify</span>
+                        </a>
+                    </div>
 
-                <div class="flex items-center gap-4 w-full">
-                    {#if trackData}
+                    <div class="flex items-center gap-4 w-full mb-3">
                         <img
-                            src={trackData.albumArtUrl}
-                            alt={`Album art for ${trackData.title}`}
+                            src={spotifyData.albumArt}
+                            alt={`Album art for ${spotifyData.title}`}
                             class="w-16 h-16 rounded-lg shrink-0 object-cover"
                         />
 
                         <div class="flex flex-col min-w-0 flex-1">
                             <h4 class="m-0 text-lg font-normal text-foreground min-w-0">
                                 <a
-                                    href={trackData.trackUrl}
+                                    href={spotifyData.uri}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="text-foreground no-underline hover:underline"
                                 >
-                                    {trackData.title}
+                                    {spotifyData.title}
                                 </a>
                             </h4>
                             <p class="m-0 text-base text-muted-foreground whitespace-normal wrap-break-word min-w-0">
-                                {trackData.artist}
+                                {spotifyData.artist}
                             </p>
                         </div>
-                    {:else}
+                    </div>
+
+                    <!-- Progress Bar -->
+                    {#if spotifyData.isPlaying}
+                        <div class="flex flex-col gap-1.5">
+                            <div class="w-full h-1 bg-muted rounded-full overflow-hidden">
+                                <div
+                                    class="h-full bg-foreground transition-all duration-100 ease-linear"
+                                    style="width: {Math.min(progressPercentage, 100)}%"
+                                ></div>
+                            </div>
+                            <div class="flex justify-between text-xs text-muted-foreground">
+                                <span>{formatTime(localProgress)}</span>
+                                <span>{formatTime(spotifyData.duration)}</span>
+                            </div>
+                        </div>
+                    {/if}
+                {:else if useLastFm && lastFmData}
+                    <!-- Last.fm Display -->
+                    <div class="flex justify-between items-center text-sm text-muted-foreground uppercase tracking-wider font-bold mb-3 flex-wrap gap-2">
+                        <span>{lastFmData.status || 'Currently playing'}</span>
+                        <a
+                            href="https://www.last.fm/user/Kirkr101"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-sm font-normal text-muted-foreground no-underline hover:text-foreground hover:underline transition-colors"
+                        >
+                            last.fm
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-4 w-full">
+                        <img
+                            src={lastFmData.albumArtUrl}
+                            alt={`Album art for ${lastFmData.title}`}
+                            class="w-16 h-16 rounded-lg shrink-0 object-cover"
+                        />
+
+                        <div class="flex flex-col min-w-0 flex-1">
+                            <h4 class="m-0 text-lg font-normal text-foreground min-w-0">
+                                <a
+                                    href={lastFmData.trackUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-foreground no-underline hover:underline"
+                                >
+                                    {lastFmData.title}
+                                </a>
+                            </h4>
+                            <p class="m-0 text-base text-muted-foreground whitespace-normal wrap-break-word min-w-0">
+                                {lastFmData.artist}
+                            </p>
+                        </div>
+                    </div>
+                {:else}
+                    <!-- Loading State -->
+                    <div class="flex justify-between items-center text-sm text-muted-foreground uppercase tracking-wider font-bold mb-3 flex-wrap gap-2">
+                        <span>Currently playing</span>
+                    </div>
+
+                    <div class="flex items-center gap-4 w-full">
                         <div class="w-16 h-16 rounded-lg bg-muted animate-pulse shrink-0"></div>
 
                         <div class="flex flex-col min-w-0 flex-1 gap-2">
                             <div class="h-5 bg-muted animate-pulse rounded"></div>
                             <div class="h-4 bg-muted animate-pulse rounded w-3/4"></div>
                         </div>
-                    {/if}
-                </div>
+                    </div>
+                {/if}
             </div>
 
             <!-- Recent Posts Section -->
