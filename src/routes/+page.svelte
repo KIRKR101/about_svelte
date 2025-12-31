@@ -176,7 +176,7 @@
                         </a>
                     </div>
 
-                    <div class="flex items-center gap-4 w-full mb-3">
+                    <div class="flex items-center gap-4 w-full">
                         <img
                             src={spotifyData.albumArt}
                             alt={`Album art for ${spotifyData.title}`}
