@@ -176,7 +176,7 @@
                         </a>
                     </div>
 
-                    <div class="flex items-center gap-4 w-full">
+                    <div class="flex items-center gap-4 w-full {spotifyData.isPlaying ? 'mb-3' : ''}">
                         <img
                             src={spotifyData.albumArt}
                             alt={`Album art for ${spotifyData.title}`}
