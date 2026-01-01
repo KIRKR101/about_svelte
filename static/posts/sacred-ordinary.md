@@ -1,6 +1,4 @@
-
 The following is a short essay on the life and art of Pieter de Hooch.
-# The Sacred Ordinary: The Domestic Vision of Pieter de Hooch
 
 Of the many masters who defined the Dutch Golden Age, few captured the quiet gravity of the home with as much precision and warmth as Pieter de Hooch. Born in Rotterdam in 1629 to a master bricklayer, de Hooch’s life remains something of a historical shadow, defined more by the light in his paintings than the details of his biography. By the early 1650s, he had settled in Delft, the city that would provide the backdrop for his most celebrated works. While long-standing myths once suggested he ended his days in an Amsterdam asylum, modern scholarship has corrected the record: it was his son, also named Pieter, who suffered that fate.[^1] The elder de Hooch remained active into the 1680s, a diligent observer of the order and industry that defined 17th-century Dutch life.
 

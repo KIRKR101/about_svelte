@@ -345,7 +345,7 @@ body {
 .prose.prose-invert a {
   color: var(--link-color);
   text-decoration: underline;
-  text-decoration-color: transparent;
+  text-decoration-color: var(--link-color);
   transition: text-decoration-color 0.2s ease;
 }
 

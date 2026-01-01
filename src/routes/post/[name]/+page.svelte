@@ -3,6 +3,7 @@
 
   interface PostMeta {
     title: string;
+    longTitle?: string;
     snippet: string;
   }
 
@@ -56,7 +57,7 @@
 
     <header>
       <h1 class="text-xl sm:text-2xl font-normal text-foreground mb-4 leading-tight">
-        {meta?.title || 'Blog Post'}
+        {meta?.longTitle || meta?.title || 'Blog Post'}
       </h1>
     </header>
 
