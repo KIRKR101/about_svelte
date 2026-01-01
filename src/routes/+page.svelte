@@ -99,6 +99,16 @@
       return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   }
 
+  function formatAriaLabel(progress: number, duration: number) {
+      const progressSeconds = Math.floor(progress / 1000);
+      const durationSeconds = Math.floor(duration / 1000);
+      const progressMinutes = Math.floor(progressSeconds / 60);
+      const progressSecs = progressSeconds % 60;
+      const durationMinutes = Math.floor(durationSeconds / 60);
+      const durationSecs = durationSeconds % 60;
+      return `Song progress: ${progressMinutes} minutes ${progressSecs} seconds of ${durationMinutes} minutes`;
+  }
+
   function formatDate(dateString: string) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-GB', {
@@ -130,9 +140,9 @@
         <!-- Intro Section -->
         <section class="flex-1 flex flex-col justify-center w-full">
             <div class="mb-2">
-                <h1 class="text-3xl font-normal">Kirkr.xyz</h1>
+                <h1 class="text-4xl font-normal tracking-tight">Kirkr.xyz</h1>
             </div>
-            <p class="mb-2 text-base">0.01x dev</p>
+            <p class="mb-2 text-base text-muted-foreground">0.01x dev</p>
 
             <div class="flex flex-row flex-wrap gap-3 mt-7 mb-6">
                 <a
@@ -140,7 +150,7 @@
                     title="GitHub"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-muted-foreground no-underline inline-flex items-center gap-2 text-base hover:text-foreground transition-colors"
+                    class="text-muted-foreground hover:underline inline-flex items-center gap-2 text-base hover:text-foreground transition-colors duration-100 ease-out"
                 >
                     <svg
                         viewBox="0 0 16 16"
@@ -158,7 +168,7 @@
 
         <div class="flex flex-col gap-8">
             <!-- Music Container (Spotify or Last.fm) -->
-            <div class="lg:max-w-xl w-full bg-card p-4 rounded-lg border border-border">
+            <div class="lg:max-w-xl w-full bg-card p-4 rounded-md border border-border">
                 {#if !useLastFm && spotifyData}
                     <!-- Spotify Display -->
                     <div class="flex justify-between items-center text-sm text-muted-foreground uppercase tracking-wider font-bold mb-3 flex-wrap gap-2">
@@ -167,6 +177,7 @@
                             href="https://open.spotify.com"
                             target="_blank"
                             rel="noopener noreferrer"
+                            title="View on Spotify"
                             class="text-sm font-normal text-muted-foreground no-underline hover:text-foreground hover:underline transition-colors inline-flex items-center gap-1.5"
                         >
                             <svg viewBox="0 0 24 24" class="w-4 h-4 fill-current">
@@ -176,11 +187,11 @@
                         </a>
                     </div>
 
-                    <div class="flex items-center gap-4 w-full {spotifyData.isPlaying ? 'mb-3' : ''}">
+                    <div class="flex items-center gap-4 w-full {spotifyData.isPlaying ? 'mb-4' : ''}">
                         <img
                             src={spotifyData.albumArt}
                             alt={`Album art for ${spotifyData.title}`}
-                            class="w-16 h-16 rounded-lg shrink-0 object-cover"
+                            class="w-18 h-18 rounded-sm shrink-0 object-cover"
                         />
 
                         <div class="flex flex-col min-w-0 flex-1">
@@ -207,6 +218,11 @@
                                 <div
                                     class="h-full bg-foreground transition-all duration-100 ease-linear"
                                     style="width: {Math.min(progressPercentage, 100)}%"
+                                    aria-label={formatAriaLabel(localProgress, spotifyData.duration)}
+                                    role="progressbar"
+                                    aria-valuenow={progressPercentage}
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
                                 ></div>
                             </div>
                             <div class="flex justify-between text-xs text-muted-foreground">
@@ -223,6 +239,7 @@
                             href="https://www.last.fm/user/Kirkr101"
                             target="_blank"
                             rel="noopener noreferrer"
+                            title="View on Last.fm"
                             class="text-sm font-normal text-muted-foreground no-underline hover:text-foreground hover:underline transition-colors"
                         >
                             last.fm
@@ -233,7 +250,7 @@
                         <img
                             src={lastFmData.albumArtUrl}
                             alt={`Album art for ${lastFmData.title}`}
-                            class="w-16 h-16 rounded-lg shrink-0 object-cover"
+                            class="w-18 h-18 rounded-sm shrink-0 object-cover"
                         />
 
                         <div class="flex flex-col min-w-0 flex-1">
@@ -259,7 +276,7 @@
                     </div>
 
                     <div class="flex items-center gap-4 w-full">
-                        <div class="w-16 h-16 rounded-lg bg-muted animate-pulse shrink-0"></div>
+                        <div class="w-16 h-16 rounded-md bg-muted animate-pulse shrink-0"></div>
 
                         <div class="flex flex-col min-w-0 flex-1 gap-2">
                             <div class="h-5 bg-muted animate-pulse rounded"></div>
@@ -272,7 +289,7 @@
             <!-- Recent Posts Section -->
             <section class="shrink-0 w-full lg:max-w-xl">
                 {#if recentPosts && recentPosts.length > 0}
-                    <div class="max-w-full w-full p-3 sm:p-5 rounded-lg bg-card border border-border">
+                    <div class="max-w-full w-full p-3 sm:p-5 rounded-md bg-card border border-border">
                         <div class="flex justify-between items-center text-sm text-muted-foreground uppercase tracking-wider font-bold mb-3 flex-wrap gap-2 pb-1 border-b border-border">
                             <span>Recent posts</span>
                             <a
