@@ -27,7 +27,6 @@ For example, this picture, *A Musical party in a Courtyard*, provoked a debate i
 Despite these stylistic shifts, de Hooch’s legacy remains rooted in his ability to make the world clear. He left behind roughly 170 paintings that serve as a testament to the Dutch obsession with order and family life. He was not a radical innovator or a genius, but a craftsman. Through his lens, the ordinary becomes sacred, and the simple act of a sunbeam hitting a kitchen floor is revealed as a moment of quiet, dignified beauty.
 
 ___
-### References
 
 [^1]: Grijzenhout 2008, pp. 612–613.
 [^2]: Hughes 1990.
@@ -35,6 +34,7 @@ ___
 [^4]: Sutton 1998, p. 47.
 [^5]: Jansen 2019.
 [^6]: Sutton 1980, p. 72, note 42.
+
 ### Sources
 
 - Grijzenhout, Frans. “New Information on Pieter de Hooch and the Amsterdam Lunatic Asylum.” *The Burlington Magazine* 150, no. 1266 (2008): 612–613.
