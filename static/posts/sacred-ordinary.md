@@ -18,7 +18,7 @@ Light is the element that breathes life into these geometries. Whether it is a r
 
 Inevitably, de Hooch is compared to his contemporary and fellow Delft guild member, Johannes Vermeer. Both shared an obsession with light and the domestic sphere, but where Vermeer’s figures often feel enigmatic and caught in a moment of psychological tension, de Hooch’s figures are comfortably absorbed in their surroundings. In the 19th century, some scholars (as I lean toward) say that Vermeer may have been the one borrowing from de Hooch. While Vermeer has since claimed the mantle of the “Sphinx of Delft,” de Hooch offers something arguably more transparent: a world where nothing is hidden, and everything is rendered with absolute clarity.
 
-The artist’s move to Amsterdam around 1660 signalled a shift in both patron and palette. Seeking wealthier clients, de Hooch’s compositions grew larger and more opulent. The humble brick floors of Delft were replaced by marble; Turkish carpets and gilded leather walls began to appear in his scenes. While these later “salon” paintings demonstrate his continued mastery of perspective, many art historians find them lacking the intimate, “homey” luminosity of his earlier work, with some suggesting he “quickly lost his inspiration and charm.”[^3] However, these assessments are frequently critiqued for “applying the aesthetic standards of his earlier Delft paintings rather than considering the evolving artistic norms of post-1670 Dutch art.” This stylistic evolution occurred amidst the “disastrous Rampjaar of 1672,” which devastated the economy and claimed the careers of many contemporaries.
+The artist’s move to Amsterdam around 1660 signalled a shift in both patron and palette. Seeking wealthier clients, de Hooch’s compositions grew larger and more opulent. The humble brick floors of Delft were replaced by marble; Turkish carpets and gilded leather walls began to appear in his scenes. While these later “salon” paintings demonstrate his continued mastery of perspective, they seem to lack the intimate, homey luminosity of his earlier work, with critics suggesting he “quickly lost his inspiration and charm.”[^3] However, I would critique these assessments for applying the aesthetic standards of his earlier Delft paintings rather than considering the evolving artistic norms of post-1670 Dutch art. This stylistic evolution occurred amidst the disastrous [Rampjaar](https://en.wikipedia.org/wiki/Rampjaar) of 1672, which devastated the economy and claimed the careers of many contemporaries like the aformentioned Vermeer.
 
 ![A later example of de Hooch’s work, A Musical Party in a Courtyard, 1677](https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Pieter_de_Hooch_-_A_Musical_Party_in_a_Courtyard.jpg/1705px-Pieter_de_Hooch_-_A_Musical_Party_in_a_Courtyard.jpg)
 
@@ -27,14 +27,7 @@ For example, this picture, *A Musical party in a Courtyard*, provoked a debate i
 Despite these stylistic shifts, de Hooch’s legacy remains rooted in his ability to make the world clear. He left behind roughly 170 paintings that serve as a testament to the Dutch obsession with order and family life. He was not a radical innovator or a genius, but a craftsman. Through his lens, the ordinary becomes sacred, and the simple act of a sunbeam hitting a kitchen floor is revealed as a moment of quiet, dignified beauty.
 
 ___
-### References
 
-[^1]: Grijzenhout 2008, pp. 612–613.
-[^2]: Hughes 1990.
-[^3]: Sutton 1980, p. 35.
-[^4]: Sutton 1998, p. 47.
-[^5]: Jansen 2019.
-[^6]: Sutton 1980, p. 72, note 42.
 ### Sources
 
 - Grijzenhout, Frans. “New Information on Pieter de Hooch and the Amsterdam Lunatic Asylum.” *The Burlington Magazine* 150, no. 1266 (2008): 612–613.
@@ -42,3 +35,10 @@ ___
 - Sutton, Peter C. *Pieter de Hooch: Complete Edition*. Oxford: Phaidon, 1980.
 - Sutton, Peter C. *Pieter de Hooch, 1629–1684*. Hartford: Dulwich Picture Gallery and Yale University Press, 1998. ISBN 0300077572.
 - Jansen, Anita (2019). Pieter de Hooch in Delft: From the Shadow of Vermeer. et al. Delft: WBooks, Zwolle in cooperation with Museum Prinsenhof Delft. ISBN 978-94-625-8328-3.
+
+[^1]: Grijzenhout 2008, pp. 612–613.
+[^2]: Hughes 1990.
+[^3]: Sutton 1980, p. 35.
+[^4]: Sutton 1998, p. 47.
+[^5]: Jansen 2019.
+[^6]: Sutton 1980, p. 72, note 42.
