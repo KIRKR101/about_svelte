@@ -1,20 +1,20 @@
 import { error } from '@sveltejs/kit';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import manifest from '$lib/manifest.js';
+import { recentPosts } from '$lib/posts-data';
 
 export const prerender = true;
 
 // Tell SvelteKit all possible routes to generate at build time
 export function entries() {
-  return manifest.map(post => ({
+  return recentPosts.map(post => ({
     name: post.file
   }));
 }
 
 // Load the post data
 export function load({ params }: { params: { name: string } }) {
-  const post = manifest.find(p => p.file === params.name);
+  const post = recentPosts.find(p => p.file === params.name);
 
   if (!post) {
     throw error(404, 'Post not found');
