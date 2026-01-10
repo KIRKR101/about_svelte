@@ -72,27 +72,40 @@
 </script>
 
 <svelte:head>
-  <title>Art | kirkr.xyz</title>
-  <meta name="description" content="A curated selection of artworks." />
+    <title>Art | kirkr.xyz</title>
+    <meta name="description" content="A curated selection of artworks." />
 </svelte:head>
 
-<div class="min-h-screen">
-  <div class="p-4 md:p-8">
-    <div class="w-full max-w-6xl mx-auto">
-      <header class="flex items-center justify-between p-0 mb-8 md:mb-12 mt-8 sm:mt-0">
-        <div class="text-center grow">
-          <h1 class="text-xl sm:text-2xl mb-2 font-normal">Art</h1>
-          <p class="text-sm sm:text-base text-muted-foreground">
-            a curated selection of artworks
-          </p>
-        </div>
-      </header>
+<!-- PAGE CONTAINER -->
+<div class="min-h-full relative text-[#1A1A1A] dark:text-[#E0E0E0] p-4 md:p-8 lg:p-12 flex flex-col items-center justify-center font-sans selection:bg-[#FF4D00] selection:text-white overflow-x-hidden">
 
-      <section class="w-full">
+    <!-- CSS GRAIN OVERLAY -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-50 mix-blend-multiply dark:mix-blend-overlay bg-noise"></div>
+
+    <!-- BACKGROUND GRID -->
+    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-[0.06] dark:opacity-[0.08]"
+         style="background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px); background-size: 40px 40px;">
+    </div>
+    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-0 dark:opacity-[0.04]"
+         style="background-image: linear-gradient(#FFFFFF 1px, transparent 1px), linear-gradient(90deg, #FFFFFF 1px, transparent 1px); background-size: 40px 40px;">
+    </div>
+
+    <main class="w-full max-w-6xl relative z-10">
+        <!-- HEADER CARD -->
+        <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 mb-6 p-8 flex flex-col justify-center text-center min-h-[120px]">
+            <h1 class="font-display font-extrabold text-5xl md:text-6xl leading-[0.8] tracking-tight text-[#1A1A1A] dark:text-[#EEEEEE] mb-3">
+                Art<span class="text-[#FF4D00]">.</span>
+            </h1>
+            <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-2">
+                a curated selection of artworks
+            </p>
+        </div>
+
+        <!-- ART GRID -->
         <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 sm:gap-6">
           {#each artEntries as [artId, art]}
             <div
-              class="group cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] border-2 mb-4 sm:mb-6 py-0 break-inside-avoid rounded-lg"
+              class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 transition-transform duration-300 ease-out hover:-translate-y-1 hover:-translate-x-[1px] hover:shadow-[6px_6px_0px_0px_#1A1A1A] dark:hover:shadow-[6px_6px_0px_0px_#55555A] active:translate-y-[2px] active:translate-x-[2px] active:shadow-[2px_2px_0px_0px_#1A1A1A] cursor-pointer group cursor-pointer overflow-hidden mb-4 sm:mb-6 py-0 break-inside-avoid"
               on:click={() => openLightbox(artId)}
               on:keydown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -106,13 +119,13 @@
             >
               <div class="p-0">
                 <div
-                  class="relative overflow-hidden bg-muted"
+                  class="relative overflow-hidden bg-[#FAF9F6] dark:bg-[#1E1E22]"
                   style={`aspect-ratio: ${art.aspectRatio}`}
                 >
                   <img
                     src={art.thumbnail}
                     alt={`${art.title} by ${art.data.find((item) => item[0] === 'artist')?.[1]}`}
-                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    class="w-full h-full object-cover"
                     loading="lazy"
                   />
                   <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
@@ -131,12 +144,10 @@
             </div>
           {/each}
         </div>
-      </section>
-    </div>
-  </div>
+    </main>
 </div>
 
-  <!-- Lightbox -->
+<!-- Lightbox -->
   {#if lightboxActive}
     <div
       class="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50 p-4 md:p-8"
@@ -149,37 +160,54 @@
     >
       <!-- Close Button -->
       <button
-        class="absolute top-4 right-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white w-12 h-12 rounded-full flex items-center justify-center cursor-pointer hover:bg-white/20 transition-all z-10 group"
+        class="absolute top-4 right-4 z-20 group focus:outline-none"
         on:click={closeLightbox}
         aria-label="Close lightbox"
       >
-        X
+        <div class="bg-black/40 dark:bg-white/10 backdrop-blur-sm hover:bg-black/60 dark:hover:bg-white/20 border border-white/20 rounded-full w-8 h-8 flex items-center justify-center transition-all focus-visible:ring-2 focus-visible:ring-[#FF4D00] focus-visible:ring-offset-2 focus-visible:ring-offset-black">
+          <svg class="w-4 h-4 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </div>
       </button>
+
+      <!-- Counter -->
+      <div class="absolute top-4 left-4 z-20">
+        <div class="bg-black/40 dark:bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1">
+          <span class="font-mono text-xs text-white/80">{currentArtIndex + 1}</span>
+          <span class="text-white/40 mx-1">/</span>
+          <span class="font-mono text-xs text-white/60">{artEntries.length}</span>
+        </div>
+      </div>
 
       <!-- Navigation Buttons -->
       {#if artEntries.length > 1}
         <button
-          class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-sm border border-white/20 text-white w-12 h-12 rounded-full flex items-center justify-center cursor-pointer hover:bg-white/20 transition-all disabled:opacity-30 disabled:cursor-not-allowed z-10"
+          class="absolute left-4 top-1/2 -translate-y-1/2 z-20 group focus:outline-none"
           on:click={goToPrevious}
           disabled={isAnimating}
           aria-label="Previous artwork"
         >
-          { '<' }
+          <div class="bg-black/40 dark:bg-white/10 backdrop-blur-sm hover:bg-black/60 dark:hover:bg-white/20 border border-white/20 rounded-full w-8 h-8 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-[#FF4D00] focus-visible:ring-offset-2 focus-visible:ring-offset-black">
+            <svg class="w-4 h-4 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </div>
         </button>
         <button
-          class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-sm border border-white/20 text-white w-12 h-12 rounded-full flex items-center justify-center cursor-pointer hover:bg-white/20 transition-all disabled:opacity-30 disabled:cursor-not-allowed z-10"
+          class="absolute right-4 top-1/2 -translate-y-1/2 z-20 group focus:outline-none"
           on:click={goToNext}
           disabled={isAnimating}
           aria-label="Next artwork"
         >
-          { '>' }
+          <div class="bg-black/40 dark:bg-white/10 backdrop-blur-sm hover:bg-black/60 dark:hover:bg-white/20 border border-white/20 rounded-full w-8 h-8 flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-[#FF4D00] focus-visible:ring-offset-2 focus-visible:ring-offset-black">
+            <svg class="w-4 h-4 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
         </button>
       {/if}
-
-      <!-- Counter -->
-      <div class="absolute top-4 left-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-2 rounded-full text-sm z-10">
-        {currentArtIndex + 1} / {artEntries.length}
-      </div>
 
       {#if currentArtData}
         <div class="bg-card border border-border/50 rounded-xl max-w-6xl lg:max-w-7xl w-full max-h-[90vh] overflow-auto flex flex-col lg:flex-row gap-6 md:gap-8 p-6 md:p-8 shadow-2xl">
@@ -202,7 +230,7 @@
           <div class="flex-1 lg:max-w-[45%] flex flex-col">
             <h2
               id="lightbox-title"
-              class="text-2xl sm:text-3xl font-light mb-2 text-foreground"
+              class="text-2xl sm:text-3xl font-display font-bold mb-2 text-[#1A1A1A] dark:text-[#EEEEEE]"
             >
               {currentArtData.title}
             </h2>
@@ -240,3 +268,13 @@
       {/if}
     </div>
   {/if}
+
+<style>
+    .font-display { font-family: 'Syne', sans-serif; }
+    .font-serif { font-family: 'Instrument Serif', serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    .bg-noise {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+    }
+</style>

@@ -40,11 +40,21 @@
 		type="font/woff2"
 		crossorigin="anonymous"
 	/>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 </svelte:head>
 
-<div class="font-suisse-intl-mono font-suisse-intl antialiased">
+<div class="font-suisse-intl-mono font-suisse-intl antialiased min-h-screen bg-[#FAF9F6] dark:bg-[#121214] relative">
 	<Navbar />
-	<main class="pt-16 min-h-screen">
+	<main class="pt-20">
+		<!-- BACKGROUND GRID -->
+		<div class="absolute inset-0 w-full h-full pointer-events-none opacity-[0.06] dark:opacity-[0.08]"
+		     style="background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px); background-size: 40px 40px;">
+		</div>
+		<div class="absolute inset-0 w-full h-full pointer-events-none opacity-0 dark:opacity-[0.04]"
+		     style="background-image: linear-gradient(#FFFFFF 1px, transparent 1px), linear-gradient(90deg, #FFFFFF 1px, transparent 1px); background-size: 40px 40px;">
+		</div>
 		<slot />
 	</main>
 </div>

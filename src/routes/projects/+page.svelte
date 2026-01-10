@@ -68,72 +68,97 @@
 </script>
 
 <svelte:head>
-  <title>Projects | kirkr.xyz</title>
-  <meta name="description" content="A collection of projects." />
-  <meta name="robots" content="index, follow" />
+    <title>Projects | kirkr.xyz</title>
+    <meta name="description" content="A collection of projects." />
+    <meta name="robots" content="index, follow" />
 </svelte:head>
 
-<div class="flex flex-col items-center p-4 md:p-8">
-  <div class="w-full max-w-5xl mx-auto">
-    <header class="flex items-center justify-center p-0 mb-8 md:mb-12 mt-8 sm:mt-0">
-      <div class="text-center">
-        <h1 class="text-xl sm:text-2xl mb-2 font-normal">Projects</h1>
-        <p class="text-sm sm:text-base text-muted-foreground">a collection of projects</p>
-      </div>
-    </header>
+<!-- PAGE CONTAINER -->
+<div class="min-h-full relative text-[#1A1A1A] dark:text-[#E0E0E0] p-4 md:p-8 lg:p-12 flex flex-col items-center justify-center font-sans selection:bg-[#FF4D00] selection:text-white overflow-x-hidden">
 
-    <section class="w-full">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        {#each projects as project}
-          <div class="flex flex-col border rounded-lg">
-            <div class="p-6">
-              <h2 class="font-sans flex items-center text-base">
-                {project.title}
-              </h2>
-            </div>
-            <div class="font-sans grow flex flex-col p-6 pt-0">
-              <p class="text-sm text-muted-foreground leading-6 mb-4 grow">
-                {project.description}
-              </p>
-            </div>
-            <div class="p-6 pt-0">
-              {#if project.link}
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-xs text-muted-foreground inline-flex items-center gap-1 no-underline hover:text-foreground transition-colors hover:underline"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[14px] h-[14px] fill-none stroke-current stroke-2.5 stroke-linecap-round stroke-linejoin-round">
-                    <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
-                    <g class="transition-transform duration-150">
-                      <path d="m21 3-9 9" />
-                      <path d="M15 3h6v6" />
-                    </g>
-                  </svg>
-                  <span>{project.link.replace('https://', '')}</span>
-                </a>
-              {:else if project.github}
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-xs text-muted-foreground inline-flex items-center gap-1 no-underline hover:text-foreground transition-colors hover:underline"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[14px] h-[14px] fill-none stroke-current stroke-2.5 stroke-linecap-round stroke-linejoin-round">
-                    <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
-                    <g class="transition-transform duration-150">
-                      <path d="m21 3-9 9" />
-                      <path d="M15 3h6v6" />
-                    </g>
-                  </svg>
-                  <span>github</span>
-                </a>
-              {/if}
-            </div>
-          </div>
-        {/each}
-      </div>
-    </section>
-  </div>
+    <!-- CSS GRAIN OVERLAY -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-50 mix-blend-multiply dark:mix-blend-overlay bg-noise"></div>
+
+    <!-- BACKGROUND GRID -->
+    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-[0.06] dark:opacity-[0.08]"
+         style="background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px); background-size: 40px 40px;">
+    </div>
+    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-0 dark:opacity-[0.04]"
+         style="background-image: linear-gradient(#FFFFFF 1px, transparent 1px), linear-gradient(90deg, #FFFFFF 1px, transparent 1px); background-size: 40px 40px;">
+    </div>
+
+    <main class="w-full max-w-6xl relative z-10">
+        <!-- HEADER CARD -->
+        <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 mb-6 p-8 flex flex-col justify-center text-center min-h-[120px]">
+            <h1 class="font-display font-extrabold text-5xl md:text-6xl leading-[0.8] tracking-tight text-[#1A1A1A] dark:text-[#EEEEEE] mb-3">
+                Projects<span class="text-[#FF4D00]">.</span>
+            </h1>
+            <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-2">
+                a collection of projects
+            </p>
+        </div>
+
+        <!-- PROJECTS GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {#each projects as project}
+                <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 transition-transform duration-300 ease-out hover:-translate-y-1 hover:-translate-x-[1px] hover:shadow-[6px_6px_0px_0px_#1A1A1A] dark:hover:shadow-[6px_6px_0px_0px_#55555A] active:translate-y-[2px] active:translate-x-[2px] active:shadow-[2px_2px_0px_0px_#1A1A1A] flex flex-col overflow-hidden">
+                    <div class="p-6">
+                        <h2 class="font-display font-bold text-xl text-[#1A1A1A] dark:text-[#EEEEEE] leading-tight">
+                            {project.title}
+                        </h2>
+                    </div>
+                    <div class="grow flex flex-col px-6 pb-2 pt-0">
+                        <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed mb-4 grow">
+                            {project.description}
+                        </p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        {#if project.link}
+                            <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 inline-flex items-center gap-1 no-underline hover:text-[#FF4D00] transition-colors hover:underline"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[14px] h-[14px] fill-none stroke-current stroke-2.5 stroke-linecap-round stroke-linejoin-round">
+                                    <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
+                                    <g class="transition-transform duration-150">
+                                        <path d="m21 3-9 9" />
+                                        <path d="M15 3h6v6" />
+                                    </g>
+                                </svg>
+                                <span>{project.link.replace('https://', '')}</span>
+                            </a>
+                        {:else if project.github}
+                            <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 inline-flex items-center gap-1 no-underline hover:text-[#FF4D00] transition-colors hover:underline"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[14px] h-[14px] fill-none stroke-current stroke-2.5 stroke-linecap-round stroke-linejoin-round">
+                                    <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
+                                    <g class="transition-transform duration-150">
+                                        <path d="m21 3-9 9" />
+                                        <path d="M15 3h6v6" />
+                                    </g>
+                                </svg>
+                                <span>github</span>
+                            </a>
+                        {/if}
+                    </div>
+                </div>
+            {/each}
+        </div>
+    </main>
 </div>
+
+<style>
+    .font-display { font-family: 'Syne', sans-serif; }
+    .font-serif { font-family: 'Instrument Serif', serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    .bg-noise {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+    }
+</style>

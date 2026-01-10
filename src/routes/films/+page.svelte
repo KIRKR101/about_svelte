@@ -62,7 +62,7 @@
 
           if (posterUrl.includes('/resized/')) {
             if (isMobile) {
-              posterUrl = posterUrl.replace(/-0-\d+-0-\d+-crop\.jpg/, '-0-100-0-150-crop.jpg');
+              posterUrl = posterUrl.replace(/-0-\d+-0-\d+-crop\.jpg/, '-0-200-0-300-crop.jpg');
             } else {
               posterUrl = posterUrl.replace(/-0-\d+-0-\d+-crop\.jpg/, '-0-200-0-300-crop.jpg');
             }
@@ -117,73 +117,104 @@
 </script>
 
 <svelte:head>
-  <title>Films | kirkr.xyz</title>
-  <meta name="description" content="A log of recently watched films." />
-  <meta name="robots" content="index, follow" />
-  <link rel="preconnect" href="https://a.ltrbxd.com" />
+    <title>Films | kirkr.xyz</title>
+    <meta name="description" content="A log of recently watched films." />
+    <meta name="robots" content="index, follow" />
+    <link rel="preconnect" href="https://a.ltrbxd.com" />
 </svelte:head>
 
-<div class="flex flex-col items-center p-4 md:p-8">
-  <header class="w-full max-w-6xl mb-8 md:mb-12 mt-8 sm:mt-0">
-    <div class="text-center">
-      <h1 class="text-xl sm:text-2xl mb-2 font-normal">Films</h1>
-      <p class="text-sm sm:text-base text-muted-foreground">a log of recently watched films</p>
+<!-- PAGE CONTAINER -->
+<div class="min-h-full relative text-[#1A1A1A] dark:text-[#E0E0E0] p-4 md:p-8 lg:p-12 flex flex-col items-center justify-center font-sans selection:bg-[#FF4D00] selection:text-white overflow-x-hidden">
+
+    <!-- CSS GRAIN OVERLAY -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-50 mix-blend-multiply dark:mix-blend-overlay bg-noise"></div>
+
+    <!-- BACKGROUND GRID -->
+    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-[0.06] dark:opacity-[0.08]"
+         style="background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px); background-size: 40px 40px;">
     </div>
-  </header>
+    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-0 dark:opacity-[0.04]"
+         style="background-image: linear-gradient(#FFFFFF 1px, transparent 1px), linear-gradient(90deg, #FFFFFF 1px, transparent 1px); background-size: 40px 40px;">
+    </div>
 
-  <main class="w-full max-w-6xl">
-    {#if loading}
-      <div class="text-center text-muted-foreground">Loading films...</div>
-    {:else if error}
-      <div class="text-center">
-        <p class="text-destructive mb-4">Failed to load films. Just see my profile instead.</p>
-        <iframe
-          src="https://embed.letterboxd.com/kirkr101"
-          width="100%"
-          height="600"
-          allow="fullscreen"
-          title="Letterboxd film diary embed"
-          class="rounded-lg border-none"
-        ></iframe>
-      </div>
-    {:else}
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 justify-items-center">
-        {#each films as film, index}
-          <div class="w-full flex flex-col items-center text-center border rounded-lg">
-            <div class="flex flex-col items-center gap-3 p-4">
-              {#if film.poster}
-                <img
-                  src={film.poster}
-                  alt={`${film.title} poster`}
-                  class="w-full h-auto object-cover rounded-lg"
-                  loading={index < 10 ? "eager" : "lazy"}
-                />
-              {/if}
+    <main class="w-full max-w-6xl relative z-10">
+        <!-- HEADER CARD -->
+        <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 mb-6 p-8 flex flex-col justify-center text-center min-h-[120px]">
+            <h1 class="font-display font-extrabold text-5xl md:text-6xl leading-[0.8] tracking-tight text-[#1A1A1A] dark:text-[#EEEEEE] mb-3">
+                Films<span class="text-[#FF4D00]">.</span>
+            </h1>
+            <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-2">
+                a log of recently watched films
+            </p>
+        </div>
 
-              <div class="flex flex-col items-center min-w-0">
-                <h2 class="text-base font-normal mb-1">
-                  <a
-                    href={film.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-foreground no-underline hover:underline"
-                  >
-                    {film.title}{film.year ? ` (${film.year})` : ''}
-                  </a>
-                </h2>
-
-                <p class="text-sm text-muted-foreground mb-0">
-                  <strong>Watched:</strong> {film.watchedDate}{film.rewatch ? ' (Rewatch)' : ''}
-                </p>
-
-                {#if film.rating}
-                  {@html createStarRating(film.rating)}
-                {/if}
-              </div>
+        <!-- FILMS CONTENT -->
+        {#if loading}
+            <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] p-8 text-center">
+                <div class="font-mono text-sm uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Loading films...</div>
             </div>
-          </div>
-        {/each}
-      </div>
-    {/if}
-  </main>
+        {:else if error}
+            <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] p-4 sm:p-8 text-center">
+                <p class="text-[#FF4D00] mb-4 font-mono text-xs sm:text-sm uppercase tracking-widest leading-relaxed">
+                    Failed to load films. Just see my profile instead.
+                </p>
+                
+                <iframe
+                  src="https://embed.letterboxd.com/kirkr101"
+                  width="100%"
+                  title="Letterboxd film diary embed"
+                  class="rounded-lg border-[1.5px] border-[#1A1A1A] dark:border-[#444448] h-[450px] sm:h-[600px]"
+                  allow="fullscreen"
+                ></iframe>
+            </div>
+        {:else}
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 justify-items-center">
+                {#each films as film, index}
+                    <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 transition-transform duration-300 ease-out hover:-translate-y-1 hover:-translate-x-[1px] hover:shadow-[6px_6px_0px_0px_#1A1A1A] dark:hover:shadow-[6px_6px_0px_0px_#55555A] active:translate-y-[2px] active:translate-x-[2px] active:shadow-[2px_2px_0px_0px_#1A1A1A] w-full flex flex-col items-center text-center overflow-hidden">
+                        <div class="flex flex-col items-center gap-3 p-4 w-full">
+                            {#if film.poster}
+                                <img
+                                  src={film.poster}
+                                  alt={`${film.title} poster`}
+                                  class="w-full h-auto object-cover rounded-lg"
+                                  loading={index < 10 ? "eager" : "lazy"}
+                                />
+                            {/if}
+
+                            <div class="flex flex-col items-center min-w-0 w-full">
+                                <h2 class="text-base font-normal mb-1">
+                                  <a
+                                    href={film.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-[#1A1A1A] dark:text-[#E0E0E0] no-underline hover:underline hover:text-[#FF4D00] transition-colors"
+                                  >
+                                    {film.title}{film.year ? ` (${film.year})` : ''}
+                                  </a>
+                                </h2>
+
+                                <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-0 font-mono">
+                                  <strong>Watched:</strong> {film.watchedDate}{film.rewatch ? ' (Rewatch)' : ''}
+                                </p>
+
+                                {#if film.rating}
+                                  {@html createStarRating(film.rating)}
+                                {/if}
+                            </div>
+                        </div>
+                    </div>
+                {/each}
+            </div>
+        {/if}
+    </main>
 </div>
+
+<style>
+    .font-display { font-family: 'Syne', sans-serif; }
+    .font-serif { font-family: 'Instrument Serif', serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    .bg-noise {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+    }
+</style>

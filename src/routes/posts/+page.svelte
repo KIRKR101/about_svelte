@@ -23,85 +23,98 @@
 
   function getRelativeTime(dateString: string) {
     const date = new Date(dateString);
-    const now = new Date();
-    const diffInDays = Math.floor(
-        (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
-    );
+    const diffInMs = date.getTime() - new Date().getTime();
+    const diffInDays = Math.round(diffInMs / (1000 * 60 * 60 * 24));
 
-    if (diffInDays === 0) return "Today";
-    if (diffInDays === 1) return "Yesterday";
-    if (diffInDays < 7) return `${diffInDays} days ago`;
-    if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} weeks ago`;
-    if (diffInDays < 365) return `${Math.floor(diffInDays / 30)} months ago`;
-    return `${Math.floor(diffInDays / 365)} years ago`;
+    const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+
+    if (Math.abs(diffInDays) < 7) return rtf.format(diffInDays, "day");
+    if (Math.abs(diffInDays) < 30) return rtf.format(Math.round(diffInDays / 7), "week");
+    if (Math.abs(diffInDays) < 365) return rtf.format(Math.round(diffInDays / 30), "month");
+    return rtf.format(Math.round(diffInDays / 365), "year");
   }
 </script>
 
 <svelte:head>
-  <title>Blog | kirkr.xyz</title>
-  <meta name="description" content="Blog posts and articles on various topics by me." />
-  <meta name="robots" content="index, follow" />
+    <title>Posts | kirkr.xyz</title>
+    <meta name="description" content="Blog posts and articles on various topics by me." />
+    <meta name="robots" content="index, follow" />
 </svelte:head>
 
-<div class="flex flex-col items-center p-4 md:p-8">
-    <header class="flex items-center justify-center p-0 mb-8 md:mb-12 mt-8 sm:mt-0">
-      <div class="text-center">
-        <h1 class="text-xl sm:text-2xl mb-2 font-normal">Blog Posts</h1>
-        <p class="text-sm sm:text-base text-muted-foreground">writings and notes by me</p>
-      </div>
-    </header>
+<!-- PAGE CONTAINER -->
+<div class="min-h-full relative text-[#1A1A1A] dark:text-[#E0E0E0] p-4 md:p-8 lg:p-12 flex flex-col items-center justify-center font-sans selection:bg-[#FF4D00] selection:text-white overflow-x-hidden">
 
-  <main class="w-full max-w-2xl">
-    {#if data.posts.length === 0}
-        <div class="border-dashed border rounded-lg">
-            <div class="flex items-center justify-center py-12">
-                <div class="flex flex-col items-center gap-3 text-center">
-                    <div>
-                        <p class="font-medium text-foreground">
-                            No posts yet
-                        </p>
-                        <p class="mt-1 text-sm text-muted-foreground">
-                            Check back soon
-                        </p>
-                    </div>
+    <!-- CSS GRAIN OVERLAY -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-50 mix-blend-multiply dark:mix-blend-overlay bg-noise"></div>
+
+    <main class="w-full max-w-4xl relative z-10">
+        <!-- HEADER CARD -->
+        <div class="w-full bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 mb-6 p-8 flex flex-col justify-center text-center min-h-[120px]">
+            <h1 class="font-display font-extrabold text-5xl md:text-6xl leading-[0.8] tracking-tight text-[#1A1A1A] dark:text-[#EEEEEE] mb-3">
+                Posts<span class="text-[#FF4D00]">.</span>
+            </h1>
+            <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-2">
+                writings and notes by me
+            </p>
+        </div>
+
+        <!-- POSTS CONTENT -->
+        {#if data.posts.length === 0}
+            <div class="w-full bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] p-12 text-center">
+                <div class="font-mono text-sm uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mb-4">
+                    No posts yet
+                </div>
+                <div class="font-display text-2xl text-[#1A1A1A] dark:text-[#E0E0E0]">
+                    Check back soon
                 </div>
             </div>
-        </div>
-    {:else}
-      <div class="space-y-0 divide-y divide-border">
-          {#each data.posts as post}
-              <a
-                  href={`/post/${post.file}`}
-                  class="group block py-4 transition-colors hover:bg-accent/50 -mx-4 px-4 rounded-lg"
-              >
-                  <article class="grid grid-cols-1 gap-3 md:grid-cols-[180px_1fr] md:gap-6">
-                      <time
-                          datetime={post.date}
-                          class="flex items-center gap-2 text-sm text-muted-foreground"
-                          title={formatDate(post.date)}
-                      >
-                          <span class="md:hidden">
-                              {getRelativeTime(post.date)}
-                          </span>
-                          <span class="hidden md:inline">
-                              {formatDate(post.date)}
-                          </span>
-                      </time>
+        {:else}
+            <div class="space-y-4">
+                {#each data.posts as post}
+                    <a
+                        href={`/post/${post.file}`}
+                        class="w-full bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 transition-transform duration-300 ease-out hover:-translate-x-[1px] hover:shadow-[6px_6px_0px_0px_#1A1A1A] dark:hover:shadow-[6px_6px_0px_0px_#55555A] active:translate-y-[2px] active:translate-x-[2px] active:shadow-[2px_2px_0px_0px_#1A1A1A] block p-6 group"
+                    >
+                        <article class="grid grid-cols-1 gap-4 md:grid-cols-[200px_1fr] md:gap-6">
+                            <div class="flex items-center">
+                                <time
+                                    datetime={post.date}
+                                    class="font-mono text-sm uppercase tracking-widest text-zinc-500 dark:text-zinc-400"
+                                    title={formatDate(post.date)}
+                                >
+                                    <span class="md:hidden">
+                                        {getRelativeTime(post.date)}
+                                    </span>
+                                    <span class="hidden md:inline">
+                                        {formatDate(post.date)}
+                                    </span>
+                                </time>
+                            </div>
 
-                      <div class="min-w-0 space-y-1.5">
-                          <h3 class="font-medium text-foreground group-hover:text-primary transition-colors leading-snug">
-                              {post.title}
-                          </h3>
-                          {#if post.snippet}
-                              <p class="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-                                  {post.snippet}
-                              </p>
-                          {/if}
-                      </div>
-                  </article>
-              </a>
-          {/each}
-      </div>
-    {/if}
-  </main>
+                            <div class="min-w-0 space-y-2">
+                                <h3 class="font-display font-bold text-xl text-[#1A1A1A] dark:text-[#EEEEEE] group-hover:text-[#FF4D00] transition-colors leading-tight">
+                                    {post.title}
+                                </h3>
+                                {#if post.snippet}
+                                    <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed line-clamp-2">
+                                        {post.snippet}
+                                    </p>
+                                {/if}
+                            </div>
+                        </article>
+                    </a>
+                {/each}
+            </div>
+        {/if}
+    </main>
 </div>
+
+<style>
+    .font-display { font-family: 'Syne', sans-serif; }
+    .font-serif { font-family: 'Instrument Serif', serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    .bg-noise {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+    }
+</style>

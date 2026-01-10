@@ -11,7 +11,7 @@ export default [
 		title: 'RISC-V, an Overview',
 		longTitle: 'RISC-V: A Deep Dive into the Open-Source ISA',
 		date: '2025-08-28',
-		snippet: 'An introduction to the RISC-V ISA...'
+		snippet: 'An introduction to the RISC-V Instruction Set...'
 	},
 	{
 		file: 'fpga',
