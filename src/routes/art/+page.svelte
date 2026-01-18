@@ -82,14 +82,6 @@
     <!-- CSS GRAIN OVERLAY -->
     <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-50 mix-blend-multiply dark:mix-blend-overlay bg-noise"></div>
 
-    <!-- BACKGROUND GRID -->
-    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-[0.06] dark:opacity-[0.08]"
-         style="background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px); background-size: 40px 40px;">
-    </div>
-    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-0 dark:opacity-[0.04]"
-         style="background-image: linear-gradient(#FFFFFF 1px, transparent 1px), linear-gradient(90deg, #FFFFFF 1px, transparent 1px); background-size: 40px 40px;">
-    </div>
-
     <main class="w-full max-w-6xl relative z-10">
         <!-- HEADER CARD -->
         <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 mb-6 p-8 flex flex-col justify-center text-center min-h-[120px]">
