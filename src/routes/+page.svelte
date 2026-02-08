@@ -46,12 +46,12 @@
   // Tailwind CSS classes for consistent card styling and interactions
   // --- Styling Constants ---
   
-  const cardBase = `
+    const cardBase = `
     bg-[#FAF9F6] dark:bg-[#1E1E22] 
     border-[1.5px] border-[#1A1A1A] dark:border-[#444448] 
-    shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] 
+    shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#1A1A1D] 
     relative z-10 transition-transform duration-300 ease-out
-  `;
+    `;
   
   const interactiveEffect = `
     hover:-translate-y-1 hover:-translate-x-[1px] 
@@ -220,7 +220,10 @@
     <!-- CSS GRAIN OVERLAY -->
     <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-50 mix-blend-multiply dark:mix-blend-overlay bg-noise"></div>
     
-    <main class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6 relative z-10">
+    <main class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-6 grid-auto-rows-min relative z-10">
+
+        <!-- CSS GRAIN OVERLAY -->
+        <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-50 mix-blend-multiply dark:mix-blend-overlay bg-noise"></div>    
 
         <!-- IDENTITY CARD -->
         <div class="lg:col-span-5 {cardBase} p-8 flex flex-col justify-between min-h-[240px] overflow-hidden group">
@@ -272,7 +275,7 @@
         </div>
 
         <!-- MUSIC PLAYER -->
-        <div class="lg:col-span-5 row-span-2 {cardBase} p-6 flex flex-col min-h-[460px]">
+        <div class="lg:col-span-5 row-span-2 {cardBase} p-6 flex flex-col">
             {#if !useLastFm && spotifyData}
                 <!-- Spotify Display -->
                 <div class="flex justify-between items-center text-sm text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 uppercase tracking-wider font-bold mb-3 flex-wrap gap-2">
@@ -400,7 +403,7 @@
         </div>
 
         <!-- JOURNAL -->
-        <div class="lg:col-span-7 row-span-2 {cardBase} flex flex-col min-h-[460px] overflow-hidden">
+        <div class="lg:col-span-7 row-span-2 {cardBase} flex flex-col overflow-hidden">
             <div class="p-6 border-b border-[#1A1A1A] dark:border-[#444448] flex justify-between items-center bg-[#FAF9F6] dark:bg-[#1E1E22]">
                 <div class="flex items-center gap-3">
                     <div class="w-3 h-3 bg-[#FF4D00]"></div>
@@ -417,9 +420,9 @@
             </div>
             
             <div class="flex-1 flex flex-col overflow-hidden bg-[#FAF9F6] dark:bg-[#1E1E22]">
-                <div class="overflow-y-auto custom-scrollbar p-2">
+                <div class="flex-1 overflow-y-auto custom-scrollbar p-2">
                     {#if recentPosts && recentPosts.length > 0}
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-1 mb-1">
                         {#each recentPosts as post, i}
                             <div transition:slide={{ duration: 100 }}>
                                 <a href={`/post/${post.file}`} class="block p-4 rounded transition-colors duration-100 group">
@@ -453,9 +456,10 @@
     .font-display { font-family: 'Syne', sans-serif; }
     .font-serif { font-family: 'Instrument Serif', serif; }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
-    
+        
     .bg-noise {
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+        opacity: 0.0; /* Disable for now */
     }
 
     .custom-scrollbar::-webkit-scrollbar {
