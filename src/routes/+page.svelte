@@ -252,7 +252,11 @@
                         <h3 class="font-display font-bold text-xl text-[#1A1A1A] dark:text-white uppercase tracking-tight">Github</h3>
                         <div class="flex items-center justify-center gap-1 mt-1">
                             <span class="font-mono text-[10px] text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 uppercase tracking-widest group-hover:text-[#FF4D00] transition-colors">kirkr101</span>
-                            <span class="text-sm leading-none text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 group-hover:text-[#FF4D00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 relative top-[-1px]">↗</span>
+                            <div class="text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 group-hover:text-[#FF4D00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+                                <svg width="14" height="14" viewBox="0 0 18 18" class="block">
+                                    <path d="M5 13 L13 5 M9 5 H13 V9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+                                </svg>
+                            </div>
                         </div>
                      </div>
                  </div>
@@ -278,7 +282,7 @@
         <div class="lg:col-span-5 row-span-2 {cardBase} p-6 flex flex-col">
             {#if !useLastFm && spotifyData}
                 <!-- Spotify Display -->
-                <div class="flex justify-between items-center text-sm text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 uppercase tracking-wider font-bold mb-3 flex-wrap gap-2">
+                <div class="flex justify-between items-center font-mono text-sm text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 uppercase tracking-wider font-bold mb-3 flex-wrap gap-2">
                     <span>{spotifyData.isPlaying ? 'Currently playing' : 'Last played'}</span>
                     <a
                         href="https://open.spotify.com"
@@ -307,7 +311,7 @@
                     </div>
                 </div>
 
-                <div class="shrink-0 mt-auto bg-white/25 dark:bg-white/2 p-4 rounded border border-[#1A1A1A]/10 dark:border-[#444448]">
+                <div class="shrink-0 mt-auto bg-white/25 dark:bg-white/2 p-4 rounded-xs border border-[#1A1A1A]/10 dark:border-[#444448]">
                     <div class="flex flex-col min-w-0 flex-1 mb-4">
                         <h2 class="m-0 font-display font-bold text-xl text-[#1A1A1A] dark:text-white truncate">
                             <a
@@ -319,7 +323,7 @@
                                 {spotifyData.title}
                             </a>
                         </h2>
-                        <p class="m-0 font-mono text-xs text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 truncate">
+                        <p class="m-0 mt-0.5 font-mono text-xs text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 truncate">
                             {spotifyData.artist}
                         </p>
                     </div>
@@ -347,7 +351,7 @@
                 </div>
             {:else if useLastFm && lastFmData}
                 <!-- Last.fm Display -->
-                <div class="flex justify-between items-center text-sm text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 uppercase tracking-wider font-bold mb-3 flex-wrap gap-2">
+                <div class="flex justify-between items-center font-mono text-sm text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 uppercase tracking-wider font-bold mb-3 flex-wrap gap-2">
                     <span>{lastFmData.status || 'Currently playing'}</span>
                     <a
                         href="https://www.last.fm/user/Kirkr101"
@@ -376,7 +380,7 @@
                     </div>
                 </div>
 
-                <div class="shrink-0 mt-auto bg-white/25 dark:bg-white/2 p-4 rounded border border-[#1A1A1A]/10 dark:border-[#444448]">
+                <div class="shrink-0 mt-auto bg-white/25 dark:bg-white/2 p-4 rounded-xs border border-[#1A1A1A]/10 dark:border-[#444448]">
                     <div class="flex flex-col min-w-0 flex-1">
                         <h2 class="m-0 font-display font-bold text-xl text-[#1A1A1A] dark:text-white truncate">
                             <a
@@ -388,7 +392,7 @@
                                 {lastFmData.title}
                             </a>
                         </h2>
-                        <p class="m-0 font-mono text-xs text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 truncate">
+                        <p class="m-0 mt-0.5 font-mono text-xs text-[#1A1A1A]/50 dark:text-[#E0E0E0]/40 truncate">
                             {lastFmData.artist}
                         </p>
                     </div>
@@ -451,28 +455,3 @@
         
     </main>
 </div>
-
-<style>
-    .font-display { font-family: 'Syne', sans-serif; }
-    .font-serif { font-family: 'Instrument Serif', serif; }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
-    .bg-noise {
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
-        opacity: 0.0; /* Disable for now */
-    }
-
-    .custom-scrollbar::-webkit-scrollbar {
-        width: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-        background-color: rgba(26, 26, 26, 0.1);
-        border-radius: 20px;
-    }
-    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #444448;
-    }
-</style>

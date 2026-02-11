@@ -107,10 +107,10 @@
         {#each navLinks as link}
           <a 
             href={link.path} 
-            class="px-2 h-full flex items-center font-mono text-xs uppercase tracking-widest font-bold transition-all duration-200 
+            class="px-2 h-full flex items-center font-mono text-xs uppercase tracking-widest font-bold transition-all duration-50
             {isActive(link.path) 
               ? 'text-[#FF4D00] border-b-2 border-[#FF4D00]' 
-              : 'text-zinc-500 dark:text-zinc-400 hover:text-[#1A1A1A] dark:hover:text-white'}"
+              : 'text-zinc-500 dark:text-zinc-400 hover:text-[#1A1A1A] hover:underline dark:hover:text-white'}"
           >
             {link.name}
           </a>
@@ -175,14 +175,23 @@
 >
   <div
     bind:this={mobileMenuRef}
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation menu"
+    tabindex="-1"
     class="absolute top-0 right-0 h-full w-full max-w-xs bg-[#FAF9F6] dark:bg-[#1E1E22] border-l-4 border-[#1A1A1A] dark:border-[#444448] p-8 flex flex-col gap-8"
     on:click|stopPropagation
+    on:keydown={(e) => {
+      if (e.key === 'Escape') {
+        isMobileMenuOpen = false;
+      }
+    }}
   >
     <div class="flex justify-between items-center mb-4">
       <span class="font-display font-extrabold text-2xl tracking-tighter text-[#1A1A1A] dark:text-[#EEEEEE]">
         MENU<span class="text-[#FF4D00]">.</span>
       </span>
-      <button on:click={() => (isMobileMenuOpen = false)} class="text-zinc-500">
+      <button on:click={() => (isMobileMenuOpen = false)} class="text-zinc-500" aria-label="Close menu">
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -212,9 +221,3 @@
   </div>
 </div>
 {/if}
-
-<style>
-    .font-display { font-family: 'Syne', sans-serif; }
-    .font-serif { font-family: 'Instrument Serif', serif; }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
-</style>

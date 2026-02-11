@@ -25,3 +25,6 @@ vite.config.ts.timestamp-*
 # Rust
 target/
 /lastfm-server/.env
+
+# SvelteKit build output
+/public/

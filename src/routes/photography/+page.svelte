@@ -151,9 +151,13 @@
     on:click={(e) => {
       if (e.target === e.currentTarget) closeLightbox();
     }}
+    on:keydown={(e) => {
+      if (e.key === 'Escape') closeLightbox();
+    }}
     role="dialog"
     aria-modal="true"
     aria-labelledby="lightbox-title"
+    tabindex="-1"
   >
     <!-- Close Button -->
     <button
@@ -233,7 +237,7 @@
           </h2>
 
           <div class="mt-4">
-            <h3 class="text-sm font-medium text-muted-foreground uppercase tracking-wide mb-4">
+            <h3 class="text-sm font-bold text-muted-foreground uppercase tracking-wide mb-4">
               EXIF Metadata
             </h3>
             
@@ -246,7 +250,7 @@
                       <th class="px-4 py-2 font-medium text-foreground border-b border-border/50">Value</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-border/50">
+                  <tbody class="divide-y divide-border/50 font-mono">
                     {#each currentImageData.exif as [key, value]}
                       <tr class="hover:bg-muted/30 transition-colors">
                         <td class="px-4 py-2 text-foreground font-medium">{key}</td>
@@ -273,13 +277,3 @@
     {/if}
   </div>
 {/if}
-
-<style>
-    .font-display { font-family: 'Syne', sans-serif; }
-    .font-serif { font-family: 'Instrument Serif', serif; }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
-
-    .bg-noise {
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
-    }
-</style>

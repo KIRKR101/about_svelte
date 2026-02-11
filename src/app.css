@@ -2,31 +2,70 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Suisse Intl - Primary Sans */
 @font-face {
-  font-family: 'SuisseIntl-Regular';
+  font-family: 'Suisse Intl';
   src: url('/SuisseIntl-Regular.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
+/* Suisse Intl Mono - Primary Mono */
 @font-face {
-  font-family: 'SuisseIntlMono-Regular';
+  font-family: 'Suisse Intl Mono';
   src: url('/SuisseIntlMono-Regular.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-.font-suisse-intl {
-  font-family: 'SuisseIntl-Regular', sans-serif;
-}
+@theme {
+  --font-sans: "Suisse Intl", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: "Suisse Intl Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --font-suisse-intl: var(--font-sans);
+  --font-suisse-intl-mono: var(--font-mono);
+  --font-display: "Syne", var(--font-sans);
+  --font-serif: "Instrument Serif", serif;
 
-.font-suisse-intl-mono {
-  font-family: 'SuisseIntlMono-Regular', monospace;
-}
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 
-:root {
+  --radius: 0.625rem;
   --bg-color: #fff;
   --text-color: #111111;
   --card-bg-color: #ffffff;
@@ -73,47 +112,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.9 0.002 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --radius: 0.625rem;
-}
-
-@theme inline {
-  --font-sans: var(--font-suisse-intl);
-  --font-mono: var(--font-suisse-intl-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
 }
 
 * {
@@ -123,22 +121,38 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  overflow: hidden;
+}
+
+html.syne-font-loading .font-display {
+	opacity: 0;
+}
+
+/* Show font-display elements when font is loaded or was already cached */
+html.syne-font-loaded .font-display {
+	opacity: 1;
+	transition: opacity 0.1s ease-in;
 }
 
 body {
-  font-family: var(--font-suisse-intl-mono), monospace;
+  font-family: var(--font-suisse-intl), monospace;
   margin: 0;
   font-size: 0.95rem;
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
-  min-height: 100vh;
-  overflow-x: hidden;
-  /* Fix overscroll color to match grid background */
+  height: 100%;
+  overflow: hidden;
   background-image: linear-gradient(rgba(26, 26, 26, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 26, 26, 0.06) 1px, transparent 1px);
   background-size: 40px 40px;
   background-attachment: fixed;
   background-color: #FAF9F6;
+}
+
+.bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+    opacity: 0.0; /* Disable for now */
 }
 
 .dark body {
@@ -154,36 +168,51 @@ body {
   }
 }
 
-::-webkit-scrollbar {
-  width: 12px;
+main::-webkit-scrollbar {
+  width: 10px;
 }
 
-::-webkit-scrollbar-track {
-  background-color: var(--bg-color);
-  border-radius: 6px;
+main::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: var(--card-border-color);
-  border-radius: 6px;
-  border: 2px solid var(--bg-color);
+main::-webkit-scrollbar-thumb {
+  background-color: rgba(26, 26, 26, 0.2);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--icon-color);
+main::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(26, 26, 26, 0.4);
 }
 
-::-webkit-scrollbar-thumb:active {
-  background-color: var(--subtle-text-color);
+main::-webkit-scrollbar-thumb:active {
+  background-color: rgba(26, 26, 26, 0.6);
 }
 
-* {
+.dark main::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.dark main::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.dark main::-webkit-scrollbar-thumb:active {
+  background-color: rgba(255, 255, 255, 0.45);
+}
+
+main {
   scrollbar-width: thin;
-  scrollbar-color: var(--card-border-color) var(--bg-color);
+  scrollbar-color: rgba(26, 26, 26, 0.2) transparent;
+}
+
+.dark main {
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 }
 
 @media (max-width: 768px) {
-  /* Better touch targets */
   a, button {
     min-height: 32px;
     display: inline-flex;
@@ -218,16 +247,20 @@ body {
 }
 
 .prose.prose-invert {
-  font-family: 'SuisseIntl-Regular', system-ui, -apple-system, sans-serif;
+  font-family: 'Suisse Intl', ui-sans-serif, system-ui, sans-serif !important;
   color: var(--text-color);
   max-width: none;
 }
 
 .prose.prose-invert p {
-  font-family: 'SuisseIntl-Regular', system-ui, -apple-system, sans-serif;
+  font-family: 'Suisse Intl', ui-sans-serif, system-ui, sans-serif !important;
   margin-bottom: 1.5em;
   line-height: 1.7;
   font-size: 1rem;
+}
+
+.prose.prose-invert li {
+  font-family: 'Suisse Intl', ui-sans-serif, system-ui, sans-serif !important;
 }
 
 .prose.prose-invert h1,
@@ -236,7 +269,7 @@ body {
 .prose.prose-invert h4,
 .prose.prose-invert h5,
 .prose.prose-invert h6 {
-  font-family: var(--font-suisse-intl-mono), 'Courier New', monospace;
+  font-family: var(--font-mono), 'Courier New', monospace;
   font-weight: 500;
   color: var(--text-color);
   margin-top: 2em;
@@ -294,7 +327,7 @@ body {
 }
 
 .prose.prose-invert code {
-  font-family: var(--font-suisse-intl-mono), 'Courier New', monospace;
+  font-family: var(--font-mono), 'Courier New', monospace;
   background-color: var(--card-bg-color);
   color: var(--text-color);
   padding: 0.125rem 0.25rem;
@@ -304,7 +337,7 @@ body {
 }
 
 .prose.prose-invert pre {
-  font-family: var(--font-suisse-intl-mono), 'Courier New', monospace;
+  font-family: var(--font-mono), 'Courier New', monospace;
   background-color: var(--card-bg-color);
   color: var(--text-color);
   padding: 1.5rem;
@@ -383,7 +416,7 @@ body {
   font-size: 0.875rem;
   color: var(--subtle-text-color);
   margin-top: 0.5rem;
-  font-family: 'SuisseIntl-Regular', system-ui, -apple-system, sans-serif;
+  font-family: 'Suisse Intl', ui-sans-serif, system-ui, sans-serif;
 }
 
 .prose.prose-invert sup {
@@ -393,7 +426,7 @@ body {
 }
 
 .prose.prose-invert .footnote-ref a {
-  font-family: var(--font-suisse-intl-mono), 'Courier New', monospace;
+  font-family: var(--font-mono), 'Courier New', monospace;
   color: var(--link-color);
   text-decoration: none;
   border-bottom: 1px solid transparent;
@@ -405,11 +438,11 @@ body {
 }
 
 .prose.prose-invert .footnotes {
-  font-family: 'SuisseIntl-Regular', system-ui, -apple-system, sans-serif;
+  font-family: 'Suisse Intl', ui-sans-serif, system-ui, sans-serif;
 }
 
 .prose.prose-invert .footnotes h2 {
-  font-family: var(--font-suisse-intl-mono), 'Courier New', monospace;
+  font-family: var(--font-mono), 'Courier New', monospace;
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
   color: var(--text-color);
@@ -432,7 +465,7 @@ body {
   margin-bottom: 1rem;
   font-size: 0.875rem;
   line-height: 1.5;
-  font-family: 'SuisseIntl-Regular', system-ui, -apple-system, sans-serif;
+  font-family: 'Suisse Intl', ui-sans-serif, system-ui, sans-serif;
 }
 
 .prose.prose-invert .footnote-text {
@@ -441,7 +474,7 @@ body {
 
 .prose.prose-invert .footnote-item p {
   margin: 0;
-  font-family: 'SuisseIntl-Regular', system-ui, -apple-system, sans-serif;
+  font-family: 'Suisse Intl', ui-sans-serif, system-ui, sans-serif;
 }
 
 .prose.prose-invert .footnote-item em {
@@ -461,7 +494,7 @@ body {
 }
 
 .prose.prose-invert .footnote-backref {
-  font-family: var(--font-suisse-intl-mono), 'Courier New', monospace;
+  font-family: var(--font-mono), 'Courier New', monospace;
   color: var(--subtle-text-color);
   text-decoration: none;
   margin-left: 0.5rem;
