@@ -69,73 +69,35 @@
 
 <svelte:head>
     <title>Projects | kirkr.xyz</title>
-    <meta name="description" content="A collection of projects." />
-    <meta name="robots" content="index, follow" />
 </svelte:head>
 
-<!-- PAGE CONTAINER -->
-<div class="min-h-full relative text-[#1A1A1A] dark:text-[#E0E0E0] p-4 md:p-8 lg:p-12 flex flex-col items-center justify-center font-sans selection:bg-[#FF4D00] selection:text-white overflow-x-hidden">
-
-    <!-- CSS GRAIN OVERLAY -->
-    <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-50 mix-blend-multiply dark:mix-blend-overlay bg-noise"></div>
-
-    <main class="w-full max-w-6xl relative z-10">
-        <!-- HEADER CARD -->
-        <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 mb-6 p-8 flex flex-col justify-center text-center min-h-[120px]">
-            <h1 class="font-display font-extrabold text-5xl md:text-6xl leading-[0.8] tracking-tight text-[#1A1A1A] dark:text-[#EEEEEE] mb-3">
-                Projects<span class="text-[#FF4D00]">.</span>
+<div class="min-h-screen flex flex-col items-center px-6 py-12">
+    <main class="w-full max-w-[800px] anim-row anim-row-1">
+        
+        <div class="py-7">
+            <h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white/90">
+                Projects<em class="not-italic italic text-white/20">.</em>
             </h1>
-            <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-2">
-                a collection of projects
-            </p>
+            <div class="lbl mt-2">a collection of projects</div>
         </div>
 
-        <!-- PROJECTS GRID -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="rule mb-8"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
             {#each projects as project}
-                <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 transition-transform duration-300 ease-out hover:-translate-y-1 hover:-translate-x-[1px] hover:shadow-[6px_6px_0px_0px_#1A1A1A] dark:hover:shadow-[6px_6px_0px_0px_#55555A] active:translate-y-[2px] active:translate-x-[2px] active:shadow-[2px_2px_0px_0px_#1A1A1A] flex flex-col overflow-hidden">
-                    <div class="p-6">
-                        <h2 class="font-display font-bold text-xl text-[#1A1A1A] dark:text-[#EEEEEE] leading-tight">
-                            {project.title}
-                        </h2>
-                    </div>
-                    <div class="grow flex flex-col px-6 pb-2 pt-0">
-                        <p class="text-sm font-mono text-zinc-600 dark:text-zinc-300 leading-relaxed mb-4 grow">
-                            {project.description}
-                        </p>
-                    </div>
-                    <div class="p-6 pt-0">
+                <div class="flex flex-col border-b border-sep pb-8">
+                    <h2 class="font-serif text-[24px] text-white/80 mb-2">{project.title}</h2>
+                    <p class="text-[13px] text-muted leading-relaxed mb-4 flex-1">
+                        {project.description}
+                    </p>
+                    <div class="mt-auto">
                         {#if project.link}
-                            <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 inline-flex items-center gap-1 no-underline hover:text-[#FF4D00] transition-colors hover:underline"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[14px] h-[14px] fill-none stroke-current stroke-2.5 stroke-linecap-round stroke-linejoin-round">
-                                    <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
-                                    <g class="transition-transform duration-150">
-                                        <path d="m21 3-9 9" />
-                                        <path d="M15 3h6v6" />
-                                    </g>
-                                </svg>
-                                <span>{project.link.replace('https://', '')}</span>
+                            <a href={project.link} target="_blank" class="arc-link lowercase text-[10px]">
+                                {project.link.replace('https://', '')} ↗
                             </a>
                         {:else if project.github}
-                            <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-xs font-mono uppercase tracking-widest text-zinc-500 dark:text-zinc-400 inline-flex items-center gap-1 no-underline hover:text-[#FF4D00] transition-colors hover:underline"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[14px] h-[14px] fill-none stroke-current stroke-2.5 stroke-linecap-round stroke-linejoin-round">
-                                    <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
-                                    <g class="transition-transform duration-150">
-                                        <path d="m21 3-9 9" />
-                                        <path d="M15 3h6v6" />
-                                    </g>
-                                </svg>
-                                <span>github</span>
+                            <a href={project.github} target="_blank" class="arc-link lowercase text-[10px]">
+                                github ↗
                             </a>
                         {/if}
                     </div>
@@ -144,3 +106,16 @@
         </div>
     </main>
 </div>
+
+<style>
+  .arc-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-dim);
+    text-decoration: none;
+    transition: color 0.07s;
+  }
+  .arc-link:hover { color: rgba(255,255,255,0.55); }
+</style>

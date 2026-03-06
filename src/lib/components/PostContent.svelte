@@ -16,6 +16,6 @@
   let parsedContent = marked(content, { renderer });
 </script>
 
-<div class="text-sans prose prose-invert max-w-none prose-sm sm:prose-base">
+<div class="font-sans prose prose-invert max-w-none prose-sm sm:prose-base">
   {@html parsedContent}
 </div>

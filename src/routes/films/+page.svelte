@@ -112,7 +112,7 @@
       starsHtml += '½';
     }
 
-    return `<p><strong>Rating:</strong> ${starsHtml}</p>`;
+    return starsHtml;
   };
 </script>
 
@@ -123,74 +123,49 @@
     <link rel="preconnect" href="https://a.ltrbxd.com" />
 </svelte:head>
 
-<!-- PAGE CONTAINER -->
-<div class="min-h-full relative text-[#1A1A1A] dark:text-[#E0E0E0] p-4 md:p-8 lg:p-12 flex flex-col items-center justify-center font-sans selection:bg-[#FF4D00] selection:text-white overflow-x-hidden">
-
-    <!-- CSS GRAIN OVERLAY -->
-    <div class="fixed inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-50 mix-blend-multiply dark:mix-blend-overlay bg-noise"></div>
-
-    <main class="w-full max-w-6xl relative z-10">
-        <!-- HEADER CARD -->
-        <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 mb-6 p-8 flex flex-col justify-center text-center min-h-[120px]">
-            <h1 class="font-display font-extrabold text-5xl md:text-6xl leading-[0.8] tracking-tight text-[#1A1A1A] dark:text-[#EEEEEE] mb-3">
-                Films<span class="text-[#FF4D00]">.</span>
+<div class="min-h-screen flex flex-col items-center px-6 py-12">
+    <main class="w-full max-w-[600px] anim-row anim-row-1">
+        
+        <div class="py-7">
+            <h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white/90">
+                Films<em class="not-italic italic text-white/20">.</em>
             </h1>
-            <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mt-2">
-                a log of recently watched films
-            </p>
+            <div class="lbl mt-2">a collection of films</div>
         </div>
 
-        <!-- FILMS CONTENT -->
+        <div class="rule mb-8"></div>
+
         {#if loading}
-            <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] p-8 text-center">
-                <div class="font-mono text-sm uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Loading films...</div>
+            <div class="py-8 text-center">
+                <div class="lbl">Loading films...</div>
             </div>
         {:else if error}
-            <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] p-4 sm:p-8 text-center">
-                <p class="text-[#FF4D00] mb-4 font-mono text-xs sm:text-sm uppercase tracking-widest leading-relaxed">
-                    Failed to load films. Just see my profile instead.
-                </p>
-                
-                <iframe
-                  src="https://embed.letterboxd.com/kirkr101"
-                  width="100%"
-                  title="Letterboxd film diary embed"
-                  class="rounded-lg border-[1.5px] border-[#1A1A1A] dark:border-[#444448] h-[450px] sm:h-[600px]"
-                  allow="fullscreen"
-                ></iframe>
+            <div class="py-8 text-center">
+                <div class="lbl text-red-500">Failed to load films</div>
             </div>
         {:else}
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 justify-items-center">
-                {#each films as film, index}
-                    <div class="bg-[#FAF9F6] dark:bg-[#1E1E22] border-[1.5px] border-[#1A1A1A] dark:border-[#444448] shadow-[4px_4px_0px_0px_#FF4D00] dark:shadow-[4px_4px_0px_0px_#000000] relative z-10 transition-transform duration-300 ease-out hover:-translate-y-1 hover:-translate-x-[1px] hover:shadow-[6px_6px_0px_0px_#1A1A1A] dark:hover:shadow-[6px_6px_0px_0px_#55555A] active:translate-y-[2px] active:translate-x-[2px] active:shadow-[2px_2px_0px_0px_#1A1A1A] w-full flex flex-col items-center text-center overflow-hidden">
-                        <div class="flex flex-col items-center gap-3 p-4 w-full">
-                            {#if film.poster}
-                                <img
-                                  src={film.poster}
-                                  alt={`${film.title} poster`}
-                                  class="w-full h-auto object-cover rounded-lg"
-                                  loading={index < 10 ? "eager" : "lazy"}
-                                />
+            <div class="space-y-4 mb-12">
+                {#each films as film}
+                    <div class="flex gap-4 py-3">
+                        <img 
+                            src={film.poster} 
+                            alt={film.title} 
+                            class="w-24 h-36 object-cover rounded-sm border border-bd flex-shrink-0"
+                        />
+                        <div class="flex flex-col justify-center">
+                            <div class="text-[18px] text-white font-medium">
+                                <a href={film.link} target="_blank" rel="noopener noreferrer" class="text-white hover:text-amber-400 transition-colors">
+                                    {film.title}
+                                </a>
+                            </div>
+                            <div class="lbl text-[12px] mt-1">{film.year}</div>
+                            {#if film.rating}
+                                <div class="text-[16px] text-amber-400 mt-1">{createStarRating(film.rating)}</div>
                             {/if}
-
-                            <div class="flex flex-col items-center min-w-0 w-full">
-                                <h2 class="text-base font-normal mb-1">
-                                  <a
-                                    href={film.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="text-[#1A1A1A] dark:text-[#E0E0E0] no-underline hover:underline hover:text-[#FF4D00] transition-colors"
-                                  >
-                                    {film.title}{film.year ? ` (${film.year})` : ''}
-                                  </a>
-                                </h2>
-
-                                <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-0 font-mono">
-                                  <strong>Watched:</strong> {film.watchedDate}{film.rewatch ? ' (Rewatch)' : ''}
-                                </p>
-
-                                {#if film.rating}
-                                  {@html createStarRating(film.rating)}
+                            <div class="lbl text-[10px] text-white/40 mt-2">
+                                Watched: {film.watchedDate}
+                                {#if film.rewatch}
+                                    <span class="text-amber-400 ml-2">↻ Rewatch</span>
                                 {/if}
                             </div>
                         </div>
@@ -198,5 +173,6 @@
                 {/each}
             </div>
         {/if}
+
     </main>
 </div>
