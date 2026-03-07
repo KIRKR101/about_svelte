@@ -11,92 +11,95 @@
     rewatch: boolean;
   }
 
-  let films: FilmItem[] = [];
-  let loading = true;
-  let error: string | null = null;
+  let films: FilmItem[] = $state([]);
+  let loading = $state(true);
+  let error = $state<string | null>(null);
 
-  onMount(async () => {
-    const fetchFilms = async () => {
-      try {
-        const targetRssUrl = 'https://letterboxd.com/kirkr101/rss/';
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
-        const rssFeedUrl = proxyUrl + encodeURIComponent(targetRssUrl);
+  const PROXIES = [
+    'https://letterboxd.kirkr.xyz/?url=',
+    'https://api.allorigins.win/raw?url=',
+    'https://corsproxy.io/?'
+  ];
 
-        const response = await fetch(rssFeedUrl);
-        if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.statusText}`);
-        }
+  async function fetchFilms(proxyIndex = 0) {
+    if (proxyIndex >= PROXIES.length) {
+      error = 'Failed to load films. All connection methods exhausted.';
+      loading = false;
+      return;
+    }
 
-        const xmlText = await response.text();
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+    try {
+      loading = true;
+      error = null;
+      const targetRssUrl = 'https://letterboxd.com/kirkr101/rss/';
+      const rssFeedUrl = PROXIES[proxyIndex] + encodeURIComponent(targetRssUrl);
 
-        const parserError = xmlDoc.querySelector('parsererror');
-        if (parserError) {
-          throw new Error('Failed to parse RSS feed. The proxy may be down or the feed is invalid.');
-        }
+      const response = await fetch(rssFeedUrl);
+      if (!response.ok) throw new Error(`Status ${response.status}`);
 
-        const items = xmlDoc.querySelectorAll('item');
-        if (items.length === 0) {
-          error = 'No films found in the RSS feed.';
-          return;
-        }
+      const xmlText = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
 
-        const filmItems: FilmItem[] = [];
-
-        items.forEach((item) => {
-          const link = item.querySelector('link')?.textContent?.trim() || '#';
-          const filmTitle = item.querySelector('filmTitle')?.textContent || 'Unknown Film';
-          const filmYear = item.querySelector('filmYear')?.textContent || '';
-          const memberRating = item.querySelector('memberRating')?.textContent || '';
-          const watchedDate = item.querySelector('watchedDate')?.textContent;
-          const rewatch = item.querySelector('rewatch')?.textContent === 'Yes';
-
-          const description = item.querySelector('description')?.textContent || '';
-          const doc = parser.parseFromString(description, 'text/html');
-          const posterImg = doc.querySelector('img');
-          let posterUrl = posterImg ? posterImg.getAttribute('src')?.trim() || '' : '';
-
-          // Process poster URL for different screen sizes
-          const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-          if (posterUrl.includes('/resized/')) {
-            if (isMobile) {
-              posterUrl = posterUrl.replace(/-0-\d+-0-\d+-crop\.jpg/, '-0-200-0-300-crop.jpg');
-            } else {
-              posterUrl = posterUrl.replace(/-0-\d+-0-\d+-crop\.jpg/, '-0-200-0-300-crop.jpg');
-            }
-          }
-
-          const watchedDateFormatted = watchedDate
-            ? new Date(watchedDate).toLocaleDateString(undefined, {
-                timeZone: 'UTC',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })
-            : 'N/A';
-
-          filmItems.push({
-            title: filmTitle,
-            year: filmYear,
-            link,
-            poster: posterUrl,
-            rating: memberRating,
-            watchedDate: watchedDateFormatted,
-            rewatch
-          });
-        });
-
-        films = filmItems;
-      } catch (err) {
-        console.error('Error fetching or processing RSS feed:', err);
-        error = err instanceof Error ? err.message : 'Failed to load films.';
-      } finally {
-        loading = false;
+      if (xmlDoc.querySelector('parsererror')) {
+        throw new Error('Parse Error');
       }
-    };
 
+      const items = xmlDoc.querySelectorAll('item');
+      if (items.length === 0) {
+        error = 'No films found.';
+        loading = false;
+        return;
+      }
+
+      const filmItems: FilmItem[] = [];
+      items.forEach((item) => {
+        const link = item.querySelector('link')?.textContent?.trim() || '#';
+        const filmTitle = item.querySelector('filmTitle')?.textContent || 'Unknown Film';
+        const filmYear = item.querySelector('filmYear')?.textContent || '';
+        const memberRating = item.querySelector('memberRating')?.textContent || '';
+        const watchedDate = item.querySelector('watchedDate')?.textContent;
+        const rewatch = item.querySelector('rewatch')?.textContent === 'Yes';
+
+        const description = item.querySelector('description')?.textContent || '';
+        const doc = parser.parseFromString(description, 'text/html');
+        const posterImg = doc.querySelector('img');
+        let posterUrl = posterImg ? posterImg.getAttribute('src')?.trim() || '' : '';
+
+        // Process poster URL
+        if (posterUrl.includes('/resized/')) {
+          posterUrl = posterUrl.replace(/-0-\d+-0-\d+-crop\.jpg/, '-0-200-0-300-crop.jpg');
+        }
+
+        const watchedDateFormatted = watchedDate
+          ? new Date(watchedDate).toLocaleDateString(undefined, {
+              timeZone: 'UTC',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })
+          : 'N/A';
+
+        filmItems.push({
+          title: filmTitle,
+          year: filmYear,
+          link,
+          poster: posterUrl,
+          rating: memberRating,
+          watchedDate: watchedDateFormatted,
+          rewatch
+        });
+      });
+
+      films = filmItems;
+      loading = false;
+    } catch (err) {
+      console.warn(`Proxy ${proxyIndex} failed, trying next...`);
+      fetchFilms(proxyIndex + 1);
+    }
+  }
+
+  onMount(() => {
     fetchFilms();
   });
 
@@ -108,9 +111,7 @@
     const fullStars = Math.floor(rating);
     const hasHalfStar = (rating % 1 !== 0);
     let starsHtml = '★'.repeat(fullStars);
-    if (hasHalfStar) {
-      starsHtml += '½';
-    }
+    if (hasHalfStar) starsHtml += '½';
 
     return starsHtml;
   };
@@ -123,49 +124,49 @@
     <link rel="preconnect" href="https://a.ltrbxd.com" />
 </svelte:head>
 
-<div class="min-h-screen flex flex-col items-center px-6 py-12">
+<div class="min-h-screen flex flex-col items-center px-6 py-6 md:py-16 font-mono">
     <main class="w-full max-w-[600px] anim-row anim-row-1">
         
         <div class="py-7">
-            <h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white/90">
-                Films<em class="not-italic italic text-white/20">.</em>
+            <h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
+                <span class="opacity-90">Films</span><span class="opacity-20"><em class="not-italic italic">.</em></span>
             </h1>
-            <div class="lbl mt-2">a collection of films</div>
+            <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim mt-2">a collection of films</div>
         </div>
 
-        <div class="rule mb-8"></div>
+        <div class="h-px bg-bd mb-8"></div>
 
         {#if loading}
-            <div class="py-8 text-center">
-                <div class="lbl">Loading films...</div>
+            <div class="py-8 text-center border border-bd rounded-sm bg-white/5">
+                <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim">Loading films...</div>
             </div>
         {:else if error}
-            <div class="py-8 text-center">
-                <div class="lbl text-red-500">Failed to load films</div>
+            <div class="py-8 text-center border border-red-500/20 rounded-sm bg-red-500/5">
+                <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-red-400">Failed to load films</div>
             </div>
         {:else}
             <div class="space-y-4 mb-12">
                 {#each films as film}
-                    <div class="flex gap-4 py-3">
+                    <div class="flex gap-4 py-3 border-b border-sep last:border-0">
                         <img 
                             src={film.poster} 
                             alt={film.title} 
                             class="w-24 h-36 object-cover rounded-sm border border-bd flex-shrink-0"
                         />
                         <div class="flex flex-col justify-center">
-                            <div class="text-[18px] text-white font-medium">
-                                <a href={film.link} target="_blank" rel="noopener noreferrer" class="text-white hover:text-amber-400 transition-colors">
+                            <div class="text-[18px] text-white/90 font-serif leading-tight">
+                                <a href={film.link} target="_blank" rel="noopener noreferrer" class="hover:text-amber-400/80 transition-colors duration-75 text-inherit no-underline">
                                     {film.title}
                                 </a>
                             </div>
-                            <div class="lbl text-[12px] mt-1">{film.year}</div>
+                            <div class="font-mono text-[12px] text-dim mt-1">{film.year}</div>
                             {#if film.rating}
-                                <div class="text-[16px] text-amber-400 mt-1">{createStarRating(film.rating)}</div>
+                                <div class="text-[16px] text-amber-400/80 mt-1">{createStarRating(film.rating)}</div>
                             {/if}
-                            <div class="lbl text-[10px] text-white/40 mt-2">
+                            <div class="font-mono text-[10px] text-muted mt-2 uppercase tracking-wider">
                                 Watched: {film.watchedDate}
                                 {#if film.rewatch}
-                                    <span class="text-amber-400 ml-2">↻ Rewatch</span>
+                                    <span class="text-amber-400/60 ml-2">↻ Rewatch</span>
                                 {/if}
                             </div>
                         </div>
@@ -175,4 +176,4 @@
         {/if}
 
     </main>
-</div>
+</div>

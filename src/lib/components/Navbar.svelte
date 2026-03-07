@@ -40,8 +40,8 @@
       
       <div class="flex items-center">
         <a href="/" class="group focus:outline-none">
-          <span class="font-serif text-[24px] md:text-[28px] leading-none tracking-[-1px] text-white/90">
-            kirkr<em class="not-italic italic text-white/20">.</em><span class="text-white/20">xyz</span>
+          <span class="font-serif text-[24px] md:text-[28px] leading-none tracking-[-1px] text-white">
+            <span class="opacity-90">kirkr</span><span class="opacity-20"><em class="not-italic italic">.</em>xyz</span>
           </span>
         </a>
       </div>
@@ -50,7 +50,7 @@
         {#each navLinks as link}
           <a 
             href={link.path} 
-            class="lbl transition-colors duration-150 lowercase
+            class="font-mono text-[11px] tracking-[0.1em] transition-colors duration-75 uppercase
             {isActive(link.path) 
               ? 'text-white/80' 
               : 'text-dim hover:text-white/60'}"
@@ -88,7 +88,7 @@
           <a 
             href={link.path} 
             on:click={closeMenu}
-            class="lbl px-6 py-3 transition-colors duration-150 lowercase
+            class="font-mono text-[11px] tracking-[0.1em] px-6 py-3 transition-colors duration-75 lowercase
             {isActive(link.path) 
               ? 'text-white/80 bg-white/5' 
               : 'text-dim hover:text-white/60 hover:bg-white/5'}"

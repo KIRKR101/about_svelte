@@ -2,9 +2,9 @@ export const artData = {
 	'the-sentry': {
 		title: 'The Sentry',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Carel_Fabritius_-_De_poort_bewaker_%281654%29.jpg/500px-Carel_Fabritius_-_De_poort_bewaker_%281654%29.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Carel_Fabritius_-_De_poort_bewaker_%281654%29.jpg/500px-Carel_Fabritius_-_De_poort_bewaker_%281654%29.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Carel_Fabritius_-_De_poort_bewaker_(1654).jpg/960px-Carel_Fabritius_-_De_poort_bewaker_(1654).jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Carel_Fabritius_-_De_poort_bewaker_(1654).jpg/960px-Carel_Fabritius_-_De_poort_bewaker_(1654).jpg',
 		description:
 			'In my opinion Fabritius would be as well known as Rembrandt, his teacher, if not for his early death in the Delft Gunpowder Explosion of 1654. His lack of surviving works can likely be attributed to the same fate. A 2004 restoration revealed a second soldier whose legs are visible under the arch. The initial covering up of this makes sense, considering its improvement to the picture',
 		data: [
@@ -18,9 +18,9 @@ export const artData = {
 	'the-mill': {
 		title: 'The Mill',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Rembrandt_van_Rijn_-_The_Mill_-_Google_Art_Project.jpg/500px-Rembrandt_van_Rijn_-_The_Mill_-_Google_Art_Project.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Rembrandt_van_Rijn_-_The_Mill_-_Google_Art_Project.jpg/500px-Rembrandt_van_Rijn_-_The_Mill_-_Google_Art_Project.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Rembrandt_van_Rijn_-_The_Mill_-_Google_Art_Project.jpg/960px-Rembrandt_van_Rijn_-_The_Mill_-_Google_Art_Project.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Rembrandt_van_Rijn_-_The_Mill_-_Google_Art_Project.jpg/960px-Rembrandt_van_Rijn_-_The_Mill_-_Google_Art_Project.jpg',
 		description:
 			"One of Rembrandt's many great landscapes. For a long time, its attribution to Rembrandt was doubted, but has been restored in recent years. The colour and brushwork is magnificent.",
 		data: [
@@ -34,9 +34,9 @@ export const artData = {
 	'delft-courtyard': {
 		title: 'A Courtyard of a House in Delft',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/The_Courtyard_of_a_House_in_Delft.jpg/500px-The_Courtyard_of_a_House_in_Delft.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/The_Courtyard_of_a_House_in_Delft.jpg/500px-The_Courtyard_of_a_House_in_Delft.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Pieter_de_Hooch_-_The_Courtyard_of_a_House_in_Delft.jpg/960px-Pieter_de_Hooch_-_The_Courtyard_of_a_House_in_Delft.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Pieter_de_Hooch_-_The_Courtyard_of_a_House_in_Delft.jpg/960px-Pieter_de_Hooch_-_The_Courtyard_of_a_House_in_Delft.jpg',
 		description:
 			'A pictoral examplar of Dutch genre painting, this work beautifully depicts domestic life. The stone tablet above the arch is a real tablet from a Delft cloister, and can be seen in the Prinsenhof Museum.',
 		data: [
@@ -50,9 +50,9 @@ export const artData = {
 	'card-players': {
 		title: 'Card Players in a Sunlit Room',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Card_Players_in_a_sunlit_Room%2C_by_Pieter_de_Hooch.jpg/500px-Card_Players_in_a_sunlit_Room%2C_by_Pieter_de_Hooch.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Card_Players_in_a_sunlit_Room%2C_by_Pieter_de_Hooch.jpg/500px-Card_Players_in_a_sunlit_Room%2C_by_Pieter_de_Hooch.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Card_Players_in_a_sunlit_Room%2C_by_Pieter_de_Hooch.jpg/960px-Card_Players_in_a_sunlit_Room%2C_by_Pieter_de_Hooch.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Card_Players_in_a_sunlit_Room%2C_by_Pieter_de_Hooch.jpg/960px-Card_Players_in_a_sunlit_Room%2C_by_Pieter_de_Hooch.jpg',
 		description:
 			'De Hooch demonstrates his mastery of light and perspective, creating a view from a shadowy interior into a bright, sunlit courtyard. The effect is a calm, reflective mood, with restrained figures absorbed in their game.',
 		data: [
@@ -66,7 +66,7 @@ export const artData = {
 	'forest-stream': {
 		title: 'The Forest Stream',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Jacob_van_Ruisdael_-_The_Forest_Stream_-_Google_Art_Project.jpg/500px-Jacob_van_Ruisdael_-_The_Forest_Stream_-_Google_Art_Project.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Jacob_van_Ruisdael_-_The_Forest_Stream_-_Google_Art_Project.jpg/500px-Jacob_van_Ruisdael_-_The_Forest_Stream_-_Google_Art_Project.jpg',
 		image: 'https://collectionapi.metmuseum.org/api/collection/v1/iiif/437546/795838/main-image',
 		description:
 			'Ruisdael was a master of Dutch landscape painting. This work is remarkable for its rich textures and colors, depicting an untamed vision of nature with a rushing stream, rocky hills, and expansive trees.',
@@ -81,9 +81,9 @@ export const artData = {
 	arbeiterstadt: {
 		title: 'Arbeiterstadt (City of Workers)',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Hans_Baluschek_-_Arbeiterstadt_%281920%29.jpg/500px-Hans_Baluschek_-_Arbeiterstadt_%281920%29.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Hans_Baluschek_-_Arbeiterstadt_%281920%29.jpg/500px-Hans_Baluschek_-_Arbeiterstadt_%281920%29.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Hans_Baluschek_-_Arbeiterstadt_%281920%29.jpg/960px-Hans_Baluschek_-_Arbeiterstadt_%281920%29.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Hans_Baluschek_-_Arbeiterstadt_%281920%29.jpg/960px-Hans_Baluschek_-_Arbeiterstadt_%281920%29.jpg',
 		description:
 			'A work of the Berlin Secession, this painting depicts a dark and dirty working-class sector of Berlin. The scene is dominated by industrial smoke and train tracks, with a silhouetted figure looking over the oppressive city.',
 		data: [
@@ -97,9 +97,9 @@ export const artData = {
 	moses: {
 		title: 'Moses Smashing the Tablets of the Law',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Rembrandt_-_Moses_with_the_Ten_Commandments_-_Google_Art_Project.jpg/500px-Rembrandt_-_Moses_with_the_Ten_Commandments_-_Google_Art_Project.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Rembrandt_-_Moses_with_the_Ten_Commandments_-_Google_Art_Project.jpg/500px-Rembrandt_-_Moses_with_the_Ten_Commandments_-_Google_Art_Project.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Rembrandt_-_Moses_with_the_Ten_Commandments_-_Google_Art_Project.jpg/960px-Rembrandt_-_Moses_with_the_Ten_Commandments_-_Google_Art_Project.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Rembrandt_-_Moses_with_the_Ten_Commandments_-_Google_Art_Project.jpg/960px-Rembrandt_-_Moses_with_the_Ten_Commandments_-_Google_Art_Project.jpg',
 		description:
 			'Rembrandt captures the biblical figure of Moses in a moment of fury. The monumental quality of the figure is achieved through dramatic lighting, expressive brushwork, and a reduced colour palette.',
 		data: [
@@ -129,7 +129,7 @@ export const artData = {
 	'suzukawa-river': {
 		title: 'Suzukawa River',
 		thumbnail:
-			'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Yoshida_Hiroshi_Suzukawa%2C_1935.jpg/640px-Yoshida_Hiroshi_Suzukawa%2C_1935.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Yoshida_Hiroshi_Suzukawa%2C_1935.jpg/330px-Yoshida_Hiroshi_Suzukawa%2C_1935.jpg',
 		image:
 			'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Yoshida_Hiroshi_Suzukawa%2C_1935.jpg/1280px-Yoshida_Hiroshi_Suzukawa%2C_1935.jpg',
 		description:
@@ -145,9 +145,9 @@ export const artData = {
 	'abbey-in-the-oakwood': {
 		title: 'The Abbey in the Oakwood',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg/500px-Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg/500px-Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg/960px-Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg/960px-Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg',
 		description:
 			'A Romantic landscape that conveys themes of transience and the sublime. The painting depicts the ruins of a Gothic abbey, standing desolate amidst a grove of bare, wintry oak trees. A funeral procession of monks makes its way towards the crumbling structure. The sombre tones, stark silhouettes, and fading evening light create a mood of melancholy, while the vast sky towering above hints at spiritual transcendence. Through this interplay of ruin, nature, and human ritual, Friedrich evokes both the fragility of earthly existence and the enduring presence of the divine.',
 		data: [
@@ -161,9 +161,9 @@ export const artData = {
 	'view-of-delft': {
 		title: 'View of Delft',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Vermeer-view-of-delft.jpg/500px-Vermeer-view-of-delft.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Vermeer-view-of-delft.jpg/500px-Vermeer-view-of-delft.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Vermeer-view-of-delft.jpg/960px-Vermeer-view-of-delft.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Vermeer-view-of-delft.jpg/960px-Vermeer-view-of-delft.jpg',
 		description:
 			"This painting presents a panoramic view of Delft from across the river Schie, with sunlight breaking through clouds to illuminate parts of the city's architecture, most notably the Nieuwe Kerk and its towering spire. Vermeer's meticulous attention to detail and subtle handling of light imbue the scene with a sense of calm realism, balancing the everyday activity of figures along the waterfront with the stillness of the reflective water. The work combines topographical accuracy with poetic atmosphere, transforming a familiar urban landscape into a timeless meditation on place and presence.",
 		data: [
@@ -177,9 +177,9 @@ export const artData = {
 	'chalets-at-rigi': {
 		title: 'Chalets at Rigi',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Chalets_at_Rigi.jpg/500px-Chalets_at_Rigi.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Chalets_at_Rigi.jpg/500px-Chalets_at_Rigi.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Chalets_at_Rigi.jpg/960px-Chalets_at_Rigi.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Chalets_at_Rigi.jpg/960px-Chalets_at_Rigi.jpg',
 		description:
 			"This view from Mount Rigi itself looks west over Lake Lucerne to Mount Pilatus, with the long shadows suggesting a late afternoon time. Calame spent time on Mount Rigi in 1858, working this piece up from sketches, and it demonstrates both the crystalline quality of his open-air studies and the Romantic sensitivity of his studio work. The deep shadows on the foreground chalets contrast sharply with the brilliant sunlight on their roofs and the bright emerald grass, while the backdrop of misty mountains is rendered in pearly blues and purples. This juxtaposition of crisp foreground and atmospheric backdrop showcases Calame's technique and reflects his belief that the mountains bear the mark of the divine creator.",
 		data: [
@@ -193,10 +193,10 @@ export const artData = {
 	'the-little-street': {
 		title: 'The Little Street',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Johannes_Vermeer_-_Gezicht_op_huizen_in_Delft%2C_bekend_als_' +
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Johannes_Vermeer_-_Gezicht_op_huizen_in_Delft%2C_bekend_als_' +
 			"'Het_straatje'_-_Google_Art_Project.jpg/500px-Johannes_Vermeer_-_Gezicht_op_huizen_in_Delft%2C_bekend_als_'Het_straatje'_-_Google_Art_Project.jpg",
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Johannes_Vermeer_-_Gezicht_op_huizen_in_Delft%2C_bekend_als_' +
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Johannes_Vermeer_-_Gezicht_op_huizen_in_Delft%2C_bekend_als_' +
 			"'Het_straatje'_-_Google_Art_Project.jpg/960px-Johannes_Vermeer_-_Gezicht_op_huizen_in_Delft%2C_bekend_als_'Het_straatje'_-_Google_Art_Project.jpg",
 		description:
 			'Depicting a quiet street in a Dutch Golden Age town, this is one of only three known Vermeer paintings of views of Delft, and is considered an important work. The composition achieves a certain vitality through the alternation of straight angles with the triangle of the house and sky. What is interesting is the thick layer of paint used on the walls, stones, and brickwork, making them almost palpable.',
@@ -211,9 +211,9 @@ export const artData = {
 	'smoke-of-a-45': {
 		title: 'Smoke of a .45',
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Charles_Marion_Russell_%E2%80%93_Smoke_of_a_.45_%E2%80%93_Google_Art_Project.jpg/500px-Charles_Marion_Russell_%E2%80%93_Smoke_of_a_.45_%E2%80%93_Google_Art_Project.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Charles_Marion_Russell_%E2%80%93_Smoke_of_a_.45_%E2%80%93_Google_Art_Project.jpg/500px-Charles_Marion_Russell_%E2%80%93_Smoke_of_a_.45_%E2%80%93_Google_Art_Project.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Charles_Marion_Russell_%E2%80%93_Smoke_of_a_.45_%E2%80%93_Google_Art_Project.jpg/960px-Charles_Marion_Russell_%E2%80%93_Smoke_of_a_.45_%E2%80%93_Google_Art_Project.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Charles_Marion_Russell_%E2%80%93_Smoke_of_a_.45_%E2%80%93_Google_Art_Project.jpg/960px-Charles_Marion_Russell_%E2%80%93_Smoke_of_a_.45_%E2%80%93_Google_Art_Project.jpg',
 		description:
 			"A Western painting depicting a gunfight, this scene leaves no clear good or bad guys, but it's strongly suggested by the props that 'bad whiskey and poker have something to do with the ruckus.' The piece captures the dramatic and often ambiguous nature of conflicts in the Old West.",
 		data: [
@@ -227,9 +227,9 @@ export const artData = {
 	'trompe-loeil-ferdinand-bol': {
 		title: "Trompe l'Oeil of an Etching by Ferdinand Bol",
 		thumbnail:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg/500px-Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg/500px-Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg',
 		image:
-			'https://corsproxy.io/?https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg/960px-Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg/960px-Dutch_or_Flemish_17th_Century_-_Trompe_l%27Oeil_of_an_Etching_by_Ferdinand_Bol_-_2016.3.1_-_National_Gallery_of_Art.jpg',
 		description:
 			"This vertical composition presents a trompe l'oeil of a printed portrait of an older, bearded man, seemingly stuck to a wood panel with a red wax seal. The realistic depiction of crinkled paper and the three-dimensional wax seal creates a convincing illusion, only to be revealed as a single painting upon closer inspection. The print within the painting is signed 'F. Bol. F 1642.'",
 		data: [
@@ -245,7 +245,7 @@ export const artData = {
 		thumbnail:
 			'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg/500px-Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg',
 		image:
-			'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg/1080px-Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg',
+			'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg/960px-Young_Man_with_a_Skull%2C_Frans_Hals%2C_National_Gallery%2C_London.jpg',
 		description:
 			"This oil on canvas painting by Frans Hals, created in 1626-1628, depicts a young man in a feathered red bonnet and cloak, gesturing towards the viewer while holding a skull. Once thought to be Hamlet, it's now considered a vanitas, a symbolic reminder of life's fragility and death's inevitability. The work is notable for its dramatic composition and the expressive quality of Hals' brushwork.",
 		data: [
