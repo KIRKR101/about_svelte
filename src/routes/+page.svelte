@@ -156,6 +156,7 @@
 </script>
 
 <svelte:head>
+  <title>kirkr.xyz</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </svelte:head>
 
