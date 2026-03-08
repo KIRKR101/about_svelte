@@ -137,7 +137,7 @@
         <div class="h-px bg-bd mb-8"></div>
 
         {#if loading}
-            <div class="py-8 text-center border border-bd rounded-sm bg-white/5">
+            <div class="py-8 text-center">
                 <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim">Loading films...</div>
             </div>
         {:else if error}
@@ -176,4 +176,4 @@
         {/if}
 
     </main>
-</div>
+</div>

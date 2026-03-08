@@ -6,7 +6,7 @@ The town of Delft was a serene place, known for its namesake *Delftware* and the
 On the morning of October 12th, 1654, that serenity shattered. A gunpowder store exploded, devastating the prosperous town with the *Delftsche Donderslag*—the Delft Thunderclap—an explosion heard as far as Texel on the North Sea, some 150 kilometres away. Though much of the town was razed, relatively few casualties were recorded—possibly a hundred, though records were of course obliterated. Among them was Carel Fabritius, a relatively new but promising artist from Rembrandt's circle. Pulled alive from the rubble but succumbing to injury, his death cut short the career of an artist who, I believe, could have risen to the heights of Rembrandt himself.
 
 
-![Egbert van der Poel: A View of Delft after the Explosion of 1654](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Delftsedonderslag.jpg/2560px-Delftsedonderslag.jpg)
+![Egbert van der Poel: A View of Delft after the Explosion of 1654](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Delftsedonderslag.jpg/1280px-Delftsedonderslag.jpg)
 
 *Fig 2: Egbert van der Poel: A View of Delft after the Explosion of 1654*
 
@@ -22,7 +22,7 @@ Following his teacher, he developed a refined technique characterised by broad, 
 
 ### The Beheading of John the Baptist, Early 1640s
 
-![The Beheading of John the Baptist, 1640s](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Circle_of_Rembrandt_001.jpg/1648px-Circle_of_Rembrandt_001.jpg)
+![The Beheading of John the Baptist, 1640s](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Circle_of_Rembrandt_001.jpg/1280px-Circle_of_Rembrandt_001.jpg)
 
 *Fig 4: Carel Fabritius, The Beheading of John the Baptist, Early 1640s*[^4]
 
@@ -32,7 +32,7 @@ The execution focuses heavily on the dramatic interplay of light and shadow, uti
 
 ### Self-portrait, 1647-1648
 
-![Self-Portrait, Circa 1647-1648](https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Carel_Fabritius_-_Self-Portrait_-_Google_Art_Project.jpg/1516px-Carel_Fabritius_-_Self-Portrait_-_Google_Art_Project.jpg)
+![Self-Portrait, Circa 1647-1648](https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Carel_Fabritius_-_Self-Portrait_-_Google_Art_Project.jpg/1280px-Carel_Fabritius_-_Self-Portrait_-_Google_Art_Project.jpg)
 
 *Fig 5: Carel Fabritius, Self-Portrait, Circa 1647–1648*
 
@@ -61,7 +61,7 @@ After the death of his first wife, Fabritius moved to Delft with his second wife
 
 ### View of Delft, 1652
 
-![View of Delft, 1652](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/FabritiusViewOfDelft.jpg/2560px-FabritiusViewOfDelft.jpg)
+![View of Delft, 1652](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/FabritiusViewOfDelft.jpg/1280px-FabritiusViewOfDelft.jpg)
 
 *Fig 7: Carel Fabritius, A View of Delft, 1652*
 
@@ -77,7 +77,7 @@ What hasn't been definitively proven is exactly how Fabritius's view was intende
 
 ### The Sentry, 1654
 
-![The Sentry, 1654](https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Carel_Fabritius_-_De_poort_bewaker_%281654%29.jpg/1740px-Carel_Fabritius_-_De_poort_bewaker_%281654%29.jpg)
+![The Sentry, 1654](https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Carel_Fabritius_-_De_poort_bewaker_%281654%29.jpg/1280px-Carel_Fabritius_-_De_poort_bewaker_%281654%29.jpg)
 
 *Fig 8: Carel Fabritius, The Sentry, 1654*
 
@@ -89,7 +89,7 @@ Whatever Fabritius intended, he created one of the most captivating works of the
 
 ### Young Man in a Fur Cap, 1654
 
-![Young Man in a Fur Cap, 1654](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Carel_Fabritius_-_Self-portrait_-_National_Gallery%2C_London_-_1654.jpg/1773px-Carel_Fabritius_-_Self-portrait_-_National_Gallery%2C_London_-_1654.jpg)
+![Young Man in a Fur Cap, 1654](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Carel_Fabritius_-_Self-portrait_-_National_Gallery%2C_London_-_1654.jpg/1280px-Carel_Fabritius_-_Self-portrait_-_National_Gallery%2C_London_-_1654.jpg)
 
 *Fig 9: Carel Fabritius, Young Man in a Fur Cap, 1654*
 
