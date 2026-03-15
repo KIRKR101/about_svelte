@@ -15,24 +15,11 @@
   let loading = $state(true);
   let error = $state<string | null>(null);
 
-  const PROXIES = [
-    'https://letterboxd.kirkr.xyz/?url=',
-    'https://api.allorigins.win/raw?url=',
-    'https://corsproxy.io/?'
-  ];
-
-  async function fetchFilms(proxyIndex = 0) {
-    if (proxyIndex >= PROXIES.length) {
-      error = 'Failed to load films. All connection methods exhausted.';
-      loading = false;
-      return;
-    }
-
+  async function fetchFilms() {
     try {
       loading = true;
       error = null;
-      const targetRssUrl = 'https://letterboxd.com/kirkr101/rss/';
-      const rssFeedUrl = PROXIES[proxyIndex] + encodeURIComponent(targetRssUrl);
+      const rssFeedUrl = 'https://letterboxd.kirkr.xyz/kirkr101/rss/';
 
       const response = await fetch(rssFeedUrl);
       if (!response.ok) throw new Error(`Status ${response.status}`);
@@ -93,9 +80,9 @@
 
       films = filmItems;
       loading = false;
-    } catch (err) {
-      console.warn(`Proxy ${proxyIndex} failed, trying next...`);
-      fetchFilms(proxyIndex + 1);
+    } catch {
+      error = 'Failed to load films.';
+      loading = false;
     }
   }
 
@@ -146,7 +133,7 @@
             </div>
         {:else}
             <div class="space-y-4 mb-12">
-                {#each films as film}
+                {#each films as film (film.link)}
                     <div class="flex gap-4 py-3 border-b border-sep last:border-0">
                         <img 
                             src={film.poster} 
@@ -155,7 +142,8 @@
                         />
                         <div class="flex flex-col justify-center">
                             <div class="text-[18px] text-white/90 font-serif leading-tight">
-                                <a href={film.link} target="_blank" rel="noopener noreferrer" class="hover:text-amber-400/80 transition-colors duration-75 text-inherit no-underline">
+                            <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                            <a href={film.link} target="_blank" rel="noopener noreferrer" class="hover:text-amber-400/80 transition-colors duration-75 text-inherit no-underline">
                                     {film.title}
                                 </a>
                             </div>
