@@ -12,27 +12,27 @@
 
   export let data: PageData;
 
-  function formatDate(dateString: string) {
+  function formatShortDate(dateString: string) {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-GB", {
-        year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric",
     });
   }
 
-  function getRelativeTime(dateString: string) {
-    const date = new Date(dateString);
-    const diffInMs = date.getTime() - new Date().getTime();
-    const diffInDays = Math.round(diffInMs / (1000 * 60 * 60 * 24));
-
-    const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
-
-    if (Math.abs(diffInDays) < 7) return rtf.format(diffInDays, "day");
-    if (Math.abs(diffInDays) < 30) return rtf.format(Math.round(diffInDays / 7), "week");
-    if (Math.abs(diffInDays) < 365) return rtf.format(Math.round(diffInDays / 30), "month");
-    return rtf.format(Math.round(diffInDays / 365), "year");
-  }
+  // Reactively group posts by year whenever data.posts changes
+  $: groupedPosts = data.posts.reduce((groups, post) => {
+    const year = new Date(post.date).getFullYear().toString();
+    const existingGroup = groups.find(g => g.year === year);
+    
+    if (existingGroup) {
+      existingGroup.posts.push(post);
+    } else {
+      groups.push({ year, posts: [post] });
+    }
+    
+    return groups;
+  }, [] as { year: string; posts: Post[] }[]);
 </script>
 
 <svelte:head>
@@ -48,7 +48,7 @@
             <h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
                 <span class="opacity-90">Log entries</span><span class="opacity-20"><em class="not-italic italic">.</em></span>
             </h1>
-            <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim mt-2">writings and notes by me</div>
+            <div class="font-sans text-[11px] tracking-[0.1em] uppercase text-dim mt-2">writings and notes by me</div>
         </div>
 
         <div class="h-px bg-bd mb-8"></div>
@@ -58,17 +58,22 @@
                 <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim">No entries found</div>
             </div>
         {:else}
-            <div class="flex flex-col">
-                {#each data.posts as post}
-                    <a href={`/post/${post.file}`} class="flex items-baseline gap-4 py-4 border-b border-sep group no-underline">
-                        <span class="font-serif text-[18px] text-white/45 group-hover:text-white/85 transition-colors duration-75 flex-1 leading-tight">
-                            {post.title}
-                        </span>
-                        <span class="font-mono lowercase text-[10px] text-dim whitespace-nowrap tracking-[0.04em]">
-                            <span class="md:hidden">{getRelativeTime(post.date)}</span>
-                            <span class="hidden md:inline">{formatDate(post.date)}</span>
-                        </span>
-                    </a>
+            <div class="flex flex-col gap-10">
+                {#each groupedPosts as group}
+                    <div class="flex flex-col">
+                        <!-- Year Header -->
+                        <h2 class="font-mono text-[14px] text-white/78 mb-3">{group.year}</h2>
+                        
+                        <!-- Posts for this year -->
+                        <div class="flex flex-col">
+                            {#each group.posts as post}
+                                <a href={`/post/${post.file}`} class="flex items-baseline gap-5 py-[11px] border-b border-sep no-underline last:border-0 group">
+                                    <span class="font-sans text-[14px] leading-[1.35] text-entry flex-1 transition-colors duration-75 group-hover:text-entry-h">{post.title}</span>
+                                    <span class="font-sans text-[11px] tracking-[0.04em] text-dim whitespace-nowrap">{formatShortDate(post.date)}</span>
+                                </a>
+                            {/each}
+                        </div>
+                    </div>
                 {/each}
             </div>
         {/if}

@@ -23,7 +23,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
 </svelte:head>
 
-<div class="font-mono antialiased min-h-screen relative bg-[#0a0a0b] text-white">
+<div class="antialiased min-h-screen relative bg-[#0a0a0b] text-white">
 	<Navbar />
 	<main class="pt-20">
 		<slot />

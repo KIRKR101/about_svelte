@@ -1,7 +1,5 @@
 <script lang="ts">
   import { photographyData } from '$lib/photography-data';
-  import { onMount } from 'svelte';
-  import { browser } from '$app/environment';
   import Lightbox from '$lib/components/Lightbox.svelte';
 
   let lightboxActive = $state(false);
@@ -35,7 +33,6 @@
       openLightbox(id);
     }
   }
-  let currentImageData = $derived(allImages[currentImageIndex]);
 </script>
 
 <svelte:head>
@@ -50,7 +47,7 @@
             <h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
                 <span class="opacity-90">Photography</span><span class="opacity-20"><em class="not-italic italic">.</em></span>
             </h1>
-            <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim mt-2">selected photos from travels</div>
+            <div class="font-sans text-[11px] tracking-[0.1em] uppercase text-dim mt-2">selected photos from travels</div>
         </div>
 
         <div class="h-px bg-bd mb-8"></div>
@@ -59,7 +56,6 @@
             <section class="mb-12 last:mb-0">
                 <div class="py-2 mb-4">
                     <h2 class="font-serif text-[24px] text-white/80 mb-1 leading-none">{city}</h2>
-                    <div class="font-mono text-[10px] tracking-[0.1em] uppercase text-dim">collection</div>
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-8">
@@ -94,4 +90,4 @@
     onNext={goToNext}
     onPrev={goToPrevious}
   />
-{/if}
+{/if}

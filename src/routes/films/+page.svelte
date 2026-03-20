@@ -118,7 +118,7 @@
             <h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
                 <span class="opacity-90">Films</span><span class="opacity-20"><em class="not-italic italic">.</em></span>
             </h1>
-            <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim mt-2">a collection of films</div>
+            <div class="font-sans text-[11px] tracking-[0.1em] uppercase text-dim mt-2">a collection of films</div>
         </div>
 
         <div class="h-px bg-bd mb-8"></div>

@@ -1,7 +1,5 @@
 <script lang="ts">
   import { artData } from '$lib/art-data';
-  import { onMount } from 'svelte';
-  import { browser } from '$app/environment';
   import Lightbox from '$lib/components/Lightbox.svelte';
 
   let lightboxActive = $state(false);
@@ -49,7 +47,7 @@
             <h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
                 <span class="opacity-90">Art</span><span class="opacity-20"><em class="not-italic italic">.</em></span>
             </h1>
-            <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim mt-2">a collection of artworks</div>
+            <div class="font-sans text-[11px] tracking-[0.1em] uppercase text-dim mt-2">a collection of artworks that i like</div>
         </div>
 
         <div class="h-px bg-bd mb-8"></div>
@@ -89,4 +87,4 @@
     onNext={goToNext}
     onPrev={goToPrevious}
   />
-{/if}
+{/if}

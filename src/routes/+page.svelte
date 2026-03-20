@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount } from 'svelte';
   import { recentPosts } from '$lib/posts-data';
 
   // --- Interfaces ---
@@ -160,7 +160,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </svelte:head>
 
-<div class="min-h-screen flex items-start justify-center px-6 py-6 md:py-16 font-mono">
+<div class="flex items-start justify-center px-6 py-6 md:py-16 font-mono">
   <div class="w-full max-w-[600px]">
 
     <!-- ── IDENTITY ─────────────────────────────────────────── -->
@@ -180,14 +180,14 @@
 
       <!-- Clock -->
       <div class="pr-0 md:pr-6 pb-6 md:pb-0 border-b md:border-b-0 border-bd md:border-r">
-        <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim mb-[14px]">Local time · GMT</div>
+        <div class="font-sans text-[11px] tracking-[0.1em] uppercase text-dim mb-[14px]">Local time · GMT</div>
         <div class="font-serif text-[32px] md:text-[40px] leading-none tracking-[-1.5px] text-white/85">{displayTime}</div>
         <div class="font-serif italic text-xs mt-[6px] text-white/45">{displayDay}</div>
       </div>
 
       <!-- GitHub -->
       <div class="pl-0 md:pl-6 flex flex-col justify-center">
-        <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim mb-[14px]">Open source</div>
+        <div class="font-sans text-[11px] tracking-[0.1em] uppercase text-dim mb-[14px]">Open source</div>
         <a href="https://github.com/Kirkr101" target="_blank" class="flex items-center gap-[10px] no-underline text-inherit transition-opacity duration-75 hover:opacity-70 group">
           <svg viewBox="0 0 16 16" class="w-5 h-5 md:w-6 md:h-6 shrink-0 fill-muted">
             <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
@@ -206,7 +206,7 @@
     <div class="anim-row anim-row-4 py-7">
 
       <div class="flex justify-between items-center mb-4">
-        <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim">Now playing · {useLastFm ? 'Last.fm' : 'Spotify'}</div>
+        <div class="font-sans text-[11px] tracking-[0.1em] uppercase text-dim">Now playing · {useLastFm ? 'Last.fm' : 'Spotify'}</div>
       </div>
 
       {#if (!useLastFm && spotifyData) || (useLastFm && lastFmData)}
@@ -231,16 +231,16 @@
             {/if}
           </div>
           <div class="flex-1 min-w-0 pt-0.5">
-            <div class="font-serif text-[16px] sm:text-[18px] leading-snug mb-1 text-white/78">
+            <div class="font-serif italic text-[18px] sm:text-[20px] leading-snug mb-1 text-white/78">
               {#if !useLastFm && spotifyData}
                 {spotifyData.title}
               {:else if useLastFm && lastFmData}
-                <a href={lastFmData.trackUrl} target="_blank" rel="noopener noreferrer" class="text-white hover:text-white no-underline">
+                <a href={lastFmData.trackUrl} target="_blank" rel="noopener noreferrer" class="text-white/78 hover:text-white no-underline">
                   {lastFmData.title}
                 </a>
               {/if}
             </div>
-            <div class="text-[10px] sm:text-[11px] tracking-[0.04em] text-muted">
+            <div class="font-sans text-[10px] sm:text-[11px] tracking-[0.04em] text-muted">
               {#if !useLastFm && spotifyData}
                 {spotifyData.artist} {spotifyData.album ? ` · ${spotifyData.album}` : ''}
               {:else if useLastFm && lastFmData}
@@ -249,7 +249,7 @@
             </div>
             
             {#if !useLastFm && spotifyData?.isPlaying}
-              <div class="h-px bg-rail relative mt-[14px]">
+              <div class="h-px bg-rail relative mt-[14px]" aria-label={formatAriaLabel(localProgress, spotifyData.duration)}>
                 <div class="absolute inset-y-0 left-0 h-full bg-prog transition-[width] duration-100 linear" style="width: {progressPercentage}%"></div>
                 <div class="absolute top-[-3.5px] w-2 h-2 rounded-full bg-white -translate-x-1/2" style="left: {progressPercentage}%"></div>
               </div>
@@ -289,15 +289,15 @@
     <!-- ── LOG ENTRIES ───────────────────────────────────────── -->
     <div class="anim-row anim-row-5 pt-7">
 
-      <div class="flex justify-between items-center mb-1.5">
-        <div class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim">Log entries</div>
-        <a href="/posts" class="font-mono text-[11px] tracking-[0.1em] uppercase text-dim no-underline transition-colors duration-75 hover:text-white/55">All posts ↗</a>
+      <div class="flex justify-between items-center mb-3">
+        <div class="font-serif italic text-[24px] text-white/78">Writings</div>
+        <a href="/posts" class="font-sans text-[11px] tracking-[0.1em] uppercase text-dim no-underline transition-colors duration-75 hover:text-white/55">All posts ↗</a>
       </div>
 
       {#each recentPosts.slice(0, 5) as post}
         <a href={`/post/${post.file}`} class="flex items-baseline gap-3.5 py-[11px] border-b border-sep no-underline last:border-0 group">
-          <span class="font-serif text-[18px] leading-[1.35] text-entry flex-1 transition-colors duration-75 group-hover:text-entry-h">{post.title}</span>
-          <span class="font-mono text-[11px] tracking-[0.04em] text-dim whitespace-nowrap">{formatDate(post.date)}</span>
+          <span class="font-sans text-[14px] leading-[1.35] text-entry flex-1 transition-colors duration-75 group-hover:text-entry-h">{post.title}</span>
+          <span class="font-sans text-[11px] tracking-[0.04em] text-dim whitespace-nowrap">{formatDate(post.date)}</span>
         </a>
       {/each}
 

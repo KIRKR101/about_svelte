@@ -50,7 +50,7 @@
         {#each navLinks as link}
           <a 
             href={link.path} 
-            class="font-mono text-[11px] tracking-[0.1em] transition-colors duration-75 uppercase
+            class="font-sans text-[11px] tracking-[0.1em] transition-colors duration-75 uppercase
             {isActive(link.path) 
               ? 'text-white/80' 
               : 'text-dim hover:text-white/60'}"
@@ -88,7 +88,7 @@
           <a 
             href={link.path} 
             on:click={closeMenu}
-            class="font-mono text-[11px] tracking-[0.1em] px-6 py-3 transition-colors duration-75 lowercase
+            class="font-sans text-[11px] tracking-[0.1em] px-6 py-3 transition-colors duration-75 uppercase
             {isActive(link.path) 
               ? 'text-white/80 bg-white/5' 
               : 'text-dim hover:text-white/60 hover:bg-white/5'}"
