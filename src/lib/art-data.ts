@@ -40,7 +40,7 @@ export const artData = {
 		description:
 			'A pictoral examplar of Dutch genre painting, this work beautifully depicts domestic life. The stone tablet above the arch is a real tablet from a Delft cloister, and can be seen in the Prinsenhof Museum.',
 		data: [
-			['artist', 'Pieter De Hooch'],
+			['artist', 'Pieter de Hooch'],
 			['year', '1658'],
 			['medium', 'Oil on canvas'],
 			['dimensions', '73.5 x 60 cm']
