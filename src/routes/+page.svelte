@@ -157,7 +157,8 @@
 
 <svelte:head>
   <title>kirkr.xyz</title>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <link rel="preconnect" href="https://i.scdn.co">
 </svelte:head>
 
 <div class="flex items-start justify-center px-6 py-6 md:py-16 font-mono">
