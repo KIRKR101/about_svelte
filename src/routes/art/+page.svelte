@@ -84,7 +84,7 @@
                                 <img 
                                     src={artwork.thumbnail} 
                                     alt={artwork.title} 
-                                    class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                                    class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-102 transition-all duration-700 ease-out"
                                 />
                             </div>
                             <span class="font-serif text-xl text-white/90 leading-tight group-hover:text-white transition-colors">
