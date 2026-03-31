@@ -122,6 +122,7 @@ export const artData = {
 			'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Rembrandt_van_Rijn_-_The_Mill_-_Google_Art_Project.jpg/960px-Rembrandt_van_Rijn_-_The_Mill_-_Google_Art_Project.jpg',
 		description:
 			"One of Rembrandt's many great landscapes. For a long time, its attribution to Rembrandt was doubted, but has been restored in recent years. The colour and brushwork is magnificent.",
+		wikipedia: 'https://en.wikipedia.org/wiki/The_Mill_(Rembrandt)',
 		data: [
 			['artist', 'Rembrandt van Rijn'],
 			['year', 'c. 1645-1648'],
@@ -214,6 +215,7 @@ export const artData = {
 			'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Card_Players_in_a_sunlit_Room%2C_by_Pieter_de_Hooch.jpg/960px-Card_Players_in_a_sunlit_Room%2C_by_Pieter_de_Hooch.jpg',
 		description:
 			'De Hooch demonstrates his mastery of light and perspective, creating a view from a shadowy interior into a bright, sunlit courtyard. The effect is a calm, reflective mood, with restrained figures absorbed in their game.',
+		wikipedia: 'https://en.wikipedia.org/wiki/Card_Players_in_a_Sunlit_Room',
 		data: [
 			['artist', 'Pieter de Hooch'],
 			['year', '1658'],
