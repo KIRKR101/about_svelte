@@ -27,35 +27,49 @@
 		trackUrl: string;
 	}
 
-	// State
+	type DataSource = 'spotify' | 'lastfm' | null;
+
 	let spotifyData: SpotifyTrackData | null = $state(null);
 	let lastFmData: LastFmTrackData | null = $state(null);
-	let useLastFm = $state(false);
+	let dataSource: DataSource = $state(null);
 	let localProgress = $state(0);
 	let lastFetchTime = $state(0);
 	let currentTime = $state(new Date());
+	let isFetching = false;
 
 	let intervalId: ReturnType<typeof setInterval> | undefined;
 	let progressIntervalId: ReturnType<typeof setInterval> | undefined;
+	let retryTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
-	// Fetchers
 	async function fetchSpotifyTrack() {
+		if (isFetching) return;
+		isFetching = true;
 		try {
 			const response = await fetch('https://spotify.kirkr.xyz/api/now-playing');
 			if (!response.ok) throw new Error(`Spotify API responded with ${response.status}`);
 			const data = await response.json();
-			if (data.isPlaying !== undefined) {
-				spotifyData = data;
-				localProgress = data.progress || 0;
-				lastFetchTime = Date.now();
-				useLastFm = false;
-				setupProgressUpdate();
+
+			if (data.isPlaying === false && !data.title) {
+				isFetching = false;
+				retryTimeoutId = setTimeout(() => fetchSpotifyTrack(), 3000);
 				return;
 			}
+
+			if (data.isPlaying !== undefined) {
+				spotifyData = data;
+				localProgress = data.progress ?? 0;
+				lastFetchTime = Date.now();
+				dataSource = 'spotify';
+				setupProgressUpdate();
+				isFetching = false;
+				return;
+			}
+
 			throw new Error('Invalid Spotify response');
 		} catch (error) {
-			console.error('Falling back to Last.fm:', error);
-			useLastFm = true;
+			console.info('Falling back to Last.fm:', error);
+			isFetching = false;
+			dataSource = 'lastfm';
 			fetchLastFmTrack();
 		}
 	}
@@ -70,13 +84,21 @@
 		}
 	}
 
+	function fetchCurrentTrack() {
+		if (dataSource === 'lastfm') {
+			fetchLastFmTrack();
+		} else {
+			fetchSpotifyTrack();
+		}
+	}
+
 	function setupProgressUpdate() {
 		if (progressIntervalId) clearInterval(progressIntervalId);
 		if (spotifyData?.isPlaying) {
 			progressIntervalId = setInterval(() => {
 				const elapsed = Date.now() - lastFetchTime;
-				const newProgress = (spotifyData?.progress || 0) + elapsed;
-				if (newProgress >= (spotifyData?.duration || 0)) {
+				const newProgress = (spotifyData?.progress ?? 0) + elapsed;
+				if (newProgress >= (spotifyData?.duration ?? 0)) {
 					fetchSpotifyTrack();
 				} else {
 					localProgress = newProgress;
@@ -85,10 +107,9 @@
 		}
 	}
 
-	// Helpers
-	function getSpotifyFallback(images: SpotifyImage[]): string {
+	function getLargestImage(images: SpotifyImage[]): string {
 		if (!images || images.length === 0) return '';
-		return [...images].sort((a, b) => b.width - a.width)[0].url;
+		return images.reduce((best, img) => (img.width > best.width ? img : best)).url;
 	}
 
 	function generateSpotifySrcset(images: SpotifyImage[]): string {
@@ -118,7 +139,7 @@
 
 	function getLastFmFallback(images: Record<string, string>): string {
 		if (!images) return '';
-		return images.extralarge || images.large || images.medium || images.small || '';
+		return images['extralarge'] || images['large'] || images['medium'] || images['small'] || '';
 	}
 
 	function formatTime(ms: number) {
@@ -133,14 +154,17 @@
 		return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 	}
 
+	const recentPostsSlice = recentPosts.slice(0, 5);
+
 	onMount(() => {
 		fetchSpotifyTrack();
-		intervalId = setInterval(fetchSpotifyTrack, 60000);
+		intervalId = setInterval(fetchCurrentTrack, 60000);
 		const clockInterval = setInterval(() => (currentTime = new Date()), 1000);
 		return () => {
 			clearInterval(clockInterval);
 			if (intervalId) clearInterval(intervalId);
 			if (progressIntervalId) clearInterval(progressIntervalId);
+			if (retryTimeoutId) clearTimeout(retryTimeoutId);
 		};
 	});
 
@@ -148,6 +172,16 @@
 		if (!spotifyData) return 0;
 		return (localProgress / spotifyData.duration) * 100;
 	});
+
+	let spotifySrcset = $derived.by(() => {
+		const d = spotifyData;
+		return d ? generateSpotifySrcset(d.images) : '';
+	});
+	let spotifyFallback = $derived.by(() => {
+		const d = spotifyData;
+		return d ? getLargestImage(d.images) : '';
+	});
+
 	let displayTime = $derived(
 		currentTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })
 	);
@@ -180,7 +214,6 @@
 		<div class="anim-row anim-row-2 h-px bg-bd"></div>
 
 		<div class="anim-row anim-row-3 grid grid-cols-1 gap-6 py-7 md:grid-cols-2 md:gap-0">
-			<!-- Clock -->
 			<div class="border-b border-bd pr-0 pb-6 md:border-r md:border-b-0 md:pr-6 md:pb-0">
 				<div class="mb-[14px] font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
 					Local time · GMT
@@ -225,24 +258,30 @@
 		<div class="anim-row anim-row-4 py-7">
 			<div class="mb-4 flex items-center justify-between">
 				<div class="font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
-					Now playing · {useLastFm ? 'Last.fm' : 'Spotify'}
+					{dataSource === 'lastfm'
+						? lastFmData?.status === 'Currently playing'
+							? 'Now playing · Last.fm'
+							: 'Last played · Last.fm'
+						: spotifyData?.isPlaying
+							? 'Now playing · Spotify'
+							: 'Last played · Spotify'}
 				</div>
 			</div>
 
-			{#if (!useLastFm && spotifyData) || (useLastFm && lastFmData)}
+			{#if (dataSource === 'spotify' && spotifyData) || (dataSource === 'lastfm' && lastFmData)}
 				<div class="flex items-start gap-3 sm:gap-4">
 					<div
 						class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[3px] border border-bd bg-art-bg sm:h-24 sm:w-24"
 					>
-						{#if !useLastFm && spotifyData}
+						{#if dataSource === 'spotify' && spotifyData}
 							<img
-								srcset={generateSpotifySrcset(spotifyData.images)}
+								srcset={spotifySrcset}
 								sizes="(max-width: 768px) 80px, 96px"
-								src={getSpotifyFallback(spotifyData.images)}
+								src={spotifyFallback}
 								alt={spotifyData.title}
 								class="h-full w-full object-cover"
 							/>
-						{:else if useLastFm && lastFmData}
+						{:else if dataSource === 'lastfm' && lastFmData}
 							<img
 								srcset={generateLastFmSrcset(lastFmData.images)}
 								sizes="(max-width: 768px) 80px, 96px"
@@ -256,9 +295,9 @@
 						<div
 							class="mb-1 font-serif text-[18px] leading-snug text-white/78 italic sm:text-[20px]"
 						>
-							{#if !useLastFm && spotifyData}
+							{#if dataSource === 'spotify' && spotifyData}
 								{spotifyData.title}
-							{:else if useLastFm && lastFmData}
+							{:else if dataSource === 'lastfm' && lastFmData}
 								<a
 									href={lastFmData.trackUrl}
 									target="_blank"
@@ -270,14 +309,14 @@
 							{/if}
 						</div>
 						<div class="font-sans text-[10px] tracking-[0.04em] text-muted sm:text-[11px]">
-							{#if !useLastFm && spotifyData}
+							{#if dataSource === 'spotify' && spotifyData}
 								{spotifyData.artist}{spotifyData.album ? ` · ${spotifyData.album}` : ''}
-							{:else if useLastFm && lastFmData}
+							{:else if dataSource === 'lastfm' && lastFmData}
 								{lastFmData.artist}
 							{/if}
 						</div>
 
-						{#if !useLastFm && spotifyData?.isPlaying}
+						{#if dataSource === 'spotify' && spotifyData?.isPlaying}
 							<div
 								class="relative mt-[14px] h-px bg-rail"
 								aria-label={formatAriaLabel(localProgress, spotifyData.duration)}
@@ -336,7 +375,7 @@
 				</a>
 			</div>
 
-			{#each recentPosts.slice(0, 5) as post (post.file)}
+			{#each recentPostsSlice as post (post.file)}
 				<a
 					href="/post/{post.file}"
 					class="group flex w-full items-baseline gap-3.5 border-b border-sep py-[11px] text-left no-underline last:border-0"

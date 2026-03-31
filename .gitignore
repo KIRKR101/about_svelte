@@ -28,3 +28,4 @@ target/
 
 # SvelteKit build output
 /public/
+scrape.py

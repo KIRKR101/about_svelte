@@ -3,6 +3,8 @@
   import { deHoochBibliography } from '$lib/bibliography';
   import Lightbox from '$lib/components/Lightbox.svelte';
   import { fade } from 'svelte/transition';
+  import { tick, onMount, onDestroy } from 'svelte';
+  import { SvelteMap } from 'svelte/reactivity';
 
   let lightboxActive = $state(false);
   let currentArtIndex = $state(0);
@@ -11,16 +13,109 @@
   let berchemFootnoteVisible = $state(false);
 
   const artEntries = Object.entries(artData);
+  
+  // Initialize deterministically to prevent SSR hydration mismatches
+  let shuffledEntries = $state([...artEntries]);
+
+  // Map from art id → its card DOM element
+  const cardEls = new SvelteMap<string, HTMLElement>();
+
+  // Visual order: array of art ids sorted by rendered position (left→right, top→bottom)
+  let visualOrder = $state<string[]>(artEntries.map(([id]) => id));
+
+  function computeVisualOrder() {
+    if (cardEls.size === 0) return;
+
+    const positions: { id: string; left: number; top: number }[] = [];
+    for (const [id, el] of cardEls) {
+      const rect = el.getBoundingClientRect();
+      positions.push({ id, left: rect.left, top: rect.top });
+    }
+
+    // 1. Find distinct column x-positions by rounding and deduplicating left values.
+    const lefts = [...new Set(positions.map(p => Math.round(p.left)))].sort((a, b) => a - b);
+    if (lefts.length === 0) return;
+
+    // 2. Bucket each item into its column by nearest left value.
+    const COLUMN_TOLERANCE = 10;
+    const columns: { id: string; top: number }[][] = lefts.map(() => []);
+    
+    for (const pos of positions) {
+      let colIdx = lefts.findIndex(l => Math.abs(l - Math.round(pos.left)) <= COLUMN_TOLERANCE);
+      if (colIdx === -1) colIdx = 0;
+      
+      const targetCol = columns[colIdx];
+      if (targetCol) {
+        targetCol.push({ id: pos.id, top: pos.top });
+      }
+    }
+
+    // 3. Sort each column top-to-bottom.
+    for (const col of columns) col.sort((a, b) => a.top - b.top);
+
+    // 4. Interleave columns left-to-right row by row so navigation reads left→right.
+    const result: string[] = [];
+    const maxLen = Math.max(0, ...columns.map(c => c.length));
+    
+    for (let row = 0; row < maxLen; row++) {
+      for (const col of columns) {
+        const item = col[row];
+        if (item) {
+          result.push(item.id);
+        }
+      }
+    }
+    visualOrder = result;
+  }
+
+  // Recompute after each render and on resize
+  let resizeObserver: ResizeObserver | null = null;
+
+  function registerCard(id: string, el: HTMLElement) {
+    cardEls.set(id, el);
+    // Once all cards are registered, compute order
+    if (cardEls.size === shuffledEntries.length) {
+      tick().then(computeVisualOrder);
+
+      if (!resizeObserver) {
+        resizeObserver = new ResizeObserver(() => computeVisualOrder());
+        resizeObserver.observe(document.body);
+      }
+    }
+  }
+
+  // Named action so it can be used as use:cardAction={id}
+  function cardAction(el: HTMLElement, id: string) {
+    registerCard(id, el);
+    return {
+      destroy() {
+        cardEls.delete(id);
+      }
+    };
+  }
+
+  onMount(async () => {
+    shuffledEntries = [...artEntries].sort(() => Math.random() - 0.5);
+    await tick();
+    computeVisualOrder();
+  });
+
+  onDestroy(() => {
+    if (resizeObserver) {
+      resizeObserver.disconnect();
+    }
+  });
 
   const openLightbox = (artId: string) => {
-    const index = artEntries.findIndex(([id]) => id === artId);
-    currentArtIndex = index;
+    const index = visualOrder.indexOf(artId);
+    currentArtIndex = index >= 0 ? index : 0;
     lightboxActive = true;
   };
 
-  const closeLightbox = () => lightboxActive = false;
-  const goToNext = () => currentArtIndex = (currentArtIndex + 1) % artEntries.length;
-  const goToPrevious = () => currentArtIndex = (currentArtIndex - 1 + artEntries.length) % artEntries.length;
+  const closeLightbox = () => (lightboxActive = false);
+  const goToNext = () => (currentArtIndex = (currentArtIndex + 1) % visualOrder.length);
+  const goToPrevious = () =>
+    (currentArtIndex = (currentArtIndex - 1 + visualOrder.length) % visualOrder.length);
 
   function handleKeydown(e: KeyboardEvent, id: string) {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -29,7 +124,11 @@
     }
   }
 
-  let currentArtData = $derived(artEntries[currentArtIndex]?.[1]);
+  // Derive the current art data from the visual order
+  let currentArtData = $derived.by(() => {
+    const id = visualOrder[currentArtIndex];
+    return id ? (artData as Record<string, typeof artData[keyof typeof artData]>)[id] : undefined;
+  });
 
   // Sort bibliography: entries with descriptions first
   const sortedBibliography = [...deHoochBibliography].sort((a, b) => {
@@ -38,8 +137,10 @@
     return bHas - aHas;
   });
 
-  const PORTRAIT_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Angebliche_zelfportret_van_de_schilder_Pieter_de_Hooch%2C_Rijksmuseum_SK-A-181.jpg/500px-Angebliche_zelfportret_van_de_schilder_Pieter_de_Hooch%2C_Rijksmuseum_SK-A-181.jpg';
-  const SIGNATURE_URL = 'https://upload.wikimedia.org/wikipedia/commons/3/31/Pieter_de_Hooch_Signature.svg';
+  const PORTRAIT_URL =
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Angebliche_zelfportret_van_de_schilder_Pieter_de_Hooch%2C_Rijksmuseum_SK-A-181.jpg/500px-Angebliche_zelfportret_van_de_schilder_Pieter_de_Hooch%2C_Rijksmuseum_SK-A-181.jpg';
+  const SIGNATURE_URL =
+    'https://upload.wikimedia.org/wikipedia/commons/3/31/Pieter_de_Hooch_Signature.svg';
 </script>
 
 <svelte:head>
@@ -48,7 +149,7 @@
 </svelte:head>
 
 <div class="min-h-screen bg-[#0a0a0a] text-[#e0e0e0] flex flex-col items-center px-6 py-12 md:py-24">
-    <main class="w-full max-w-[1000px] anim-row anim-row-1">
+    <main class="w-full max-w-7xl anim-row anim-row-1">
       
         <div class="py-7">
             <h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
@@ -73,23 +174,29 @@
 
         {#if activeTab === 'gallery'}
             <div in:fade={{ duration: 300 }}>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
-                    {#each artEntries as [id, artwork] (id)}
+                <div class="columns-1 sm:columns-2 lg:columns-3 gap-12 mb-12">
+                    {#each shuffledEntries as [id, artwork] (id)}
                         <button 
-                            class="flex flex-col text-left group focus:outline-none"
+                            use:cardAction={id}
+                            class="flex flex-col text-left group focus:outline-none break-inside-avoid mb-12 w-full"
                             onclick={() => openLightbox(id)}
                             onkeydown={(e) => handleKeydown(e, id)}
                         >
-                            <div class="overflow-hidden bg-neutral-900 aspect-[4/5] mb-6 border border-white/5 shadow-2xl">
+                            <div 
+                                class="overflow-hidden bg-neutral-900 mb-6 border border-white/5 shadow-2xl w-full"
+                                style:aspect-ratio={artwork.aspectRatio || 'auto'}
+                            >
                                 <img 
                                     src={artwork.thumbnail} 
                                     alt={artwork.title} 
                                     class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-102 transition-all duration-700 ease-out"
                                 />
                             </div>
+                            
                             <span class="font-serif text-xl text-white/90 leading-tight group-hover:text-white transition-colors">
                                 {artwork.title}
                             </span>
+                            
                             <div class="flex items-center gap-2 mt-2">
                                 <span class="font-sans text-[12px] text-white/55 tracking-wide">
                                     {artwork.data.find(d => d[0] === 'artist')?.[1]}
@@ -349,14 +456,15 @@
 </div>
 
 {#if lightboxActive && currentArtData}
+  {@const artItem = currentArtData!}
   <Lightbox 
     item={{
-        ...currentArtData,
-        description: currentArtData.description,
-        data: currentArtData.data as [string, string][]
+        ...artItem,
+        description: artItem.description,
+        data: artItem.data as [string, string][]
     }}
     currentIndex={currentArtIndex}
-    totalItems={artEntries.length}
+    totalItems={visualOrder.length} 
     onClose={closeLightbox}
     onNext={goToNext}
     onPrev={goToPrevious}
