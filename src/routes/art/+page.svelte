@@ -189,7 +189,7 @@
                                 <img 
                                     src={artwork.thumbnail} 
                                     alt={artwork.title} 
-                                    class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-102 transition-all duration-700 ease-out"
+                                    class="w-full h-full object-cover group-hover:brightness-105 group-hover:scale-102 group-hover:cursor-zoom-in transition-all duration-700 ease-out"
                                 />
                             </div>
                             
@@ -608,7 +608,7 @@
                         </div>
                     </section>
 
-                    <!-- External Resources (moved from sidebar) -->
+                    <!-- External Resources -->
                     <div class="pt-8">
                         <h3 class="font-mono text-[11px] uppercase tracking-[0.3em] text-white/30 mb-6 border-b border-white/10 pb-4">
                             External Resources
@@ -633,7 +633,7 @@
                         </div>
                     </div>
 
-                    <!-- Footnotes (remaining in sidebar) -->
+                    <!-- Footnotes -->
                     {#if footnoteVisible}
                         <div in:fade={{ duration: 200 }} class="border border-white/10 bg-white/2.5 p-6 space-y-4">
                             <div class="flex items-start justify-between gap-4 mb-1">

@@ -405,7 +405,7 @@ export const artData = {
 		],
 		aspectRatio: '5/7.12'
 	},
-	landschap: {
+	'landschap': {
 		title: 'Landscape',
 		thumbnail: 'https://iiif.micr.io/MgMtO/full/500,/0/default.webp',
 		image: 'https://iiif.micr.io/MgMtO/full/1600,/0/default.webp',
@@ -719,7 +719,7 @@ export const artData = {
 		],
 		aspectRatio: '92/61.9'
 	},
-	arbeiterstadt: {
+	'arbeiterstadt': {
 		title: 'Arbeiterstadt (City of Workers)',
 		thumbnail:
 			'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Hans_Baluschek_-_Arbeiterstadt_%281920%29.jpg/500px-Hans_Baluschek_-_Arbeiterstadt_%281920%29.jpg',
@@ -751,7 +751,7 @@ export const artData = {
 		],
 		aspectRatio: '5/6.89'
 	},
-	sarubashi: {
+	'sarubashi': {
 		title: 'The Monkey Bridge (Sarubashi)',
 		thumbnail: 'https://iiif.micr.io/aMGwN/pct:9.9,8.2,84.8,87.5/500,/0/default.webp',
 		image: 'https://iiif.micr.io/aMGwN/pct:9.9,8.2,84.8,87.5/1600,/0/default.webp',

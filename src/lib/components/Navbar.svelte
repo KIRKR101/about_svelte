@@ -34,6 +34,7 @@
 <nav
   aria-label="Main navigation"
   class="fixed top-0 left-0 right-0 z-50 h-16 bg-[#0a0a0b]/80 backdrop-blur-sm border-b border-bd"
+  style="padding-right: var(--scrollbar-width, 0px);"
 >
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 h-full">
     <div class="flex items-center justify-between h-full">
