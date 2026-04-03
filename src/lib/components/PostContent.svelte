@@ -1,21 +1,21 @@
 <script lang="ts">
-  import { marked } from 'marked';
-  import footnote from 'marked-footnote';
+	import { marked } from 'marked';
+	import footnote from 'marked-footnote';
 
-  const { content } = $props();
+	const { content } = $props();
 
-  const renderer = new marked.Renderer();
+	const renderer = new marked.Renderer();
 
-  renderer.image = ({ href, title, text }) => {
-    const titleHtml = title ? ` title="${title}"` : '';
-    return `<img src="${href || ''}" alt="${text}"${titleHtml}/>`;
-  };
+	renderer.image = ({ href, title, text }) => {
+		const titleHtml = title ? ` title="${title}"` : '';
+		return `<img src="${href || ''}" alt="${text}"${titleHtml}/>`;
+	};
 
-  marked.use(footnote());
+	marked.use(footnote());
 
-  let parsedContent = marked(content, { renderer });
+	let parsedContent = marked(content, { renderer });
 </script>
 
-<div class="font-sans prose prose-invert max-w-none prose-sm sm:prose-base">
-  {@html parsedContent}
+<div class="prose prose-invert prose-sm sm:prose-base max-w-none font-sans">
+	{@html parsedContent}
 </div>

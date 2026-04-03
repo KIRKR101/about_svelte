@@ -19,11 +19,14 @@
 	<meta name="description" content="Kirkr.xyz - A personal website showcasing lots of stuff." />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-	
-	<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+	<link
+		href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap"
+		rel="stylesheet"
+	/>
 </svelte:head>
 
-<div class="antialiased min-h-screen relative bg-[#0a0a0b] text-white">
+<div class="relative min-h-screen bg-[#0a0a0b] text-white antialiased">
 	<Navbar />
 	<main class="pt-20">
 		<slot />
