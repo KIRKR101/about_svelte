@@ -134,7 +134,7 @@
 			</a>
 		</div>
 
-		<div class="mb-3">
+		<div class="mb-3 flex min-h-[16px] items-center">
 			{#if loading}
 				<div class="h-3 w-48 animate-pulse rounded-sm bg-white/5"></div>
 			{:else}
@@ -176,11 +176,11 @@
 			<div
 				class="grid w-full gap-[3px]"
 				style="grid-template-columns: repeat({loading
-					? 52
+					? 53
 					: contributionWeeks.length}, minmax(0, 1fr));"
 			>
 				{#if loading}
-					{#each [...Array(52).keys()] as wi (wi)}
+					{#each [...Array(53).keys()] as wi (wi)}
 						<div class="grid grid-rows-7 gap-[3px]">
 							{#each [...Array(7).keys()] as di (di)}
 								<div class="aspect-square w-full animate-pulse rounded-[2px] bg-white/5"></div>
@@ -192,7 +192,7 @@
 						<div class="grid grid-rows-7 gap-[3px]">
 							{#each week.contributionDays as day (day.date)}
 								<button
-									class="relative aspect-square w-full cursor-default border-0 p-0 transition-all duration-75 sm:rounded-[3px] sm:hover:z-10 sm:hover:scale-150 sm:hover:brightness-125 sm:focus:z-10 sm:focus:scale-150 sm:focus:brightness-125 sm:focus:outline-none"
+									class="relative aspect-square w-full cursor-default border-0 p-0 transition-all duration-75 sm:rounded-[3px] sm:hover:z-10 sm:hover:scale-110 sm:hover:brightness-125 sm:focus:z-10"
 									style="background-color: {getContributionColor(day.contributionCount)}"
 									onmouseenter={!isMobile ? (e) => showTooltip(e, day) : undefined}
 									onmouseleave={!isMobile ? hideTooltip : undefined}
@@ -207,18 +207,20 @@
 				{/if}
 			</div>
 
-			{#if !loading}
-				<div class="mt-3 flex items-center justify-end gap-[3px]">
-					<span class="mr-1 font-sans text-[10px] text-muted">Less</span>
-					{#each [0, 3, 8, 15, 25] as count (count)}
+			<div class="mt-3 flex items-center justify-end gap-[3px]">
+				<span class="mr-1 font-sans text-[10px] text-muted">Less</span>
+				{#each [0, 3, 8, 15, 25] as count (count)}
+					{#if loading}
+						<div class="h-[10px] w-[10px] flex-shrink-0 animate-pulse rounded-[2px] bg-white/5"></div>
+					{:else}
 						<div
 							class="h-[10px] w-[10px] flex-shrink-0 rounded-[2px]"
 							style="background-color: {getContributionColor(count)}"
 						></div>
-					{/each}
-					<span class="ml-1 font-sans text-[10px] text-muted">More</span>
-				</div>
-			{/if}
+					{/if}
+				{/each}
+				<span class="ml-1 font-sans text-[10px] text-muted">More</span>
+			</div>
 		</div>
 	</div>
 
