@@ -1,18 +1,22 @@
-## Field-Programmable Gate Arrays (FPGAs)
+# Field-Programmable Gate Arrays (FPGAs)
 
-Designers have long navigated the trade-off between the flexibility of software-driven CPUs and the raw performance of custom-designed silicon (ASICs). Field-Programmable Gate Arrays (FPGAs) represent a third paradigm: a "sea" of gates on a chip that can be rewired after manufacturing to become any digital circuit possible. This unique reconfigurability allows FPGAs to deliver hardware-level performance with software-like flexibility. This post explores the architecture that makes this possible, the design flow used to harness their power, and the real-world applications where they are used, like prototyping the next generation of chips and accelerating workloads in cloud data centres.
+A CPU runs software. An ASIC does one thing in hardware, permanently. An FPGA sits between the two -- a chip full of unconnected logic gates that you wire together yourself, after manufacture, to implement whatever circuit you need. Rewire it tomorrow and it's a different circuit.
+
+That's the core idea. Hardware-level performance, but reconfigurable. The obvious question is how.
 
 ---
 
-### 1. The Architecture of Reconfigurability
+### The fabric
 
-At its heart, an FPGA is a blank canvas for digital logic. Unlike a CPU that fetches and executes a linear sequence of instructions, an FPGA implements a circuit spatially. The design is not *compiled*; it is *synthesised* onto a physical fabric of programmable components. This fabric is primarily composed of three elements:
+An FPGA isn't a processor and it isn't memory. It's a grid of programmable components connected by a programmable routing network. Three things make it up.
 
-1.  **Configurable Logic Blocks (CLBs):** These are the fundamental building blocks. Each CLB contains a few small, reconfigurable memory units called **Look-Up Tables (LUTs)** and storage elements called **Flip-Flops**. A 6-input LUT, for instance, is a tiny SRAM that can be programmed to implement *any* boolean logic function of up to six variables. Flip-flops provide memory, allowing the creation of registers and stateful, synchronous circuits.
-2.  **Programmable Interconnect:** A vast, flexible network of wires and programmable switches that route signals between the thousands of CLBs, I/O pins, and other resources on the chip. The efficiency of this routing fabric is a major determinant of the FPGA's final performance.
-3.  **Input/Output (I/O) Blocks:** These blocks sit at the perimeter of the chip, connecting the internal logic to the outside world. They are highly configurable to support a wide range of signaling standards (like LVDS, HDMI, or DDR memory interfaces).
+The first is the Configurable Logic Block (CLB). Each one contains Look-Up Tables (LUTs) and flip-flops. A LUT is a tiny piece of SRAM -- a 6-input LUT can implement any boolean logic function of up to six variables, just by storing the truth table. Flip-flops add memory, letting you build registers and stateful circuits. Stack enough CLBs together and you can implement essentially any digital logic.
 
-The mental model for an FPGA designer is not writing code that runs sequentially, but describing a hardware structure that operates in parallel. For example, this snippet of Verilog, a Hardware Description Language (HDL), describes a simple 8-bit counter:
+The second is the interconnect -- a dense network of wires and programmable switches routing signals between CLBs, I/O blocks, and everything else on the chip. Routing quality matters more than most people expect. A design that fits comfortably in terms of logic can still fail timing because the routing is congested.
+
+The third is the I/O blocks at the chip's perimeter, configurable to speak whatever signalling standard you need -- LVDS, HDMI, DDR.
+
+The mental shift for anyone coming from software is that you're not writing instructions that execute sequentially. You're describing a structure that runs in parallel. This Verilog describes a simple 8-bit counter:
 
 ```verilog
 module simple_counter (
@@ -20,7 +24,6 @@ module simple_counter (
     input reset,
     output reg [7:0] count_out
 );
-
     always @(posedge clk) begin
         if (reset) begin
             count_out <= 8'd0;
@@ -28,49 +31,49 @@ module simple_counter (
             count_out <= count_out + 1;
         end
     end
-
 endmodule
 ```
 
-When synthesised, this becomes a physical circuit: eight flip-flops to form the `count_out` register, a collection of LUTs configured to work as an 8-bit adder, and routing to connect them all together. Every clock cycle, the entire circuit updates in parallel.
+Synthesised, this becomes eight flip-flops, a collection of LUTs wired as an 8-bit adder, and the routing between them. Every clock cycle, the whole thing updates at once.
 
 ---
 
-### 2. The Modern FPGA SoC
+### Hard blocks
 
-Modern FPGAs are more than a grid of CLBs. To improve performance and efficiency for common tasks, they integrate hardened, dedicated silicon circuits known as **hard blocks**. Building a function in dedicated silicon is orders of magnitude more efficient in terms of power, area, and speed than constructing it from generic logic.
+Generic logic is flexible but wasteful. A 32x32 multiplier built from LUTs eats hundreds of logic cells and runs slowly. The same operation in a dedicated DSP hard block -- fixed silicon optimised for exactly that function -- runs faster, draws less power, and uses none of your general-purpose resources.
 
-> **The Power of Hard Blocks:** Implementing a 32x32 multiplier using LUTs might consume hundreds of logic cells and run at a few hundred MHz. A dedicated DSP hard block on the same chip can perform the same function faster, at lower power, and using zero general-purpose logic resources.
+Modern FPGAs pack in a lot of these. Block RAM for on-chip storage. DSP slices for multiply-accumulate operations, which turn up constantly in signal processing and neural network inference. High-speed transceivers for multi-gigabit protocols like PCIe and 100G Ethernet.
 
-Common hard blocks found in today's FPGAs include:
-*   **Block RAM (BRAM):** Dedicated on-chip memory blocks for efficient data storage.
-*   **DSP Slices:** Digital Signal Processing units containing hardware multipliers and accumulators, essential for filtering, transforms, and AI inference.
-*   **High-Speed Transceivers:** Complex SerDes (Serialiser/Deserialiser) blocks for implementing multi-gigabit protocols like PCI Express and 100G Ethernet.
-*   **Hard Processor Systems:** Many FPGAs are now full-fledged Systems-on-Chips (SoCs), integrating one or more hardened Arm processor cores (e.g., Cortex-A53 or Cortex-R5). This allows developers to run a full operating system like Linux for control and management tasks, while using the programmable fabric for custom, high-performance hardware accelerators.
+The most significant addition in recent years is the hard processor. Many FPGAs now integrate one or more Arm cores directly on the die -- a Cortex-A53 for running Linux, a Cortex-R5 for real-time control. You run your management software on the processor and offload the performance-critical work to the programmable fabric beside it. That combination is genuinely powerful and it's why "FPGA" and "SoC" have become nearly synonymous at the high end.
 
 ---
 
-### 3. The Ecosystem and Real-World Impact
+### Tooling
 
-A powerful piece of silicon is only useful if developers have the tools and ecosystem to target it. The FPGA ecosystem has matured dramatically.
+The two dominant toolchains are AMD's Vivado (for Xilinx devices) and Intel's Quartus Prime (for Altera). Both handle synthesis, placement, and routing -- turning your HDL into a bitstream that configures the physical chip. Neither is particularly pleasant to use, but both are mature and capable.
 
-*   **Design Tools:** The industry is dominated by sophisticated EDA (Electronic Design Automation) toolchains from the device vendors, namely **AMD (Xilinx) Vivado** and **Intel (Altera) Quartus Prime**. These tools handle the complex process of synthesis, placement (assigning logic to specific CLBs), and routing (connecting everything through the interconnect). An open-source toolchain (*Yosys*, *nextpnr*) is also gaining significant traction for smaller devices.
-*   **High-Level Synthesis (HLS):** To bridge the gap between software and hardware design, HLS tools allow developers to write algorithms in C, C++, or OpenCL. The HLS compiler analyses the code, infers parallelism, and synthesises it into a hardware implementation (RTL), making FPGA acceleration accessible to a much broader audience.
+High-Level Synthesis has changed the accessibility picture considerably. HLS tools let you write in C or C++ and have the compiler infer a hardware implementation. The results aren't always as efficient as hand-written RTL, but they're good enough for a lot of workloads, and they let software engineers target FPGAs without learning Verilog from scratch.
 
-This powerful combination of hardware and software has unlocked FPGAs for a wide array of applications:
-*   **ASIC Prototyping:** The original killer app. An entire ASIC design can be implemented on a large FPGA to be tested and validated with real software months before the final chip is fabricated.
-*   **Data Centre Acceleration:** Uses cases like Microsoft's [Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) and Amazon deploy FPGAs in their data centres (e.g., [AWS F1 instances](https://aws.amazon.com/ec2/instance-types/f1/)) to accelerate networking, database queries, and machine learning workloads. Their reconfigurability is a key advantage, allowing new hardware accelerators to be deployed with a simple bitstream update.
-*   **High-Frequency Trading (HFT):** Where every nanosecond counts, FPGAs are used to implement ultra-low-latency network stacks and trading algorithms directly in hardware.
-*   **Aerospace & Defense:** FPGAs are staples in radar, software-defined radio, and avionics, where their performance and ability to be reconfigured in the field are critical.
+For smaller open-source devices, Yosys and nextpnr form a credible open toolchain that's gaining real traction.
 
 ---
 
-### 4. The FPGA vs. ASIC Trade-off
+### Where they're actually used
 
-The ultimate question for many product designers is when to use an FPGA versus committing to a full-custom ASIC. The decision hinges on a few trade-offs:
+ASIC prototyping was the original use case and remains important. Before taping out a chip that costs millions to fabricate, you implement the design on a large FPGA to validate it with real software. Bugs found here cost nothing compared to bugs found in silicon.
 
-*   **Cost & Time-to-Market:** FPGAs have no non-recurring engineering (NRE) costs; you simply buy the chips off the shelf. An ASIC design requires millions of pounds in NRE for design, verification, and mask sets, and a typical design cycle is 18-24 months. FPGAs offer a vastly faster and cheaper path to market.
-*   **Performance & Power:** An ASIC will always be superior for a given function. By optimising the silicon specifically for one task, an ASIC can achieve higher clock speeds, lower power consumption, and a smaller die area compared to an FPGA implementation of the same logic.
-*   **Volume:** The trade-off often comes down to volume. The high NRE of an ASIC is amortised over the number of units sold. For low-to-medium volume products, FPGAs are almost always more cost-effective. For products that will ship in the millions of units, the lower per-unit cost of an ASIC eventually wins out.
+Data centres are the growth area. Microsoft's Project Catapult put FPGAs between the network and the servers, accelerating everything from Bing ranking to Azure networking. AWS F1 instances let customers run custom FPGA accelerators in the cloud. The reconfigurability is the point -- you can push a new bitstream to update the hardware without touching the physical infrastructure.
 
-Ultimately, FPGAs provide a unique middle ground, offering hardware performance and software flexibility that has cemented their place as a critical component in the modern computing landscape.
+High-frequency trading uses FPGAs for the obvious reason: a network stack implemented in hardware is faster than anything running on an OS. When the latency budget is measured in nanoseconds, that matters.
+
+Aerospace and defence have used FPGAs for decades -- radar processing, software-defined radio, avionics -- partly for performance and partly because being able to reconfigure hardware in the field is operationally valuable.
+
+---
+
+### FPGA or ASIC?
+
+The same trade-off as always. An FPGA costs nothing in NRE -- buy the chip, program it, done. An ASIC design runs to millions in engineering costs and mask sets, with an 18-24 month design cycle before you have physical silicon.
+
+For performance, the ASIC wins every time. Custom silicon optimised for one task runs faster, draws less power, and takes less die area than an FPGA implementation of the same logic. That gap is significant.
+
+Volume decides it. ASIC NRE is fixed -- spread across ten million units it's negligible. An FPGA's per-unit cost doesn't compress the same way. For prototypes and low-volume products, FPGAs are almost always right. For anything mass-market, the economics eventually shift.

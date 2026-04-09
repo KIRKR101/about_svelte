@@ -1,51 +1,18 @@
-## RISC-V
+Proprietary instruction set architectures (ISAs) like x86 and Arm have held processor design in a chokehold for decades. These architectures impose heavy licencing fees and rigid restrictions that prevent hardware customisation. RISC-V is the open alternative: a royalty-free ISA that permits anyone to build custom processors without asking for permission or paying a tax. I see this as the democratisation of hardware. Recent developments in China, including Beijing’s [hedge on RISC-V](https://www.tomshardware.com/pc-components/cpus/chinese-government-shifts-focus-from-x86-and-arm-cpus-promoting-the-adoption-of-risc-v-chips) and [new chips](https://www.tomshardware.com/pc-components/cpus/chinas-push-for-chip-independence-continues-with-its-first-risc-v-server-cpu) that rival Western designs in performance, suggest that the architecture has moved from an academic experiment to a geopolitical necessity.
 
-For decades, processor design has been dominated by proprietary ISAs like x86 and Arm, which impose licensing fees and limit hardware customisation. RISC-V is a compelling alternative: a free and open standard Instruction Set Architecture (*ISA*) that allows anyone to design, build, and sell custom processors without royalties. This post provides an overview of its modular architecture and core features, as well as the growing ecosystem that makes it a viable option today. This post was largely inspired by recent RISC-V developments in China, like Beijing’s [hedge on RISC-V](https://www.tomshardware.com/pc-components/cpus/chinese-government-shifts-focus-from-x86-and-arm-cpus-promoting-the-adoption-of-risc-v-chips) and [new chips](https://www.tomshardware.com/pc-components/cpus/chinas-push-for-chip-independence-continues-with-its-first-risc-v-server-cpu) starting to come within the performance magnitude of western designs.
+## Origins and Principles
 
----
-## 1. Background and Origins
+RISC-V began at the University of California, Berkeley, in 2010. Krste Asanović and David Patterson intended to create a clean-slate ISA for research and education. I initially assumed the name was pronounced "risk-vee," but it is "risk-five," denoting the fifth major Reduced Instruction Set Computer design from the Berkeley lineage. This history is documented in Patterson's paper, [“The Case for RISC”](https://courses.cs.washington.edu/courses/cse548/08wi/papers/Case_for_RISC.pdf).
 
-RISC-V was developed at the University of California, Berkeley, starting in 2010. The project, led by Krste Asanović and David Patterson, aimed to create a clean-slate ISA for research and education (See “[The Case for RISC](https://courses.cs.washington.edu/courses/cse548/08wi/papers/Case_for_RISC.pdf)“ by Patterson). Its design principles quickly attracted commercial interest. The name "RISC-V" (pronounced *risk-five*, not *risk-vee* as I had assumed) signifies it as the fifth major Reduced Instruction Set Computer (*RISC*) design from Berkeley, a lineage that influenced standards like SPARC and MIPS.
+The project is built on three core tenets. First, it is open and free under a permissive BSD-style licence. Second, the design is simple. It avoids the architectural baggage accumulated by x86 over 40 years, which makes the hardware easier to implement and verify. Third, it is stable. Once the base ISA and extensions are ratified, they are frozen. New functionality is added only through optional extensions, ensuring long-term software compatibility. The non-profit RISC-V International governs the standard to prevent the fragmentation that eventually killed Unix.
 
-The project's core tenets are:
+## The Base ISA
 
-- **Open and Free:** The ISA is specified under a permissive license (similar to BSD), imposing no royalties or licensing fees for implementation.
-- **Simple and Clean:** The design deliberately avoids architectural baggage accumulated by older ISAs, making it easier to implement in hardware, simpler to write compilers for, and straightforward to verify.
-- **Stable:** To ensure long-term software compatibility, the base ISA and major extensions are frozen once ratified. New functionality is added through optional extensions, never by modifying the frozen parts.
+The RISC-V design philosophy is modular. A small, mandatory base ISA provides core functionality, while optional extensions add features like floating-point math or vector processing. The foundation is the base integer ISA, primarily **RV32I** (32-bit) or **RV64I** (64-bit). An **RV32E** variant with 16 registers exists for extremely constrained embedded systems.
 
-To manage the ISA's evolution and prevent fragmentation, the non-profit *RISC-V International* was founded. This organisation, with many members from industry and academia, governs the standard.
+The base ISA contains fewer than 50 instructions — just enough to support a complete software toolchain. It uses a load-store architecture where memory access is handled by explicit load (`lw`, `ld`) and store (`sw`, `sd`) instructions. Computational instructions like `add` or `and` operate only on registers. I think the hardwired zero register (`x0`) is an elegant design choice. It allows the instruction set to remain small by turning a `move` instruction into a pseudo-instruction for adding zero to a register.
 
----
-## 2. The RISC-V Design Philosophy and Base ISA
-
-The design philosophy of RISC-V is centred on modularity: a small, mandatory base ISA provides core functionality, while optional extensions add features like floating-point math or vector processing.
-
-The foundation is the **base integer ISA**. The two most common variants are:
-
-- **RV32I**: The base 32-bit integer ISA with 32 general-purpose registers (`x0`-`x31`).
-- **RV64I**: The 64-bit version, which widens the general-purpose registers and the address space.
-
-A smaller variant, **RV32E**, with only 16 registers, is available for extremely area-constrained embedded applications. The "I" in these names stands for Integer. The base ISA contains just enough instructions—fewer than 50—to support a complete software toolchain.
-
-Key features of the base ISA include:
-
-- **Load-Store Architecture:** All memory access is handled by explicit load (`lw`, `ld`) and store (`sw`, `sd`) instructions. Computational instructions like `add` or `and` operate only on registers. This simplifies the CPU control logic.
-- **Hardwired Zero Register (`x0`):** Register `x0` is permanently wired to the value zero. This is a simple but effective design choice that allows the instruction set to be smaller. For example, a `mv rd, rs` (move) instruction is a pseudo-instruction for `addi rd, rs, 0` (add immediate zero).
-- **Regular Instruction Encoding:** Base instructions are all 32 bits wide with a consistent structure. Fields for source and destination registers are in fixed locations, which significantly simplifies the instruction decode stage of a processor pipeline.
-
-Consider this simple C function:
-
-```c
-int sum_array(int* array, int size) {
-    int sum = 0;
-    for (int i = 0; i < size; i++) {
-        sum += array[i];
-    }
-    return sum;
-}
-```
-
-This might compile to the following RV32I assembly. The arguments are passed in registers `a0` and `a1` per the standard calling convention:
+Consider how a simple array sum compiles to RV32I. The arguments arrive in registers `a0` and `a1` per the standard calling convention:
 
 ```mipsasm
 # a0: pointer to array
@@ -65,60 +32,31 @@ end:
     mv   a0, t1        # set return value to sum
     ret                # return
 ```
-The logic is clear and follows a predictable pattern, a direct result of the ISA's simplicity.
 
----
-## 3. The Modular Approach: Standard Extensions
+The logic is predictable because the instruction encoding is regular. Fields for source and destination registers are always in the same place. This simplifies the instruction decode stage in a processor pipeline and reduces the power required for logic switching.
 
-![*Figure: RISC-V Extensions*](https://upload.wikimedia.org/wikipedia/commons/f/fe/RV32IMAC_Instruction_Set.svg)
+## Standard Extensions
 
-The modularity of RISC-V is its most powerful feature. Instead of a one-size-fits-all ISA, designers implement only the extensions their application requires. This minimises silicon area, power consumption, and verification effort.
+Modularity is the primary strength of RISC-V. Designers only implement the extensions their application requires, which reduces silicon area and power consumption.
 
-*Figure: ISA Extension Layering*
-```
-+----------------------------------------------+
-| Applications (e.g., Linux, RTOS, Bare-metal) |
-+----------------------------------------------+
-|       Privileged ISA (S-mode, U-mode)        |
-+----------------------------------------------+
-|  Standard Extensions (M, A, F, D, C, V...)   |
-+----------------------------------------------+
-|        Base Integer ISA (RV32I/RV64I)        |
-+----------------------------------------------+
-```
+- **M (Multiplication and Division)**: Adds instructions for integer math like `mul` and `rem`.
+- **A (Atomic)**: Provides operations for multithreading synchronisation, such as mutexes and semaphores.
+- **F & D (Floating-Point)**: Defines separate registers for single- and double-precision math compliant with [IEEE 754-2008](https://en.wikipedia.org/wiki/IEEE_754-2008_revision).
+- **C (Compressed)**: Defines 16-bit encodings for the most common 32-bit instructions. This reduces code size by 30%, which is vital for embedded systems.
+- **V (Vector)**: Adds SIMD capabilities. I find the vector extension impressive because it is VLEN-agnostic. A binary compiled for a 128-bit vector unit will run on a 512-bit unit without modification.
 
-Here are some of the most common standard extensions:
+A typical Linux-capable processor uses the **RV64G** profile, where "G" is shorthand for the **IMAFD** extensions. To run an operating system, the hardware must also implement the **Supervisor (S) mode** from the Privileged Specification, which enables virtual memory and page tables.
 
-- **M (Integer Multiplication and Division):** Adds instructions like `mul`, `div`, and `rem`.
-- **A (Atomic Instructions):** Provides atomic memory operations (AMOs) like `amoswap` and `amoadd`, which are used for multithreading synchronisation primitives like mutexes and semaphores.
-- **F & D (Single- & Double-Precision Floating-Point):** Defines a separate floating-point register file (`f0`-`f31`) and instructions compliant with [IEEE 754-2008](https://en.wikipedia.org/wiki/IEEE_754-2008_revision).
-- **G (General-Purpose):** This is not an extension itself, but a shorthand for **IMAFD**, representing a standard set of features for general-purpose computing. A typical Linux-capable processor profile is `RV64G`.
-- **C (Compressed Instructions):** A highly effective extension that defines 16-bit encodings for the most common 32-bit instructions. A hardware decoder expands these instructions transparently. This can reduce static code size by 25-30%, which is critical for memory-constrained embedded systems.
-- **V (Vector Extension):** Provides powerful SIMD capabilities for tasks in scientific computing, machine learning, and media processing. A key feature is that the vector ISA is **vector-length agnostic (VLEN-agnostic)**. The same compiled binary can run efficiently on hardware with different vector register sizes (e.g., 128-bit, 512-bit) without modification.
-- **Privileged Specification:** A separate document that defines privilege levels (Machine, Supervisor, User), memory management via page tables, and interrupt handling. The **Supervisor (`S`) mode** is what enables virtual memory and is a prerequisite for running operating systems like Linux or Windows.
+## Ecosystem and Adoption
 
----
-## 4. Ecosystem, Adoption, and Real-World Use Cases
+An ISA is only as good as its software ecosystem. RISC-V has reached critical mass in just over a decade. Support is now mainline in both **GCC** and **LLVM/Clang**. Linux support is robust, with active ports for all major distributions. Support also exists for FreeBSD and real-time operating systems like FreeRTOS or Zephyr.
 
-An ISA is only as good as its ecosystem. In just over a decade, RISC-V has achieved critical mass.
+In the embedded and IoT space, RISC-V is already dominant. Companies like Espressif have shipped hundreds of millions of RISC-V microcontrollers. Western Digital is transitioning its entire storage controller business to RISC-V. NVIDIA uses RISC-V cores as internal management processors within its GPUs.
 
-- **Software Toolchain:** Support for RISC-V is mainline in both **GCC** and **LLVM/Clang**, with mature, high-quality compilers, assemblers, and debuggers.
-- **Operating Systems:** Linux support is robust. All major distributions have RISC-V ports, and kernel development is very active. Support also exists for FreeBSD, real-time operating systems (RTOS) like FreeRTOS and Zephyr, and the seL4 microkernel.
-- **Embedded and IoT:** This is where RISC-V has seen its highest volume adoption. Companies like **SiFive**, **Andes Technology**, and **Espressif** (with their ESP32-C series) have shipped hundreds of millions of RISC-V-based microcontrollers. The ability to customise a core for a specific power/performance target is a major advantage here.
-- **Storage and Accelerators:** **Western Digital** has publicly committed to transitioning its storage controllers—which ship in the billions—to RISC-V. **NVIDIA** uses RISC-V as control processors within its GPUs. This shows its utility as a flexible, embedded "management" core within a larger SoC.
-- **General-Purpose Computing:** This area is rapidly maturing. **StarFive's** VisionFive 2 and **SiFive's** HiFive Unmatched are commercially available, affordable Linux-capable single-board computers, allowing developers to build and test software on real RISC-V hardware.
-- **High-Performance Computing (HPC):** The **European Processor Initiative (EPI)** is using RISC-V to develop accelerator cores for Europe's next-generation exascale supercomputers.
+High-performance computing is the next frontier. The European Processor Initiative is using RISC-V for exascale supercomputer accelerators. While x86 still dominates the desktop, the rise of affordable Linux-capable boards like the VisionFive 2 means the gap is closing.
 
----
-## 5. Security Considerations for an Open ISA
+## Security and Transparency
 
-A common question is whether an open ISA is more or less secure than a proprietary one. The consensus in the security community is that security through obscurity is not real security.
+The security community generally agrees that "security through obscurity" is a failure. The open nature of RISC-V allows for public scrutiny of the ISA and its implementations. Researchers can formally verify designs and look for architectural vulnerabilities without reverse-engineering a proprietary black box. This follows [Kerckhoffs's principle](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle): a system should be secure even if everything about it is public.
 
-- **Transparency:** The open nature of RISC-V allows for public scrutiny of the ISA and hardware implementations. Researchers can formally verify designs and search for architectural vulnerabilities without reverse-engineering a black box. This follows [Kerckhoffs's principle](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle): a cryptosystem should be secure even if everything about the system, except the key, is public knowledge.
-- **Implementation is Key:** The ISA itself is just a specification. Security vulnerabilities like Spectre and Meltdown were implementation-specific flaws in microarchitecture, not flaws in the ISA definition. Any RISC-V core can have such bugs, but the open community is actively developing best practices for secure implementations.
-- **Standardised Security Features:** RISC-V International is standardising extensions for enhanced security. This includes:
-    - **Physical Memory Protection (PMP):** A hardware mechanism to enforce memory access permissions for different privilege levels, preventing, for example, user-mode code from accessing kernel memory.
-    - **Trusted Execution Environments (TEEs):** Work is underway on standardised TEEs to create isolated, secure enclaves for sensitive code and data.
-    - **Cryptographic Extensions:** The `Zk` extension family provides constant-time instructions for common cryptographic algorithms, helping to mitigate side-channel attacks.
-
-The ability to audit the design from the ISA down to the RTL gives implementers an unprecedented level of control over the final product's security posture.
+Vulnerabilities like Spectre and Meltdown were implementation flaws in specific microarchitectures, not flaws in an ISA definition. Any processor can have these bugs, but the RISC-V community is developing standardised security features to mitigate them. **Physical Memory Protection (PMP)** enforces access permissions between privilege levels. The **Zk** extension family provides constant-time instructions for cryptographic algorithms to prevent side-channel attacks. The ability to audit the design from the high-level spec down to the hardware description logic gives implementers control over their security posture that proprietary ISAs cannot match.

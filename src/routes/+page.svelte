@@ -200,7 +200,7 @@
 	<link rel="preconnect" href="https://i.scdn.co" />
 </svelte:head>
 
-<div class="flex items-start justify-center px-6 py-6 font-mono md:py-16">
+<div class="flex items-start justify-center px-6 py-6 md:py-16">
 	<div class="w-full max-w-[600px]">
 		<div class="anim-row anim-row-1 py-7">
 			<div class="font-serif text-[58px] leading-[0.92] tracking-[-1.5px] text-white">
@@ -246,7 +246,7 @@
 					></a
 				>
 				<div
-					class="mt-2 ml-[30px] font-mono text-[11px] tracking-[0.1em] text-dim uppercase md:ml-[36px]"
+					class="mt-2 ml-[30px] text-[11px] tracking-[0.1em] text-dim uppercase md:ml-[36px]"
 				>
 					github.com ↗
 				</div>
