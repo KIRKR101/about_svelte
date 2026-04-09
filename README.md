@@ -9,23 +9,27 @@ A personal website built with SvelteKit, featuring articles, artworks, films, an
 ## Setup
 
 1. Clone the repository:
+
    ```sh
    git clone <repository-url>
    cd about-svelte
    ```
 
 2. Install frontend dependencies:
+
    ```sh
    bun install
    ```
 
 3. Setup the Last.fm server:
    - Copy `lastfm-server/.env` and set your Last.fm API key:
+
      ```sh
      LASTFM_API_KEY=your_api_key_here
      ```
 
    - Ensure Rust is installed, then build the server:
+
      ```sh
      cd lastfm-server
      cargo build --release
@@ -39,12 +43,14 @@ A personal website built with SvelteKit, featuring articles, artworks, films, an
 To run both the frontend and backend in development mode:
 
 1. Start the Last.fm proxy server:
+
    ```sh
    cd lastfm-server
    cargo run
    ```
 
 2. In a separate terminal, start the Svelte frontend:
+
    ```sh
    bun run dev
    ```
@@ -96,4 +102,3 @@ This runs the Svelte preview server and the Rust API server concurrently.
 │   └── Cargo.toml          # Rust project configuration
 └── package.json            # Node.js dependencies and scripts
 ```
-

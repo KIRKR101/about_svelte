@@ -6,8 +6,8 @@ const userTheme = browser && localStorage.getItem('theme');
 export const theme = writable(userTheme || 'dark');
 
 theme.subscribe((value) => {
-  if (browser) {
-    localStorage.setItem('theme', value);
-    document.documentElement.classList.toggle('dark', value === 'dark');
-  }
+	if (browser) {
+		localStorage.setItem('theme', value);
+		document.documentElement.classList.toggle('dark', value === 'dark');
+	}
 });
