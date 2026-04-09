@@ -5,14 +5,12 @@ import { recentPosts } from '$lib/posts-data';
 
 export const prerender = true;
 
-// Tell SvelteKit all possible routes to generate at build time
 export function entries() {
 	return recentPosts.map((post) => ({
 		name: post.file
 	}));
 }
 
-// Load the post data
 export function load({ params }: { params: { name: string } }) {
 	const post = recentPosts.find((p) => p.file === params.name);
 
@@ -21,25 +19,26 @@ export function load({ params }: { params: { name: string } }) {
 	}
 
 	try {
-		// Fetch markdown content
 		const postPath = join('static', 'posts', `${params.name}.md`);
 		let markdownContent = readFileSync(postPath, 'utf8');
 
-		// Process wikilinks ![[file]] to standard markdown images
-		markdownContent = markdownContent.replace(/!\[\[([^\]]+)\]\]/g, '![](posts/$1)');
+		markdownContent = markdownContent.replace(
+			/!\[\[([^|\]]+)(?:\|([^\]]+))?\]\]/g,
+			(_, file, alt) => `![${alt ?? ''}](posts/${file})`
+		);
 
-		// Inline SVG files - replace standalone SVG image lines
 		markdownContent = markdownContent.replace(
 			/^!\[([^\]]*)\]\((posts\/[^)]+\.svg)\)$/gm,
-			(match, alt, src) => {
+			(match, _alt, src) => {
 				const fileName = src.replace('posts/', '');
 				try {
 					const svgPath = join('static', 'posts', fileName);
 					const svgContent = readFileSync(svgPath, 'utf8');
-					return `<div class="svg-container">${svgContent}</div>\n\n`;
+					const altText = _alt ?? '';
+					return `<div class="svg-container mb-2" role="img" aria-label="${altText}">${svgContent}</div>\n\n`;
 				} catch (err) {
 					console.error(`Error loading SVG ${fileName}:`, err);
-					return match; // Return original markdown if SVG loading fails
+					return match;
 				}
 			}
 		);

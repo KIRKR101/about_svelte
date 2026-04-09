@@ -11,6 +11,14 @@
 		return `<img src="${href || ''}" alt="${text}"${titleHtml}/>`;
 	};
 
+	renderer.code = ({ text, lang }) => {
+		if (lang === 'html') {
+			return `<div class="html-block">${text}</div>`;
+		}
+		const langAttr = lang ? ` class="language-${lang}"` : '';
+		return `<pre><code${langAttr}>${text}</code></pre>`;
+	};
+
 	marked.use(footnote());
 
 	let parsedContent = marked(content, { renderer });

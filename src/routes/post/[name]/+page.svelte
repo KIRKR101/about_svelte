@@ -12,14 +12,14 @@
 		content: string;
 	}
 
-	export let data: PageData;
+	let { data }: { data: PageData } = $props();
 
 	function parseFrontmatter(content: string): {
 		frontmatter: Record<string, string>;
 		body: string;
 	} {
 		const frontmatterMatch = content.match(/^---\s*([\s\S]*?)\s*---/);
-		if (frontmatterMatch) {
+		if (frontmatterMatch && frontmatterMatch[1]) {
 			const frontmatterStr = frontmatterMatch[1];
 			const body = content.substring(frontmatterMatch[0].length).trimStart();
 

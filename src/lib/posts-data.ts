@@ -1,5 +1,12 @@
-// Static posts data for client-side use
 export const recentPosts = [
+	{
+		file: 'hover-states',
+		title: 'The Hover UX',
+		longTitle: 'The Hover UX: Making Interfaces Feel Mechanical',
+		date: '2026-04-09',
+		snippet:
+			'Hover states should feel like mechanical clicks...'
+	},
 	{
 		file: 'early-computing',
 		title: 'The Early Computing Era',
