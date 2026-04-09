@@ -108,7 +108,6 @@
 	<title>Films | kirkr.xyz</title>
 	<meta name="description" content="A log of recently watched films." />
 	<meta name="robots" content="index, follow" />
-	<link rel="preconnect" href="https://a.ltrbxd.com" />
 </svelte:head>
 
 <div class="flex min-h-screen flex-col items-center px-6 py-6 font-mono md:py-16">

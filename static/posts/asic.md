@@ -1,5 +1,3 @@
-# Application-Specific Integrated Circuits (ASICs)
-
 A CPU is a generalist. It can run your browser, your music, and your taxes, switching between tasks by executing software instructions one after another. An ASIC does one thing. That's the entire point -- and it's why they're faster, cheaper to run at scale, and more power-efficient than anything general-purpose.
 
 The trade-off is obvious: you can't reprogram one. Once the silicon is cut, the function is fixed. That's a serious commitment, which is why the decision to build an ASIC rather than use something reconfigurable is never taken lightly.
