@@ -19,19 +19,17 @@ export const deHoochBibliography: BibEntry[] = [
 	},
 	{
 		title:
-			'Glimpses, Glances, and Gossip: Seventeenth-century Dutch Paintings of Domestic Interiors on Their Neighbourhood’s Doorstep',
+			'Glimpses, Glances, and Gossip: Seventeenth-century Dutch Paintings of Domestic Interiors on Their Neighbourhood\u2019s Doorstep',
 		author: 'Linda Stone-Ferrier',
 		year: '2020',
 		journal: 'RACAR',
-		url: 'https://www.jstor.org/stable/26965793',
-		description: ''
+		url: 'https://www.jstor.org/stable/26965793'
 	},
 	{
 		title: 'Pieter de Hooch: A woman preparing bread and butter for a boy',
 		author: 'Wayne Franits',
 		year: '2006',
-		url: 'https://archive.org/details/pieterdehoochwom0000fran',
-		description: ''
+		url: 'https://archive.org/details/pieterdehoochwom0000fran'
 	},
 	{
 		title: 'Pieter de Hooch in Delft: From the Shadow of Vermeer',
@@ -47,48 +45,42 @@ export const deHoochBibliography: BibEntry[] = [
 		author: 'Diane Wolfthal',
 		year: '2019',
 		journal: 'Women and Gender in the Early Modern Low Countries',
-		url: 'https://www.jstor.org/stable/10.1163/j.ctvrxk3hp.13',
-		description: ''
+		url: 'https://www.jstor.org/stable/10.1163/j.ctvrxk3hp.13'
 	},
 	{
 		title: 'The Cambridge Companion to the Dutch Golden Age',
 		author: 'Helmers, Helmer J., and Geert H. Janssen',
 		year: '2018',
 		journal: 'Cambridge Companions to Art',
-		url: 'https://www.cambridge.org/core/books/cambridge-companion-to-the-dutch-golden-age/B4626F4C935B337659FBF0CB7C328ADB#fndtn-information',
-		description: ''
+		url: 'https://www.cambridge.org/core/books/cambridge-companion-to-the-dutch-golden-age/B4626F4C935B337659FBF0CB7C328ADB#fndtn-information'
 	},
 	{
 		title: 'Wily women?: On sexual imagery in Dutch art of the seventeenth century',
 		author: 'Wayne Franits',
 		year: '2017',
 		journal: 'From Revolt to Riches',
-		url: 'https://www.jstor.org/stable/j.ctt1n2tvhw.26',
-		description: ''
+		url: 'https://www.jstor.org/stable/j.ctt1n2tvhw.26'
 	},
 	{
 		title: 'Far from Home: Looking at a Painting by Pieter de Hooch',
 		author: 'William E. Wallace',
 		year: '2015',
 		journal: 'Source: Notes in the History of Art',
-		url: 'https://www.jstor.org/stable/sournotehistart.35.1-2.62',
-		description: ''
+		url: 'https://www.jstor.org/stable/sournotehistart.35.1-2.62'
 	},
 	{
 		title: 'An Unknown Painting by Pieter de Hooch',
 		author: 'Jochai Rosen',
 		year: '2011',
 		journal: 'Oud Holland',
-		url: 'https://www.jstor.org/stable/23802202',
-		description: ''
+		url: 'https://www.jstor.org/stable/23802202'
 	},
 	{
 		title: "Vermeer's Impact on His Contemporaries",
 		author: 'Adriaan E. Waiboer',
 		year: '2010',
 		journal: 'Oud Holland',
-		url: 'https://www.jstor.org/stable/42712248',
-		description: ''
+		url: 'https://www.jstor.org/stable/42712248'
 	},
 	{
 		title: 'New Information on Pieter de Hooch and the Amsterdam Lunatic Asylum',
@@ -104,48 +96,42 @@ export const deHoochBibliography: BibEntry[] = [
 		author: 'Esmée Quodbach',
 		year: '2007',
 		journal: 'The Metropolitan Museum of Art Bulletin',
-		url: 'https://www.jstor.org/stable/25434133',
-		description: ''
+		url: 'https://www.jstor.org/stable/25434133'
 	},
 	{
 		title: 'After Iconography and Iconoclasm: Current Research in Netherlandish Art, 1566-1700',
 		author: 'Mariët Westermann',
 		year: '2002',
 		journal: 'The Art Bulletin',
-		url: 'https://www.jstor.org/stable/3177273',
-		description: ''
+		url: 'https://www.jstor.org/stable/3177273'
 	},
 	{
 		title: 'Public and private life in the art of Pieter de Hooch',
 		author: 'Martha Hollander',
 		year: '2000',
 		journal: 'NKJ',
-		url: 'https://www.jstor.org/stable/24706499',
-		description: ''
+		url: 'https://www.jstor.org/stable/24706499'
 	},
 	{
 		title: "'For people of fashion': Domestic imagery and the art market in the Dutch Republic",
 		author: 'Wayne Franits',
 		year: '2000',
 		journal: 'NKJ',
-		url: 'https://www.jstor.org/stable/24706500',
-		description: ''
+		url: 'https://www.jstor.org/stable/24706500'
 	},
 	{
 		title: 'Luxury and Calvinism/ Luxury and Capitalism: Supply and Demand for Luxury Goods',
 		author: 'Jan de Vries',
 		year: '1999',
 		journal: 'The Journal of the Walters Art Gallery',
-		url: 'https://www.jstor.org/stable/20169143',
-		description: ''
+		url: 'https://www.jstor.org/stable/20169143'
 	},
 	{
 		title: "De Hooch's Illumination",
 		author: 'Paul Barolsky',
 		year: '1997',
 		journal: 'Source: Notes in the History of Art',
-		url: 'https://www.jstor.org/stable/23205158',
-		description: ''
+		url: 'https://www.jstor.org/stable/23205158'
 	},
 	{
 		title:
@@ -153,24 +139,21 @@ export const deHoochBibliography: BibEntry[] = [
 		author: 'Jeroen J. H. Dekker',
 		year: '1996',
 		journal: 'History of Education Quarterly',
-		url: 'https://www.jstor.org/stable/369503',
-		description: ''
+		url: 'https://www.jstor.org/stable/369503'
 	},
 	{
 		title: 'The Depiction of Servants in Some Paintings by Pieter de Hooch',
 		author: 'Wayne E. Franits',
 		year: '1989',
 		journal: 'Zeitschrift für Kunstgeschichte',
-		url: 'https://www.jstor.org/stable/1482471',
-		description: ''
+		url: 'https://www.jstor.org/stable/1482471'
 	},
 	{
 		title: 'The Age of Vermeer and de Hooch: Masterpieces of 17th Century Dutch Genre Painting',
 		author: 'Exhibition Review',
 		year: '1984',
 		journal: 'Irish Arts Review',
-		url: 'https://www.jstor.org/stable/20491700',
-		description: ''
+		url: 'https://www.jstor.org/stable/20491700'
 	},
 	{
 		title: 'Pieter de Hooch',
@@ -186,88 +169,77 @@ export const deHoochBibliography: BibEntry[] = [
 		author: 'E. de Jongh',
 		year: '1980',
 		journal: 'Simiolus',
-		url: 'https://www.jstor.org/stable/3780570',
-		description: ''
+		url: 'https://www.jstor.org/stable/3780570'
 	},
 	{
-		title: 'Pieter de Hooch, 1629–1684',
+		title: 'Pieter de Hooch, 1629\u20131684',
 		author: 'Peter C. Sutton',
 		year: '1980',
 		journal: 'Ithaca, N.Y.: Cornell University Press',
-		url: 'https://archive.org/details/pieterdehooch00sutt',
-		description: ''
+		url: 'https://archive.org/details/pieterdehooch00sutt'
 	},
 	{
 		title: 'Ludolf de Jongh and the Early Work of Pieter de Hooch',
 		author: 'R. E. Fleischer',
 		year: '1978',
 		journal: 'Oud Holland',
-		url: 'https://www.jstor.org/stable/42710990',
-		description: ''
+		url: 'https://www.jstor.org/stable/42710990'
 	},
 	{
 		title: 'An Altered Painting by Pieter de Hooch',
 		author: 'Roland E. Fleischer',
 		year: '1976',
 		journal: 'Oud Holland',
-		url: 'https://www.jstor.org/stable/42710938',
-		description: ''
+		url: 'https://www.jstor.org/stable/42710938'
 	},
 	{
 		title: 'Realism and Symbolism in Seventeenth-Century Dutch Painting',
 		author: 'Seymour Slive',
 		year: '1962',
 		journal: 'Daedalus',
-		url: 'https://www.jstor.org/stable/20026724',
-		description: ''
+		url: 'https://www.jstor.org/stable/20026724'
 	},
 	{
 		title: '"The Music Party" by De Hooch',
 		author: 'Louise H. Burchfield',
 		year: '1952',
 		journal: 'The Bulletin of the Cleveland Museum of Art',
-		url: 'https://www.jstor.org/stable/25141800',
-		description: ''
+		url: 'https://www.jstor.org/stable/25141800'
 	},
 	{
-		title: 'Un émule de Vermeer et de Pieter de Hooch: Cornélis de Man, I & II',
-		author: 'Cl. Brière—Misme',
+		title: 'Un \u00e9mule de Vermeer et de Pieter de Hooch: Corn\u00e9lis de Man, I & II',
+		author: 'Cl. Bri\u00e8re\u2014Misme',
 		year: '1935',
 		journal: 'Oud Holland',
-		url: 'https://www.jstor.org/stable/42712381',
-		description: ''
+		url: 'https://www.jstor.org/stable/42712381'
 	},
 	{
 		title: 'Paintings by Pieter de Hooch and Jacobus Vrel',
 		author: 'W. R. Valentiner',
 		year: '1928',
 		journal: 'Bulletin of the Detroit Institute of Arts',
-		url: 'https://www.jstor.org/stable/41501130',
-		description: ''
+		url: 'https://www.jstor.org/stable/41501130'
 	},
 	{
 		title: 'Jan Vermeer und Pieter de Hooch als Konkurrenten',
 		author: 'Wilhelm Bode',
 		year: '1911',
-		journal: 'Jahrbuch der Königlich Preussischen Kunstsammlungen',
-		url: 'https://www.jstor.org/stable/25168731',
-		description: ''
+		journal: 'Jahrbuch der K\u00f6niglich Preussischen Kunstsammlungen',
+		url: 'https://www.jstor.org/stable/25168731'
 	},
 	{
 		title: 'Pieter de Hooch of de Hoogh',
 		author: 'P. Haverkorn van Rijsewijk',
 		year: '1892',
 		journal: 'Oud Holland',
-		url: 'https://www.jstor.org/stable/42721879',
-		description: ''
+		url: 'https://www.jstor.org/stable/42721879'
 	},
 	{
 		title: 'De Schilder Janssens, een Navolger van Pieter de Hooch',
 		author: 'C. Hofstede de Groot',
 		year: '1891',
 		journal: 'Oud Holland',
-		url: 'https://www.jstor.org/stable/42723777',
-		description: ''
+		url: 'https://www.jstor.org/stable/42723777'
 	},
 	{
 		title:

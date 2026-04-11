@@ -10,7 +10,7 @@
 		posts: Post[];
 	}
 
-	export let data: PageData;
+	let { data }: { data: PageData } = $props();
 
 	function formatShortDate(dateString: string) {
 		const date = new Date(dateString);
@@ -20,22 +20,23 @@
 		});
 	}
 
-	// Reactively group posts by year whenever data.posts changes
-	$: groupedPosts = data.posts.reduce(
-		(groups, post) => {
-			const year = new Date(post.date).getFullYear().toString();
-			const existingGroup = groups.find((g) => g.year === year);
+	let groupedPosts = $derived.by(() => {
+		return data.posts.reduce(
+			(groups, post) => {
+				const year = new Date(post.date).getFullYear().toString();
+				const existingGroup = groups.find((g) => g.year === year);
 
-			if (existingGroup) {
-				existingGroup.posts.push(post);
-			} else {
-				groups.push({ year, posts: [post] });
-			}
-
-			return groups;
-		},
-		[] as { year: string; posts: Post[] }[]
-	);
+				if (existingGroup) {
+					return groups.map((g) =>
+						g.year === year ? { ...g, posts: [...g.posts, post] } : g
+					);
+				} else {
+					return [...groups, { year, posts: [post] }];
+				}
+			},
+			[] as { year: string; posts: Post[] }[]
+		);
+	});
 </script>
 
 <svelte:head>

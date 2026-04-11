@@ -41,6 +41,8 @@
 	let progressIntervalId: ReturnType<typeof setInterval> | undefined;
 	let retryTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
+	// Fetches the currently playing track from Spotify API.
+	// Falls back to Last.fm if Spotify fails or returns no active playback.
 	async function fetchSpotifyTrack() {
 		if (isFetching) return;
 		isFetching = true;
@@ -74,6 +76,7 @@
 		}
 	}
 
+	// Fallback: fetches the last played track from Last.fm via proxy server.
 	async function fetchLastFmTrack() {
 		try {
 			const response = await fetch('https://lastfm.kirkr.xyz/api/lastfm-track');
@@ -84,6 +87,7 @@
 		}
 	}
 
+	// Refreshes track data based on the current data source.
 	function fetchCurrentTrack() {
 		if (dataSource === 'lastfm') {
 			fetchLastFmTrack();
@@ -92,6 +96,8 @@
 		}
 	}
 
+	// Sets up local progress tracking by incrementing from the last fetch time.
+	// Polls every 100ms and re-fetches when the track completes.
 	function setupProgressUpdate() {
 		if (progressIntervalId) clearInterval(progressIntervalId);
 		if (spotifyData?.isPlaying) {
@@ -107,16 +113,19 @@
 		}
 	}
 
+	// Selects the image with the largest dimensions for the Spotify track.
 	function getLargestImage(images: SpotifyImage[]): string {
 		if (!images || images.length === 0) return '';
 		return images.reduce((best, img) => (img.width > best.width ? img : best)).url;
 	}
 
+	// Generates a srcset string for responsive image loading from Spotify images.
 	function generateSpotifySrcset(images: SpotifyImage[]): string {
 		if (!images || images.length === 0) return '';
 		return images.map((img) => `${img.url} ${img.width}w`).join(', ');
 	}
 
+	// Generates a srcset string for responsive image loading from Last.fm image sizes.
 	function generateLastFmSrcset(images: Record<string, string>): string {
 		if (!images) return '';
 		const mapping: Record<string, string> = {
@@ -245,9 +254,7 @@
 						>Kirkr101</span
 					></a
 				>
-				<div
-					class="mt-2 ml-[30px] text-[11px] tracking-[0.1em] text-dim uppercase md:ml-[36px]"
-				>
+				<div class="mt-2 ml-[30px] text-[11px] tracking-[0.1em] text-dim uppercase md:ml-[36px]">
 					github.com ↗
 				</div>
 			</div>

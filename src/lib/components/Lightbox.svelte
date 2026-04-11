@@ -62,10 +62,11 @@
 			isMounted = true;
 			window.addEventListener('keydown', handleKeyDown);
 
+			// Account for scrollbar width when the body overflow is hidden,
+			// preventing layout shift by applying padding to the body.
 			const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 			if (scrollbarWidth > 0) {
 				document.body.style.paddingRight = `${scrollbarWidth}px`;
-				// Expose the variable for the fixed Navbar
 				document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
 			}
 			document.body.style.overflow = 'hidden';
@@ -81,7 +82,6 @@
 
 			document.body.style.overflow = '';
 			document.body.style.paddingRight = '';
-			// Clean up the variable
 			document.documentElement.style.removeProperty('--scrollbar-width');
 		}
 	});

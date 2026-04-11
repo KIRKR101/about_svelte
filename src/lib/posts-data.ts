@@ -4,8 +4,7 @@ export const recentPosts = [
 		title: 'The Hover UX',
 		longTitle: 'The Hover UX: Making Interfaces Feel Mechanical',
 		date: '2026-04-09',
-		snippet:
-			'Hover states should feel like mechanical clicks...'
+		snippet: 'Hover states should feel like mechanical clicks...'
 	},
 	{
 		file: 'early-computing',

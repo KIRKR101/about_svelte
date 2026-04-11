@@ -53,7 +53,6 @@
 				const posterImg = doc.querySelector('img');
 				let posterUrl = posterImg ? posterImg.getAttribute('src')?.trim() || '' : '';
 
-				// Process poster URL
 				if (posterUrl.includes('/resized/')) {
 					posterUrl = posterUrl.replace(/-0-\d+-0-\d+-crop\.jpg/, '-0-200-0-300-crop.jpg');
 				}

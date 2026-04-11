@@ -22,11 +22,14 @@ export function load({ params }: { params: { name: string } }) {
 		const postPath = join('static', 'posts', `${params.name}.md`);
 		let markdownContent = readFileSync(postPath, 'utf8');
 
+		// Transforms Obsidian-style wiki image syntax to standard Markdown:
+		// ![[filename|alt]] → ![alt](posts/filename)
 		markdownContent = markdownContent.replace(
 			/!\[\[([^|\]]+)(?:\|([^\]]+))?\]\]/g,
 			(_, file, alt) => `![${alt ?? ''}](posts/${file})`
 		);
 
+		// Inlines SVG files referenced in Markdown as embedded HTML elements.
 		markdownContent = markdownContent.replace(
 			/^!\[([^\]]*)\]\((posts\/[^)]+\.svg)\)$/gm,
 			(match, _alt, src) => {

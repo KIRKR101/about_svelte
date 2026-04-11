@@ -169,7 +169,7 @@
 
 				<button
 					on:click={toggleAudio}
-					class="flex w-full items-center justify-between px-6 py-3 font-sans text-[11px] tracking-[0.1em] uppercase text-dim transition-colors hover:bg-white/5 hover:text-white/60 focus:outline-none"
+					class="flex w-full items-center justify-between px-6 py-3 font-sans text-[11px] tracking-[0.1em] text-dim uppercase transition-colors hover:bg-white/5 hover:text-white/60 focus:outline-none"
 					aria-label={isPlaying ? 'Pause music' : 'Play music'}
 				>
 					<span>Music</span>

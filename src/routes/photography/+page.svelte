@@ -148,7 +148,7 @@
 				<div class="columns-1 gap-4 sm:columns-2">
 					{#each images as image (image.id)}
 						<div
-							class="group mb-4 break-inside-avoid cursor-pointer overflow-hidden rounded-sm border border-bd transition-all duration-75 focus:ring-1 focus:ring-white/20 focus:outline-none"
+							class="group mb-4 cursor-pointer break-inside-avoid overflow-hidden rounded-sm border border-bd transition-all duration-75 focus:ring-1 focus:ring-white/20 focus:outline-none"
 							use:cardAction={image.id}
 							onclick={() => openLightbox(image.id)}
 							onkeydown={(e) => handleKeydown(e, image.id)}

@@ -26,11 +26,11 @@
 		y: 0
 	});
 
-	// Computed
 	let contributionWeeks = $derived(contributions?.weeks || []);
 	let totalContributions = $derived(contributions?.totalContributions || 0);
 	let currentYear = $derived(new Date().getFullYear());
 
+	// Fetches GitHub contribution data from a proxy API that mirrors the GitHub GraphQL API.
 	async function fetchContributions() {
 		try {
 			const res = await fetch('https://github.kirkr.xyz/');
@@ -54,6 +54,7 @@
 		return () => window.removeEventListener('resize', handleResize);
 	});
 
+	// Maps contribution count to GitHub's contribution color palette.
 	function getContributionColor(count: number) {
 		if (count === 0) return '#1a1a1c';
 		if (count < 5) return '#0e4429';
@@ -72,6 +73,8 @@
 		});
 	}
 
+	// Displays a tooltip showing contribution count and date for a specific day.
+	// Clamps the X position to keep the tooltip within the graph container.
 	function showTooltip(event: MouseEvent | FocusEvent, day: ContributionDay) {
 		const target = event.currentTarget as HTMLElement;
 		const rect = target.getBoundingClientRect();
@@ -211,7 +214,9 @@
 				<span class="mr-1 font-sans text-[10px] text-muted">Less</span>
 				{#each [0, 3, 8, 15, 25] as count (count)}
 					{#if loading}
-						<div class="h-[10px] w-[10px] flex-shrink-0 animate-pulse rounded-[2px] bg-white/5"></div>
+						<div
+							class="h-[10px] w-[10px] flex-shrink-0 animate-pulse rounded-[2px] bg-white/5"
+						></div>
 					{:else}
 						<div
 							class="h-[10px] w-[10px] flex-shrink-0 rounded-[2px]"
