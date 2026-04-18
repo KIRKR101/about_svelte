@@ -161,13 +161,6 @@
 		return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 	}
 
-	function formatPlayedAt(dateString: string) {
-		const date = new Date(dateString);
-		const time = date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-		const dayMonth = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-		return `${dayMonth} at ${time}`;
-	}
-
 	const recentPostsSlice = recentPosts.slice(0, 5);
 
 	$effect(() => {
@@ -305,7 +298,7 @@
 						{#if currentTrack.isPlaying}
 							Now playing · {currentTrack.source}
 						{:else}
-							Last played{#if currentTrack.playedAt} {formatPlayedAt(currentTrack.playedAt)}{/if} · {currentTrack.source}
+							Last played · {currentTrack.source}
 						{/if}
 					{:else}
 						Initialising...
@@ -345,7 +338,7 @@
 									href={currentTrack.url}
 									target="_blank"
 									rel="noopener noreferrer"
-									class="font-serif text-[18px] text-white/78 italic no-underline hover:text-white sm:text-[20px]"
+									class="font-serif text-[18px] text-white/78 italic no-underline hover:text-white transition-colors duration-100 sm:text-[20px]"
 								>
 									{currentTrack.title}
 								</a>
@@ -355,7 +348,7 @@
 						</div>
 						<div class="font-sans text-[10px] tracking-[0.04em] text-muted sm:text-[11px]">
 							{#if currentTrack.artistUrl}
-								<a href={currentTrack.artistUrl} target="_blank" rel="noopener noreferrer" class="text-inherit no-underline hover:text-white transition-colors duration-200">
+								<a href={currentTrack.artistUrl} target="_blank" rel="noopener noreferrer" class="text-inherit no-underline hover:text-white/78 transition-colors duration-100">
 									{currentTrack.artist}
 								</a>
 							{:else}
