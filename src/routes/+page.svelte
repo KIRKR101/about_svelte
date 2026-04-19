@@ -217,7 +217,9 @@
 	});
 
 	let progressPercentage = $derived(
-		currentTrack && currentTrack.duration > 0 ? (currentTrack.progress / currentTrack.duration) * 100 : 0
+		currentTrack && currentTrack.duration > 0
+			? (currentTrack.progress / currentTrack.duration) * 100
+			: 0
 	);
 
 	let displayTime = $derived(
@@ -312,7 +314,12 @@
 						class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[3px] border border-bd bg-art-bg sm:h-24 sm:w-24"
 					>
 						{#if currentTrack.url}
-							<a href={currentTrack.url} target="_blank" rel="noopener noreferrer" class="block h-full w-full">
+							<a
+								href={currentTrack.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="block h-full w-full"
+							>
 								<img
 									srcset={currentTrack.imageSrcset}
 									sizes="(max-width: 768px) 80px, 96px"
@@ -332,13 +339,15 @@
 						{/if}
 					</div>
 					<div class="min-w-0 flex-1 pt-0.5">
-						<div class="mb-1 font-serif text-[18px] leading-snug text-white/78 italic sm:text-[20px]">
+						<div
+							class="mb-1 font-serif text-[18px] leading-snug text-white/78 italic sm:text-[20px]"
+						>
 							{#if currentTrack.url}
 								<a
 									href={currentTrack.url}
 									target="_blank"
 									rel="noopener noreferrer"
-									class="font-serif text-[18px] text-white/78 italic no-underline hover:text-white transition-colors duration-100 sm:text-[20px]"
+									class="font-serif text-[18px] text-white/78 italic no-underline transition-colors duration-100 hover:text-white sm:text-[20px]"
 								>
 									{currentTrack.title}
 								</a>
@@ -348,7 +357,12 @@
 						</div>
 						<div class="font-sans text-[10px] tracking-[0.04em] text-muted sm:text-[11px]">
 							{#if currentTrack.artistUrl}
-								<a href={currentTrack.artistUrl} target="_blank" rel="noopener noreferrer" class="text-inherit no-underline hover:text-white/78 transition-colors duration-100">
+								<a
+									href={currentTrack.artistUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="text-inherit no-underline transition-colors duration-100 hover:text-white/78"
+								>
 									{currentTrack.artist}
 								</a>
 							{:else}

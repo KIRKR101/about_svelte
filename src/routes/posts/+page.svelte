@@ -27,9 +27,7 @@
 				const existingGroup = groups.find((g) => g.year === year);
 
 				if (existingGroup) {
-					return groups.map((g) =>
-						g.year === year ? { ...g, posts: [...g.posts, post] } : g
-					);
+					return groups.map((g) => (g.year === year ? { ...g, posts: [...g.posts, post] } : g));
 				} else {
 					return [...groups, { year, posts: [post] }];
 				}
