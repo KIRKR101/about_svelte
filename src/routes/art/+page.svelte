@@ -3,7 +3,7 @@
 	import { deHoochBibliography } from '$lib/bibliography';
 	import Lightbox from '$lib/components/Lightbox.svelte';
 	import { fade } from 'svelte/transition';
-	import { tick, onMount, onDestroy } from 'svelte';
+	import { tick } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 
 	let lightboxActive = $state(false);
@@ -94,16 +94,17 @@
 		};
 	}
 
-	onMount(async () => {
+	$effect(() => {
 		shuffledEntries = [...artEntries].sort(() => Math.random() - 0.5);
-		await tick();
-		computeVisualOrder();
+		tick().then(computeVisualOrder);
 	});
 
-	onDestroy(() => {
-		if (resizeObserver) {
-			resizeObserver.disconnect();
-		}
+	$effect(() => {
+		return () => {
+			if (resizeObserver) {
+				resizeObserver.disconnect();
+			}
+		};
 	});
 
 	const openLightbox = (artId: string) => {
@@ -203,6 +204,7 @@
 									src={artwork.thumbnail}
 									alt={artwork.title}
 									class="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-102 group-hover:cursor-zoom-in group-hover:brightness-105"
+									loading="lazy"
 								/>
 							</div>
 
@@ -321,6 +323,7 @@
 									src={PORTRAIT_URL}
 									alt="Possible self-portrait of Pieter de Hooch"
 									class="h-full w-full object-cover object-top opacity-85"
+									loading="lazy"
 								/>
 								<div
 									class="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-3"
@@ -448,6 +451,7 @@
 									src={SIGNATURE_URL}
 									alt="Pieter de Hooch signature"
 									class="h-8 opacity-40 invert"
+									loading="lazy"
 								/>
 							</div>
 						</div>
@@ -560,6 +564,7 @@
 								src={PORTRAIT_URL}
 								alt="Possible self-portrait of Pieter de Hooch"
 								class="h-full w-full object-cover object-top opacity-85"
+								loading="lazy"
 							/>
 							<div
 								class="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-3"
@@ -684,6 +689,7 @@
 								src={SIGNATURE_URL}
 								alt="Pieter de Hooch signature"
 								class="h-8 opacity-40 invert"
+								loading="lazy"
 							/>
 						</div>
 					</div>

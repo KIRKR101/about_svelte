@@ -1,11 +1,10 @@
 <script lang="ts">
 	import '../app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
-	import { onMount } from 'svelte';
 	import { theme } from '$lib/stores/theme';
 	import { browser } from '$app/environment';
 
-	onMount(() => {
+	$effect(() => {
 		if (browser) {
 			const userTheme = localStorage.getItem('theme') || 'dark';
 			theme.set(userTheme);

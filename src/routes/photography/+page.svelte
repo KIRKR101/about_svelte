@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { photographyData } from '$lib/photography-data';
 	import Lightbox from '$lib/components/Lightbox.svelte';
-	import { tick, onMount, onDestroy } from 'svelte';
+	import { tick } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 
 	let lightboxActive = $state(false);
@@ -78,14 +78,16 @@
 		};
 	}
 
-	onMount(() => {
+	$effect(() => {
 		tick().then(computeVisualOrder);
 	});
 
-	onDestroy(() => {
-		if (resizeObserver) {
-			resizeObserver.disconnect();
-		}
+	$effect(() => {
+		return () => {
+			if (resizeObserver) {
+				resizeObserver.disconnect();
+			}
+		};
 	});
 
 	const openLightbox = (imageId: string) => {

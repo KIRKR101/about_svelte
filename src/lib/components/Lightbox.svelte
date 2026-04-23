@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
 
 	interface LightboxProps {
@@ -57,7 +56,7 @@
 		setTimeout(() => (isAnimating = false), 250);
 	}
 
-	onMount(() => {
+	$effect(() => {
 		if (browser) {
 			isMounted = true;
 			window.addEventListener('keydown', handleKeyDown);
@@ -74,16 +73,16 @@
 			const dialog = document.querySelector('[role="dialog"]');
 			if (dialog instanceof HTMLElement) dialog.focus();
 		}
-	});
 
-	onDestroy(() => {
-		if (browser) {
-			window.removeEventListener('keydown', handleKeyDown);
+		return () => {
+			if (browser) {
+				window.removeEventListener('keydown', handleKeyDown);
 
-			document.body.style.overflow = '';
-			document.body.style.paddingRight = '';
-			document.documentElement.style.removeProperty('--scrollbar-width');
-		}
+				document.body.style.overflow = '';
+				document.body.style.paddingRight = '';
+				document.documentElement.style.removeProperty('--scrollbar-width');
+			}
+		};
 	});
 
 	$effect(() => {

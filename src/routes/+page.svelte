@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { recentPosts } from '$lib/posts-data';
 
 	const SPOTIFY_API_URL = 'https://spotify.kirkr.xyz/api/now-playing';
@@ -168,7 +167,7 @@
 		return () => clearInterval(clockInterval);
 	});
 
-	onMount(() => {
+	$effect(() => {
 		fetchSpotifyTrack();
 		intervalId = setInterval(fetchCurrentTrack, 60000);
 		return () => {
@@ -222,15 +221,15 @@
 			: 0
 	);
 
+	let timezoneLabel = $derived(currentTime.getTimezoneOffset() === -60 ? 'BST' : 'GMT');
 	let displayTime = $derived(
-		currentTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })
+		currentTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
 	);
 	let displayDay = $derived(
 		currentTime.toLocaleDateString('en-GB', {
 			weekday: 'long',
 			day: 'numeric',
-			month: 'long',
-			timeZone: 'UTC'
+			month: 'long'
 		})
 	);
 </script>
@@ -256,7 +255,7 @@
 		<div class="anim-row anim-row-3 grid grid-cols-1 gap-6 py-7 md:grid-cols-2 md:gap-0">
 			<div class="border-b border-bd pr-0 pb-6 md:border-r md:border-b-0 md:pr-6 md:pb-0">
 				<div class="mb-[14px] font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
-					Local time · GMT
+					Local time · {timezoneLabel}
 				</div>
 				<div
 					class="font-serif text-[32px] leading-none tracking-[-1.5px] text-white/85 md:text-[40px]"

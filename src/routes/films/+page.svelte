@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	interface FilmItem {
 		title: string;
 		year: string;
@@ -85,7 +83,7 @@
 		}
 	}
 
-	onMount(() => {
+	$effect(() => {
 		fetchFilms();
 	});
 
@@ -144,6 +142,7 @@
 							src={film.poster}
 							alt={film.title}
 							class="h-36 w-24 flex-shrink-0 rounded-sm border border-bd object-cover"
+							loading="lazy"
 						/>
 						<div class="flex flex-col justify-center">
 							<div class="font-serif text-[18px] leading-tight text-white/90">
@@ -172,6 +171,9 @@
 						</div>
 					</div>
 				{/each}
+				<p class="mt-2 text-center font-mono text-[11px] tracking-wider text-muted">
+					the letterboxd rss feed only shows the last 50 :(
+				</p>
 			</div>
 		{/if}
 	</main>

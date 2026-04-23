@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { projects } from '$lib/projects-data';
 
 	interface ContributionDay {
@@ -44,7 +43,7 @@
 		}
 	}
 
-	onMount(() => {
+	$effect(() => {
 		fetchContributions();
 		isMobile = window.matchMedia('(max-width: 768px)').matches;
 		const handleResize = () => {
