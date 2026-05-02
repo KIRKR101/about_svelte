@@ -1,9 +1,16 @@
+---
+title: 'Intro to ASICs'
+longTitle: 'Application-Specific Integrated Circuits'
+date: '2025-10-04'
+snippet: 'A starting point to ASIC architecture.'
+---
+
 A CPU is a generalist. It can run your browser, your music, and your taxes, switching between tasks by executing software instructions one after another. An ASIC does one thing. That's the entire point -- and it's why they're faster, cheaper to run at scale, and more power-efficient than anything general-purpose.
 
 The trade-off is obvious: you can't reprogram one. Once the silicon is cut, the function is fixed. That's a serious commitment, which is why the decision to build an ASIC rather than use something reconfigurable is never taken lightly.
 
 ![A tray of application-specific integrated circuit (ASIC) chips](https://upload.wikimedia.org/wikipedia/commons/7/79/SSDTR-ASIC_technology.jpg)
-*Figure 1: A tray of ASIC chips*
+_Figure 1: A tray of ASIC chips_
 
 ---
 
@@ -26,7 +33,7 @@ As fabrication has improved, "one chip, one function" has given way to something
 The reason SoCs don't take decades to design is IP cores. Rather than building a USB controller or an Arm processor from scratch, teams license pre-verified blocks of logic and drop them in. A block comes in two forms: a soft macro, which is a flexible HDL description that can be adapted to different manufacturing processes, or a hard macro, which is a fixed physical layout optimised for one specific process. Hard macros perform predictably; soft macros travel better.
 
 ![Microscope photograph of a gate-array ASIC](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/S-MOS_Systems_ASIC_SLA6140.jpg/1280px-S-MOS_Systems_ASIC_SLA6140.jpg)
-*Figure 2: A gate-array ASIC under a microscope. This design uses less than 20% of its available logic gates*
+_Figure 2: A gate-array ASIC under a microscope. This design uses less than 20% of its available logic gates_
 
 ---
 

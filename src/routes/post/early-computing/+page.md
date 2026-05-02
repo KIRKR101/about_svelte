@@ -1,3 +1,10 @@
+---
+title: 'The Early Computing Era'
+longTitle: 'Early Computing: How the Modern Computer Was Born'
+date: '2026-03-15'
+snippet: 'A room-sized calculator became a device in your hand.'
+---
+
 The earliest computers were installations rather than devices. They occupied entire rooms with racks of electronics, thick wiring bundles, and panels of status lights. Operating them required teams of specialists to manage power and cooling. Programming often meant physically rewiring sections of the machine by hand. To change a program was to change the wiring, a process that frequently took days.
 
 Computing is now scattered through the environment. Laptops and phones are merely the surface. Autonomous vehicles process sensor data in real time via embedded controllers, while robotics systems fold perception and motion planning directly into their silicon. Network routers push enormous volumes of traffic through the internet using specialised packet-processing logic. A PlayStation contains hardware more powerful than the supercomputers of the 1990s.

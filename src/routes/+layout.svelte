@@ -4,6 +4,8 @@
 	import { theme } from '$lib/stores/theme';
 	import { browser } from '$app/environment';
 
+	let { children } = $props();
+
 	$effect(() => {
 		if (browser) {
 			const userTheme = localStorage.getItem('theme') || 'dark';
@@ -23,6 +25,6 @@
 <div class="relative min-h-screen bg-[#0a0a0b] text-white antialiased">
 	<Navbar />
 	<main class="pt-20">
-		<slot />
+		{@render children()}
 	</main>
 </div>

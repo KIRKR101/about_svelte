@@ -1,18 +1,22 @@
-The town of Delft was a serene place, known for its namesake *Delftware* and the remarkable collection of artists gathered at the Guild of St. Luke. This flourishing cultural market emerged from the town's position in the midst of the Dutch Golden Age, an era when even middle-class families adorned their walls with portraits. It is estimated that near two-thirds of households possessed some kind of art.[^1] This unprecedented demand created a thriving ecosystem for artists. Unlike their counterparts elsewhere in Europe, who depended on aristocratic patronage or church commissions, Dutch painters could sustain themselves through open market sales. The Guild of St. Luke itself reflected this prosperity, attracting talented artists who could make a respectable living painting everything from grand civic portraits to intimate domestic scenes. In Delft alone, dozens of masters competed for commissions, each developing distinctive styles to stand out in an increasingly crowded marketplace.
+---
+title: 'Carel Fabritius'
+longTitle: 'The Short Corpus of Works by Carel Fabritius'
+date: '2025-10-25'
+snippet: 'A look into the paintings of Carel Fabritius.'
+---
+
+The town of Delft was a serene place, known for its namesake _Delftware_ and the remarkable collection of artists gathered at the Guild of St. Luke. This flourishing cultural market emerged from the town's position in the midst of the Dutch Golden Age, an era when even middle-class families adorned their walls with portraits. It is estimated that near two-thirds of households possessed some kind of art.[^1] This unprecedented demand created a thriving ecosystem for artists. Unlike their counterparts elsewhere in Europe, who depended on aristocratic patronage or church commissions, Dutch painters could sustain themselves through open market sales. The Guild of St. Luke itself reflected this prosperity, attracting talented artists who could make a respectable living painting everything from grand civic portraits to intimate domestic scenes. In Delft alone, dozens of masters competed for commissions, each developing distinctive styles to stand out in an increasingly crowded marketplace.
 
 ![[Art-market.svg|A figure of the active artist in the Dutch Republic over time]]
-*Fig 1: Estimates of the number of painters and publishers active in the Dutch Republic, 1580–1700 (five-year moving average, semi-log scale)*[^2]
+_Fig 1: Estimates of the number of painters and publishers active in the Dutch Republic, 1580–1700 (five-year moving average, semi-log scale)[^2]_
 
-On the morning of October 12th, 1654, that serenity shattered. A gunpowder store exploded, devastating the prosperous town with the *Delftsche Donderslag*—the Delft Thunderclap—an explosion heard as far as Texel on the North Sea, some 150 kilometres away. Though much of the town was razed, relatively few casualties were recorded—possibly a hundred, though records were of course obliterated. Among them was Carel Fabritius, a relatively new but promising artist from Rembrandt's circle. Pulled alive from the rubble but succumbing to injury, his death cut short the career of an artist who, I believe, could have risen to the heights of Rembrandt himself.
-
+On the morning of October 12th, 1654, that serenity shattered. A gunpowder store exploded, devastating the prosperous town with the _Delftsche Donderslag_—the Delft Thunderclap—an explosion heard as far as Texel on the North Sea, some 150 kilometres away. Though much of the town was razed, relatively few casualties were recorded—possibly a hundred, though records were of course obliterated. Among them was Carel Fabritius, a relatively new but promising artist from Rembrandt's circle. Pulled alive from the rubble but succumbing to injury, his death cut short the career of an artist who, I believe, could have risen to the heights of Rembrandt himself.
 
 ![Egbert van der Poel: A View of Delft after the Explosion of 1654](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Delftsedonderslag.jpg/1280px-Delftsedonderslag.jpg)
-
-*Fig 2: Egbert van der Poel: A View of Delft after the Explosion of 1654*
+_Fig 2: Egbert van der Poel: A View of Delft after the Explosion of 1654_
 
 ![A detail of the Guild of Saint Luke register with Vermeer's name at number 78 and Pieter de Hooch's name at 80 and Carel Fabritius at 75](https://www.essentialvermeer.com/directoryimages/guild_register_lrg.jpg)
-
-*Fig 3: A detail of the Guild of Saint Luke register with Vermeer's name at number 78 and Pieter de Hooch's name at 80 and Carel Fabritius at 75.*[^3]
+_Fig 3: A detail of the Guild of Saint Luke register with Vermeer's name at number 78 and Pieter de Hooch's name at 80 and Carel Fabritius at 75.[^3]_
 
 Carel Pietersz. Fabritius was baptised on 27 February 1622 in Middenbeemster. He was the eldest son of Pieter Carelsz., a schoolteacher and part-time painter, and the elder brother of Barent and Johannes, who also pursued painting careers. Around 1641 to 1643, Fabritius entered the Amsterdam studio of Rembrandt van Rijn, where he developed his early artistic style, deemed "a link between Vermeer and Rembrandt," by Thoré-Bürger.[^8]
 
@@ -23,20 +27,18 @@ Following his teacher, he developed a refined technique characterised by broad, 
 ### The Beheading of John the Baptist, Early 1640s
 
 ![The Beheading of John the Baptist, 1640s](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Circle_of_Rembrandt_001.jpg/1280px-Circle_of_Rembrandt_001.jpg)
-
-*Fig 4: Carel Fabritius, The Beheading of John the Baptist, Early 1640s*[^4]
+_Fig 4: Carel Fabritius, The Beheading of John the Baptist, Early 1640s[^4]_
 
 This work, first circulated as a Rembrandt, represents the earliest works of Fabritius — history paintings — which followed the stylistic tendencies of his teacher. On the right stands Salomé, who — according to the biblical account — received the head of John the Baptist on a platter as her reward for dancing.
 
-The execution focuses heavily on the dramatic interplay of light and shadow, utilising an almost blinding "flood (almost a flash) of daylight" and "half shadows, textures" to create a convincing optical impression of space. Technically, The Beheading displays a masterful handling of the palette and the texture of both flesh and cloth, consistent with the treatment found in works like *Mercury, Argus and Io*. Furthermore, the head of the executioner is directly comparable to the artist’s own likeness in the National Gallery Self-Portrait. A particularly unique technical feature is the employment of a device to brightly illuminate the backs of the figures' hands. This handling, especially the treatment of the four nearest figures, strongly suggests the mature vision and distinct hand of Fabritius in his later period.
+The execution focuses heavily on the dramatic interplay of light and shadow, utilising an almost blinding "flood (almost a flash) of daylight" and "half shadows, textures" to create a convincing optical impression of space. Technically, The Beheading displays a masterful handling of the palette and the texture of both flesh and cloth, consistent with the treatment found in works like _Mercury, Argus and Io_. Furthermore, the head of the executioner is directly comparable to the artist’s own likeness in the National Gallery Self-Portrait. A particularly unique technical feature is the employment of a device to brightly illuminate the backs of the figures' hands. This handling, especially the treatment of the four nearest figures, strongly suggests the mature vision and distinct hand of Fabritius in his later period.
 
 ### Self-portrait, 1647-1648
 
 ![Self-Portrait, Circa 1647-1648](https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Carel_Fabritius_-_Self-Portrait_-_Google_Art_Project.jpg/1280px-Carel_Fabritius_-_Self-Portrait_-_Google_Art_Project.jpg)
+_Fig 5: Carel Fabritius, Self-Portrait, Circa 1647–1648_
 
-*Fig 5: Carel Fabritius, Self-Portrait, Circa 1647–1648*
-
-“All this goes with the Rotterdam portrait of Fabritius, into a special category in which the portrait of a human being is transformed into something luminous and consoling.”         
+“All this goes with the Rotterdam portrait of Fabritius, into a special category in which the portrait of a human being is transformed into something luminous and consoling.”  
 — Vincent Van Gogh, to Theo van Gogh. Saint-Rémy-de-Provence, on or about Monday, 2 September 1889.[^5]
 
 In this self-portrait, painted at around twenty-three years old, Fabritius presents himself with tousled curls falling to his shoulders and an open-necked shirt that reveals his chest hair, partially obscured by his work apron. He is set against a crumbling wall into which he scratched his signature while the paint was still wet. The portrait captures a young man who had already endured more than his share of hardship — he had recently survived the death of his young wife and all three of their children, returning from Amsterdam to grieve in his parents' home in Beemster. His piercing black eyes inspect us directly, and though he is young, his face shows the rugged features of someone who has lived a difficult life.
@@ -46,8 +48,7 @@ What distinguishes this work from his training under Rembrandt — documented by
 ### Portrait of Abraham de Potter, 1649
 
 ![Portrait of Abraham de Potter, 1649](https://upload.wikimedia.org/wikipedia/commons/f/f7/Carel_Fabritius_005.jpg)
-
-*Fig 6: Carel Fabritius, Portrait of Abraham de Potter, 1649*
+_Fig 6: Carel Fabritius, Portrait of Abraham de Potter, 1649_
 
 Abraham de Potter sits in his black robes and ruffled collar, befitting a merchant of fine silks from Amsterdam. He was fifty-six when Fabritius painted this portrait — a lifelong friend of the artist's father and godfather to Carel's youngest brother and fellow painter, Johannes. This work and the Rotterdam self-portrait are the only two paintings signed by Fabritius during his six-year period in Beemster before his move to Delft, making them the only works from this time we can attribute to him with absolute certainty. Documentation suggests he received payments for other commissioned portraits during these years, indicating he was making a living as a painter, but none of those works survived.[^7]
 
@@ -62,8 +63,7 @@ After the death of his first wife, Fabritius moved to Delft with his second wife
 ### View of Delft, 1652
 
 ![View of Delft, 1652](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/FabritiusViewOfDelft.jpg/1280px-FabritiusViewOfDelft.jpg)
-
-*Fig 7: Carel Fabritius, A View of Delft, 1652*
+_Fig 7: Carel Fabritius, A View of Delft, 1652_
 
 This is a very small and unusual painting, measuring just 15.5 × 31.7 centimetres, showing a view of the Nieuwe Kerk in Delft as though through a wide-angle lens. We look roughly north-west over a canal from the corner of two streets, the Oude Langendijk and Oosteinde. The grey shape just to the left of the church is the town hall. Both these buildings look much the same today, but the canal has been filled in and the houses on the right have been knocked down.[^7]
 
@@ -78,8 +78,7 @@ What hasn't been definitively proven is exactly how Fabritius's view was intende
 ### The Sentry, 1654
 
 ![The Sentry, 1654](https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Carel_Fabritius_-_De_poort_bewaker_%281654%29.jpg/1280px-Carel_Fabritius_-_De_poort_bewaker_%281654%29.jpg)
-
-*Fig 8: Carel Fabritius, The Sentry, 1654*
+_Fig 8: Carel Fabritius, The Sentry, 1654_
 
 This work presents itself as a simple scene of military life, yet its strangeness becomes apparent upon examination. A soldier has dozed off on a rough bench, his musket resting across his lap mid-loading. The architectural backdrop defies logic: a moss-covered pillar supports nothing, stairs climb towards an absent destination, and a carved relief of Saint Anthony and his pig adorns what appears to be an awkward hybrid of gateway and bridge spanning an empty moat. Barely visible beyond this structure lurks a partial figure — legs and a sword — painted over in the eighteenth century. The figure remained hidden until conservators uncovered it again in 2004-2005.
 
@@ -90,8 +89,7 @@ Whatever Fabritius intended, he created one of the most captivating works of the
 ### Young Man in a Fur Cap, 1654
 
 ![Young Man in a Fur Cap, 1654](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Carel_Fabritius_-_Self-portrait_-_National_Gallery%2C_London_-_1654.jpg/1280px-Carel_Fabritius_-_Self-portrait_-_National_Gallery%2C_London_-_1654.jpg)
-
-*Fig 9: Carel Fabritius, Young Man in a Fur Cap, 1654*
+_Fig 9: Carel Fabritius, Young Man in a Fur Cap, 1654_
 
 Though no contemporary documentation confirms the sitter's identity, this is almost certainly Fabritius himself. The direct stare and the stance recall a tradition established by Rembrandt and his circle, who frequently used themselves as subjects. The military breastplate follows this same convention — Rembrandt had depicted himself in similar martial dress during the 1630s.[^9]
 
@@ -106,8 +104,7 @@ This shift towards luminosity and atmosphere likely reflects exposure to other p
 ### The Goldfinch, 1654
 
 ![The Goldfinch, 1654](https://upload.wikimedia.org/wikipedia/commons/6/64/Fabritius-vink.jpg)
-
-*Fig 10: Carel Fabritius, The Goldfinch, 1654*
+_Fig 10: Carel Fabritius, The Goldfinch, 1654_
 
 The goldfinch appears frequently in Dutch painting, valued not merely for its vivid plumage but for its layered symbolism. Classical writers like Pliny linked the species to fertility — a connection perhaps referenced in Hieronymus Bosch's _[Garden of Earthly Delights](https://www.museodelprado.es/en/the-collection/art-work/the-garden-of-earthly-delights-triptych/02388242-6d6a-4e9e-a992-e1311eab3609)_, where an outsized goldfinch accompanies a naked couple.
 
@@ -119,14 +116,20 @@ The work exists on a relatively thick small panel sawn from a much larger board 
 
 Despite his tragic early death at the age of 32, Carel Fabritius left an indelible mark on Dutch Golden Age Painting. His innovative approaches to perspective, illumination, and everyday subjects profoundly influenced the Delft school and artists like Johannes Vermeer. Fabritius's mastery of technique, combined with his willingness to experiment, established him as one of the most talented painters of the period.
 
-___
+[^1]: Janson, J. _The Dutch Economy of the Golden Age_. Essential Vermeer. Available at: https://www.essentialvermeer.com/dutch-painters/dutch_art/ecnmcs_dtchart.html
 
-[^1]: Janson, J. *The Dutch Economy of the Golden Age*. Essential Vermeer. Available at: https://www.essentialvermeer.com/dutch-painters/dutch_art/ecnmcs_dtchart.html
-[^2]: Rasterhoff C. The Markets for Art, Books, and Luxury Goods. In: Helmers HJ, Janssen GH, eds. *The Cambridge Companion to the Dutch Golden Age*. Cambridge Companions to Culture. Cambridge University Press; 2018:249-267.
-[^3]: Janson, J. *The Guild of Saint Luke of Delft*. Essential Vermeer. Available at: https://www.essentialvermeer.com/saint_luke%27s_guild_delft.html
+[^2]: Rasterhoff C. The Markets for Art, Books, and Luxury Goods. In: Helmers HJ, Janssen GH, eds. _The Cambridge Companion to the Dutch Golden Age_. Cambridge Companions to Culture. Cambridge University Press; 2018:249-267.
+
+[^3]: Janson, J. _The Guild of Saint Luke of Delft_. Essential Vermeer. Available at: https://www.essentialvermeer.com/saint_luke%27s_guild_delft.html
+
 [^4]: This is tentatively attributed to Carel Fabritius, however I tend to go with Walter Liedtke’s attribution to Fabritius.
+
 [^5]: Van Gogh, Vincent. Letter 798 to Theo van Gogh, on or about Monday, 2 September 1889. Available at: https://vangoghletters.org/vg/letters/let798/letter.html
+
 [^6]: Keith, L. 'Carel Fabritius' "A View in Delft": Some Observations on its Treatment and Display'. National Gallery Technical Bulletin Vol 15, pp 54–63. Available at: http://www.nationalgallery.org.uk/technical-bulletin/keith1994b
+
 [^7]: P. Sutton, _Vermeer and the Delft Style_ (exh. cat. Tokyo Metropolitan Art Museum, 2 August - 14 December 2008), Tokyo 2008. Available at: https://www.codart.nl/images/JPTokyo2008VermeerTokyoMetropolitan.pdf
-[^8]: Wright. C, *The Dutch Painters: 100 Seventeenth Century Masters*, London, 1978.
+
+[^8]: Wright. C, _The Dutch Painters: 100 Seventeenth Century Masters_, London, 1978.
+
 [^9]: See "Self-Portrait with Gorget" by Rembrandt: https://www.mauritshuis.nl/en/our-collection/artworks/148-portrait-of-rembrandt-1606-1669-with-a-gorget

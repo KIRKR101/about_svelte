@@ -1,6 +1,8 @@
 ---
-title: Palestine, an Early History
-date: 2025-04-22
+title: 'Palestine, an Early History'
+longTitle: 'Palestine: An Early History and the Origins of Zionism'
+date: '2025-04-22'
+snippet: 'An early history of Palestine and Zionism.'
 ---
 
 For the Palestinian Arabs, the end of the Second World War was a period of intensified existential threat rather than liberation. While Allied rhetoric promised self-determination for the victims of fascism, the indigenous inhabitants of Palestine found their homeland offered up as a solution to European crimes. The political movement of Zionism, supported by international powers, moved to exploit the aftermath of the Holocaust. Their objective was not merely to find a refuge for survivors, but to complete a colonial project: the establishment of an exclusive Jewish state on land already inhabited for millennia by an Arab majority. I argue that the years 1945 and 1946 were the critical period where the infrastructure for the Nakba was finalised.
@@ -9,7 +11,7 @@ For the Palestinian Arabs, the end of the Second World War was a period of inten
 
 The investigation led by Earl G. Harrison in the summer of 1945 into the conditions of Jewish Displaced Persons (DPs) in Europe was a political weapon. Harrison arrived in Europe with established pro-Zionist sympathies and framed his findings to suit a specific nationalistic agenda. His report used emotionally charged language to depict the suffering of survivors while remaining wilfully blind to the existence of the Palestinian people. I find his dramatic comparisons of Allied DP camps to Nazi treatment particularly cynical, especially given his inclusion of factually incorrect claims regarding gas chambers at Belsen. These inaccuracies served a purpose: they generated a sense of moral urgency that directed all Jewish migration toward Palestine.
 
-The report’s primary significance lay in its recommendation that the US recognise Jewish DPs as a distinct national entity. This embedded the Zionist premise into official American discourse and stripped Palestinians of their status as the legitimate population. Harrison's call for the "immediate immigration of 100,000 Jews" was the most destructive element of the document. This figure was arbitrary. It ignored the social fabric, the economic limits, and the political rights of the Arab majority. It treated Palestine as *terra nullius* — a blank slate where European powers could project their problems. For Palestinians, who had already endured decades of forced immigration under British rule, the Harrison Report proved that their voices carried no weight in the new world order.
+The report’s primary significance lay in its recommendation that the US recognise Jewish DPs as a distinct national entity. This embedded the Zionist premise into official American discourse and stripped Palestinians of their status as the legitimate population. Harrison's call for the "immediate immigration of 100,000 Jews" was the most destructive element of the document. This figure was arbitrary. It ignored the social fabric, the economic limits, and the political rights of the Arab majority. It treated Palestine as _terra nullius_ — a blank slate where European powers could project their problems. For Palestinians, who had already endured decades of forced immigration under British rule, the Harrison Report proved that their voices carried no weight in the new world order.
 
 ### American Expediency and Hypocrisy
 

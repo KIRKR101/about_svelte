@@ -1,3 +1,10 @@
+---
+title: 'Intro to FPGAs'
+longTitle: 'Field-Programmable Gate Arrays'
+date: '2025-08-30'
+snippet: 'A starting point to FPGA architecture.'
+---
+
 A CPU runs software. An ASIC does one thing in hardware, permanently. An FPGA sits between the two -- a chip full of unconnected logic gates that you wire together yourself, after manufacture, to implement whatever circuit you need. Rewire it tomorrow and it's a different circuit.
 
 That's the core idea. Hardware-level performance, but reconfigurable. The obvious question is how.
