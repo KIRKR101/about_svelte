@@ -4,7 +4,6 @@ import { mdsvex } from 'mdsvex';
 import { readFileSync } from 'fs';
 import { join, dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import remarkGfm from 'remark-gfm';
 import remarkFootnotes from 'remark-footnotes';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -59,7 +58,7 @@ const config = {
 		mdsvex({
 			extensions: ['.md'],
 			smartypants: false,
-			remarkPlugins: [remarkFootnotes, remarkGfm],
+			remarkPlugins: [remarkFootnotes],
 			layout: {
 				_: resolve(__dirname, './src/lib/components/PostLayout.svelte').replace(/\\/g, '/')
 			}

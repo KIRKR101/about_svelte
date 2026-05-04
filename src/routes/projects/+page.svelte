@@ -27,14 +27,28 @@
 
 	let contributionWeeks = $derived(contributions?.weeks || []);
 	let totalContributions = $derived(contributions?.totalContributions || 0);
-	let currentYear = $derived(new Date().getFullYear());
+	const currentYear = new Date().getFullYear();
+	let selectedYear = $state(currentYear);
+
+	const contributionsCache: Record<number, ContributionCalendar> = {};
 
 	// Fetches GitHub contribution data from a proxy API that mirrors the GitHub GraphQL API.
-	async function fetchContributions() {
+	async function fetchContributions(year: number) {
+		if (contributionsCache[year]) {
+			contributions = contributionsCache[year];
+			return;
+		}
+
+		loading = true;
 		try {
-			const res = await fetch('https://github.kirkr.xyz/');
+			const url =
+				year !== currentYear
+					? `https://github.kirkr.xyz/?year=${year}`
+					: 'https://github.kirkr.xyz/';
+			const res = await fetch(url);
 			if (!res.ok) return;
 			const data = await res.json();
+			contributionsCache[year] = data.contributions;
 			contributions = data.contributions;
 		} catch (e) {
 			console.error('Error fetching contributions:', e);
@@ -44,7 +58,10 @@
 	}
 
 	$effect(() => {
-		fetchContributions();
+		fetchContributions(selectedYear);
+	});
+
+	$effect(() => {
 		isMobile = window.matchMedia('(max-width: 768px)').matches;
 		const handleResize = () => {
 			isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -136,14 +153,58 @@
 			</a>
 		</div>
 
-		<div class="mb-3 flex min-h-[16px] items-center">
-			{#if loading}
-				<div class="h-3 w-48 animate-pulse rounded-sm bg-white/5"></div>
-			{:else}
-				<div class="font-sans text-[11px] tracking-[0.04em] text-muted">
-					{totalContributions.toLocaleString()} contributions in {currentYear}
-				</div>
-			{/if}
+		<div class="mb-3 flex min-h-[16px] items-center justify-between">
+			<div class="flex items-center">
+				{#if loading}
+					<div class="h-3 w-48 animate-pulse rounded-sm bg-white/5"></div>
+				{:else}
+					<div class="font-sans text-[11px] tracking-[0.04em] text-muted">
+						{totalContributions.toLocaleString()} contributions in {selectedYear}
+					</div>
+				{/if}
+			</div>
+
+			<div class="flex items-center p-0.5">
+				<button
+					class="flex h-5 w-5 cursor-pointer items-center justify-center rounded-[4px] text-muted transition-colors hover:bg-white/10 hover:text-white disabled:cursor-default disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-muted"
+					disabled={selectedYear <= 2024}
+					onclick={() => selectedYear--}
+					aria-label="Previous year"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="12"
+						height="12"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg
+					>
+				</button>
+				<span class="w-10 text-center font-sans text-[11px] font-medium text-muted"
+					>{selectedYear}</span
+				>
+				<button
+					class="flex h-5 w-5 cursor-pointer items-center justify-center rounded-[4px] text-muted transition-colors hover:bg-white/10 hover:text-white disabled:cursor-default disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-muted"
+					disabled={selectedYear >= currentYear}
+					onclick={() => selectedYear++}
+					aria-label="Next year"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="12"
+						height="12"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg
+					>
+				</button>
+			</div>
 		</div>
 
 		<div class="contribution-graph relative min-w-0" bind:this={graphContainer}>
