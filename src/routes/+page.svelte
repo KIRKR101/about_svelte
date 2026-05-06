@@ -241,18 +241,7 @@
 
 <div class="flex items-start justify-center px-6 py-6 md:py-16">
 	<div class="w-full max-w-[600px]">
-		<div class="anim-row anim-row-1 py-7">
-			<div class="font-serif text-[58px] leading-[0.92] tracking-[-1.5px] text-white">
-				<span class="opacity-90">kirkr</span><span class="opacity-18"
-					><em class="italic not-italic">.</em>xyz</span
-				>
-			</div>
-			<div class="mt-[14px] font-mono text-[11px] tracking-[0.1em] text-dim uppercase"></div>
-		</div>
-
-		<div class="anim-row anim-row-2 h-px bg-bd"></div>
-
-		<div class="anim-row anim-row-3 grid grid-cols-1 gap-6 py-7 md:grid-cols-2 md:gap-0">
+		<div class="anim-row anim-row-1 grid grid-cols-1 gap-6 py-4 md:grid-cols-2 md:gap-0">
 			<div class="border-b border-bd pr-0 pb-6 md:border-r md:border-b-0 md:pr-6 md:pb-0">
 				<div class="mb-[14px] font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
 					Local time · {timezoneLabel}
@@ -290,9 +279,27 @@
 			</div>
 		</div>
 
-		<div class="anim-row anim-row-3 h-px bg-bd"></div>
+		<div class="anim-row anim-row-2 h-px bg-bd"></div>
 
-		<div class="anim-row anim-row-4 py-7">
+		<div class="anim-row anim-row-3 py-6">
+			<div class="font-sans text-[14px] leading-[1.6] text-white/70">
+				<p class="mb-5">
+					My main academic interest is in computer engineering, particularly architecture. I'm a
+					fan of C, Zig, and TypeScript, and web technologies in general; this site is built on
+					Svelte.
+				</p>
+				<p>
+					I also have an interest in art, with a strong inclination towards the Dutch Golden Age,
+					especially the Delft and Hague Schools, as well as Romanticism, Realism, and
+					Impressionism. Beyond that, I have a passing interest in economics, reading papers in my
+					spare time.
+				</p>
+			</div>
+		</div>
+
+		<div class="anim-row anim-row-4 h-px bg-bd"></div>
+
+		<div class="anim-row anim-row-5 py-7">
 			<div class="mb-4 flex items-center justify-between">
 				<div class="font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
 					{#if currentTrack}
@@ -417,9 +424,9 @@
 			{/if}
 		</div>
 
-		<div class="anim-row anim-row-4 h-px bg-bd"></div>
+		<div class="anim-row anim-row-6 h-px bg-bd"></div>
 
-		<div class="anim-row anim-row-5 pt-7">
+		<div class="anim-row anim-row-7 pt-7">
 			<div class="mb-3 flex items-center justify-between">
 				<div class="font-serif text-[24px] text-white/78 italic">Writings</div>
 				<a

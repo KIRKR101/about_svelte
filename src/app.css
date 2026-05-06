@@ -81,6 +81,12 @@
 .anim-row-5 {
 	animation-delay: 0.14s;
 }
+.anim-row-6 {
+	animation-delay: 0.17s;
+}
+.anim-row-7 {
+	animation-delay: 0.20s;
+}
 
 html {
 	-webkit-font-smoothing: antialiased;
