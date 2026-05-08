@@ -42,7 +42,6 @@
 	--font-serif: 'Instrument Serif', Georgia, serif;
 
 	--color-bd: rgba(255, 255, 255, 0.08);
-	--color-dim: rgba(255, 255, 255, 0.32);
 	--color-muted: rgba(255, 255, 255, 0.45);
 	--color-entry: rgba(255, 255, 255, 0.45);
 	--color-entry-h: rgba(255, 255, 255, 0.85);
@@ -85,7 +84,7 @@
 	animation-delay: 0.17s;
 }
 .anim-row-7 {
-	animation-delay: 0.20s;
+	animation-delay: 0.2s;
 }
 
 html {
@@ -111,7 +110,7 @@ body {
 	border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--color-dim);
+	background: var(--color-muted);
 }
 
 /* Markdown Content Styling - using @layer to override typography plugin if needed or just as custom component */
@@ -151,7 +150,7 @@ body {
 		color: inherit;
 		text-decoration: underline;
 		text-underline-offset: 3px;
-		text-decoration-color: var(--color-dim);
+		text-decoration-color: var(--color-muted);
 		transition: all 0.1s ease;
 	}
 
@@ -161,7 +160,7 @@ body {
 	}
 
 	.prose blockquote {
-		border-left: 1px solid var(--color-dim);
+		border-left: 1px solid var(--color-muted);
 		padding-left: 1.75rem;
 		margin: 3rem 0;
 		font-family: var(--font-serif);
@@ -217,7 +216,7 @@ body {
 		display: block;
 		text-align: center;
 		font-size: 0.8em;
-		color: var(--color-dim);
+		color: var(--color-muted);
 		margin-top: -0.5rem;
 		margin-bottom: 2.5rem;
 		font-style: normal;
@@ -263,7 +262,7 @@ body {
 
 	.prose .footnotes li::marker,
 	.prose section[data-footnotes] li::marker {
-		color: var(--color-dim);
+		color: var(--color-muted);
 		font-family: var(--font-mono);
 		font-size: 0.85em;
 	}
@@ -282,7 +281,7 @@ body {
 
 	.prose .footnotes a:hover {
 		color: white;
-		text-decoration-color: var(--color-dim);
+		text-decoration-color: var(--color-muted);
 	}
 
 	.prose .footnote-backref,
@@ -290,7 +289,7 @@ body {
 		display: inline-block;
 		margin-left: 0.5rem;
 		text-decoration: none !important;
-		color: var(--color-dim);
+		color: var(--color-muted);
 		font-family: var(--font-sans);
 		transition: color 0.15s ease;
 		vertical-align: baseline;

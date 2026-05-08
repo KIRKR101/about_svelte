@@ -18,7 +18,7 @@ An anecdote goes:[^2] when Van Dyck was about to leave for England in the servic
 
 Hals watched him prepare his palette and his brushes and saw at once that this was no novice. He still didn't think of Van Dyck; he decided it must be some other artist playing a trick, trying to make a name for himself. Van Dyck didn't take long. He asked Hals to stand and look. As soon as Hals saw the canvas he said: _thou art Van Dyck, for no other person is able to do something like this_. He embraced him and kissed him.
 
-Van Dyck left with his still-wet portrait and pressed something into Hals' children's hands in payment. They didn't hold it long, for Hals drank it shortly after. Van Dyck tried hard to lure him to England, but Hals wouldn't hear of it: he was too attached to his drinking. 
+Van Dyck left with his still-wet portrait and pressed something into Hals' children's hands in payment. They didn't hold it long, for Hals drank it shortly after. Van Dyck tried hard to lure him to England, but Hals wouldn't hear of it: he was too attached to his drinking.
 
 Van Dyck kept a high opinion of his art all the same, saying later that if Hals' pigments had been a little more delicate he would have been among the greatest masters, since no one matched him in that control of the brush by which, setting up a portrait, he could place the lights and darks in a single pass without correction.
 
@@ -27,7 +27,7 @@ _Portrait of Nicolaes Hasselaer (c. 1627)_
 
 It was said he laid his portraits on thickly and let them merge softly, then returned with sharper brushwork, announcing: _now the essence of the master must be introduced_.
 
-___
+---
 
 ![Copy of a lost self-portrait from Hals](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/After_Frans_Hals_-_Portrait_of_Frans_Hals_-_Indianapolis.jpg/960px-After_Frans_Hals_-_Portrait_of_Frans_Hals_-_Indianapolis.jpg)
 _Copy of a lost self-portrait of Frans Hals_

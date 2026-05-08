@@ -40,7 +40,6 @@
 	let dataSource: DataSource = $state(null);
 	let localProgress = $state(0);
 	let lastFetchTime = $state(0);
-	let currentTime = $state(new Date());
 	let isFetching = false;
 
 	let intervalId: ReturnType<typeof setInterval> | undefined;
@@ -163,11 +162,6 @@
 	const recentPostsSlice = recentPosts.slice(0, 5);
 
 	$effect(() => {
-		const clockInterval = setInterval(() => (currentTime = new Date()), 1000);
-		return () => clearInterval(clockInterval);
-	});
-
-	$effect(() => {
 		fetchSpotifyTrack();
 		intervalId = setInterval(fetchCurrentTrack, 60000);
 		return () => {
@@ -220,18 +214,6 @@
 			? (currentTrack.progress / currentTrack.duration) * 100
 			: 0
 	);
-
-	let timezoneLabel = $derived(currentTime.getTimezoneOffset() === -60 ? 'BST' : 'GMT');
-	let displayTime = $derived(
-		currentTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
-	);
-	let displayDay = $derived(
-		currentTime.toLocaleDateString('en-GB', {
-			weekday: 'long',
-			day: 'numeric',
-			month: 'long'
-		})
-	);
 </script>
 
 <svelte:head>
@@ -239,85 +221,59 @@
 	<link rel="preconnect" href="https://i.scdn.co" />
 </svelte:head>
 
-<div class="flex items-start justify-center px-6 py-6 md:py-16">
+<div class="flex items-start justify-center px-6 py-6">
 	<div class="w-full max-w-[600px]">
-		<div class="anim-row anim-row-1 grid grid-cols-1 gap-6 py-4 md:grid-cols-2 md:gap-0">
-			<div class="border-b border-bd pr-0 pb-6 md:border-r md:border-b-0 md:pr-6 md:pb-0">
-				<div class="mb-[14px] font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
-					Local time · {timezoneLabel}
-				</div>
-				<div
-					class="font-serif text-[32px] leading-none tracking-[-1.5px] text-white/85 md:text-[40px]"
-				>
-					{displayTime}
-				</div>
-				<div class="mt-[6px] font-serif text-xs text-white/45 italic">{displayDay}</div>
+		<div class="anim-row anim-row-1 py-6">
+			<div class="mb-4 flex items-center justify-between">
+				<div class="font-sans text-[10px] tracking-[0.2em] text-muted uppercase">About</div>
 			</div>
 
-			<div class="flex flex-col justify-center pl-0 md:pl-6">
-				<div class="mb-[14px] font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
-					Open source
+			<div class="border-l border-bd/60 py-1 pl-5">
+				<div class="space-y-4 font-sans text-[14px] leading-[1.7] text-white/70">
+					<p>
+						My main academic interest is in computer engineering, particularly architecture. I'm a
+						fan of C, Zig, and TypeScript, and web technologies in general; this site is built on
+						Svelte.
+					</p>
+					<p>
+						I also have an interest in art, with a strong inclination towards the Dutch Golden Age,
+						especially the Delft and Hague Schools. Beyond that, I have a passing interest in
+						economics, reading papers in my spare time.
+					</p>
 				</div>
-				<a
-					href="https://github.com/Kirkr101"
-					target="_blank"
-					class="group flex items-center gap-[10px] text-inherit no-underline transition-opacity duration-75 hover:opacity-70"
-					><svg viewBox="0 0 16 16" class="h-5 w-5 shrink-0 fill-muted md:h-6 md:w-6"
-						><path
-							fill-rule="evenodd"
-							d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
-						></path></svg
+
+				<div class="mt-5">
+					<a
+						href="https://github.com/KIRKR101"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="font-sans text-[10px] tracking-[0.15em] text-muted uppercase no-underline hover:text-white/60"
 					>
-					<span
-						class="font-serif text-[24px] leading-none tracking-[-0.5px] text-white/85 md:text-[28px]"
-						>Kirkr101</span
-					></a
-				>
-				<div class="mt-2 ml-[30px] text-[11px] tracking-[0.1em] text-dim uppercase md:ml-[36px]">
-					github.com ↗
+						View Github ↗
+					</a>
 				</div>
 			</div>
 		</div>
 
-		<div class="anim-row anim-row-2 h-px bg-bd"></div>
+		<div class="anim-row anim-row-2 h-px bg-bd/60"></div>
 
 		<div class="anim-row anim-row-3 py-6">
-			<div class="font-sans text-[14px] leading-[1.6] text-white/70">
-				<p class="mb-5">
-					My main academic interest is in computer engineering, particularly architecture. I'm a
-					fan of C, Zig, and TypeScript, and web technologies in general; this site is built on
-					Svelte.
-				</p>
-				<p>
-					I also have an interest in art, with a strong inclination towards the Dutch Golden Age,
-					especially the Delft and Hague Schools, as well as Romanticism, Realism, and
-					Impressionism. Beyond that, I have a passing interest in economics, reading papers in my
-					spare time.
-				</p>
-			</div>
-		</div>
-
-		<div class="anim-row anim-row-4 h-px bg-bd"></div>
-
-		<div class="anim-row anim-row-5 py-7">
-			<div class="mb-4 flex items-center justify-between">
-				<div class="font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
-					{#if currentTrack}
-						{#if currentTrack.isPlaying}
-							Now playing · {currentTrack.source}
-						{:else}
-							Last played · {currentTrack.source}
-						{/if}
+			<div class="mb-5 font-sans text-[10px] tracking-[0.15em] text-muted uppercase">
+				{#if currentTrack}
+					{#if currentTrack.isPlaying}
+						Now playing · {currentTrack.source}
 					{:else}
-						Initialising...
+						Last played · {currentTrack.source}
 					{/if}
-				</div>
+				{:else}
+					Initialising...
+				{/if}
 			</div>
 
 			{#if currentTrack}
-				<div class="flex items-start gap-3 sm:gap-4">
+				<div class="flex items-start gap-4 sm:gap-6">
 					<div
-						class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[3px] border border-bd bg-art-bg sm:h-24 sm:w-24"
+						class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-bd bg-art-bg sm:h-24 sm:w-24"
 					>
 						{#if currentTrack.url}
 							<a
@@ -345,15 +301,13 @@
 						{/if}
 					</div>
 					<div class="min-w-0 flex-1 pt-0.5">
-						<div
-							class="mb-1 font-serif text-[18px] leading-snug text-white/78 italic sm:text-[20px]"
-						>
+						<div class="mb-1 font-serif text-[20px] leading-tight text-white/85 italic">
 							{#if currentTrack.url}
 								<a
 									href={currentTrack.url}
 									target="_blank"
 									rel="noopener noreferrer"
-									class="font-serif text-[18px] text-white/78 italic no-underline transition-colors duration-100 hover:text-white sm:text-[20px]"
+									class="text-inherit no-underline transition-colors hover:text-white"
 								>
 									{currentTrack.title}
 								</a>
@@ -361,7 +315,7 @@
 								{currentTrack.title}
 							{/if}
 						</div>
-						<div class="font-sans text-[10px] tracking-[0.04em] text-muted sm:text-[11px]">
+						<div class="font-sans text-[11px] tracking-wide text-muted">
 							{#if currentTrack.artistUrl}
 								<a
 									href={currentTrack.artistUrl}
@@ -393,7 +347,7 @@
 									style="left: {progressPercentage}%"
 								></div>
 							</div>
-							<div class="mt-1.5 flex justify-between text-[9px] text-dim sm:text-[10px]">
+							<div class="mt-1.5 flex justify-between text-[9px] text-muted sm:text-[10px]">
 								<span>{formatTime(currentTrack.progress)}</span>
 								<span>{formatTime(currentTrack.duration)}</span>
 							</div>
@@ -403,9 +357,9 @@
 					</div>
 				</div>
 			{:else}
-				<div class="flex items-start gap-3 sm:gap-4">
+				<div class="flex items-start gap-4 sm:gap-6">
 					<div
-						class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[3px] border border-bd bg-art-bg sm:h-24 sm:w-24"
+						class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-bd bg-art-bg sm:h-24 sm:w-24"
 					>
 						<svg viewBox="0 0 24 24" class="h-6 w-6 fill-white/12 sm:h-7 sm:w-7">
 							<path
@@ -414,43 +368,45 @@
 						</svg>
 					</div>
 					<div class="min-w-0 flex-1 pt-0.5">
-						<div class="mb-1 font-serif text-[16px] leading-snug text-white/78 sm:text-[18px]">
+						<div class="mb-1 font-serif text-[20px] leading-tight text-white/85 italic">
 							Initialising...
 						</div>
-						<div class="text-[10px] tracking-[0.04em] text-muted sm:text-[11px]">...</div>
+						<div class="text-[11px] tracking-wide text-muted">...</div>
 						<div class="relative mt-[14px] h-px bg-rail"></div>
 					</div>
 				</div>
 			{/if}
 		</div>
 
-		<div class="anim-row anim-row-6 h-px bg-bd"></div>
+		<div class="anim-row anim-row-4 h-px bg-bd/60"></div>
 
-		<div class="anim-row anim-row-7 pt-7">
-			<div class="mb-3 flex items-center justify-between">
-				<div class="font-serif text-[24px] text-white/78 italic">Writings</div>
+		<div class="anim-row anim-row-5 py-6">
+			<div class="mb-6 flex items-center justify-between">
+				<div class="font-serif text-[26px] text-white/85 italic">Writings</div>
 				<a
 					href="/posts"
-					class="font-sans text-[11px] tracking-[0.1em] text-dim uppercase no-underline transition-colors duration-75 hover:text-white/55"
+					class="font-sans text-[10px] tracking-[0.15em] text-muted uppercase no-underline hover:text-white/60"
 				>
 					All posts ↗
 				</a>
 			</div>
 
-			{#each recentPostsSlice as post (post.file)}
-				<a
-					href="/post/{post.file}"
-					class="group flex w-full items-baseline gap-3.5 border-b border-sep py-[11px] text-left no-underline last:border-0"
-				>
-					<span
-						class="flex-1 font-sans text-[14px] leading-[1.35] text-entry transition-colors duration-75 group-hover:text-entry-h"
-						>{post.title}</span
+			<div class="flex flex-col">
+				{#each recentPostsSlice as post (post.file)}
+					<a
+						href="/post/{post.file}"
+						class="group flex w-full items-baseline justify-between border-b border-bd/30 py-4 no-underline last:border-0"
 					>
-					<span class="font-sans text-[11px] tracking-[0.04em] whitespace-nowrap text-dim"
-						>{formatDate(post.date)}</span
-					>
-				</a>
-			{/each}
+						<span
+							class="font-sans text-[14px] text-white/70 transition-colors duration-100 group-hover:text-white"
+							>{post.title}</span
+						>
+						<span class="font-sans text-[11px] tracking-wider text-muted/60 uppercase"
+							>{formatDate(post.date)}</span
+						>
+					</a>
+				{/each}
+			</div>
 		</div>
 	</div>
 </div>

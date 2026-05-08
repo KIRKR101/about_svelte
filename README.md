@@ -1,1 +1,1 @@
-A personal website built with SvelteKit, featuring articles, artworks, films, and Last.fm data integration via a Rust proxy server.
+A personal website built with SvelteKit, with github, letterboxd, and spotify proxies through CF workers.

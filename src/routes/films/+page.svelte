@@ -115,7 +115,7 @@
 					><em class="italic not-italic">.</em></span
 				>
 			</h1>
-			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
+			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-muted uppercase">
 				a collection of films
 			</div>
 		</div>
@@ -124,7 +124,7 @@
 
 		{#if loading}
 			<div class="py-8 text-center">
-				<div class="font-mono text-[11px] tracking-[0.1em] text-dim uppercase">
+				<div class="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">
 					Loading films...
 				</div>
 			</div>
@@ -156,7 +156,7 @@
 									{film.title}
 								</a>
 							</div>
-							<div class="mt-1 font-mono text-[12px] text-dim">{film.year}</div>
+							<div class="mt-1 font-mono text-[12px] text-muted">{film.year}</div>
 							{#if film.rating}
 								<div class="mt-1 text-[16px] text-amber-400/80">
 									{createStarRating(film.rating)}

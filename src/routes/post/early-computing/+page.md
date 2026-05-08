@@ -13,7 +13,7 @@ Computing is now scattered through the environment. Laptops and phones are merel
 
 Modern computer architecture is a hierarchy of abstractions. Each layer hides the mechanics of everything below it. At the base, electrons move through semiconductors. These form transistors and circuits described by register-transfer level (RTL) representations. Above these, microarchitectures implement an instruction set architecture (ISA). Higher layers include operating systems and virtual machines that manage hardware resources and present controlled environments to programs.
 
-The practical result is a total separation of concerns. A programmer writing a sorting algorithm in a high-level language never considers transistor switching. Circuit designers do not worry about how an operating system schedules threads. Abstraction allows the system to scale in complexity without any one person having to hold the entire map in their head. 
+The practical result is a total separation of concerns. A programmer writing a sorting algorithm in a high-level language never considers transistor switching. Circuit designers do not worry about how an operating system schedules threads. Abstraction allows the system to scale in complexity without any one person having to hold the entire map in their head.
 
 The definition of computer architecture has expanded. In the 1950s, architects focused on the layers between circuits and operating systems: execution logic and memory organisation. By the 1990s, power consumption and manufacturing costs became central concerns as transistor counts climbed into the millions. Today, parallel architectures, hardware accelerators, and security mechanisms are the primary focus. The boundaries between hardware design and systems software have been obscured.
 
@@ -41,7 +41,7 @@ The Electronic Numerical Integrator and Computer (ENIAC) was the most significan
 
 ENIAC had a fundamental flaw: it lacked a stored program. Programming it meant configuring external patch cables. Changing a computation took two days of rewiring. The machine was fast at arithmetic but glacially slow to reprogram. This made it useful for repetitive ballistics calculations but poorly suited for general research.
 
-John von Neumann articulated the solution. Building on thinking by J. Presper Eckert and John Mauchly, he described the stored-program computer. The idea is to store instructions in memory alongside data, using the same format. You load a new program into memory instead of rewiring the machine. I find the "von Neumann architecture" label unfortunate; it is a misnomer that obscures the engineering contributions of the ENIAC team. 
+John von Neumann articulated the solution. Building on thinking by J. Presper Eckert and John Mauchly, he described the stored-program computer. The idea is to store instructions in memory alongside data, using the same format. You load a new program into memory instead of rewiring the machine. I find the "von Neumann architecture" label unfortunate; it is a misnomer that obscures the engineering contributions of the ENIAC team.
 
 By 1948, the Manchester Small-Scale Experimental Machine ran the world's first stored program -- a factorisation calculation that took 52 minutes. EDSAC followed in 1949. UNIVAC I became the first commercial computer sold in the United States in 1951, later used to predict a presidential election on television.
 
@@ -53,6 +53,6 @@ Instruction sets were minimal. Most machines had fewer than 20 instructions: loa
 
 Iterating through an array required programmers to write code that modified its own instructions. The program would update the address field of its next load instruction after each loop iteration. This self-modifying code was inefficient and difficult to debug. Tom Kilburn solved this in the 1950s with the index register. Programs could keep a base address in the instruction and add the register's value automatically. The code doing the work was no longer tangled with the code managing addresses.
 
-Modern processors have moved to general-purpose registers. Addressing modes now handle complex data structures like linked lists or trees automatically. In the 1950s, the programmer's mental model matched the physical hardware. Today, that connection is severed. 
+Modern processors have moved to general-purpose registers. Addressing modes now handle complex data structures like linked lists or trees automatically. In the 1950s, the programmer's mental model matched the physical hardware. Today, that connection is severed.
 
 Layers of virtual memory and high-level languages ensure that programmers rarely consider the physical state of the silicon.

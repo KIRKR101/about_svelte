@@ -134,7 +134,7 @@
 					><em class="italic not-italic">.</em></span
 				>
 			</h1>
-			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
+			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-muted uppercase">
 				selected photos from travels
 			</div>
 		</div>

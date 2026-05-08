@@ -159,7 +159,7 @@
 					><em class="italic not-italic">.</em></span
 				>
 			</h1>
-			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
+			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-muted uppercase">
 				a collection of artworks that i like, as well as research on pieter de hooch
 			</div>
 		</div>

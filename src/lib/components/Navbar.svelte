@@ -97,7 +97,7 @@
 					<a
 						href={link.path}
 						class="font-sans text-[11px] tracking-[0.1em] uppercase transition-colors duration-75
-						{isActive(link.path) ? 'text-white/80' : 'text-dim hover:text-white/60'}"
+						{isActive(link.path) ? 'text-white/80' : 'text-muted hover:text-white/60'}"
 					>
 						{link.name}
 					</a>
@@ -105,7 +105,7 @@
 
 				<button
 					on:click={toggleAudio}
-					class="flex h-6 w-6 items-center justify-center text-dim transition-colors duration-75 hover:text-white/60 focus:outline-none"
+					class="flex h-6 w-6 items-center justify-center text-muted transition-colors duration-75 hover:text-white/60 focus:outline-none"
 					aria-label={isPlaying ? 'Pause music' : 'Play music'}
 				>
 					{#if isLoading}
@@ -161,7 +161,7 @@
 						class="px-6 py-3 font-sans text-[11px] tracking-[0.1em] uppercase transition-colors duration-75
 						{isActive(link.path)
 							? 'bg-white/5 text-white/80'
-							: 'text-dim hover:bg-white/5 hover:text-white/60'}"
+							: 'text-muted hover:bg-white/5 hover:text-white/60'}"
 					>
 						{link.name}
 					</a>
@@ -169,7 +169,7 @@
 
 				<button
 					on:click={toggleAudio}
-					class="flex w-full items-center justify-between px-6 py-3 font-sans text-[11px] tracking-[0.1em] text-dim uppercase transition-colors hover:bg-white/5 hover:text-white/60 focus:outline-none"
+					class="flex w-full items-center justify-between px-6 py-3 font-sans text-[11px] tracking-[0.1em] text-muted uppercase transition-colors hover:bg-white/5 hover:text-white/60 focus:outline-none"
 					aria-label={isPlaying ? 'Pause music' : 'Play music'}
 				>
 					<span>Music</span>

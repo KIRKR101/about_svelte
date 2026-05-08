@@ -51,7 +51,7 @@
 					><em class="italic not-italic">.</em></span
 				>
 			</h1>
-			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
+			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-muted uppercase">
 				writings and notes by me
 			</div>
 		</div>
@@ -60,7 +60,7 @@
 
 		{#if data.posts.length === 0}
 			<div class="py-12 text-center">
-				<div class="font-mono text-[11px] tracking-[0.1em] text-dim uppercase">
+				<div class="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">
 					No entries found
 				</div>
 			</div>
@@ -68,21 +68,19 @@
 			<div class="flex flex-col gap-10">
 				{#each groupedPosts as group (group.year)}
 					<div class="flex flex-col">
-						<!-- Year Header -->
 						<h2 class="mb-3 font-mono text-[14px] text-white/78">{group.year}</h2>
 
-						<!-- Posts for this year -->
 						<div class="flex flex-col">
 							{#each group.posts as post (post.file)}
 								<a
 									href={`/post/${post.file}`}
-									class="group flex items-baseline gap-5 border-b border-sep py-[11px] no-underline last:border-0"
+									class="group flex w-full items-baseline justify-between border-b border-bd/30 py-4 no-underline last:border-0"
 								>
 									<span
-										class="flex-1 font-sans text-[14px] leading-[1.35] text-entry transition-colors duration-75 group-hover:text-entry-h"
+										class="font-sans text-[14px] text-white/70 transition-colors duration-100 group-hover:text-white"
 										>{post.title}</span
 									>
-									<span class="font-sans text-[11px] tracking-[0.04em] whitespace-nowrap text-dim"
+									<span class="font-sans text-[11px] tracking-wider text-muted/60"
 										>{formatShortDate(post.date)}</span
 									>
 								</a>

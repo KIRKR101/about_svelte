@@ -27,7 +27,9 @@
 			<h1 class="font-serif text-[42px] leading-tight tracking-[-1px] text-white/90 md:text-[48px]">
 				{longTitle || title || 'Blog Post'}
 			</h1>
-			<div class="mt-3 flex items-center justify-between font-mono text-[11px] tracking-[0.1em] text-dim uppercase">
+			<div
+				class="mt-3 flex items-center justify-between font-mono text-[11px] tracking-[0.1em] text-muted uppercase"
+			>
 				<span>kirkr.xyz</span>
 				<span>{formatDate(date)}</span>
 			</div>

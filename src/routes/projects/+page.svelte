@@ -119,20 +119,20 @@
 </svelte:head>
 
 <div class="flex flex-col items-center px-4 py-6 font-mono sm:px-6 md:py-16">
-	<div class="anim-row anim-row-1 w-full max-w-[1200px]">
+	<div class="anim-row anim-row-1 w-full max-w-[850px]">
 		<div class="py-7">
 			<h1 class="font-serif text-[40px] leading-tight tracking-[-1px] text-white sm:text-[48px]">
 				<span class="opacity-90">Projects</span><span class="opacity-20"
 					><em class="italic not-italic">.</em></span
 				>
 			</h1>
-			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-dim uppercase">
+			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-muted uppercase">
 				a collection of projects
 			</div>
 		</div>
 	</div>
 
-	<div class="anim-row anim-row-2 w-full max-w-[1200px] py-7">
+	<div class="anim-row anim-row-2 w-full max-w-[850px] py-7">
 		<div class="mb-4 flex items-center justify-between">
 			<div class="flex items-center gap-3">
 				<svg viewBox="0 0 16 16" class="h-4 w-4 fill-muted">
@@ -141,13 +141,13 @@
 						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
 					/>
 				</svg>
-				<span class="font-sans text-[11px] tracking-[0.1em] text-dim uppercase">Github</span>
+				<span class="font-sans text-[11px] tracking-[0.1em] text-muted uppercase">Github</span>
 			</div>
 			<a
 				href="https://github.com/Kirkr101"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="font-sans text-[11px] tracking-[0.1em] text-dim uppercase no-underline transition-colors duration-75 hover:text-white/55"
+				class="font-sans text-[10px] tracking-[0.15em] text-muted uppercase no-underline hover:text-white/60"
 			>
 				Kirkr101 ↗
 			</a>
@@ -214,14 +214,14 @@
 					style="left: {tooltip.x}px; top: {tooltip.y}px;"
 				>
 					<div
-						class="rounded-[4px] border border-muted/25 bg-[#1a1a1c] px-2.5 py-1.5 text-[11px] whitespace-nowrap shadow-xl ring-1 ring-black/40"
+						class="rounded-[4px] border border-muted/25 bg-[#1a1a1c] px-1.5 py-1.5 text-[11px] whitespace-nowrap shadow-xl ring-1 ring-black/40"
 					>
 						<span class="font-semibold text-white/90"
 							>{tooltip.count === 0
 								? 'No contributions'
 								: `${tooltip.count} contribution${tooltip.count !== 1 ? 's' : ''}`}</span
 						>
-						<span class="ml-1.5 text-white/45">on {tooltip.date}</span>
+						<span class="text-white/45">on {tooltip.date}</span>
 					</div>
 					<div class="absolute top-full left-1/2 -translate-x-1/2">
 						<div
@@ -289,14 +289,14 @@
 		</div>
 	</div>
 
-	<div class="h-px w-full max-w-[1200px] bg-bd"></div>
+	<div class="h-px w-full max-w-[850px] bg-bd"></div>
 
-	<main class="anim-row anim-row-3 mt-8 w-full max-w-[1200px]">
+	<main class="anim-row anim-row-3 mt-8 w-full max-w-[850px]">
 		<div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
 			{#each projects as project (project.title)}
 				<div class="flex flex-col border-b border-sep pb-8 last:border-0 md:last:border-b">
 					<h2 class="mb-2 font-serif text-[24px] leading-none text-white/80">{project.title}</h2>
-					<p class="mb-4 flex-1 font-sans text-[13px] leading-relaxed text-muted">
+					<p class="mb-2 flex-1 font-sans text-[13px] leading-relaxed text-muted">
 						{project.description}
 					</p>
 					<div class="mt-auto">
@@ -305,7 +305,7 @@
 								href={project.link}
 								target="_blank"
 								rel="noopener noreferrer"
-								class="font-sans text-[11px] tracking-[0.1em] text-dim uppercase no-underline transition-colors duration-75 hover:text-white/55"
+								class="font-sans text-[10px] tracking-[0.15em] text-muted uppercase no-underline hover:text-white/60"
 							>
 								{project.link.replace('https://', '')} ↗
 							</a>
@@ -314,7 +314,7 @@
 								href={project.github}
 								target="_blank"
 								rel="noopener noreferrer"
-								class="font-sans text-[11px] tracking-[0.1em] text-dim uppercase no-underline transition-colors duration-75 hover:text-white/55"
+								class="font-sans text-[10px] tracking-[0.15em] text-muted uppercase no-underline hover:text-white/60"
 							>
 								github ↗
 							</a>
