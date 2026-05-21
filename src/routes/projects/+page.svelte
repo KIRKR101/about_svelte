@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { projects } from '$lib/projects-data';
+	import { getContributionColor } from '$lib/utils';
 
 	interface ContributionDay {
 		date: string;
@@ -30,14 +31,19 @@
 	const currentYear = new Date().getFullYear();
 	let selectedYear = $state(currentYear);
 
-	const contributionsCache: Record<number, ContributionCalendar> = {};
+	let contributionsCache = $state<Record<number, ContributionCalendar>>({});
 
-	// Fetches GitHub contribution data from a proxy API that mirrors the GitHub GraphQL API.
+	let currentFetch: AbortController | null = null;
+
 	async function fetchContributions(year: number) {
 		if (contributionsCache[year]) {
 			contributions = contributionsCache[year];
 			return;
 		}
+
+		currentFetch?.abort();
+		currentFetch = new AbortController();
+		const signal = currentFetch.signal;
 
 		loading = true;
 		try {
@@ -45,12 +51,13 @@
 				year !== currentYear
 					? `https://github.kirkr.xyz/?year=${year}`
 					: 'https://github.kirkr.xyz/';
-			const res = await fetch(url);
+			const res = await fetch(url, { signal });
 			if (!res.ok) return;
 			const data = await res.json();
 			contributionsCache[year] = data.contributions;
 			contributions = data.contributions;
 		} catch (e) {
+			if (e instanceof DOMException && e.name === 'AbortError') return;
 			console.error('Error fetching contributions:', e);
 		} finally {
 			loading = false;
@@ -69,15 +76,6 @@
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
 	});
-
-	// Maps contribution count to GitHub's contribution color palette.
-	function getContributionColor(count: number) {
-		if (count === 0) return '#1a1a1c';
-		if (count < 5) return '#0e4429';
-		if (count < 10) return '#006d32';
-		if (count < 20) return '#26a641';
-		return '#39d353';
-	}
 
 	function formatContribDate(dateString: string) {
 		const date = new Date(dateString);

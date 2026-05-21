@@ -1,10 +1,7 @@
 <script lang="ts">
-	let { children, title, longTitle, date, snippet } = $props();
+	import { formatDate } from '$lib/utils';
 
-	function formatDate(dateString: string) {
-		const date = new Date(dateString);
-		return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-	}
+	let { children, title, longTitle, date, snippet } = $props();
 </script>
 
 <svelte:head>

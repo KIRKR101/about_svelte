@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { formatShortDate } from '$lib/utils';
+
 	interface Post {
 		file: string;
 		title: string;
@@ -12,28 +14,15 @@
 
 	let { data }: { data: PageData } = $props();
 
-	function formatShortDate(dateString: string) {
-		const date = new Date(dateString);
-		return date.toLocaleDateString('en-GB', {
-			month: 'short',
-			day: 'numeric'
-		});
-	}
-
 	let groupedPosts = $derived.by(() => {
-		return data.posts.reduce(
-			(groups, post) => {
-				const year = new Date(post.date).getFullYear().toString();
-				const existingGroup = groups.find((g) => g.year === year);
-
-				if (existingGroup) {
-					return groups.map((g) => (g.year === year ? { ...g, posts: [...g.posts, post] } : g));
-				} else {
-					return [...groups, { year, posts: [post] }];
-				}
-			},
-			[] as { year: string; posts: Post[] }[]
-		);
+		const groups: Record<string, Post[]> = {};
+		for (const post of data.posts) {
+			const year = new Date(post.date).getFullYear().toString();
+			(groups[year] ??= []).push(post);
+		}
+		return Object.entries(groups)
+			.map(([year, posts]) => ({ year, posts }))
+			.sort((a, b) => b.year.localeCompare(a.year));
 	});
 </script>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { photographyData } from '$lib/photography-data';
 	import Lightbox from '$lib/components/Lightbox.svelte';
+	import { computeVisualOrder } from '$lib/masonry';
 	import { tick } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 
@@ -14,45 +15,16 @@
 	const cardEls = new SvelteMap<string, HTMLElement>();
 	let visualOrder = $state<string[]>(allImages.map((img) => img.id));
 
-	function computeVisualOrder() {
+	function updateVisualOrder() {
 		if (cardEls.size === 0) return;
 
-		const positions: { id: string; left: number; top: number }[] = [];
+		const positions = [];
 		for (const [id, el] of cardEls) {
 			const rect = el.getBoundingClientRect();
 			positions.push({ id, left: rect.left, top: rect.top });
 		}
 
-		const lefts = [...new Set(positions.map((p) => Math.round(p.left)))].sort((a, b) => a - b);
-		if (lefts.length === 0) return;
-
-		const COLUMN_TOLERANCE = 10;
-		const columns: { id: string; top: number }[][] = lefts.map(() => []);
-
-		for (const pos of positions) {
-			let colIdx = lefts.findIndex((l) => Math.abs(l - Math.round(pos.left)) <= COLUMN_TOLERANCE);
-			if (colIdx === -1) colIdx = 0;
-
-			const targetCol = columns[colIdx];
-			if (targetCol) {
-				targetCol.push({ id: pos.id, top: pos.top });
-			}
-		}
-
-		for (const col of columns) col.sort((a, b) => a.top - b.top);
-
-		const result: string[] = [];
-		const maxLen = Math.max(0, ...columns.map((c) => c.length));
-
-		for (let row = 0; row < maxLen; row++) {
-			for (const col of columns) {
-				const item = col[row];
-				if (item) {
-					result.push(item.id);
-				}
-			}
-		}
-		visualOrder = result;
+		visualOrder = computeVisualOrder(positions);
 	}
 
 	let resizeObserver: ResizeObserver | null = null;
@@ -60,10 +32,10 @@
 	function registerCard(id: string, el: HTMLElement) {
 		cardEls.set(id, el);
 		if (cardEls.size === allImages.length) {
-			tick().then(computeVisualOrder);
+			tick().then(updateVisualOrder);
 
 			if (!resizeObserver) {
-				resizeObserver = new ResizeObserver(() => computeVisualOrder());
+				resizeObserver = new ResizeObserver(() => updateVisualOrder());
 				resizeObserver.observe(document.body);
 			}
 		}
@@ -79,7 +51,7 @@
 	}
 
 	$effect(() => {
-		tick().then(computeVisualOrder);
+		tick().then(updateVisualOrder);
 	});
 
 	$effect(() => {

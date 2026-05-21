@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { recentPosts } from '$lib/posts-data';
+	import { formatDate } from '$lib/utils';
 
 	const SPOTIFY_API_URL = 'https://spotify.kirkr.xyz/api/now-playing';
 	const LASTFM_API_URL = 'https://lastfm.kirkr.xyz/api/lastfm-track';
@@ -40,7 +41,7 @@
 	let dataSource: DataSource = $state(null);
 	let localProgress = $state(0);
 	let lastFetchTime = $state(0);
-	let isFetching = false;
+	let isFetching = $state(false);
 
 	let intervalId: ReturnType<typeof setInterval> | undefined;
 	let progressIntervalId: ReturnType<typeof setInterval> | undefined;
@@ -152,11 +153,6 @@
 		const minutes = Math.floor(totalSeconds / 60);
 		const seconds = totalSeconds % 60;
 		return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-	}
-
-	function formatDate(dateString: string) {
-		const date = new Date(dateString);
-		return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 	}
 
 	const recentPostsSlice = recentPosts.slice(0, 5);

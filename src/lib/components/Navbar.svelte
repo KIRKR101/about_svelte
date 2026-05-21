@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	let menuOpen = false;
-	let isPlaying = false;
-	let isLoading = false;
+	let menuOpen = $state(false);
+	let isPlaying = $state(false);
+	let isLoading = $state(false);
 	let audio: HTMLAudioElement;
 
 	function isActive(path: string) {
@@ -66,11 +66,11 @@
 	src="/Gnossienne.opus"
 	loop
 	preload="metadata"
-	on:play={onPlay}
-	on:pause={onPause}
-	on:waiting={onWaiting}
-	on:canplay={onCanPlay}
-	on:ended={handleEnded}
+	onplay={onPlay}
+	onpause={onPause}
+	onwaiting={onWaiting}
+	oncanplay={onCanPlay}
+	onended={handleEnded}
 ></audio>
 
 <nav
@@ -104,7 +104,7 @@
 				{/each}
 
 				<button
-					on:click={toggleAudio}
+					onclick={toggleAudio}
 					class="flex h-6 w-6 items-center justify-center text-muted transition-colors duration-75 hover:text-white/60 focus:outline-none"
 					aria-label={isPlaying ? 'Pause music' : 'Play music'}
 				>
@@ -124,7 +124,7 @@
 
 			<div class="flex items-center md:hidden">
 				<button
-					on:click={toggleMenu}
+					onclick={toggleMenu}
 					class="flex h-10 w-10 items-center justify-center focus:outline-none"
 					aria-label="Toggle menu"
 					aria-expanded={menuOpen}
@@ -157,7 +157,7 @@
 				{#each navLinks as link (link.path)}
 					<a
 						href={link.path}
-						on:click={closeMenu}
+						onclick={closeMenu}
 						class="px-6 py-3 font-sans text-[11px] tracking-[0.1em] uppercase transition-colors duration-75
 						{isActive(link.path)
 							? 'bg-white/5 text-white/80'
@@ -168,7 +168,7 @@
 				{/each}
 
 				<button
-					on:click={toggleAudio}
+					onclick={toggleAudio}
 					class="flex w-full items-center justify-between px-6 py-3 font-sans text-[11px] tracking-[0.1em] text-muted uppercase transition-colors hover:bg-white/5 hover:text-white/60 focus:outline-none"
 					aria-label={isPlaying ? 'Pause music' : 'Play music'}
 				>

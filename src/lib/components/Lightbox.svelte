@@ -24,6 +24,7 @@
 	let isAnimating = $state(false);
 	let isClosing = $state(false);
 	let isMounted = $state(false);
+	let dialogEl: HTMLDivElement | undefined = $state();
 
 	function handleClose() {
 		if (isClosing) return;
@@ -70,8 +71,7 @@
 			}
 			document.body.style.overflow = 'hidden';
 
-			const dialog = document.querySelector('[role="dialog"]');
-			if (dialog instanceof HTMLElement) dialog.focus();
+			dialogEl?.focus();
 		}
 
 		return () => {
@@ -95,6 +95,7 @@
 </script>
 
 <div
+	bind:this={dialogEl}
 	class="fixed inset-0 z-50 flex items-center justify-center bg-[#0b0b0b]/95 transition-opacity duration-300 ease-in-out outline-none select-none {isMounted &&
 	!isClosing
 		? 'opacity-100'
