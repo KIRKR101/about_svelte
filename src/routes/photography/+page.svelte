@@ -133,8 +133,10 @@
 							<img
 								src={image.url}
 								alt={`Photo from ${city}`}
+								style="aspect-ratio: {image.aspectRatio}"
 								class="h-auto w-full object-cover transition-all duration-700 ease-out group-hover:scale-102 group-hover:cursor-zoom-in group-hover:brightness-105"
 								loading="lazy"
+								onload={() => updateVisualOrder()}
 							/>
 						</div>
 					{/each}

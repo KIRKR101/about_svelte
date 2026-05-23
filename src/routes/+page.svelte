@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { recentPosts } from '$lib/posts-data';
 	import { formatDate } from '$lib/utils';
 
@@ -57,7 +58,8 @@
 
 			if (data.isPlaying === false && !data.title) {
 				isFetching = false;
-				retryTimeoutId = setTimeout(() => fetchSpotifyTrack(), 3000);
+				if (retryTimeoutId) clearTimeout(retryTimeoutId);
+				retryTimeoutId = setTimeout(() => fetchSpotifyTrack(), 30000);
 				return;
 			}
 
@@ -99,13 +101,25 @@
 	}
 
 	function setupProgressUpdate() {
-		if (progressIntervalId) clearInterval(progressIntervalId);
-		if (spotifyData?.isPlaying) {
+		if (progressIntervalId) {
+			clearInterval(progressIntervalId);
+			progressIntervalId = undefined;
+		}
+
+		if (spotifyData?.isPlaying && localProgress < (spotifyData?.duration ?? 0)) {
 			progressIntervalId = setInterval(() => {
 				const elapsed = Date.now() - lastFetchTime;
 				const newProgress = (spotifyData?.progress ?? 0) + elapsed;
+
 				if (newProgress >= (spotifyData?.duration ?? 0)) {
-					fetchSpotifyTrack();
+					if (progressIntervalId) {
+						clearInterval(progressIntervalId);
+						progressIntervalId = undefined;
+					}
+					localProgress = spotifyData?.duration ?? 0;
+
+					if (retryTimeoutId) clearTimeout(retryTimeoutId);
+					retryTimeoutId = setTimeout(fetchSpotifyTrack, 500);
 				} else {
 					localProgress = newProgress;
 				}
@@ -157,9 +171,9 @@
 
 	const recentPostsSlice = recentPosts.slice(0, 5);
 
-	$effect(() => {
+	onMount(() => {
 		fetchSpotifyTrack();
-		intervalId = setInterval(fetchCurrentTrack, 60000);
+		intervalId = setInterval(fetchCurrentTrack, 30000);
 		return () => {
 			if (intervalId) clearInterval(intervalId);
 			if (progressIntervalId) clearInterval(progressIntervalId);
