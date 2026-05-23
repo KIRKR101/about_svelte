@@ -75,8 +75,7 @@
 
 <nav
 	aria-label="Main navigation"
-	class="fixed top-0 right-0 left-0 z-50 h-16 border-b border-bd bg-[#0a0a0b]/80 backdrop-blur-sm"
-	style="padding-right: var(--scrollbar-width, 0px);"
+	class="relative z-50 h-16 border-b border-bd bg-[#0a0a0b]/80 backdrop-blur-sm shrink-0"
 >
 	<div class="mx-auto h-full max-w-[1200px] px-4 md:px-6">
 		<div class="flex h-full items-center justify-between">

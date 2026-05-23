@@ -231,7 +231,7 @@
 	<link rel="preconnect" href="https://i.scdn.co" />
 </svelte:head>
 
-<div class="flex items-start justify-center px-6 py-6">
+<div class="flex items-start justify-center px-6 py-6 lg:py-16">
 	<div class="w-full max-w-[600px]">
 		<div class="anim-row anim-row-1 py-6">
 			<div class="mb-4 flex items-center justify-between">
