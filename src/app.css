@@ -113,12 +113,12 @@ body {
 	background: var(--color-muted);
 }
 
-/* Markdown Content Styling - using @layer to override typography plugin if needed or just as custom component */
+/* Markdown Content Styling */
 @layer components {
 	.prose {
 		color: var(--color-muted);
-		font-size: 15px;
-		line-height: 1.6;
+		font-size: 1em;
+		line-height: 1.75;
 	}
 
 	.prose p {
@@ -164,7 +164,7 @@ body {
 		padding-left: 1.75rem;
 		margin: 3rem 0;
 		font-family: var(--font-serif);
-		font-size: 1.1em;
+		font-size: 1.3em;
 		font-style: italic;
 		color: rgba(255, 255, 255, 0.7);
 	}
