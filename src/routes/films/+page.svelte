@@ -13,7 +13,43 @@
 	let loading = $state(true);
 	let error = $state<string | null>(null);
 
+	const CACHE_TTL = 60 * 60 * 1000;
+
+	function loadCachedFilms(): FilmItem[] | null {
+		try {
+			const stored = sessionStorage.getItem('films-cache');
+			if (!stored) return null;
+			const parsed = JSON.parse(stored);
+			if (parsed && typeof parsed.timestamp === 'number' && Array.isArray(parsed.data)) {
+				if (Date.now() - parsed.timestamp > CACHE_TTL) {
+					sessionStorage.removeItem('films-cache');
+					return null;
+				}
+				return parsed.data as FilmItem[];
+			}
+			return null;
+		} catch {
+			return null;
+		}
+	}
+
+	function saveCachedFilms(films: FilmItem[]) {
+		try {
+			sessionStorage.setItem('films-cache', JSON.stringify({ data: films, timestamp: Date.now() }));
+		} catch {
+			// sessionStorage not available
+		}
+	}
+
 	async function fetchFilms() {
+		const cached = loadCachedFilms();
+		if (cached) {
+			films = cached;
+			error = null;
+			loading = false;
+			return;
+		}
+
 		try {
 			loading = true;
 			error = null;
@@ -76,6 +112,7 @@
 			});
 
 			films = filmItems;
+			saveCachedFilms(filmItems);
 			loading = false;
 		} catch {
 			error = 'Failed to load films.';
@@ -138,12 +175,23 @@
 			<div class="mb-12 space-y-4">
 				{#each films as film (film.link)}
 					<div class="flex gap-4 border-b border-sep py-3 last:border-0">
+						<div
+							class="relative flex h-36 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border border-bd bg-[#141416] text-white/20"
+						>
+						<span
+							class="-rotate-[315deg] select-none text-center font-serif text-[12px] leading-tight tracking-wide"
+							aria-hidden="true"
+						>
+							{film.title}
+						</span>
 						<img
 							src={film.poster}
 							alt={film.title}
-							class="h-36 w-24 flex-shrink-0 rounded-sm border border-bd object-cover"
+							class="absolute inset-0 h-full w-full rounded-sm object-cover"
 							loading="lazy"
+							onerror={(e) => ((e.target as HTMLElement).style.opacity = '0')}
 						/>
+						</div>
 						<div class="flex flex-col justify-center">
 							<div class="font-serif text-[18px] leading-tight text-white/90">
 								<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->

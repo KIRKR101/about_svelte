@@ -31,13 +31,42 @@
 	const currentYear = new Date().getFullYear();
 	let selectedYear = $state(currentYear);
 
-	let contributionsCache = $state<Record<number, ContributionCalendar>>({});
+	const CACHE_TTL = 60 * 60 * 1000;
+
+	function loadCache(): Record<number, ContributionCalendar> {
+		try {
+			const stored = sessionStorage.getItem('gh-contributions-cache');
+			if (!stored) return {};
+			const parsed = JSON.parse(stored);
+			if (parsed && typeof parsed.timestamp === 'number' && typeof parsed.data === 'object') {
+				if (Date.now() - parsed.timestamp > CACHE_TTL) {
+					sessionStorage.removeItem('gh-contributions-cache');
+					return {};
+				}
+				return parsed.data as Record<number, ContributionCalendar>;
+			}
+			return {};
+		} catch {
+			return {};
+		}
+	}
+
+	function saveCache(cache: Record<number, ContributionCalendar>) {
+		try {
+			sessionStorage.setItem('gh-contributions-cache', JSON.stringify({ data: cache, timestamp: Date.now() }));
+		} catch {
+			// sessionStorage not available
+		}
+	}
+
+	const contributionsCache = loadCache();
 
 	let currentFetch: AbortController | null = null;
 
 	async function fetchContributions(year: number) {
 		if (contributionsCache[year]) {
 			contributions = contributionsCache[year];
+			loading = false;
 			return;
 		}
 
@@ -55,6 +84,7 @@
 			if (!res.ok) return;
 			const data = await res.json();
 			contributionsCache[year] = data.contributions;
+			saveCache(contributionsCache);
 			contributions = data.contributions;
 		} catch (e) {
 			if (e instanceof DOMException && e.name === 'AbortError') return;

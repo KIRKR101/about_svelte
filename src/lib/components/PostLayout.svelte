@@ -2,6 +2,16 @@
 	import { formatDate } from '$lib/utils';
 
 	let { children, title, longTitle, date, snippet } = $props();
+
+	function externalLinks(node: HTMLElement) {
+		const links = node.querySelectorAll('a');
+		for (const link of links) {
+			if (link.hostname && link.hostname !== window.location.hostname) {
+				link.setAttribute('target', '_blank');
+				link.setAttribute('rel', 'noreferrer noopener');
+			}
+		}
+	}
 </script>
 
 <svelte:head>
@@ -34,7 +44,7 @@
 
 		<div class="mb-8 h-px bg-bd"></div>
 
-		<article class="prose prose-invert prose-sm sm:prose-base max-w-none font-sans text-[#c0c0c0]">
+		<article use:externalLinks class="prose prose-invert prose-sm sm:prose-base max-w-none font-sans text-[#c0c0c0]">
 			{@render children()}
 		</article>
 	</main>
