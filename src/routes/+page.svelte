@@ -231,7 +231,7 @@
 	<link rel="preconnect" href="https://i.scdn.co" />
 </svelte:head>
 
-<div class="flex items-start justify-center px-6 py-6 lg:py-16">
+<div class="flex items-start justify-center px-6 py-6 lg:py-8">
 	<div class="w-full max-w-[600px]">
 		<div class="anim-row anim-row-1 py-6">
 			<div class="mb-4 flex items-center justify-between">
@@ -247,8 +247,7 @@
 					</p>
 					<p>
 						I also have an interest in art, with a strong inclination towards the Dutch Golden Age,
-						especially the Delft and Hague Schools. Beyond that, I have a passing interest in
-						economics, reading papers in my spare time.
+						especially the Delft and Hague Schools. I also have an interest in PPE.
 					</p>
 				</div>
 
@@ -391,7 +390,7 @@
 		<div class="anim-row anim-row-4 h-px bg-bd/60"></div>
 
 		<div class="anim-row anim-row-5 py-6">
-			<div class="mb-6 flex items-center justify-between">
+			<div class="mb-4 flex items-center justify-between">
 				<div class="font-serif text-[26px] text-white/85 italic">Writings</div>
 				<a
 					href="/posts"
@@ -405,13 +404,13 @@
 				{#each recentPostsSlice as post (post.file)}
 					<a
 						href="/post/{post.file}"
-						class="group flex w-full items-baseline justify-between border-b border-bd/30 py-4 no-underline last:border-0"
+						class="group flex w-full items-baseline justify-between border-b border-bd/30 py-3 no-underline last:border-0"
 					>
 						<span
-							class="font-sans text-[14px] text-white/70 transition-colors duration-100 group-hover:text-white"
+							class="font-sans text-[13px] text-white/70 transition-colors duration-100 group-hover:text-white"
 							>{post.title}</span
 						>
-						<span class="font-sans text-[11px] tracking-wider text-muted/60 uppercase"
+						<span class="font-sans text-[10px] tracking-wider text-muted/60 uppercase"
 							>{formatDate(post.date)}</span
 						>
 					</a>
