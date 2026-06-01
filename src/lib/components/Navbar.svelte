@@ -2,9 +2,6 @@
 	import { page } from '$app/stores';
 
 	let menuOpen = $state(false);
-	let isPlaying = $state(false);
-	let isLoading = $state(false);
-	let audio: HTMLAudioElement;
 
 	function isActive(path: string) {
 		if (path === '/') return $page.url.pathname === '/';
@@ -26,56 +23,11 @@
 	function closeMenu() {
 		menuOpen = false;
 	}
-
-	function toggleAudio() {
-		if (!audio) return;
-
-		if (audio.paused) {
-			isLoading = true;
-			audio.play();
-		} else {
-			audio.pause();
-			isPlaying = false;
-		}
-	}
-
-	function onPlay() {
-		isPlaying = true;
-		isLoading = false;
-	}
-
-	function onPause() {
-		isPlaying = false;
-	}
-
-	function onWaiting() {
-		isLoading = true;
-	}
-
-	function onCanPlay() {
-		isLoading = false;
-	}
-
-	function handleEnded() {
-		isPlaying = false;
-	}
 </script>
-
-<audio
-	bind:this={audio}
-	src="/Gnossienne.opus"
-	loop
-	preload="metadata"
-	onplay={onPlay}
-	onpause={onPause}
-	onwaiting={onWaiting}
-	oncanplay={onCanPlay}
-	onended={handleEnded}
-></audio>
 
 <nav
 	aria-label="Main navigation"
-	class="relative z-50 h-16 border-b border-bd bg-[#0a0a0b]/80 backdrop-blur-sm shrink-0"
+	class="relative z-50 h-16 shrink-0 border-b border-bd bg-[#0a0a0b]/80 backdrop-blur-sm"
 >
 	<div class="mx-auto h-full max-w-[1200px] px-4 md:px-6">
 		<div class="flex h-full items-center justify-between">
@@ -101,24 +53,6 @@
 						{link.name}
 					</a>
 				{/each}
-
-				<button
-					onclick={toggleAudio}
-					class="flex h-6 w-6 items-center justify-center text-muted transition-colors duration-75 hover:text-white/60 focus:outline-none"
-					aria-label={isPlaying ? 'Pause music' : 'Play music'}
-				>
-					{#if isLoading}
-						<span class="h-1.5 w-1.5 animate-pulse rounded-full bg-current"></span>
-					{:else if isPlaying}
-						<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" />
-						</svg>
-					{:else}
-						<svg class="h-5 w-5 translate-x-[1px]" fill="currentColor" viewBox="0 0 24 24">
-							<path d="M8 5v14l11-7z" />
-						</svg>
-					{/if}
-				</button>
 			</nav>
 
 			<div class="flex items-center md:hidden">
@@ -165,27 +99,6 @@
 						{link.name}
 					</a>
 				{/each}
-
-				<button
-					onclick={toggleAudio}
-					class="flex w-full items-center justify-between px-6 py-3 font-sans text-[11px] tracking-[0.1em] text-muted uppercase transition-colors hover:bg-white/5 hover:text-white/60 focus:outline-none"
-					aria-label={isPlaying ? 'Pause music' : 'Play music'}
-				>
-					<span>Music</span>
-					<div class="flex h-4 w-4 items-center justify-center">
-						{#if isLoading}
-							<span class="h-1.5 w-1.5 animate-pulse rounded-full bg-current"></span>
-						{:else if isPlaying}
-							<svg class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
-								<path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" />
-							</svg>
-						{:else}
-							<svg class="h-3 w-3 translate-x-[1px]" fill="currentColor" viewBox="0 0 24 24">
-								<path d="M8 5v14l11-7z" />
-							</svg>
-						{/if}
-					</div>
-				</button>
 			</div>
 		</div>
 	{/if}

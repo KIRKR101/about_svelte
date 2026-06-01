@@ -13,12 +13,15 @@
 		};
 		currentIndex: number;
 		totalItems: number;
+		nextUrl?: string | undefined;
+		prevUrl?: string | undefined;
 		onClose: () => void;
 		onNext: () => void;
 		onPrev: () => void;
 	}
 
-	let { item, currentIndex, totalItems, onClose, onNext, onPrev }: LightboxProps = $props();
+	let { item, currentIndex, totalItems, nextUrl, prevUrl, onClose, onNext, onPrev }: LightboxProps =
+		$props();
 
 	let imageLoaded = $state(false);
 	let isAnimating = $state(false);
@@ -26,6 +29,25 @@
 	let isMounted = $state(false);
 	let footerVisible = $state(true);
 	let dialogEl: HTMLDivElement | undefined = $state();
+
+	function prefetchImage(href: string | undefined) {
+		if (!browser || !href) return;
+		const existing = document.head.querySelector('link[data-lightbox-prefetch="' + href + '"]');
+		if (existing) return;
+		const link = document.createElement('link');
+		link.rel = 'preload';
+		link.as = 'image';
+		link.href = href;
+		link.setAttribute('data-lightbox-prefetch', href);
+		document.head.appendChild(link);
+	}
+
+	$effect(() => {
+		if (browser) {
+			prefetchImage(nextUrl);
+			prefetchImage(prevUrl);
+		}
+	});
 
 	function handleClose() {
 		if (isClosing) return;
@@ -133,7 +155,13 @@
 			disabled={isAnimating || isClosing}
 			aria-label="Previous image"
 		>
-			<svg class="h-5 w-5 md:h-6 md:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+			<svg
+				class="h-5 w-5 md:h-6 md:w-6"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+			>
 				<path d="M15 18l-6-6 6-6" />
 			</svg>
 		</button>
@@ -144,7 +172,13 @@
 			disabled={isAnimating || isClosing}
 			aria-label="Next image"
 		>
-			<svg class="h-5 w-5 md:h-6 md:w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+			<svg
+				class="h-5 w-5 md:h-6 md:w-6"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+			>
 				<path d="M9 18l6-6-6-6" />
 			</svg>
 		</button>
@@ -182,27 +216,21 @@
 	</div>
 
 	<div
-		class="text-container absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent px-4 pt-20 pb-6 transition-opacity duration-300 select-none md:pt-28 md:pb-8 md:px-6 {footerVisible
+		class="text-container absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent px-4 pt-20 pb-6 transition-opacity duration-300 select-none md:px-6 md:pt-28 md:pb-8 {footerVisible
 			? 'opacity-100'
-			: 'opacity-0 pointer-events-none'}"
+			: 'pointer-events-none opacity-0'}"
 	>
 		<div class="mx-auto w-full max-w-[780px] text-center">
-			<div
-				class="font-serif text-[22px] leading-tight tracking-tight text-white/95 md:text-[30px]"
-			>
+			<div class="font-serif text-[22px] leading-tight tracking-tight text-white/95 md:text-[30px]">
 				{title}
 			</div>
 
-			<div
-				class="mt-2 font-mono text-[10px] tracking-[0.18em] text-white/40 uppercase md:mt-3"
-			>
+			<div class="mt-2 font-mono text-[10px] tracking-[0.18em] text-white/40 uppercase md:mt-3">
 				{currentIndex + 1} / {totalItems}
 			</div>
 
 			{#if item.description}
-				<p
-					class="mt-4 font-sans text-[13px] leading-relaxed text-white/60 md:mt-6 md:text-[14px]"
-				>
+				<p class="mt-4 font-sans text-[13px] leading-relaxed text-white/60 md:mt-6 md:text-[14px]">
 					{item.description}
 				</p>
 			{/if}
@@ -210,9 +238,7 @@
 			{#if metadata}
 				<div class="mt-5 flex flex-wrap justify-center gap-x-8 gap-y-3 md:mt-7">
 					{#each metadata as [key, value] (key)}
-						<div
-							class="font-mono text-[10px] whitespace-nowrap text-white/25 md:text-[11px]"
-						>
+						<div class="font-mono text-[10px] whitespace-nowrap text-white/25 md:text-[11px]">
 							{key}: <span class="text-white/50">{value}</span>
 						</div>
 					{/each}

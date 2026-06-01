@@ -2,8 +2,8 @@ export const artData = {
 	// --- DUTCH GOLDEN AGE / 17TH CENTURY ---
 	'portrait-of-a-goldsmith': {
 		title: 'Portrait of a Goldsmith',
-		thumbnail: 'https://iiif.micr.io/pAJRo/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/pAJRo/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/pAJRo/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/pAJRo/full/2400,/0/default.webp',
 		description:
 			'The man leans out of a window holding a gold ring. His left hand rests on a touchstone, used for assessing the purity of precious metals. The sitter is likely Bartholomeus Jansz van Assendelft, appointed assay-master in 1617.',
 		data: [
@@ -16,8 +16,8 @@ export const artData = {
 	},
 	'still-life-with-books': {
 		title: 'Still Life with Books',
-		thumbnail: 'https://iiif.micr.io/JpMwf/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/JpMwf/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/JpMwf/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/JpMwf/full/2400,/0/default.webp',
 		description:
 			'A masterful Vanitas still life. The tattered books and the momentary nature of the lute\'s music symbolize the transience of life. The word "finis" (the end) is visible on a paper edge, serving as a literal reminder of mortality.',
 		data: [
@@ -46,8 +46,8 @@ export const artData = {
 	},
 	'jeremiah-lamenting-the-destruction-of-jerusalem': {
 		title: 'Jeremiah Lamenting the Destruction of Jerusalem',
-		thumbnail: 'https://iiif.micr.io/zQBxS/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/zQBxS/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/zQBxS/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/zQBxS/full/2400,/0/default.webp',
 		description:
 			"The prophet Jeremiah rests his weary head on his hand as Jerusalem burns in the distance. Rembrandt uses dramatic chiaroscuro to highlight the prophet's sorrow and the precious temple vessels saved from the fire.",
 		data: [
@@ -60,8 +60,8 @@ export const artData = {
 	},
 	'self-portrait-in-a-cap-wide-eyed-and-open-mouthed': {
 		title: 'Self-portrait in a Cap, Wide-eyed and Open-mouthed',
-		thumbnail: 'https://iiif.micr.io/LxSxH/pct:5.5,4,89,58/500,/0/default.webp',
-		image: 'https://iiif.micr.io/LxSxH/pct:5.5,4,89,58/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/LxSxH/pct:5.5,4,89,58/800,/0/default.webp',
+		image: 'https://iiif.micr.io/LxSxH/pct:5.5,4,89,58/2400,/0/default.webp',
 		description:
 			'In this early etching, a young Rembrandt practices capturing extreme human emotion. By portraying himself as startled or shocked, he mastered the facial movements required for larger historical commissions.',
 		data: [
@@ -74,8 +74,8 @@ export const artData = {
 	},
 	'portrait-of-jan-van-de-poll-1597-1678': {
 		title: 'Portrait of Jan van de Poll',
-		thumbnail: 'https://iiif.micr.io/tMAzx/pct:1.5,0.5,97.2,97/500,/0/default.webp',
-		image: 'https://iiif.micr.io/tMAzx/pct:1.5,0.5,97.2,97/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/tMAzx/pct:1.5,0.5,97.2,97/800,/0/default.webp',
+		image: 'https://iiif.micr.io/tMAzx/pct:1.5,0.5,97.2,97/2400,/0/default.webp',
 		description:
 			'A portrait of the powerful Amsterdam mayor Jan van de Poll. Frans Hals uses his signature "rough" style—bold, visible brushstrokes—to bring the sitter to life with a sense of character and vitality.',
 		data: [
@@ -88,8 +88,8 @@ export const artData = {
 	},
 	'a-coastal-ruin-in-italy': {
 		title: 'A Coastal Ruin in Italy',
-		thumbnail: 'https://iiif.micr.io/qsBvy/pct:0,2,97,100/500,/0/default.webp',
-		image: 'https://iiif.micr.io/qsBvy/pct:0,2,97,100/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/qsBvy/pct:0,2,97,100/800,/0/default.webp',
+		image: 'https://iiif.micr.io/qsBvy/pct:0,2,97,100/2400,/0/default.webp',
 		description:
 			'A favorite motif of the Italianates was a small harbor on the Mediterranean with a crumbling quay and a ruin. This imaginary scene features Turkish traders and an African man, reflecting the era’s fascination with overseas trade.',
 		data: [
@@ -102,8 +102,8 @@ export const artData = {
 	},
 	'the-holy-family-at-night': {
 		title: 'The Holy Family at Night',
-		thumbnail: 'https://iiif.micr.io/OgAJr/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/OgAJr/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/OgAJr/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/OgAJr/full/2400,/0/default.webp',
 		description:
 			"An intimate domestic scene where the grandmother's shadow looms over the sleeping Christ child. Heavily influenced by Rembrandts chiaroscuro style, it is likely the work of a talented pupil.",
 		data: [
@@ -132,8 +132,8 @@ export const artData = {
 	},
 	'portrait-of-ephraim-bueno': {
 		title: 'Portrait of Ephraim Bueno',
-		thumbnail: 'https://iiif.micr.io/sRVhF/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/sRVhF/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/sRVhF/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/sRVhF/full/2400,/0/default.webp',
 		description:
 			"Bueno was a prominent Jewish physician and poet in Amsterdam. This small, expressive oil sketch was made by Rembrandt as a preparatory study for a famous etching, focusing on the sitter's soulful face.",
 		data: [
@@ -146,8 +146,8 @@ export const artData = {
 	},
 	'interior-of-a-bookshop': {
 		title: 'Interior of a Bookshop',
-		thumbnail: 'https://iiif.micr.io/SqoGW/pct:3,3,94,94/500,/0/default.webp',
-		image: 'https://iiif.micr.io/SqoGW/pct:3,3,94,94/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/SqoGW/pct:3,3,94,94/800,/0/default.webp',
+		image: 'https://iiif.micr.io/SqoGW/pct:3,3,94,94/2400,/0/default.webp',
 		description:
 			'A rare 17th-century drawing of a bookshop, likely in Haarlem. It shows customers browsing shelves where books are stored with their spines inward and clasps forward, providing a detailed look at early modern commercial life.',
 		data: [
@@ -176,8 +176,8 @@ export const artData = {
 	},
 	'the-stag-hunt': {
 		title: 'The Stag Hunt',
-		thumbnail: 'https://iiif.micr.io/HGMBq/pct:0.5,1.2,99,98/500,/0/default.webp',
-		image: 'https://iiif.micr.io/HGMBq/pct:0.5,1.2,99,98/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/HGMBq/pct:0.5,1.2,99,98/800,/0/default.webp',
+		image: 'https://iiif.micr.io/HGMBq/pct:0.5,1.2,99,98/2400,/0/default.webp',
 		description:
 			'A dynamic hunt scene set against a hilly, Italianate landscape. The central ruins of the Rijnsburg Abbey add a sense of historical grandeur to the high-energy pursuit of the stag.',
 		data: [
@@ -305,8 +305,8 @@ export const artData = {
 	// --- 18TH & 19TH CENTURY TRADITIONAL / ROMANTIC ---
 	'a-writer-trimming-his-pen': {
 		title: 'A Writer Trimming his Pen',
-		thumbnail: 'https://iiif.micr.io/BrUfr/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/BrUfr/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/BrUfr/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/BrUfr/full/2400,/0/default.webp',
 		description:
 			'A deliberate homage to the 17th-century Dutch masters. Ekels captures the quiet, concentrated light of a study, reminiscent of Vermeer, showing a moment of still contemplation.',
 		data: [
@@ -319,8 +319,8 @@ export const artData = {
 	},
 	'dorp-onder-sneeuw': {
 		title: 'Village under Snow',
-		thumbnail: 'https://iiif.micr.io/clrwu/pct:2,2,96,96/500,/0/default.webp',
-		image: 'https://iiif.micr.io/clrwu/pct:2,2,96,96/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/clrwu/pct:2,2,96,96/800,/0/default.webp',
+		image: 'https://iiif.micr.io/clrwu/pct:2,2,96,96/2400,/0/default.webp',
 		description:
 			'A quiet, atmospheric scene of a Dutch village blanketed in snow, rendered in delicate watercolors and pen. It captures the stillness and solitude of a northern winter.',
 		data: [
@@ -349,8 +349,8 @@ export const artData = {
 	},
 	'the-shop-of-the-bookdealer-pieter-meijer-warnars-on-the-vijgendam-in-amsterdam': {
 		title: 'The Bookshop of Pieter Meijer Warnars',
-		thumbnail: 'https://iiif.micr.io/FPejw/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/FPejw/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/FPejw/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/FPejw/full/2400,/0/default.webp',
 		description:
 			'This 19th-century interior provides a rare look into the cultural life of Amsterdam. The pronounced perspective of the shop interior makes it look like a stage set.',
 		data: [
@@ -363,8 +363,8 @@ export const artData = {
 	},
 	'mountain-landscape-in-tirol-with-chamois': {
 		title: 'Mountain Landscape in Tirol',
-		thumbnail: 'https://iiif.micr.io/dWjRT/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/dWjRT/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/dWjRT/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/dWjRT/full/2400,/0/default.webp',
 		description:
 			'Tavenraat uses bold gradations of violet morning mist to make the mountains appear vast and sublime, dwarfing the miniscule group of shepherds with their flock.',
 		data: [
@@ -393,8 +393,8 @@ export const artData = {
 	},
 	'young-young-italian-woman-with-puck-the-dog': {
 		title: 'Young Italian Woman with Puck the Dog',
-		thumbnail: 'https://iiif.micr.io/wJkMC/pct:1,1.2,97,97/500,/0/default.webp',
-		image: 'https://iiif.micr.io/wJkMC/pct:1,1.2,97,97/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/wJkMC/pct:1,1.2,97,97/800,/0/default.webp',
+		image: 'https://iiif.micr.io/wJkMC/pct:1,1.2,97,97/2400,/0/default.webp',
 		description:
 			'Schwartze captured this striking image during her stay in France. For a young female artist at the time, pursuing a career as an artist was unconventional, yet she became a highly successful portraitist.',
 		data: [
@@ -407,8 +407,8 @@ export const artData = {
 	},
 	landschap: {
 		title: 'Landscape',
-		thumbnail: 'https://iiif.micr.io/MgMtO/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/MgMtO/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/MgMtO/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/MgMtO/full/2400,/0/default.webp',
 		description:
 			'A scenic landscape featuring swaying grass or corn in the foreground, with a dramatic mountain range visible in the hazy distance.',
 		data: [
@@ -423,8 +423,8 @@ export const artData = {
 	// --- HAGUE SCHOOL & IMPRESSIONISM ---
 	'winterlandschap-met-huizen-aan-een-vaart': {
 		title: 'Winter Landscape with Houses on a Canal',
-		thumbnail: 'https://iiif.micr.io/gpgZC/pct:2,2,96,96.3/500,/0/default.webp',
-		image: 'https://iiif.micr.io/gpgZC/pct:2,2,96,96.3/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/gpgZC/pct:2,2,96,96.3/800,/0/default.webp',
+		image: 'https://iiif.micr.io/gpgZC/pct:2,2,96,96.3/2400,/0/default.webp',
 		description:
 			'A delicate watercolor by Louis Apol. It shows a frozen waterway lined with traditional Dutch houses, capturing the soft-focus atmosphere of a day where the sun struggles to break through.',
 		data: [
@@ -437,8 +437,8 @@ export const artData = {
 	},
 	'an-afternoon-view-of-snowy-woods': {
 		title: 'Snowy Woods in the Afternoon',
-		thumbnail: 'https://iiif.micr.io/ypiKT/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/ypiKT/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/ypiKT/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/ypiKT/full/2400,/0/default.webp',
 		description:
 			'Louis Apol was the preeminent painter of winter in the Hague School. This large canvas captures the heavy, silent weight of fresh snow in a Dutch forest.',
 		data: [
@@ -451,8 +451,8 @@ export const artData = {
 	},
 	'the-singel-bridge-at-the-paleisstraat-in-amsterdam': {
 		title: 'The Singel Bridge at the Paleisstraat in Amsterdam',
-		thumbnail: 'https://iiif.micr.io/RXguV/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/RXguV/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/RXguV/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/RXguV/full/2400,/0/default.webp',
 		description:
 			'The way in which the woman walks straight towards us and the image is cropped strikes one as distinctly photographic. Breitner initially depicted the woman as a maid, but repainted her as an elegant lady.',
 		data: [
@@ -465,8 +465,8 @@ export const artData = {
 	},
 	'de-dam-te-amsterdam': {
 		title: 'Dam Square, Amsterdam',
-		thumbnail: 'https://iiif.micr.io/XotNG/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/XotNG/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/XotNG/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/XotNG/full/2400,/0/default.webp',
 		description:
 			"A vibrant impressionistic sketch of Amsterdam's heart. Breitner captures the energy of the square, featuring the silhouette of the New Church under a moody sky.",
 		data: [
@@ -479,8 +479,8 @@ export const artData = {
 	},
 	'landscape-near-kortenhoef': {
 		title: 'Landscape near Kortenhoef',
-		thumbnail: 'https://iiif.micr.io/Imiuq/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/Imiuq/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/Imiuq/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/Imiuq/full/2400,/0/default.webp',
 		description:
 			'Cities expanded rapidly in the late 19th century. Within 50 years, Amsterdam’s population doubled. Many artists wanted to escape the modern cities and move to the country in search of peaceful nature. However, in the Netherlands, even the countryside had been intensively transformed by man. For centuries, vast strips of sea have been dried up to increase the land surface.',
 		data: [
@@ -493,8 +493,8 @@ export const artData = {
 	},
 	'boerenwoningen-aan-het-water-bij-ochtendnevel': {
 		title: 'Farmhouses by the Water in Morning Mist',
-		thumbnail: 'https://iiif.micr.io/oEbGt/pct:1,1.5,97.2,97/500,/0/default.webp',
-		image: 'https://iiif.micr.io/oEbGt/pct:1,1.5,97.2,97/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/oEbGt/pct:1,1.5,97.2,97/800,/0/default.webp',
+		image: 'https://iiif.micr.io/oEbGt/pct:1,1.5,97.2,97/2400,/0/default.webp',
 		description:
 			'A peaceful scene of Dutch farmhouses nestled by a waterway, nearly obscured by a thick, atmospheric morning fog that softens the horizon.',
 		data: [
@@ -507,8 +507,8 @@ export const artData = {
 	},
 	'a-windmill-on-a-polder-waterway-known-as-in-the-month-of-july': {
 		title: 'A Windmill on a Polder Waterway',
-		thumbnail: 'https://iiif.micr.io/HNwWx/pct:1,2,100,100/500,/0/default.webp',
-		image: 'https://iiif.micr.io/HNwWx/pct:1,2,100,100/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/HNwWx/pct:1,2,100,100/800,/0/default.webp',
+		image: 'https://iiif.micr.io/HNwWx/pct:1,2,100,100/2400,/0/default.webp',
 		description:
 			'Gabriël famously argued that the Netherlands was not a grey country. This work shows the image of the grass, sky and mill, and their reflection in the water on a beautiful summer day.',
 		data: [
@@ -521,8 +521,8 @@ export const artData = {
 	},
 	'portrait-of-a-wounded-knil-soldier': {
 		title: 'Portrait of a Wounded KNIL Soldier',
-		thumbnail: 'https://iiif.micr.io/UqUud/pct:2,0.6,95.7,98/500,/0/default.webp',
-		image: 'https://iiif.micr.io/UqUud/pct:2,0.6,95.7,98/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/UqUud/pct:2,0.6,95.7,98/800,/0/default.webp',
+		image: 'https://iiif.micr.io/UqUud/pct:2,0.6,95.7,98/2400,/0/default.webp',
 		description:
 			'A portrait of Kees Pop, a West African soldier who served in the Dutch East Indies Army. Israëls painted him with his medals during a brief stay in the Netherlands before Pop returned to Africa.',
 		data: [
@@ -535,8 +535,8 @@ export const artData = {
 	},
 	modistenatelier: {
 		title: 'The Millinery Shop',
-		thumbnail: 'https://iiif.micr.io/qwphj/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/qwphj/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/qwphj/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/qwphj/full/2400,/0/default.webp',
 		description:
 			'Isaac Israels was the foremost Dutch Impressionist. This pastel work captures the high-fashion world of the early 20th century, where elegant hats were crafted for the elite.',
 		data: [
@@ -549,8 +549,8 @@ export const artData = {
 	},
 	'the-joy-of-motherhood': {
 		title: 'The Joy of Motherhood',
-		thumbnail: 'https://iiif.micr.io/jVQva/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/jVQva/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/jVQva/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/jVQva/full/2400,/0/default.webp',
 		description:
 			'In an interior sits a young mother mending clothes. Israëls was famous for his empathetic depictions of the hard but dignified lives of the Dutch working class.',
 		data: [
@@ -563,8 +563,8 @@ export const artData = {
 	},
 	'woman-at-a-window': {
 		title: 'Woman at a Window',
-		thumbnail: 'https://iiif.micr.io/BzxKw/pct:2,2,96,93/500,/0/default.webp',
-		image: 'https://iiif.micr.io/BzxKw/pct:2,2,96,93/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/BzxKw/pct:2,2,96,93/800,/0/default.webp',
+		image: 'https://iiif.micr.io/BzxKw/pct:2,2,96,93/2400,/0/default.webp',
 		description:
 			"An intimate scene of a woman seated by a window, her hands resting on her knees as she gazes out toward the sea. The soft light and interior focus are characteristic of Israëls' sensitive style.",
 		data: [
@@ -577,8 +577,8 @@ export const artData = {
 	},
 	'windmills-near-rotterdam': {
 		title: 'Windmills near Rotterdam',
-		thumbnail: 'https://iiif.micr.io/SsvYn/pct:2,2,95.5,93/500,/0/default.webp',
-		image: 'https://iiif.micr.io/SsvYn/pct:2,2,95.5,93/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/SsvYn/pct:2,2,95.5,93/800,/0/default.webp',
+		image: 'https://iiif.micr.io/SsvYn/pct:2,2,95.5,93/2400,/0/default.webp',
 		description:
 			'Focuses on the play of light on the water and the sails of the windmills, a precursor to the style of Monet.',
 		data: [
@@ -591,8 +591,8 @@ export const artData = {
 	},
 	'girl-at-the-piano': {
 		title: 'Girl at the Piano',
-		thumbnail: 'https://iiif.micr.io/FmLHW/pct:2.3,2,95.5,100/500,/0/default.webp',
-		image: 'https://iiif.micr.io/FmLHW/pct:2.3,2,95.5,100/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/FmLHW/pct:2.3,2,95.5,100/800,/0/default.webp',
+		image: 'https://iiif.micr.io/FmLHW/pct:2.3,2,95.5,100/2400,/0/default.webp',
 		description:
 			'A quiet domestic moment capturing a girl from the side as she plays the piano. A framed painting hangs on the wall above, adding to the refined, interior atmosphere.',
 		data: [
@@ -605,8 +605,8 @@ export const artData = {
 	},
 	'riders-in-the-snow-in-the-haagse-bos': {
 		title: 'Riders in the Snow in the Haagse Bos',
-		thumbnail: 'https://iiif.micr.io/MmBmn/pct:13.3,9.9,72,79.1/500,/0/default.webp',
-		image: 'https://iiif.micr.io/MmBmn/pct:13.3,9.9,72,79.1/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/MmBmn/pct:13.3,9.9,72,79.1/800,/0/default.webp',
+		image: 'https://iiif.micr.io/MmBmn/pct:13.3,9.9,72,79.1/2400,/0/default.webp',
 		description:
 			'Mauve shows the riders from behind trotting away into the silent wood. The bare branches contrast sharply with the misty background, lit by an almost imperceptible winter sun.',
 		data: [
@@ -619,8 +619,8 @@ export const artData = {
 	},
 	'huisje-aan-een-sloot': {
 		title: 'Cottage on a Canal',
-		thumbnail: 'https://iiif.micr.io/UBeRd/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/UBeRd/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/UBeRd/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/UBeRd/full/2400,/0/default.webp',
 		description:
 			'Mauve was a master at depicting the soft light of cloudy days, using a palette of silver-greys to suggest a moist, peaceful afternoon in the Dutch heartland.',
 		data: [
@@ -633,8 +633,8 @@ export const artData = {
 	},
 	'bosrand-aan-het-water': {
 		title: 'Forest Edge by the Water',
-		thumbnail: 'https://iiif.micr.io/JOJwS/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/JOJwS/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/JOJwS/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/JOJwS/full/2400,/0/default.webp',
 		description:
 			'A serene landscape where a dense forest meets the still surface of a river. Mauve uses soft, tonal colors to capture the quiet humidity of the Dutch countryside.',
 		data: [
@@ -647,8 +647,8 @@ export const artData = {
 	},
 	'amsterdam-orphan-girl': {
 		title: 'Amsterdam Orphan Girl',
-		thumbnail: 'https://iiif.micr.io/RaHJE/full/500,/0/default.webp',
-		image: 'https://iiif.micr.io/RaHJE/full/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/RaHJE/full/800,/0/default.webp',
+		image: 'https://iiif.micr.io/RaHJE/full/2400,/0/default.webp',
 		description:
 			'A young orphan in Amsterdam is depicted in profile, standing by a window and focused on a book. The scene is filled with a sense of studious calm.',
 		data: [
@@ -661,8 +661,8 @@ export const artData = {
 	},
 	'bomen-in-de-sneeuw': {
 		title: 'Trees in the Snow',
-		thumbnail: 'https://iiif.micr.io/BXmLJ/pct:3,1.5,93,95/500,/0/default.webp',
-		image: 'https://iiif.micr.io/BXmLJ/pct:3,1.5,93,95/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/BXmLJ/pct:3,1.5,93,95/800,/0/default.webp',
+		image: 'https://iiif.micr.io/BXmLJ/pct:3,1.5,93,95/2400,/0/default.webp',
 		description:
 			'A moody study of trees under a heavy blanket of snow. Witsen uses black chalk and watercolors to emphasize the dark, graphic silhouettes of the branches against the white ground.',
 		data: [
@@ -677,8 +677,8 @@ export const artData = {
 	// --- MODERN / SYMBOLISM / WESTERN ---
 	'ik-kijk-van-bovenaf-op-de-vage-vormen-van-een-menselijke-figuur': {
 		title: 'Looking Down on the Vague Forms of a Human Figure',
-		thumbnail: 'https://iiif.micr.io/EtCoH/pct:3,3,94,94/500,/0/default.webp',
-		image: 'https://iiif.micr.io/EtCoH/pct:3,3,94,94/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/EtCoH/pct:3,3,94,94/800,/0/default.webp',
+		image: 'https://iiif.micr.io/EtCoH/pct:3,3,94,94/2400,/0/default.webp',
 		description:
 			'A haunting Symbolist lithograph. It illustrates "The Haunted House", using a dreamlike perspective to gaze down at a figure as if through a psychological veil.',
 		data: [
@@ -691,8 +691,8 @@ export const artData = {
 	},
 	'de-dood-te-paard': {
 		title: 'Death on Horseback',
-		thumbnail: 'https://iiif.micr.io/SDeUG/pct:2,3,96,95/500,/0/default.webp',
-		image: 'https://iiif.micr.io/SDeUG/pct:2,3,96,95/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/SDeUG/pct:2,3,96,95/800,/0/default.webp',
+		image: 'https://iiif.micr.io/SDeUG/pct:2,3,96,95/2400,/0/default.webp',
 		description:
 			'A chilling illustration of Revelation 6:8, depicting Death as one of the four horsemen of the Apocalypse. The skeleton rider brandishes a long sword, galloping across a dark landscape.',
 		data: [
@@ -739,8 +739,8 @@ export const artData = {
 	// --- JAPANESE WOODBLOCK PRINTS (Shin-hanga) ---
 	'roeiboot-onder-brug': {
 		title: 'Rowboat under a Bridge',
-		thumbnail: 'https://iiif.micr.io/aZZyD/pct:3,2.3,94.5,96/500,/0/default.webp',
-		image: 'https://iiif.micr.io/aZZyD/pct:3,2.3,94.5,96/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/aZZyD/pct:3,2.3,94.5,96/800,/0/default.webp',
+		image: 'https://iiif.micr.io/aZZyD/pct:3,2.3,94.5,96/2400,/0/default.webp',
 		description:
 			'A flat boat rests between high bridge pillars at dusk. Above, pedestrians cross while the water reflects the warm glow of lanterns from the riverbank houses.',
 		data: [
@@ -753,8 +753,8 @@ export const artData = {
 	},
 	sarubashi: {
 		title: 'The Monkey Bridge (Sarubashi)',
-		thumbnail: 'https://iiif.micr.io/aMGwN/pct:9.9,8.2,84.8,87.5/500,/0/default.webp',
-		image: 'https://iiif.micr.io/aMGwN/pct:9.9,8.2,84.8,87.5/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/aMGwN/pct:9.9,8.2,84.8,87.5/800,/0/default.webp',
+		image: 'https://iiif.micr.io/aMGwN/pct:9.9,8.2,84.8,87.5/2400,/0/default.webp',
 		description:
 			'Sarubashi is one of Japans three most famous bridges. This print shows the dramatic structure spanning the Sagami River canyon.',
 		data: [
@@ -767,8 +767,8 @@ export const artData = {
 	},
 	'pagode-en-regenboog': {
 		title: 'Pagoda and Rainbow',
-		thumbnail: 'https://iiif.micr.io/jdLsR/pct:7.6,3,88.8,95/500,/0/default.webp',
-		image: 'https://iiif.micr.io/jdLsR/pct:7.6,3,88.8,95/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/jdLsR/pct:7.6,3,88.8,95/800,/0/default.webp',
+		image: 'https://iiif.micr.io/jdLsR/pct:7.6,3,88.8,95/2400,/0/default.webp',
 		description:
 			'Famous for his "kacho-ga" (bird-and-flower) designs, Koson here captures a pagoda rising through the mist, framed by a rainbow.',
 		data: [
@@ -781,8 +781,8 @@ export const artData = {
 	},
 	'in-de-sneeuw-op-yanagibashi': {
 		title: 'In the Snow at Yanagibashi',
-		thumbnail: 'https://iiif.micr.io/eHUqQ/pct:4.5,5.8,90,90/500,/0/default.webp',
-		image: 'https://iiif.micr.io/eHUqQ/pct:4.5,5.8,90,90/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/eHUqQ/pct:4.5,5.8,90,90/800,/0/default.webp',
+		image: 'https://iiif.micr.io/eHUqQ/pct:4.5,5.8,90,90/2400,/0/default.webp',
 		description:
 			'A beautiful winter scene at the "Willow Bridge." Two women walking under umbrellas navigate the snow-covered path, framed by the drooping branches of weeping willows.',
 		data: [
@@ -811,8 +811,8 @@ export const artData = {
 	},
 	'het-drijvende-paviljoen-te-katada-in-de-sneeuw': {
 		title: 'The Floating Pavilion at Katada in Snow',
-		thumbnail: 'https://iiif.micr.io/SovRZ/pct:5,6,86.2,92/500,/0/default.webp',
-		image: 'https://iiif.micr.io/SovRZ/pct:5,6,86.2,92/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/SovRZ/pct:5,6,86.2,92/800,/0/default.webp',
+		image: 'https://iiif.micr.io/SovRZ/pct:5,6,86.2,92/2400,/0/default.webp',
 		description:
 			'A night view of the lantern-lit wooden temple on Lake Biwa. The structure is seen from the snow-blanketed shore during a serene, cold flurry.',
 		data: [
@@ -825,8 +825,8 @@ export const artData = {
 	},
 	'avondgloed-in-het-nishi-park-in-fukuoka': {
 		title: 'Evening Glow at Nishi Park, Fukuoka',
-		thumbnail: 'https://iiif.micr.io/YNMID/pct:4.5,6.6,91.5,89/500,/0/default.webp',
-		image: 'https://iiif.micr.io/YNMID/pct:4.5,6.6,91.5,89/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/YNMID/pct:4.5,6.6,91.5,89/800,/0/default.webp',
+		image: 'https://iiif.micr.io/YNMID/pct:4.5,6.6,91.5,89/2400,/0/default.webp',
 		description:
 			'A 20th-century woodblock print capturing the vibrant reds and purples of a Japanese sunset over the mountains of Fukuoka.',
 		data: [
@@ -839,8 +839,8 @@ export const artData = {
 	},
 	'avondregen-bij-de-shinobazu-vijver': {
 		title: 'Evening Rain at Shinobazu Pond',
-		thumbnail: 'https://iiif.micr.io/krjOV/pct:4,5.6,87.5,91/500,/0/default.webp',
-		image: 'https://iiif.micr.io/krjOV/pct:4,5.6,87.5,91/1600,/0/default.webp',
+		thumbnail: 'https://iiif.micr.io/krjOV/pct:4,5.6,87.5,91/800,/0/default.webp',
+		image: 'https://iiif.micr.io/krjOV/pct:4,5.6,87.5,91/2400,/0/default.webp',
 		description:
 			' Lone figure walking under an umbrella at dusk. The glowing lanterns and the reflection of the rain create a deeply atmospheric scene.',
 		data: [

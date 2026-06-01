@@ -35,12 +35,12 @@
 
 	function loadCache(): Record<number, ContributionCalendar> {
 		try {
-			const stored = sessionStorage.getItem('gh-contributions-cache');
+			const stored = localStorage.getItem('gh-contributions-cache');
 			if (!stored) return {};
 			const parsed = JSON.parse(stored);
 			if (parsed && typeof parsed.timestamp === 'number' && typeof parsed.data === 'object') {
 				if (Date.now() - parsed.timestamp > CACHE_TTL) {
-					sessionStorage.removeItem('gh-contributions-cache');
+					localStorage.removeItem('gh-contributions-cache');
 					return {};
 				}
 				return parsed.data as Record<number, ContributionCalendar>;
@@ -53,9 +53,12 @@
 
 	function saveCache(cache: Record<number, ContributionCalendar>) {
 		try {
-			sessionStorage.setItem('gh-contributions-cache', JSON.stringify({ data: cache, timestamp: Date.now() }));
+			localStorage.setItem(
+				'gh-contributions-cache',
+				JSON.stringify({ data: cache, timestamp: Date.now() })
+			);
 		} catch {
-			// sessionStorage not available
+			// localStorage not available
 		}
 	}
 
@@ -117,33 +120,56 @@
 		});
 	}
 
-	// Displays a tooltip showing contribution count and date for a specific day.
-	// Clamps the X position to keep the tooltip within the graph container.
-	function showTooltip(event: MouseEvent | FocusEvent, day: ContributionDay) {
-		const target = event.currentTarget as HTMLElement;
-		const rect = target.getBoundingClientRect();
+	function showTooltipFor(target: Element) {
 		const parentRect = graphContainer?.getBoundingClientRect();
 		if (!parentRect) return;
-
+		const rect = target.getBoundingClientRect();
 		const rawX = rect.left - parentRect.left + rect.width / 2;
 		const clampedX = Math.max(50, Math.min(rawX, parentRect.width - 50));
-
+		const day = target.getAttribute('data-day');
+		const count = Number(target.getAttribute('data-count') ?? 0);
+		if (!day) return;
 		tooltip = {
 			visible: true,
-			date: formatContribDate(day.date),
-			count: day.contributionCount,
+			date: formatContribDate(day),
+			count,
 			x: clampedX,
 			y: rect.top - parentRect.top - 6
 		};
 	}
 
-	function hideTooltip() {
-		tooltip = { ...tooltip, visible: false };
+	function handleGraphMouseOver(e: MouseEvent) {
+		if (isMobile) return;
+		const target = (e.target as Element)?.closest?.('[data-day]');
+		if (target) showTooltipFor(target);
+	}
+
+	function handleGraphMouseOut(e: MouseEvent) {
+		if (isMobile) return;
+		const related = e.relatedTarget as Element | null;
+		if (!related || !related.closest?.('[data-day]')) {
+			tooltip = { ...tooltip, visible: false };
+		}
+	}
+
+	function handleGraphFocusIn(e: FocusEvent) {
+		if (isMobile) return;
+		const target = (e.target as Element)?.closest?.('[data-day]');
+		if (target) showTooltipFor(target);
+	}
+
+	function handleGraphFocusOut(e: FocusEvent) {
+		if (isMobile) return;
+		const related = e.relatedTarget as Element | null;
+		if (!related || !related.closest?.('[data-day]')) {
+			tooltip = { ...tooltip, visible: false };
+		}
 	}
 </script>
 
 <svelte:head>
 	<title>Projects | kirkr.xyz</title>
+	<link rel="preconnect" href="https://github.kirkr.xyz" crossorigin="anonymous" />
 </svelte:head>
 
 <div class="flex flex-col items-center px-4 py-6 font-mono sm:px-6 md:py-16">
@@ -264,11 +290,18 @@
 				</div>
 			{/if}
 
+			<!-- svelte-ignore a11y_mouse_events_have_key_events -->
 			<div
 				class="grid w-full gap-[3px]"
 				style="grid-template-columns: repeat({loading
 					? 53
 					: contributionWeeks.length}, minmax(0, 1fr));"
+				role="grid"
+				tabindex="-1"
+				onmouseover={handleGraphMouseOver}
+				onmouseout={handleGraphMouseOut}
+				onfocusin={handleGraphFocusIn}
+				onfocusout={handleGraphFocusOut}
 			>
 				{#if loading}
 					{#each [...Array(53).keys()] as wi (wi)}
@@ -285,10 +318,8 @@
 								<button
 									class="relative aspect-square w-full cursor-default border-0 p-0 transition-all duration-75 sm:rounded-[3px] sm:hover:z-10 sm:hover:scale-110 sm:hover:brightness-125 sm:focus:z-10"
 									style="background-color: {getContributionColor(day.contributionCount)}"
-									onmouseenter={!isMobile ? (e) => showTooltip(e, day) : undefined}
-									onmouseleave={!isMobile ? hideTooltip : undefined}
-									onfocus={!isMobile ? (e) => showTooltip(e, day) : undefined}
-									onblur={!isMobile ? hideTooltip : undefined}
+									data-day={day.date}
+									data-count={day.contributionCount}
 									tabindex={isMobile ? -1 : 0}
 									aria-label="{day.contributionCount} contributions on {day.date}"
 								></button>

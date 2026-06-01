@@ -17,12 +17,12 @@
 
 	function loadCachedFilms(): FilmItem[] | null {
 		try {
-			const stored = sessionStorage.getItem('films-cache');
+			const stored = localStorage.getItem('films-cache');
 			if (!stored) return null;
 			const parsed = JSON.parse(stored);
 			if (parsed && typeof parsed.timestamp === 'number' && Array.isArray(parsed.data)) {
 				if (Date.now() - parsed.timestamp > CACHE_TTL) {
-					sessionStorage.removeItem('films-cache');
+					localStorage.removeItem('films-cache');
 					return null;
 				}
 				return parsed.data as FilmItem[];
@@ -35,9 +35,9 @@
 
 	function saveCachedFilms(films: FilmItem[]) {
 		try {
-			sessionStorage.setItem('films-cache', JSON.stringify({ data: films, timestamp: Date.now() }));
+			localStorage.setItem('films-cache', JSON.stringify({ data: films, timestamp: Date.now() }));
 		} catch {
-			// sessionStorage not available
+			// localStorage not available
 		}
 	}
 
@@ -142,6 +142,7 @@
 	<title>Films | kirkr.xyz</title>
 	<meta name="description" content="A log of recently watched films." />
 	<meta name="robots" content="index, follow" />
+	<link rel="preconnect" href="https://letterboxd.kirkr.xyz" crossorigin="anonymous" />
 </svelte:head>
 
 <div class="flex min-h-screen flex-col items-center px-6 py-6 font-mono md:py-16">
@@ -178,19 +179,19 @@
 						<div
 							class="relative flex h-36 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border border-bd bg-[#141416] text-white/20"
 						>
-						<span
-							class="-rotate-[315deg] select-none text-center font-serif text-[12px] leading-tight tracking-wide"
-							aria-hidden="true"
-						>
-							{film.title}
-						</span>
-						<img
-							src={film.poster}
-							alt={film.title}
-							class="absolute inset-0 h-full w-full rounded-sm object-cover"
-							loading="lazy"
-							onerror={(e) => ((e.target as HTMLElement).style.opacity = '0')}
-						/>
+							<span
+								class="-rotate-[315deg] text-center font-serif text-[12px] leading-tight tracking-wide select-none"
+								aria-hidden="true"
+							>
+								{film.title}
+							</span>
+							<img
+								src={film.poster}
+								alt={film.title}
+								class="absolute inset-0 h-full w-full rounded-sm object-cover"
+								loading="lazy"
+								onerror={(e) => ((e.target as HTMLElement).style.opacity = '0')}
+							/>
 						</div>
 						<div class="flex flex-col justify-center">
 							<div class="font-serif text-[18px] leading-tight text-white/90">

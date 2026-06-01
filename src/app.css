@@ -351,3 +351,10 @@ body {
 		color: white;
 	}
 }
+
+@layer components {
+	.cv-auto {
+		content-visibility: auto;
+		contain-intrinsic-size: 0 600px;
+	}
+}

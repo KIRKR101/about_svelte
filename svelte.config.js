@@ -69,7 +69,7 @@ const config = {
 			fallback: undefined,
 			pages: 'public',
 			assets: 'public',
-			precompress: false,
+			precompress: true,
 			strict: false
 		}),
 		prerender: {

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { recentPosts } from '$lib/posts-data';
 	import { formatDate } from '$lib/utils';
+
+	let { data }: { data: { allPosts: { title: string; date: string; file: string }[] } } = $props();
 
 	const SPOTIFY_API_URL = 'https://spotify.kirkr.xyz/api/now-playing';
 	const LASTFM_API_URL = 'https://lastfm.kirkr.xyz/api/lastfm-track';
@@ -45,7 +46,7 @@
 	let isFetching = $state(false);
 
 	let intervalId: ReturnType<typeof setInterval> | undefined;
-	let progressIntervalId: ReturnType<typeof setInterval> | undefined;
+	let progressRafId: number | undefined;
 	let retryTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
 	async function fetchSpotifyTrack() {
@@ -101,29 +102,31 @@
 	}
 
 	function setupProgressUpdate() {
-		if (progressIntervalId) {
-			clearInterval(progressIntervalId);
-			progressIntervalId = undefined;
+		if (progressRafId) {
+			cancelAnimationFrame(progressRafId);
+			progressRafId = undefined;
 		}
 
 		if (spotifyData?.isPlaying && localProgress < (spotifyData?.duration ?? 0)) {
-			progressIntervalId = setInterval(() => {
+			function tick() {
+				if (!spotifyData?.isPlaying) return;
+
 				const elapsed = Date.now() - lastFetchTime;
 				const newProgress = (spotifyData?.progress ?? 0) + elapsed;
+				const duration = spotifyData?.duration ?? 0;
 
-				if (newProgress >= (spotifyData?.duration ?? 0)) {
-					if (progressIntervalId) {
-						clearInterval(progressIntervalId);
-						progressIntervalId = undefined;
-					}
-					localProgress = spotifyData?.duration ?? 0;
-
+				if (newProgress >= duration) {
+					localProgress = duration;
 					if (retryTimeoutId) clearTimeout(retryTimeoutId);
 					retryTimeoutId = setTimeout(fetchSpotifyTrack, 500);
-				} else {
-					localProgress = newProgress;
+					return;
 				}
-			}, 100);
+
+				localProgress = newProgress;
+				progressRafId = requestAnimationFrame(tick);
+			}
+
+			progressRafId = requestAnimationFrame(tick);
 		}
 	}
 
@@ -169,14 +172,14 @@
 		return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 	}
 
-	const recentPostsSlice = recentPosts.slice(0, 5);
+	const recentPostsSlice = data.allPosts.slice(0, 5);
 
 	onMount(() => {
 		fetchSpotifyTrack();
 		intervalId = setInterval(fetchCurrentTrack, 30000);
 		return () => {
 			if (intervalId) clearInterval(intervalId);
-			if (progressIntervalId) clearInterval(progressIntervalId);
+			if (progressRafId) cancelAnimationFrame(progressRafId);
 			if (retryTimeoutId) clearTimeout(retryTimeoutId);
 		};
 	});
@@ -297,6 +300,7 @@
 									src={currentTrack.imageUrl}
 									alt={currentTrack.title}
 									class="h-full w-full object-cover"
+									fetchpriority="high"
 								/>
 							</a>
 						{:else}
@@ -306,6 +310,7 @@
 								src={currentTrack.imageUrl}
 								alt={currentTrack.title}
 								class="h-full w-full object-cover"
+								fetchpriority="high"
 							/>
 						{/if}
 					</div>
@@ -348,7 +353,7 @@
 								aria-label={formatAriaLabel(currentTrack.progress, currentTrack.duration)}
 							>
 								<div
-									class="linear absolute inset-y-0 left-0 h-full bg-prog transition-[width] duration-100"
+									class="linear absolute inset-y-0 left-0 h-full bg-prog"
 									style="width: {progressPercentage}%"
 								></div>
 								<div
@@ -389,7 +394,7 @@
 
 		<div class="anim-row anim-row-4 h-px bg-bd/60"></div>
 
-		<div class="anim-row anim-row-5 py-6">
+		<div class="anim-row anim-row-5 cv-auto py-6">
 			<div class="mb-4 flex items-center justify-between">
 				<div class="font-serif text-[26px] text-white/85 italic">Writings</div>
 				<a

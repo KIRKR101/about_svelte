@@ -1,12 +1,14 @@
 <script lang="ts">
-	import { photographyData } from '$lib/photography-data';
+	import { photographyData } from '$lib/photography-list';
 	import Lightbox from '$lib/components/Lightbox.svelte';
 	import { computeVisualOrder } from '$lib/masonry';
+	import { createRafObserver } from '$lib/raf-observer';
 	import { tick } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 
 	let lightboxActive = $state(false);
 	let currentImageIndex = $state(0);
+	let gridContainer = $state<HTMLElement | null>(null);
 
 	const allImages = Object.entries(photographyData).flatMap(([city, images]) =>
 		images.map((img) => ({ ...img, city }))
@@ -14,6 +16,20 @@
 
 	const cardEls = new SvelteMap<string, HTMLElement>();
 	let visualOrder = $state<string[]>(allImages.map((img) => img.id));
+
+	let exifMap = $state<Record<string, [string, string][]> | null>(null);
+	let exifLoadPromise: Promise<Record<string, [string, string][]>> | null = null;
+
+	async function ensureExif() {
+		if (exifMap) return exifMap;
+		if (!exifLoadPromise) {
+			exifLoadPromise = import('$lib/photography-exif').then((m) => {
+				exifMap = m.photographyExif;
+				return exifMap;
+			});
+		}
+		return exifLoadPromise;
+	}
 
 	function updateVisualOrder() {
 		if (cardEls.size === 0) return;
@@ -27,16 +43,15 @@
 		visualOrder = computeVisualOrder(positions);
 	}
 
-	let resizeObserver: ResizeObserver | null = null;
+	const rafObserver = createRafObserver(updateVisualOrder);
 
 	function registerCard(id: string, el: HTMLElement) {
 		cardEls.set(id, el);
 		if (cardEls.size === allImages.length) {
 			tick().then(updateVisualOrder);
 
-			if (!resizeObserver) {
-				resizeObserver = new ResizeObserver(() => updateVisualOrder());
-				resizeObserver.observe(document.body);
+			if (gridContainer) {
+				rafObserver.observe(gridContainer);
 			}
 		}
 	}
@@ -56,13 +71,12 @@
 
 	$effect(() => {
 		return () => {
-			if (resizeObserver) {
-				resizeObserver.disconnect();
-			}
+			rafObserver.destroy();
 		};
 	});
 
-	const openLightbox = (imageId: string) => {
+	const openLightbox = async (imageId: string) => {
+		await ensureExif();
 		const index = visualOrder.indexOf(imageId);
 		currentImageIndex = index >= 0 ? index : 0;
 		lightboxActive = true;
@@ -89,13 +103,32 @@
 
 	let currentItem = $derived.by(() => {
 		const id = visualOrder[currentImageIndex];
-		return id ? allImages.find((img) => img.id === id) : undefined;
+		if (!id) return undefined;
+		const item = allImages.find((img) => img.id === id);
+		if (!item) return undefined;
+		return {
+			...item,
+			...(exifMap ? { exif: exifMap[id] } : {})
+		};
+	});
+
+	let nextImageUrl = $derived.by<string | undefined>(() => {
+		const id = visualOrder[(currentImageIndex + 1) % visualOrder.length];
+		if (!id) return undefined;
+		return allImages.find((img) => img.id === id)?.url;
+	});
+
+	let prevImageUrl = $derived.by<string | undefined>(() => {
+		const id = visualOrder[(currentImageIndex - 1 + visualOrder.length) % visualOrder.length];
+		if (!id) return undefined;
+		return allImages.find((img) => img.id === id)?.url;
 	});
 </script>
 
 <svelte:head>
 	<title>Photography | kirkr.xyz</title>
 	<meta name="description" content="A collection of photography from various cities." />
+	<link rel="preconnect" href="https://res.cloudinary.com" crossorigin="anonymous" />
 </svelte:head>
 
 <div class="flex min-h-screen flex-col items-center px-6 py-6 font-mono md:py-16">
@@ -114,12 +147,12 @@
 		<div class="mb-8 h-px bg-bd"></div>
 
 		{#each Object.entries(photographyData) as [city, images] (city)}
-			<section class="mb-16 last:mb-0">
+			<section class="cv-auto mb-16 last:mb-0">
 				<div class="mb-6 py-2">
 					<h2 class="mb-1 font-serif text-[32px] leading-none text-white/80">{city}</h2>
 				</div>
 
-				<div class="columns-1 gap-4 sm:columns-2">
+				<div bind:this={gridContainer} class="columns-1 gap-4 sm:columns-2">
 					{#each images as image (image.id)}
 						<div
 							class="group mb-4 cursor-pointer break-inside-avoid overflow-hidden rounded-sm border border-bd transition-all duration-75 focus:ring-1 focus:ring-white/20 focus:outline-none"
@@ -132,10 +165,13 @@
 						>
 							<img
 								src={image.url}
+								srcset={image.srcset}
+								sizes="(max-width: 640px) 100vw, 50vw"
 								alt={`Photo from ${city}`}
 								style="aspect-ratio: {image.aspectRatio}"
 								class="h-auto w-full object-cover transition-all duration-700 ease-out group-hover:scale-102 group-hover:cursor-zoom-in group-hover:brightness-105"
 								loading="lazy"
+								decoding="async"
 								onload={() => updateVisualOrder()}
 							/>
 						</div>
@@ -151,6 +187,8 @@
 		item={currentItem}
 		currentIndex={currentImageIndex}
 		totalItems={allImages.length}
+		nextUrl={nextImageUrl}
+		prevUrl={prevImageUrl}
 		onClose={closeLightbox}
 		onNext={goToNext}
 		onPrev={goToPrevious}

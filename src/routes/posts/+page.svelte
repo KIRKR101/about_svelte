@@ -9,14 +9,14 @@
 	}
 
 	interface PageData {
-		posts: Post[];
+		allPosts: Post[];
 	}
 
 	let { data }: { data: PageData } = $props();
 
 	let groupedPosts = $derived.by(() => {
 		const groups: Record<string, Post[]> = {};
-		for (const post of data.posts) {
+		for (const post of data.allPosts) {
 			const year = new Date(post.date).getFullYear().toString();
 			(groups[year] ??= []).push(post);
 		}
@@ -47,7 +47,7 @@
 
 		<div class="mb-8 h-px bg-bd"></div>
 
-		{#if data.posts.length === 0}
+		{#if data.allPosts.length === 0}
 			<div class="py-12 text-center">
 				<div class="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">
 					No entries found

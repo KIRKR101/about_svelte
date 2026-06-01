@@ -1,26 +1,50 @@
 <script lang="ts">
-	import { artData } from '$lib/art-data';
-	import { deHoochBibliography } from '$lib/bibliography';
 	import Lightbox from '$lib/components/Lightbox.svelte';
 	import ArtInfobox from '$lib/components/ArtInfobox.svelte';
 	import ArtBibliographySection from '$lib/components/ArtBibliography.svelte';
 	import ArtExternalLinks from '$lib/components/ArtExternalLinks.svelte';
 	import ArtFootnotePanel from '$lib/components/ArtFootnotePanel.svelte';
-	import { getMetaValue } from '$lib/utils';
+	import { getMetaValue, getIiifSrcset } from '$lib/utils';
 	import { computeVisualOrder } from '$lib/masonry';
+	import { createRafObserver } from '$lib/raf-observer';
 	import { tick } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { SvelteMap } from 'svelte/reactivity';
+
+	interface ArtEntry {
+		id: string;
+		title: string;
+		thumbnail: string;
+		image: string;
+		description: string;
+		aspectRatio: string;
+		data: [string, string][];
+	}
+
+	interface PageData {
+		entries: ArtEntry[];
+		bibliography: {
+			title: string;
+			author: string;
+			year: string;
+			journal?: string;
+			url?: string;
+			description?: string;
+		}[];
+	}
+
+	let { data }: { data: PageData } = $props();
 
 	let lightboxActive = $state(false);
 	let currentArtIndex = $state(0);
 	let activeTab = $state('gallery');
 	let footnoteVisible = $state(false);
 	let berchemFootnoteVisible = $state(false);
+	let gridContainer = $state<HTMLElement | null>(null);
 
-	const artEntries = Object.entries(artData);
+	const artEntries: [string, ArtEntry][] = data.entries.map((entry) => [entry.id, entry]);
 
-	let shuffledEntries = $state([...artEntries]);
+	let shuffledEntries = $state<[string, ArtEntry][]>([...artEntries]);
 
 	const cardEls = new SvelteMap<string, HTMLElement>();
 
@@ -31,7 +55,8 @@
 			id,
 			artwork,
 			artist: getMetaValue(artwork.data, 'artist'),
-			year: getMetaValue(artwork.data, 'year')
+			year: getMetaValue(artwork.data, 'year'),
+			thumbnailSrcset: getIiifSrcset(artwork.thumbnail)
 		}))
 	);
 
@@ -47,16 +72,15 @@
 		visualOrder = computeVisualOrder(positions);
 	}
 
-	let resizeObserver: ResizeObserver | null = null;
+	const rafObserver = createRafObserver(updateVisualOrder);
 
 	function registerCard(id: string, el: HTMLElement) {
 		cardEls.set(id, el);
 		if (cardEls.size === shuffledEntries.length) {
 			tick().then(updateVisualOrder);
 
-			if (!resizeObserver) {
-				resizeObserver = new ResizeObserver(() => updateVisualOrder());
-				resizeObserver.observe(document.body);
+			if (gridContainer) {
+				rafObserver.observe(gridContainer);
 			}
 		}
 	}
@@ -77,9 +101,7 @@
 
 	$effect(() => {
 		return () => {
-			if (resizeObserver) {
-				resizeObserver.disconnect();
-			}
+			rafObserver.destroy();
 		};
 	});
 
@@ -101,21 +123,30 @@
 		}
 	}
 
-	let currentArtData = $derived.by(() => {
+	let currentArtData = $derived.by<ArtEntry | undefined>(() => {
 		const id = visualOrder[currentArtIndex];
-		return id ? (artData as Record<string, (typeof artData)[keyof typeof artData]>)[id] : undefined;
+		if (!id) return undefined;
+		return data.entries.find((entry) => entry.id === id);
 	});
 
-	const sortedBibliography = [...deHoochBibliography].sort((a, b) => {
-		const aHas = a.description ? 1 : 0;
-		const bHas = b.description ? 1 : 0;
-		return bHas - aHas;
+	let nextArtImageUrl = $derived.by<string | undefined>(() => {
+		const nextId = visualOrder[(currentArtIndex + 1) % visualOrder.length];
+		if (!nextId) return undefined;
+		return data.entries.find((entry) => entry.id === nextId)?.image;
+	});
+
+	let prevArtImageUrl = $derived.by<string | undefined>(() => {
+		const prevId = visualOrder[(currentArtIndex - 1 + visualOrder.length) % visualOrder.length];
+		if (!prevId) return undefined;
+		return data.entries.find((entry) => entry.id === prevId)?.image;
 	});
 </script>
 
 <svelte:head>
 	<title>Art | kirkr.xyz</title>
 	<meta name="description" content="A curated selection of artworks." />
+	<link rel="preconnect" href="https://iiif.micr.io" crossorigin="anonymous" />
+	<link rel="preconnect" href="https://upload.wikimedia.org" crossorigin="anonymous" />
 </svelte:head>
 
 <div
@@ -157,7 +188,7 @@
 
 		{#if activeTab === 'gallery'}
 			<div in:fade={{ duration: 300 }}>
-				<div class="mb-12 columns-1 gap-12 sm:columns-2 lg:columns-3">
+				<div bind:this={gridContainer} class="mb-12 columns-1 gap-12 sm:columns-2 lg:columns-3">
 					{#each entriesWithMeta as entry (entry.id)}
 						<button
 							use:cardAction={entry.id}
@@ -171,9 +202,12 @@
 							>
 								<img
 									src={entry.artwork.thumbnail}
+									srcset={entry.thumbnailSrcset || undefined}
+									sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 									alt={entry.artwork.title}
 									class="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-102 group-hover:cursor-zoom-in group-hover:brightness-105"
 									loading="lazy"
+									decoding="async"
 								/>
 							</div>
 
@@ -205,7 +239,7 @@
 						<div class="mb-20">
 							{@render researchEssay()}
 						</div>
-						<ArtBibliographySection bibliography={sortedBibliography} />
+						<ArtBibliographySection bibliography={data.bibliography} />
 					</div>
 					<aside class="space-y-8 lg:col-span-5">
 						<ArtInfobox
@@ -246,7 +280,7 @@
 					<div class="mb-20">
 						{@render researchEssay()}
 					</div>
-					<ArtBibliographySection bibliography={sortedBibliography} />
+					<ArtBibliographySection bibliography={data.bibliography} />
 					<ArtExternalLinks />
 					<ArtFootnotePanel
 						title="Note — date of death"
@@ -268,27 +302,27 @@
 	</main>
 </div>
 
-	{#snippet researchEssay()}
-	<section>
+{#snippet researchEssay()}
+	<section class="cv-auto">
 		<div class="space-y-6 font-sans text-[16px] leading-relaxed text-white/65">
 			<p>
-				Pieter de Hooch is one of the more understated figures of the Dutch Golden Age, and one
-				I've spent a good deal of time with — including writing his Wikipedia page. His work
-				centres on the domestic interior: tiled floors, orderly courtyards, women going about
-				household tasks. What makes it worth sustained attention is how consistently he thinks
-				through space rather than just depicting it.
+				Pieter de Hooch is one of the more understated figures of the Dutch Golden Age, and one I've
+				spent a good deal of time with — including writing his Wikipedia page. His work centres on
+				the domestic interior: tiled floors, orderly courtyards, women going about household tasks.
+				What makes it worth sustained attention is how consistently he thinks through space rather
+				than just depicting it.
 			</p>
 			<p>
-				The device he returns to most often is the <em class="italic">doorkijkje</em> — a view
-				through an open door or passageway into another room or the street beyond. It keeps his
-				interiors from feeling sealed off, connecting the private household to the wider world
-				outside in a way that feels considered rather than incidental.
+				The device he returns to most often is the <em class="italic">doorkijkje</em> — a view through
+				an open door or passageway into another room or the street beyond. It keeps his interiors from
+				feeling sealed off, connecting the private household to the wider world outside in a way that
+				feels considered rather than incidental.
 			</p>
 			<p>
-				Compared to Vermeer, whose paintings tend toward mystery, de Hooch is straightforward.
-				Light in his work isn't theatrical — it falls on ordinary things and makes them present.
-				Even in his later Amsterdam period, when his patrons wanted something grander, he kept a
-				certain quietness about everyday subjects that runs through the whole of his career.
+				Compared to Vermeer, whose paintings tend toward mystery, de Hooch is straightforward. Light
+				in his work isn't theatrical — it falls on ordinary things and makes them present. Even in
+				his later Amsterdam period, when his patrons wanted something grander, he kept a certain
+				quietness about everyday subjects that runs through the whole of his career.
 			</p>
 		</div>
 	</section>
@@ -335,6 +369,8 @@
 		}}
 		currentIndex={currentArtIndex}
 		totalItems={visualOrder.length}
+		nextUrl={nextArtImageUrl}
+		prevUrl={prevArtImageUrl}
 		onClose={closeLightbox}
 		onNext={goToNext}
 		onPrev={goToPrevious}
