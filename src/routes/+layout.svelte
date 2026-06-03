@@ -21,9 +21,9 @@
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 </svelte:head>
 
-<div class="h-screen flex flex-col overflow-hidden bg-[#0a0a0b] text-white antialiased">
+<div class="h-dvh flex flex-col overflow-hidden bg-[#0a0a0b] text-white antialiased">
 	<Navbar />
-	<main class="flex-1 min-h-0 overflow-y-auto">
+	<main class="flex-1 min-h-0 overflow-y-auto overscroll-y-auto">
 		{@render children()}
 	</main>
 </div>
