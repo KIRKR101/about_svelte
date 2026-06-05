@@ -44,7 +44,10 @@
 
 		<div class="mb-8 h-px bg-bd"></div>
 
-		<article use:externalLinks class="prose prose-invert prose-sm sm:prose-base max-w-none font-sans text-[#c0c0c0]">
+		<article
+			use:externalLinks
+			class="prose prose-invert prose-sm sm:prose-base max-w-none font-sans text-[#c0c0c0]"
+		>
 			{@render children()}
 		</article>
 	</main>

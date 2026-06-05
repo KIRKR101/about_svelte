@@ -103,3 +103,7 @@
 		</div>
 	{/if}
 </nav>
+
+{#if menuOpen}
+	<div class="fixed inset-0 top-16 z-40 backdrop-blur-[2px] md:hidden"></div>
+{/if}

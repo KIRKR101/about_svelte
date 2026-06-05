@@ -32,5 +32,7 @@ export function isIiifUrl(url: string): boolean {
 
 export function getIiifSrcset(url: string): string {
 	if (!isIiifUrl(url)) return '';
-	return IIIF_WIDTHS.map((w: number) => url.replace(/\/\d+,?\/0\/default/, `/${w},/0/default`)).join(', ');
+	return IIIF_WIDTHS.map((w: number) =>
+		url.replace(/\/\d+,?\/0\/default/, `/${w},/0/default`)
+	).join(', ');
 }
