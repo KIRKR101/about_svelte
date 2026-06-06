@@ -146,12 +146,10 @@
 </svelte:head>
 
 <div class="flex min-h-screen flex-col items-center px-6 py-6 font-mono md:py-16">
-	<main class="anim-row anim-row-1 w-full max-w-[600px]">
+	<main class="w-full max-w-[600px]">
 		<div class="py-7">
 			<h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
-				<span class="opacity-90">Films</span><span class="opacity-20"
-					><em class="italic not-italic">.</em></span
-				>
+				<span class="opacity-90">Films</span><span class="opacity-20">.</span>
 			</h1>
 			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-muted uppercase">
 				a collection of films
@@ -220,9 +218,6 @@
 						</div>
 					</div>
 				{/each}
-				<p class="mt-2 text-center font-mono text-[11px] tracking-wider text-muted">
-					the letterboxd rss feed only shows the last 50 :(
-				</p>
 			</div>
 		{/if}
 	</main>

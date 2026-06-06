@@ -6,7 +6,7 @@ export const projects = [
 		link: 'https://wasmagick.kirkr.xyz',
 		github: 'https://github.com/Kirkr101/WASMagick-svelte',
 		description:
-			'I built this to run ImageMagick directly in the browser using WebAssembly. There are no servers or uploads, everything happens locally and instantly. I recently improved the UI with a compare feature, refactored main thread behaviour to a web worker, and fixed awkward zoom behaviour. Next up is adding bilateral blur and Canny edge detection.',
+			'Run ImageMagick filters directly in the browser through WebAssembly. Everything is local: no servers, no uploads.',
 		tech: ['Svelte 5', 'WebAssembly', 'TypeScript']
 	},
 	{
@@ -15,7 +15,7 @@ export const projects = [
 		link: 'https://voxor.kirkr.xyz',
 		github: 'https://github.com/Kirkr101/Voxor',
 		description:
-			'A self-hosted chat platform I wrote in Flask to avoid arbitrary file size limits and paywalls. I have added Slack-style message threading, typing indicators, soft-deletion, and a CMD+K quick-search modal. It also renders LaTeX on the fly.',
+			'Self-hosted chat with threading, typing indicators, LaTeX rendering, and a CMD+K quick-search modal.',
 		tech: ['Python', 'Flask', 'JavaScript', 'Tailwind']
 	},
 	{
@@ -24,7 +24,7 @@ export const projects = [
 		link: null,
 		github: 'https://github.com/Kirkr101/audioshare-sv',
 		description:
-			'I got tired of Next.js and rewrote this entire music streaming site in SvelteKit to speed up builds. It streams any kind of audio format, including lossless, while parsing metadata and covers automatically. I recently finished building a keyboard-navigated queue system and a cleaner media player. It exists to let me share huge, uncompressed music files without quality loss.',
+			'Stream any audio format, including lossless, with automatic metadata and cover-art parsing. Built for sharing large, uncompressed music files.',
 		tech: ['Svelte 5', 'TypeScript', 'Drizzle', 'SQLite']
 	},
 	{
@@ -33,7 +33,7 @@ export const projects = [
 		link: null,
 		github: 'https://github.com/Kirkr101/dezoomify-rs-jxl',
 		description:
-			'I fork and maintain this Rust utility to download and stitch massive, zoomable images from museum archives. I added JPEG XL output with multi-threaded encoding and proper colour profile preservation, which means you get archival-grade images without filling your hard drive. This was driven by the need for better compression, fast decoding, and lossless encoding for Open Gallery (below), which downloads images that are more than a gigabyte in size.',
+			'Download and stitch massive zoomable images from museum archives. Outputs JPEG XL with multithreaded encoding and colour profile preservation.',
 		tech: ['Rust']
 	},
 	{
@@ -42,7 +42,7 @@ export const projects = [
 		link: null,
 		github: 'https://github.com/Kirkr101/CPUsim',
 		description:
-			'I wrote this 16-bit CPU simulation in C from scratch to figure out how computers actually work at the bare metal after reading Noam Nisan\'s "The Elements of Computing Systems". It includes an assembler to compile my own custom text assembly into binaries, and a simulator to execute them. It handles the basics like arithmetic, stack operations, and function calls, and writing it was a great lesson in CPU architecture.',
+			'A 16-bit CPU emulator written from scratch, including a custom assembler and binary simulator. Handles arithmetic, stack ops, and function calls.',
 		tech: ['C']
 	},
 	{
@@ -51,7 +51,7 @@ export const projects = [
 		link: null,
 		github: 'https://github.com/Kirkr101/RMT-Debrid',
 		description:
-			'A FastAPI dashboard I built to manage torrent downloads through Real-Debrid from anywhere. It handles magnets and direct links, updating you in real time over WebSockets. It started as a quick script, but I rewrote it as a download manager so I could rely on it daily.',
+			'Manage torrent downloads through Real-Debrid from a web dashboard, with real-time progress over WebSockets.',
 		tech: ['Python', 'FastAPI', 'WebSocket']
 	},
 	{
@@ -60,7 +60,7 @@ export const projects = [
 		link: null,
 		github: 'https://github.com/Kirkr101/Streamline',
 		description:
-			'A Rust-based CLI utility I wrote to copy huge folders across my local network without the overhead of SFTP or Samba. It zips, chunks, and transfers data in parallel, then verifies integrity with SHA256 hashes.',
+			'Copy large folders across a local network without SFTP or Samba overhead. Zips, chunks, and transfers in parallel with SHA256 verification.',
 		tech: ['Rust']
 	},
 	{
@@ -69,7 +69,7 @@ export const projects = [
 		link: null,
 		github: 'https://github.com/KIRKR101/linux_keylogger',
 		description:
-			'A lightweight keylogger daemon I wrote in C that hooks directly into Linux input device drivers. It runs silently in the background and writes keystrokes to a log, purely as an exercise in writing low-level system services ;).',
+			'A minimal daemon that hooks Linux input device drivers to log keystrokes. Written as a low-level systems exercise.',
 		tech: ['C']
 	},
 	{
@@ -78,7 +78,7 @@ export const projects = [
 		link: null,
 		github: 'https://github.com/KIRKR101/open-gallery',
 		description:
-			'I scraped the National Gallery’s collection and built this Go web app to browse artworks with their full historical metadata. It includes search, filtering, and a simple admin panel.',
+			'Browse the National Gallery\'s collection with full historical metadata, search, and filtering.',
 		tech: ['Go', 'SQLite']
 	}
 ];

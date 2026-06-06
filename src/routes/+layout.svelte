@@ -1,22 +1,13 @@
 <script lang="ts">
 	import '../app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
-	import { theme } from '$lib/stores/theme';
-	import { browser } from '$app/environment';
 
 	let { children } = $props();
-
-	$effect(() => {
-		if (browser) {
-			const userTheme = localStorage.getItem('theme') || 'dark';
-			theme.set(userTheme);
-		}
-	});
 </script>
 
 <svelte:head>
 	<title>kirkr.xyz</title>
-	<meta name="description" content="Kirkr.xyz - A personal website showcasing lots of stuff." />
+	<meta name="description" content="Writing on art history, computer engineering, and other interests." />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 </svelte:head>

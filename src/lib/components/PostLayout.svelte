@@ -20,18 +20,18 @@
 </svelte:head>
 
 <div class="flex min-h-screen flex-col items-center px-6 py-6 font-sans md:py-16">
-	<main class="anim-row anim-row-1 w-full max-w-[600px]">
+	<main class="w-full max-w-[600px]">
 		<div class="py-4">
 			<a
 				href="/posts"
-				class="font-mono text-[11px] tracking-[0.2em] text-white/40 uppercase no-underline transition-colors duration-75 hover:text-white/75"
+				class="font-sans text-[11px] tracking-[0.1em] text-muted uppercase no-underline hover:text-white/60"
 			>
 				← all posts
 			</a>
 		</div>
 
 		<div class="py-6">
-			<h1 class="font-serif text-[42px] leading-tight tracking-[-1px] text-white/90 md:text-[48px]">
+			<h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white/90">
 				{longTitle || title || 'Blog Post'}
 			</h1>
 			<div

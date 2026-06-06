@@ -28,20 +28,18 @@
 
 <svelte:head>
 	<title>Posts | kirkr.xyz</title>
-	<meta name="description" content="Blog posts and articles on various topics by me." />
+	<meta name="description" content="Writings and articles on various topics." />
 	<meta name="robots" content="index, follow" />
 </svelte:head>
 
 <div class="flex min-h-screen flex-col items-center px-6 py-6 font-mono md:py-16">
-	<main class="anim-row anim-row-1 w-full max-w-[600px]">
+	<main class="w-full max-w-[600px]">
 		<div class="py-7">
 			<h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
-				<span class="opacity-90">Log entries</span><span class="opacity-20"
-					><em class="italic not-italic">.</em></span
-				>
+				<span class="opacity-90">Writings</span><span class="opacity-20">.</span>
 			</h1>
 			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-muted uppercase">
-				writings and notes by me
+				a collection of writings
 			</div>
 		</div>
 
@@ -63,7 +61,7 @@
 							{#each group.posts as post (post.file)}
 								<a
 									href={`/post/${post.file}`}
-									class="group flex w-full items-baseline justify-between border-b border-bd/30 py-4 no-underline last:border-0"
+									class="group flex w-full items-baseline justify-between border-b border-bd/30 py-3 no-underline last:border-0"
 								>
 									<span
 										class="font-sans text-[14px] text-white/70 transition-colors duration-100 group-hover:text-white"

@@ -144,23 +144,19 @@
 
 <svelte:head>
 	<title>Art | kirkr.xyz</title>
-	<meta name="description" content="A curated selection of artworks." />
+	<meta name="description" content="Artworks I like, and research on Pieter de Hooch." />
 	<link rel="preconnect" href="https://iiif.micr.io" crossorigin="anonymous" />
 	<link rel="preconnect" href="https://upload.wikimedia.org" crossorigin="anonymous" />
 </svelte:head>
 
-<div
-	class="flex min-h-screen flex-col items-center bg-[#0a0a0a] px-6 py-12 text-[#e0e0e0] md:py-24"
->
-	<main class="anim-row anim-row-1 w-full max-w-7xl">
+<div class="flex min-h-screen flex-col items-center px-6 py-6 font-mono md:py-16">
+	<main class="w-full max-w-7xl">
 		<div class="py-7">
 			<h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
-				<span class="opacity-90">Art</span><span class="opacity-20"
-					><em class="italic not-italic">.</em></span
-				>
+				<span class="opacity-90">Art</span><span class="opacity-20">.</span>
 			</h1>
 			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-muted uppercase">
-				a collection of artworks that i like, as well as research on pieter de hooch
+				a collection of artworks, and research on Pieter de Hooch
 			</div>
 		</div>
 
@@ -197,7 +193,7 @@
 							onkeydown={(e) => handleKeydown(e, entry.id)}
 						>
 							<div
-								class="mb-6 w-full overflow-hidden border border-white/5 bg-neutral-900 shadow-2xl"
+								class="mb-6 w-full overflow-hidden border border-bd bg-neutral-900 shadow-2xl"
 								style:aspect-ratio={entry.artwork.aspectRatio || 'auto'}
 							>
 								<img

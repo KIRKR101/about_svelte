@@ -234,11 +234,11 @@
 	<link rel="preconnect" href="https://i.scdn.co" />
 </svelte:head>
 
-<div class="flex items-start justify-center px-6 py-6 lg:py-8">
-	<div class="w-full max-w-[600px]">
-		<div class="anim-row anim-row-1 py-6">
+<div class="flex min-h-screen flex-col items-center px-6 py-6 md:py-16">
+	<main class="w-full max-w-[600px]">
+		<div class="py-6">
 			<div class="mb-4 flex items-center justify-between">
-				<div class="font-sans text-[10px] tracking-[0.2em] text-muted uppercase">About</div>
+				<div class="font-sans text-[11px] tracking-[0.1em] text-muted uppercase">About</div>
 			</div>
 
 			<div class="border-l border-bd/60 py-1 pl-5">
@@ -249,8 +249,8 @@
 						Svelte.
 					</p>
 					<p>
-						I also have an interest in art, with a strong inclination towards the Dutch Golden Age,
-						especially the Delft and Hague Schools. I also have an interest in PPE.
+						I also have an interest in Politics, Philosophy, and Economics, as well as art, with a
+						strong inclination towards the Dutch Golden Age, especially the Delft and Hague Schools.
 					</p>
 				</div>
 
@@ -267,9 +267,9 @@
 			</div>
 		</div>
 
-		<div class="anim-row anim-row-2 h-px bg-bd/60"></div>
+		<div class="h-px bg-bd"></div>
 
-		<div class="anim-row anim-row-3 py-6">
+		<div class="py-6">
 			<div class="mb-5 font-sans text-[10px] tracking-[0.15em] text-muted uppercase">
 				{#if currentTrack}
 					{#if currentTrack.isPlaying}
@@ -383,7 +383,7 @@
 					</div>
 					<div class="min-w-0 flex-1 pt-0.5">
 						<div class="mb-1 font-serif text-[20px] leading-tight text-white/85 italic">
-							Initialising...
+							Loading...
 						</div>
 						<div class="text-[11px] tracking-wide text-muted">...</div>
 						<div class="relative mt-[14px] h-px bg-rail"></div>
@@ -392,9 +392,9 @@
 			{/if}
 		</div>
 
-		<div class="anim-row anim-row-4 h-px bg-bd/60"></div>
+		<div class="h-px bg-bd"></div>
 
-		<div class="anim-row anim-row-5 cv-auto py-6">
+		<div class="cv-auto py-6">
 			<div class="mb-4 flex items-center justify-between">
 				<div class="font-serif text-[26px] text-white/85 italic">Writings</div>
 				<a
@@ -422,5 +422,5 @@
 				{/each}
 			</div>
 		</div>
-	</div>
+	</main>
 </div>

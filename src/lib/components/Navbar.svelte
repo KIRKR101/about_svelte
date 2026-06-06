@@ -36,9 +36,7 @@
 					<span
 						class="font-serif text-[24px] leading-none tracking-[-1px] text-white md:text-[28px]"
 					>
-						<span class="opacity-90">kirkr</span><span class="opacity-20"
-							><em class="italic not-italic">.</em>xyz</span
-						>
+						<span class="opacity-90">kirkr</span><span class="opacity-20">.xyz</span>
 					</span>
 				</a>
 			</div>

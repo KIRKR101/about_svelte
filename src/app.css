@@ -33,8 +33,6 @@
 	font-display: swap;
 }
 
-@custom-variant dark (&:is(.dark *));
-
 @theme {
 	--font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
 	--font-mono: 'Geist Mono', ui-monospace, monospace;
@@ -49,42 +47,6 @@
 	--color-rail: rgba(255, 255, 255, 0.07);
 	--color-sep: rgba(255, 255, 255, 0.08);
 	--color-art-bg: #1a1a1c;
-}
-
-@keyframes fu {
-	from {
-		opacity: 0;
-		transform: translateY(6px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-.anim-row {
-	animation: fu 0.3s ease both;
-}
-.anim-row-1 {
-	animation-delay: 0s;
-}
-.anim-row-2 {
-	animation-delay: 0.04s;
-}
-.anim-row-3 {
-	animation-delay: 0.08s;
-}
-.anim-row-4 {
-	animation-delay: 0.11s;
-}
-.anim-row-5 {
-	animation-delay: 0.14s;
-}
-.anim-row-6 {
-	animation-delay: 0.17s;
-}
-.anim-row-7 {
-	animation-delay: 0.2s;
 }
 
 html {
@@ -180,7 +142,6 @@ body {
 		border-left: 1px solid var(--color-muted);
 		padding-left: 1.75rem;
 		margin: 3rem 0;
-		font-family: var(--font-serif);
 		font-size: 1.3em;
 		font-style: italic;
 		color: rgba(255, 255, 255, 0.7);

@@ -172,13 +172,11 @@
 	<link rel="preconnect" href="https://github.kirkr.xyz" crossorigin="anonymous" />
 </svelte:head>
 
-<div class="flex flex-col items-center px-4 py-6 font-mono sm:px-6 md:py-16">
-	<div class="anim-row anim-row-1 w-full max-w-[850px]">
+<div class="flex min-h-screen flex-col items-center px-6 py-6 font-mono md:py-16">
+	<div class="w-full max-w-[850px]">
 		<div class="py-7">
-			<h1 class="font-serif text-[40px] leading-tight tracking-[-1px] text-white sm:text-[48px]">
-				<span class="opacity-90">Projects</span><span class="opacity-20"
-					><em class="italic not-italic">.</em></span
-				>
+			<h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
+				<span class="opacity-90">Projects</span><span class="opacity-20">.</span>
 			</h1>
 			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-muted uppercase">
 				a collection of projects
@@ -186,7 +184,7 @@
 		</div>
 	</div>
 
-	<div class="anim-row anim-row-2 w-full max-w-[850px] py-7">
+	<div class="w-full max-w-[850px] py-7">
 		<div class="mb-4 flex items-center justify-between">
 			<div class="flex items-center gap-3">
 				<svg viewBox="0 0 16 16" class="h-4 w-4 fill-muted">
@@ -350,11 +348,11 @@
 
 	<div class="h-px w-full max-w-[850px] bg-bd"></div>
 
-	<main class="anim-row anim-row-3 mt-8 w-full max-w-[850px]">
+	<main class="mt-8 w-full max-w-[850px]">
 		<div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
 			{#each projects as project (project.title)}
 				<div class="flex flex-col border-b border-sep pb-8 last:border-0 md:last:border-b">
-					<h2 class="mb-2 font-serif text-[24px] leading-none text-white/80">{project.title}</h2>
+					<h2 class="mb-2 font-sans text-[24px] leading-none text-white/80">{project.title}</h2>
 					<p class="mb-2 flex-1 font-sans text-[13px] leading-relaxed text-muted">
 						{project.description}
 					</p>
