@@ -29,6 +29,9 @@
 	let isMounted = $state(false);
 	let footerVisible = $state(true);
 	let dialogEl: HTMLDivElement | undefined = $state();
+	let touchStartX: number | null = null;
+	let touchStartY: number | null = null;
+	let swipeTimestamp = 0;
 
 	function prefetchImage(href: string | undefined) {
 		if (!browser || !href) return;
@@ -83,7 +86,37 @@
 	}
 
 	function toggleFooter() {
+		if (Date.now() - swipeTimestamp < 300) return;
 		footerVisible = !footerVisible;
+	}
+
+	function handleTouchStart(e: TouchEvent) {
+		const touch = e.touches[0];
+		if (touch) {
+			touchStartX = touch.clientX;
+			touchStartY = touch.clientY;
+		}
+	}
+
+	function handleTouchEnd(e: TouchEvent) {
+		if (touchStartX === null || touchStartY === null) return;
+		const touch = e.changedTouches[0];
+		if (!touch) return;
+		const touchEndX = touch.clientX;
+		const touchEndY = touch.clientY;
+		const diffX = touchEndX - touchStartX;
+		const diffY = touchEndY - touchStartY;
+
+		if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+			swipeTimestamp = Date.now();
+			if (diffX > 0) {
+				handlePrev();
+			} else {
+				handleNext();
+			}
+		}
+		touchStartX = null;
+		touchStartY = null;
 	}
 
 	$effect(() => {
@@ -126,10 +159,13 @@
 		? 'opacity-100'
 		: 'opacity-0'}"
 	onmousedown={(e) => {
+		if (Date.now() - swipeTimestamp < 300) return;
 		if (!(e.target as Element).closest('img, button, .text-container')) {
 			handleClose();
 		}
 	}}
+	ontouchstart={handleTouchStart}
+	ontouchend={handleTouchEnd}
 	role="dialog"
 	aria-modal="true"
 	tabindex="-1"

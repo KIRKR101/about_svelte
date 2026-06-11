@@ -144,39 +144,41 @@
 
 		<div class="mb-8 h-px bg-bd"></div>
 
-		{#each Object.entries(photographyData) as [city, images] (city)}
-			<section class="cv-auto mb-16 last:mb-0">
-				<div class="mb-6 py-2">
-					<h2 class="mb-1 font-serif text-[32px] leading-none text-white/80">{city}</h2>
-				</div>
+		<div bind:this={gridContainer}>
+			{#each Object.entries(photographyData) as [city, images] (city)}
+				<section class="cv-auto mb-16 last:mb-0">
+					<div class="mb-6 py-2">
+						<h2 class="mb-1 font-serif text-[32px] leading-none text-white/80">{city}</h2>
+					</div>
 
-				<div bind:this={gridContainer} class="columns-1 gap-4 sm:columns-2">
-					{#each images as image (image.id)}
-						<div
-							class="group mb-4 cursor-pointer break-inside-avoid overflow-hidden rounded-sm border border-bd transition-all duration-75 focus:ring-1 focus:ring-white/20 focus:outline-none"
-							use:cardAction={image.id}
-							onclick={() => openLightbox(image.id)}
-							onkeydown={(e) => handleKeydown(e, image.id)}
-							role="button"
-							tabindex="0"
-							aria-label={`View photo from ${city}`}
-						>
-							<img
-								src={image.url}
-								srcset={image.srcset}
-								sizes="(max-width: 640px) 100vw, 50vw"
-								alt={`Photo from ${city}`}
-								style="aspect-ratio: {image.aspectRatio}"
-								class="h-auto w-full object-cover transition-all duration-700 ease-out group-hover:scale-102 group-hover:cursor-zoom-in group-hover:brightness-105"
-								loading="lazy"
-								decoding="async"
-								onload={() => updateVisualOrder()}
-							/>
-						</div>
-					{/each}
-				</div>
-			</section>
-		{/each}
+					<div class="columns-1 gap-4 sm:columns-2">
+						{#each images as image (image.id)}
+							<div
+								class="group mb-4 cursor-pointer break-inside-avoid overflow-hidden rounded-sm border border-bd transition-all duration-75 focus:ring-1 focus:ring-white/20 focus:outline-none"
+								use:cardAction={image.id}
+								onclick={() => openLightbox(image.id)}
+								onkeydown={(e) => handleKeydown(e, image.id)}
+								role="button"
+								tabindex="0"
+								aria-label={`View photo from ${city}`}
+							>
+								<img
+									src={image.url}
+									srcset={image.srcset}
+									sizes="(max-width: 640px) 100vw, 50vw"
+									alt={`Photo from ${city}`}
+									style="aspect-ratio: {image.aspectRatio}"
+									class="h-auto w-full object-cover transition-all duration-700 ease-out group-hover:scale-102 group-hover:cursor-zoom-in group-hover:brightness-105"
+									loading="lazy"
+									decoding="async"
+									onload={() => updateVisualOrder()}
+								/>
+							</div>
+						{/each}
+					</div>
+				</section>
+			{/each}
+		</div>
 	</main>
 </div>
 

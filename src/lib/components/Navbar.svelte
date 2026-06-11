@@ -23,6 +23,15 @@
 	function closeMenu() {
 		menuOpen = false;
 	}
+
+	$effect(() => {
+		if (!menuOpen) return;
+		function handleKeydown(e: KeyboardEvent) {
+			if (e.key === 'Escape') closeMenu();
+		}
+		window.addEventListener('keydown', handleKeydown);
+		return () => window.removeEventListener('keydown', handleKeydown);
+	});
 </script>
 
 <nav
@@ -103,5 +112,17 @@
 </nav>
 
 {#if menuOpen}
-	<div class="fixed inset-0 top-16 z-40 backdrop-blur-[2px] md:hidden"></div>
+	<div
+		class="fixed inset-0 top-16 z-40 backdrop-blur-[2px] md:hidden"
+		onclick={closeMenu}
+		onkeydown={(e: KeyboardEvent) => {
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
+				closeMenu();
+			}
+		}}
+		aria-label="Close menu"
+		role="button"
+		tabindex="0"
+	></div>
 {/if}

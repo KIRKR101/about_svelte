@@ -78,7 +78,7 @@ export const projects = [
 		link: null,
 		github: 'https://github.com/KIRKR101/open-gallery',
 		description:
-			'Browse the National Gallery\'s collection with full historical metadata, search, and filtering.',
+			"Browse the National Gallery's collection with full historical metadata, search, and filtering.",
 		tech: ['Go', 'SQLite']
 	}
 ];
