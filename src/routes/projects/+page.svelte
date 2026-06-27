@@ -427,7 +427,7 @@
 							<button
 								onclick={() => openLightbox(project.title, 0)}
 								aria-label={`View gallery, ${project.media.length} ${project.media.length === 1 ? 'item' : 'items'}`}
-								class="group flex items-center gap-1.5 self-start text-left font-sans text-[11px] tracking-wider text-muted uppercase transition-colors hover:text-white/85 focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
+								class="group flex cursor-pointer items-center gap-1.5 self-start text-left font-sans text-[11px] tracking-wider text-muted uppercase transition-colors hover:text-white/85 focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
 							>
 								<svg
 									class="h-3.5 w-3.5 shrink-0 opacity-80 transition-opacity group-hover:opacity-100"
