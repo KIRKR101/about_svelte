@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { projects } from '$lib/projects-data';
 	import { getContributionColor } from '$lib/utils';
+	import Lightbox from '$lib/components/Lightbox.svelte';
 
 	interface ContributionDay {
 		date: string;
@@ -164,6 +165,68 @@
 		if (!related || !related.closest?.('[data-day]')) {
 			tooltip = { ...tooltip, visible: false };
 		}
+	}
+
+	let lightboxOpen = $state(false);
+	let lightboxProjectTitle = $state('');
+	let lightboxMediaIndex = $state(0);
+
+	let lightboxProject = $derived(projects.find((p) => p.title === lightboxProjectTitle) ?? null);
+
+	let lightboxMediaCount = $derived(lightboxProject?.media?.length ?? 0);
+
+	let lightboxCurrentUrl = $derived(lightboxProject?.media?.[lightboxMediaIndex] ?? '');
+
+	let lightboxNextUrl = $derived.by(() => {
+		if (!lightboxProject?.media?.length) return undefined;
+		return lightboxProject.media[(lightboxMediaIndex + 1) % lightboxProject.media.length];
+	});
+
+	let lightboxPrevUrl = $derived.by(() => {
+		if (!lightboxProject?.media?.length) return undefined;
+		return lightboxProject.media[
+			(lightboxMediaIndex - 1 + lightboxProject.media.length) % lightboxProject.media.length
+		];
+	});
+
+	let lightboxItem = $derived.by(() => {
+		if (!lightboxProject) return undefined;
+		const item: {
+			image: string;
+			title: string;
+			description: string;
+			data?: [string, string][];
+		} = {
+			image: lightboxCurrentUrl,
+			title: lightboxProject.title,
+			description: lightboxProject.description
+		};
+		if (lightboxProject.tech.length > 0) {
+			item.data = [['tech', lightboxProject.tech.join(', ')]];
+		}
+		return item;
+	});
+
+	function openLightbox(title: string, idx: number) {
+		lightboxProjectTitle = title;
+		lightboxMediaIndex = idx;
+		lightboxOpen = true;
+	}
+
+	function closeLightbox() {
+		lightboxOpen = false;
+		lightboxProjectTitle = '';
+	}
+
+	function nextMedia() {
+		if (!lightboxProject?.media?.length) return;
+		lightboxMediaIndex = (lightboxMediaIndex + 1) % lightboxProject.media.length;
+	}
+
+	function prevMedia() {
+		if (!lightboxProject?.media?.length) return;
+		lightboxMediaIndex =
+			(lightboxMediaIndex - 1 + lightboxProject.media.length) % lightboxProject.media.length;
 	}
 </script>
 
@@ -358,7 +421,32 @@
 					<p class="mb-2 flex-1 font-sans text-[13px] leading-relaxed text-muted">
 						{project.description}
 					</p>
-					<div class="mt-auto">
+
+					<div class="mt-1 flex items-center gap-4">
+						{#if project.media?.length}
+							<button
+								onclick={() => openLightbox(project.title, 0)}
+								aria-label={`View gallery, ${project.media.length} ${project.media.length === 1 ? 'item' : 'items'}`}
+								class="group flex items-center gap-1.5 self-start text-left font-sans text-[11px] tracking-wider text-muted uppercase transition-colors hover:text-white/85 focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
+							>
+								<svg
+									class="h-3.5 w-3.5 shrink-0 opacity-80 transition-opacity group-hover:opacity-100"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.8"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+									<circle cx="9" cy="9" r="2" />
+									<path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+								</svg>
+								<span>view gallery ({project.media.length})</span>
+							</button>
+						{/if}
+
 						{#if project.link}
 							<a
 								href={project.link}
@@ -384,3 +472,16 @@
 		</div>
 	</main>
 </div>
+
+{#if lightboxOpen && lightboxItem}
+	<Lightbox
+		item={lightboxItem}
+		currentIndex={lightboxMediaIndex}
+		totalItems={lightboxMediaCount}
+		nextUrl={lightboxNextUrl}
+		prevUrl={lightboxPrevUrl}
+		onClose={closeLightbox}
+		onNext={nextMedia}
+		onPrev={prevMedia}
+	/>
+{/if}

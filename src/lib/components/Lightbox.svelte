@@ -23,7 +23,7 @@
 	let { item, currentIndex, totalItems, nextUrl, prevUrl, onClose, onNext, onPrev }: LightboxProps =
 		$props();
 
-	let imageLoaded = $state(false);
+	let mediaLoaded = $state(false);
 	let isAnimating = $state(false);
 	let isClosing = $state(false);
 	let isMounted = $state(false);
@@ -33,8 +33,9 @@
 	let touchStartY: number | null = null;
 	let swipeTimestamp = 0;
 
-	function prefetchImage(href: string | undefined) {
+	function prefetchMedia(href: string | undefined) {
 		if (!browser || !href) return;
+		if (isVideoUrl(href)) return;
 		const existing = document.head.querySelector('link[data-lightbox-prefetch="' + href + '"]');
 		if (existing) return;
 		const link = document.createElement('link');
@@ -47,15 +48,15 @@
 
 	$effect(() => {
 		if (browser) {
-			prefetchImage(nextUrl);
-			prefetchImage(prevUrl);
+			prefetchMedia(nextUrl);
+			prefetchMedia(prevUrl);
 		}
 	});
 
 	function handleClose() {
 		if (isClosing) return;
 		isClosing = true;
-		imageLoaded = false;
+		mediaLoaded = false;
 		setTimeout(() => {
 			onClose();
 		}, 300);
@@ -70,7 +71,7 @@
 	function handleNext() {
 		if (isAnimating || isClosing) return;
 		isAnimating = true;
-		imageLoaded = false;
+		mediaLoaded = false;
 		footerVisible = true;
 		onNext();
 		setTimeout(() => (isAnimating = false), 250);
@@ -79,7 +80,7 @@
 	function handlePrev() {
 		if (isAnimating || isClosing) return;
 		isAnimating = true;
-		imageLoaded = false;
+		mediaLoaded = false;
 		footerVisible = true;
 		onPrev();
 		setTimeout(() => (isAnimating = false), 250);
@@ -144,10 +145,14 @@
 	});
 
 	$effect(() => {
-		if (item) imageLoaded = false;
+		if (item) mediaLoaded = false;
 	});
 
 	const imageUrl = $derived(item.url || item.image);
+	function isVideoUrl(url: string | undefined) {
+		if (!url) return false;
+		return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
+	}
 	const metadata = $derived(item.exif || item.data);
 	const title = $derived(item.title || item.city);
 </script>
@@ -160,7 +165,7 @@
 		: 'opacity-0'}"
 	onmousedown={(e) => {
 		if (Date.now() - swipeTimestamp < 300) return;
-		if (!(e.target as Element).closest('img, button, .text-container')) {
+		if (!(e.target as Element).closest('img, video, button, .text-container')) {
 			handleClose();
 		}
 	}}
@@ -233,30 +238,44 @@
 		tabindex="0"
 		aria-label="Toggle image details"
 	>
-		{#if !imageLoaded}
+		{#if !mediaLoaded}
 			<div
 				class="absolute animate-pulse font-mono text-[10px] tracking-widest text-white/20 uppercase"
 			>
 				Loading
 			</div>
 		{/if}
-		<img
-			src={imageUrl}
-			alt={title || ''}
-			class="max-h-full max-w-full object-contain transition-all duration-300 {imageLoaded
-				? 'scale-100 opacity-100'
-				: 'scale-[0.98] opacity-0'}"
-			onload={() => (imageLoaded = true)}
-			draggable="false"
-		/>
+		{#if isVideoUrl(imageUrl)}
+			<video
+				src={imageUrl}
+				controls
+				autoplay
+				muted
+				playsinline
+				class="max-h-full max-w-full object-contain transition-all duration-300 {mediaLoaded
+					? 'scale-100 opacity-100'
+					: 'scale-[0.98] opacity-0'}"
+				onloadeddata={() => (mediaLoaded = true)}
+			></video>
+		{:else}
+			<img
+				src={imageUrl}
+				alt={title || ''}
+				class="max-h-full max-w-full object-contain transition-all duration-300 {mediaLoaded
+					? 'scale-100 opacity-100'
+					: 'scale-[0.98] opacity-0'}"
+				onload={() => (mediaLoaded = true)}
+				draggable="false"
+			/>
+		{/if}
 	</div>
 
 	<div
-		class="text-container absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent px-4 pt-20 pb-6 transition-opacity duration-300 select-none md:px-6 md:pt-28 md:pb-8 {footerVisible
+		class="text-container pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent px-4 pt-20 pb-6 transition-opacity duration-300 select-none md:px-6 md:pt-28 md:pb-8 {footerVisible
 			? 'opacity-100'
-			: 'pointer-events-none opacity-0'}"
+			: 'opacity-0'}"
 	>
-		<div class="mx-auto w-full max-w-[780px] text-center">
+		<div class="pointer-events-auto mx-auto w-full max-w-[780px] text-center {footerVisible ? '' : '!pointer-events-none'}">
 			<div class="font-serif text-[22px] leading-tight tracking-tight text-white/95 md:text-[30px]">
 				{title}
 			</div>

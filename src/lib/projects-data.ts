@@ -7,16 +7,11 @@ export const projects = [
 		github: 'https://github.com/Kirkr101/WASMagick-svelte',
 		description:
 			'Run ImageMagick filters directly in the browser through WebAssembly. Everything is local: no servers, no uploads.',
-		tech: ['Svelte 5', 'WebAssembly', 'TypeScript']
-	},
-	{
-		id: 'voxor',
-		title: 'Voxor',
-		link: 'https://voxor.kirkr.xyz',
-		github: 'https://github.com/Kirkr101/Voxor',
-		description:
-			'Self-hosted chat with threading, typing indicators, LaTeX rendering, and a CMD+K quick-search modal.',
-		tech: ['Python', 'Flask', 'JavaScript', 'Tailwind']
+		tech: ['Svelte 5', 'WebAssembly', 'TypeScript'],
+		media: [
+			'https://res.cloudinary.com/dvnkil9d4/image/upload/v1782515675/wasmagick_owgsva.webp',
+			'https://res.cloudinary.com/dvnkil9d4/video/upload/v1782514387/wasmagick__ug5f2q.mp4'
+		]
 	},
 	{
 		id: 'audioshare-sv',
@@ -24,8 +19,12 @@ export const projects = [
 		link: null,
 		github: 'https://github.com/Kirkr101/audioshare-sv',
 		description:
-			'Stream any audio format, including lossless, with automatic metadata and cover-art parsing. Built for sharing large, uncompressed music files.',
-		tech: ['Svelte 5', 'TypeScript', 'Drizzle', 'SQLite']
+			'Stream any audio format, including lossless, with automatic metadata and cover-art parsing. Built for sharing large music files.',
+		tech: ['Svelte 5', 'TypeScript', 'Drizzle', 'SQLite'],
+		media: [
+			'https://res.cloudinary.com/dvnkil9d4/image/upload/v1782515675/audioshare1_z17tz0.webp',
+			'https://res.cloudinary.com/dvnkil9d4/image/upload/v1782515675/audioshare2_n4wyrq.webp'
+		]
 	},
 	{
 		id: 'dezoomify-rs-jxl',
@@ -37,6 +36,15 @@ export const projects = [
 		tech: ['Rust']
 	},
 	{
+		id: 'voxor',
+		title: 'Voxor',
+		link: 'https://voxor.kirkr.xyz',
+		github: 'https://github.com/Kirkr101/Voxor',
+		description:
+			'Self-hosted chat with threading, typing indicators, LaTeX rendering, and a CMD+K quick-search modal.',
+		tech: ['Python', 'Flask', 'JavaScript', 'Tailwind']
+	},
+	{
 		id: 'cpusim',
 		title: 'CPUsim',
 		link: null,
@@ -44,15 +52,6 @@ export const projects = [
 		description:
 			'A 16-bit CPU emulator written from scratch, including a custom assembler and binary simulator. Handles arithmetic, stack ops, and function calls.',
 		tech: ['C']
-	},
-	{
-		id: 'rmt-debrid',
-		title: 'Rmt-Debrid',
-		link: null,
-		github: 'https://github.com/Kirkr101/RMT-Debrid',
-		description:
-			'Manage torrent downloads through Real-Debrid from a web dashboard, with real-time progress over WebSockets.',
-		tech: ['Python', 'FastAPI', 'WebSocket']
 	},
 	{
 		id: 'streamline',
@@ -73,6 +72,14 @@ export const projects = [
 		tech: ['C']
 	},
 	{
+		id: 'mini_malloc',
+		title: 'Mini Malloc',
+		link: null,
+		github: 'https://github.com/Kirkr101/mini_malloc',
+		description: 'A minimal memory allocator written in C as a learning exercise.',
+		tech: ['C']
+	},
+	{
 		id: 'open-gallery',
 		title: 'Open Gallery',
 		link: null,
@@ -80,5 +87,14 @@ export const projects = [
 		description:
 			"Browse the National Gallery's collection with full historical metadata, search, and filtering.",
 		tech: ['Go', 'SQLite']
+	},
+	{
+		id: 'rmt-debrid',
+		title: 'RMT-Debrid',
+		link: null,
+		github: 'https://github.com/Kirkr101/RMT-Debrid',
+		description:
+			'Manage torrent downloads through Real-Debrid from a web dashboard, with real-time progress over WebSockets.',
+		tech: ['Python', 'FastAPI', 'WebSocket']
 	}
 ];
