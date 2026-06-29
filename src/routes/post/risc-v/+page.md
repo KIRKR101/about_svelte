@@ -15,7 +15,7 @@ The project is open and free under a permissive BSD-style licence, simple in des
 
 ## The Base ISA
 
-At the start of _The RISC-V Reader_, an introduction to RISC-V by Patterson and Andrew Waterman, the opening quote from Leonardi Da Vinci states _'Simplicity is the ultimate sophistication.'_ One of the main problems with other ISAs is bloat, and RISC-V solves this elegantly by keeping the base ISA small and focused. For reference, the x86 instruction set started with 80 instructions in 1978, and reached **3600** by 2015, representing a new instruction every four days between 1978 and 2015.[^6]
+At the start of _The RISC-V Reader_, an introduction to RISC-V by Patterson and Andrew Waterman, the opening quote from Leonardi Da Vinci states _'Simplicity is the ultimate sophistication.'_ One of the main problems with other ISAs is bloat, and RISC-V solves this elegantly by keeping the base ISA small and focused. For reference, the x86 instruction set started with 80 instructions in 1978, and reached **3600** by 2015, representing a new instruction every four days between 1978 and 2015.[^5]
 
 The RISC-V design philosophy is modular. A small, stable base ISA provides core functionality, and optional extensions add features like floating-point math or vector processing. The foundation is the base integer ISA, primarily RV32I or RV64I. An RV32E variant with 16 registers exists for extremely constrained embedded systems. Again in The RISC-V Reader, they state that RISC-V should be the Linux of ISAs, evolving for technical reasons rather than commercial ones, and so insulated from the kind of discontinuation that ended SPARC.
 
@@ -66,11 +66,11 @@ The next frontier is high-performance computing. The European Processor Initiati
 
 ## Security and Transparency
 
-Security through obscurity fails. The open nature of RISC-V is thus not a risk, but allows for public scrutiny of the ISA and its implementations. Researchers can formally verify designs and look for architectural vulnerabilities without reverse-engineering a proprietary black box. This follows Kerckhoffs's principle:[^5] a system should be secure even if everything about it is public.
+Security through obscurity fails. The open nature of RISC-V is thus not a risk, but allows for public scrutiny of the ISA and its implementations. Researchers can formally verify designs and look for architectural vulnerabilities without reverse-engineering a proprietary black box. This follows Kerckhoffs's principle:[^6] a system should be secure even if everything about it is public.
 
 [^1]: Tom's Hardware — 'Chinese Government Shifts Focus from x86 and Arm CPUs, Promoting the Adoption of RISC-V Chips': https://www.tomshardware.com/pc-components/cpus/chinese-government-shifts-focus-from-x86-and-arm-cpus-promoting-the-adoption-of-risc-v-chips
 [^2]: Tom's Hardware — 'China's Push for Chip Independence Continues with Its First RISC-V Server CPU': https://www.tomshardware.com/pc-components/cpus/chinas-push-for-chip-independence-continues-with-its-first-risc-v-server-cpu
 [^3]: David Patterson — 'The Case for RISC' (1983): https://courses.cs.washington.edu/courses/cse548/08wi/papers/Case_for_RISC.pdf
 [^4]: Wikipedia — 'IEEE 754-2008 Revision': https://en.wikipedia.org/wiki/IEEE_754-2008_revision
-[^5]: Wikipedia — 'Kerckhoffs's Principle': https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle
-[^6]: Steven Rodgers and Richard A. Uhlig — 'x86: Approaching 40, Still Going Strong', Intel (8 June 2017): https://download.intel.com/newsroom/2021/archive/2017-06-08-editorials-x86-approaching-40-still-going-strong.pdf
+[^5]: Steven Rodgers and Richard A. Uhlig — 'x86: Approaching 40, Still Going Strong', Intel (8 June 2017): https://download.intel.com/newsroom/2021/archive/2017-06-08-editorials-x86-approaching-40-still-going-strong.pdf
+[^6]: Wikipedia — 'Kerckhoffs's Principle': https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle
