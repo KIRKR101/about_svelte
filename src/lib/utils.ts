@@ -1,5 +1,9 @@
-const dateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' });
-const shortDateFormatter = new Intl.DateTimeFormat('en-GB', { month: 'short', day: 'numeric' });
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+	day: '2-digit',
+	month: 'short',
+	year: 'numeric'
+});
+const shortDateFormatter = new Intl.DateTimeFormat('en-GB', { month: 'short', day: '2-digit' });
 
 export function formatDate(dateString: string) {
 	return dateFormatter.format(new Date(dateString));
