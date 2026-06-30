@@ -1,8 +1,15 @@
 <script lang="ts">
+	import { afterNavigate } from '$app/navigation';
 	import '../app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
 
 	let { children } = $props();
+
+	let mainEl = $state<HTMLElement | null>(null);
+
+	afterNavigate(() => {
+		mainEl?.scrollTo(0, 0);
+	});
 </script>
 
 <svelte:head>
@@ -35,7 +42,7 @@
 
 <div class="flex h-dvh flex-col overflow-hidden bg-[#0a0a0b] text-white antialiased">
 	<Navbar />
-	<main id="main-content" class="min-h-0 flex-1 overflow-y-auto overscroll-y-auto">
+	<main bind:this={mainEl} id="main-content" class="min-h-0 flex-1 overflow-y-auto overscroll-y-auto">
 		{@render children()}
 	</main>
 </div>

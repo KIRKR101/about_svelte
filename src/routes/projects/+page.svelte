@@ -415,7 +415,7 @@
 		<div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-2">
 			{#each projects as project (project.title)}
 				<div class="flex flex-col border-b border-sep pb-8 last:border-0 md:last:border-b">
-					<h2 class="mb-2 font-sans text-[18px] font-bold text-white/80">
+					<h2 class="mb-2 font-sans text-[16px] font-bold text-white/80">
 						{project.title}
 					</h2>
 					<p class="mb-2 flex-1 font-sans text-[13px] leading-relaxed text-muted">
