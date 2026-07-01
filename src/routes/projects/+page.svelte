@@ -247,6 +247,8 @@
 		</div>
 	</div>
 
+	<div class="h-px w-full max-w-[850px] bg-bd"></div>
+
 	<div class="w-full max-w-[850px] py-7">
 		<div class="mb-4 flex items-center justify-between">
 			<div class="flex items-center gap-3">

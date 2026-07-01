@@ -144,7 +144,9 @@
 			</div>
 		</div>
 
-		<div bind:this={gridContainer} class="mb-12 columns-1 gap-12 sm:columns-2 lg:columns-3">
+		<div class="mb-8 h-px bg-bd"></div>
+
+		<div bind:this={gridContainer} class="mb-12 columns-1 gap-12 py-2 sm:columns-2 lg:columns-3">
 			{#each entriesWithMeta as entry (entry.id)}
 				<button
 					use:cardAction={entry.id}

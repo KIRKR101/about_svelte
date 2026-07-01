@@ -151,7 +151,7 @@
 			<h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white">
 				<span class="opacity-90">Films</span><span class="opacity-20">.</span>
 			</h1>
-			<div class="mt-2 font-sans text-[11px] tracking-[0.1em] text-muted uppercase">
+			<div class="mt-2 font-sans text-[12px] tracking-[0.1em] text-muted uppercase">
 				a collection of films
 			</div>
 		</div>
@@ -160,13 +160,13 @@
 
 		{#if loading}
 			<div class="py-8 text-center">
-				<div class="font-mono text-[11px] tracking-[0.1em] text-muted uppercase">
+				<div class="font-mono text-[12px] tracking-[0.1em] text-muted uppercase">
 					Loading films...
 				</div>
 			</div>
 		{:else if error}
 			<div class="rounded-sm border border-red-500/20 bg-red-500/5 py-8 text-center">
-				<div class="font-mono text-[11px] tracking-[0.1em] text-red-400 uppercase">
+				<div class="font-mono text-[12px] tracking-[0.1em] text-red-400 uppercase">
 					Failed to load films
 				</div>
 			</div>
@@ -175,10 +175,10 @@
 				{#each films as film (film.link)}
 					<div class="flex gap-4 border-b border-sep py-3 last:border-0">
 						<div
-							class="relative flex h-36 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border border-bd bg-[#141416] text-white/20"
+							class="relative flex h-48 w-32 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border border-bd bg-[#141416] text-white/20"
 						>
 							<span
-								class="-rotate-[315deg] text-center font-serif text-[12px] leading-tight tracking-wide select-none"
+								class="-rotate-[315deg] text-center font-serif text-[13px] leading-tight tracking-wide select-none"
 								aria-hidden="true"
 							>
 								{film.title}
@@ -192,7 +192,7 @@
 							/>
 						</div>
 						<div class="flex flex-col justify-center">
-							<div class="font-serif text-[18px] leading-tight text-white/90">
+							<div class="font-serif text-[20px] leading-tight text-white/90">
 								<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 								<a
 									href={film.link}
@@ -203,13 +203,13 @@
 									{film.title}
 								</a>
 							</div>
-							<div class="mt-1 font-mono text-[12px] text-muted">{film.year}</div>
+							<div class="mt-1 font-mono text-[13px] text-muted">{film.year}</div>
 							{#if film.rating}
-								<div class="mt-1 text-[16px] text-amber-400/80">
+								<div class="mt-1 text-[15px] text-amber-400/80">
 									{createStarRating(film.rating)}
 								</div>
 							{/if}
-							<div class="mt-2 font-mono text-[10px] tracking-wider text-muted uppercase">
+							<div class="mt-2 font-mono text-[12px] tracking-wider text-muted uppercase">
 								Watched: {film.watchedDate}
 								{#if film.rewatch}
 									<span class="ml-2 text-amber-400/60">↻ Rewatch</span>
