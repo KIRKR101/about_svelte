@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { fly, fade } from 'svelte/transition';
 
 	let menuOpen = $state(false);
 
@@ -25,12 +26,19 @@
 	}
 
 	$effect(() => {
-		if (!menuOpen) return;
+		if (!menuOpen) {
+			document.body.style.overflow = '';
+			return;
+		}
+		document.body.style.overflow = 'hidden';
 		function handleKeydown(e: KeyboardEvent) {
 			if (e.key === 'Escape') closeMenu();
 		}
 		window.addEventListener('keydown', handleKeydown);
-		return () => window.removeEventListener('keydown', handleKeydown);
+		return () => {
+			document.body.style.overflow = '';
+			window.removeEventListener('keydown', handleKeydown);
+		};
 	});
 </script>
 
@@ -92,8 +100,11 @@
 	</div>
 
 	{#if menuOpen}
-		<div class="absolute top-16 right-0 left-0 border-b border-bd bg-[#0a0a0b] md:hidden">
-			<div class="flex flex-col py-4">
+		<div
+			transition:fly={{ y: -6, duration: 200 }}
+			class="absolute top-16 right-0 left-0 rounded-b-sm border-b border-bd bg-[#0a0a0b] shadow-xl md:hidden"
+		>
+			<div class="flex flex-col divide-y divide-bd/50">
 				{#each navLinks as link (link.path)}
 					<a
 						href={link.path}
@@ -113,6 +124,7 @@
 
 {#if menuOpen}
 	<div
+		transition:fade={{ duration: 150 }}
 		class="fixed inset-0 top-16 z-40 backdrop-blur-[2px] md:hidden"
 		onclick={closeMenu}
 		onkeydown={(e: KeyboardEvent) => {

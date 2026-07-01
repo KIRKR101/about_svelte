@@ -154,6 +154,11 @@ body {
 		text-decoration-color: white;
 	}
 
+	.prose a[target='_blank']::after {
+		content: ' ↗';
+		font-size: 0.75em;
+	}
+
 	.prose blockquote {
 		border-left: 1px solid var(--color-muted);
 		padding-left: 1.75rem;
