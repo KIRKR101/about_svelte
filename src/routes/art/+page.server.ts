@@ -1,5 +1,4 @@
 import { artData } from '$lib/art-data';
-import { deHoochBibliography } from '$lib/bibliography';
 
 export const prerender = true;
 
@@ -14,14 +13,5 @@ export function load() {
 		data: artwork.data
 	}));
 
-	const sortedBibliography = [...deHoochBibliography].sort((a, b) => {
-		const aHas = a.description ? 1 : 0;
-		const bHas = b.description ? 1 : 0;
-		return bHas - aHas;
-	});
-
-	return {
-		entries,
-		bibliography: sortedBibliography
-	};
+	return { entries };
 }
