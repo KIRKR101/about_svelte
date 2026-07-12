@@ -1,9 +1,9 @@
-import { recentPosts } from '$lib/posts-data';
+import { recentWritings } from '$lib/writings-data';
 
 export const prerender = true;
 
 export function load() {
 	return {
-		allPosts: recentPosts
+		allWritings: recentWritings
 	};
 }

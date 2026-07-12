@@ -10,7 +10,7 @@
 	}
 
 	const navLinks = [
-		{ name: 'Posts', path: '/posts' },
+		{ name: 'Writings', path: '/writings' },
 		{ name: 'Projects', path: '/projects' },
 		{ name: 'Films', path: '/films' },
 		{ name: 'Art', path: '/art' },

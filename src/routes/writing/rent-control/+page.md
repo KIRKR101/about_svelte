@@ -24,9 +24,15 @@ Modelling commissioned for the Bay Area found that of every feature tested, vaca
 The basic redistributive case for some form of rent regulation is sound and not seriously disputed, protecting sitting tenants from extraction in a hyper-commodified market with high switching costs is a big welfare gain, and the NYC data on landlord income outpacing the increases nominally justified by costs is a very good reason to be sceptical of arguments from heavily biased ownership groups. But a blanket, non-means-tested freeze, repeated annually, without supply response, is the worst possible version of this policy. Extending [SCRIE/DRIE](https://www.nyc.gov/content/tenantresourceportal/pages/rent-freeze)-style means-tested freezing to all low-income stabilised tenants rather than freezing indiscriminately gets the people who actually need protection the stability they need without starving every building's revenue regardless of who's living in it. Learn Vienna’s lesson that regulation works when it's sitting on top of real supply growth (i.e. a large scale building project) and not substituting for it. Without caveats, a freeze buys current tenants a year or two of stability and probably costs the next decade of tenants a meaningfully worse market to enter. The bit I'm quite interested in is how many consecutive freeze years it takes before the supply response shows up in a market like NYC. Mamdani's multi-year pledge means New York will be an interesting data point in the future.
 
 [^1]: ABC7 NY — [Board freezes rent on 1 and 2-year leases for NYC's 1 million rent-regulated apartment](https://abc7ny.com/post/final-rent-guidelines-board-vote-thursday-east-harlem-increase-freeze-hanging-balance/19378211/)
+
 [^2]: Arpit Gupta, Vital City — [After the Mamdani Rent Freeze](https://www.vitalcitynyc.org/mamdani-rent-freeze-agenda-nyc/)
+
 [^3]: Diamond, McQuade, Qian — [The Effects of Rent Control Expansion on Tenants, Landlords, and Inequality: Evidence from San Francisco](https://www.aeaweb.org/articles?id=10.1257/aer.20181289)
+
 [^4]: Autor, Palmer, Pathak — [Housing Market Spillovers: Evidence from the End of Rent Control in Cambridge Massachusetts](https://www.nber.org/papers/w18125)
+
 [^5]: Urban Institute — [Rent Control and the Supply of Affordable Housing](https://www.urban.org/research/publication/rent-control-and-supply-affordable-housing)
+
 [^6]: AEI — [Vienna’s “Social Housing” Model Is a Costly Illusion—Not a Blueprint](https://www.aei.org/op-eds/viennas-social-housing-model-is-a-costly-illusion-not-a-blueprint/)
+
 [^7]: Minneapolis Fed — [An overview of rent stabilization from national housing experts](https://www.minneapolisfed.org/article/2022/an-overview-of-rent-stabilization-from-national-housing-experts)

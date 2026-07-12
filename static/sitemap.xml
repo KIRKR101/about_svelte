@@ -6,7 +6,7 @@
 		<priority>1.0</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/posts</loc>
+		<loc>https://kirkr.xyz/writings</loc>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 	</url>
@@ -31,52 +31,52 @@
 		<priority>0.8</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/post/lvt</loc>
+		<loc>https://kirkr.xyz/writing/lvt</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/post/investing-degeneracy</loc>
+		<loc>https://kirkr.xyz/writing/investing-degeneracy</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/post/frans-hals</loc>
+		<loc>https://kirkr.xyz/writing/frans-hals</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/post/early-computing</loc>
+		<loc>https://kirkr.xyz/writing/sacred-ordinary</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/post/sacred-ordinary</loc>
+		<loc>https://kirkr.xyz/writing/carel-fabritius</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/post/carel-fabritius</loc>
+		<loc>https://kirkr.xyz/writing/asic</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/post/asic</loc>
+		<loc>https://kirkr.xyz/writing/fpga</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/post/fpga</loc>
+		<loc>https://kirkr.xyz/writing/risc-v</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/post/risc-v</loc>
+		<loc>https://kirkr.xyz/writing/history-of-palestine</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://kirkr.xyz/post/history-of-palestine</loc>
+		<loc>https://kirkr.xyz/writing/rent-control</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.7</priority>
 	</url>

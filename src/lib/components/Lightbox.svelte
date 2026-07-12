@@ -275,7 +275,11 @@
 			? 'opacity-100'
 			: 'opacity-0'}"
 	>
-		<div class="pointer-events-auto mx-auto w-full max-w-[780px] text-center {footerVisible ? '' : '!pointer-events-none'}">
+		<div
+			class="pointer-events-auto mx-auto w-full max-w-[780px] text-center {footerVisible
+				? ''
+				: '!pointer-events-none'}"
+		>
 			<div class="font-serif text-[22px] leading-tight tracking-tight text-white/95 md:text-[30px]">
 				{title}
 			</div>

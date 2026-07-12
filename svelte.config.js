@@ -23,10 +23,10 @@ const config = {
 				let transformed = content;
 
 				// Transforms Obsidian-style wiki image syntax to standard Markdown:
-				// ![[filename|alt]] → ![alt](/posts/filename)
+				// ![[filename|alt]] → ![alt](/writing/filename)
 				transformed = transformed.replace(
 					/!\[\[([^|\]]+)(?:\|([^\]]+))?\]\]/g,
-					(_, file, alt) => `![${alt ?? ''}](/posts/${file})`
+					(_, file, alt) => `![${alt ?? ''}](/writing/${file})`
 				);
 
 				// Transforms ```html code blocks into raw HTML:
@@ -37,11 +37,11 @@ const config = {
 
 				// Inlines SVG files referenced in Markdown as embedded HTML elements.
 				transformed = transformed.replace(
-					/^!\[([^\]]*)\]\((\/?posts\/[^)]+\.svg)\)\s*$/gm,
+					/^!\[([^\]]*)\]\((\/?writing\/[^)]+\.svg)\)\s*$/gm,
 					(match, _alt, src) => {
-						const fileName = src.replace(/^\/?posts\//, '');
+						const fileName = src.replace(/^\/?writing\//, '');
 						try {
-							const svgPath = join('static', 'posts', fileName);
+							const svgPath = join('static', 'writing', fileName);
 							const svgContent = readFileSync(svgPath, 'utf8');
 							const altText = _alt ?? '';
 							return `<div class="svg-container mb-2" role="img" aria-label="${altText}">{@html ${JSON.stringify(svgContent)}}</div>\n\n`;
@@ -60,7 +60,7 @@ const config = {
 			smartypants: false,
 			remarkPlugins: [remarkFootnotes],
 			layout: {
-				_: resolve(__dirname, './src/lib/components/PostLayout.svelte').replace(/\\/g, '/')
+				_: resolve(__dirname, './src/lib/components/WritingLayout.svelte').replace(/\\/g, '/')
 			}
 		})
 	],

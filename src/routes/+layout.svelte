@@ -42,7 +42,11 @@
 
 <div class="flex h-dvh flex-col overflow-hidden bg-[#0a0a0b] text-white antialiased">
 	<Navbar />
-	<main bind:this={mainEl} id="main-content" class="min-h-0 flex-1 overflow-y-auto overscroll-y-auto">
+	<main
+		bind:this={mainEl}
+		id="main-content"
+		class="min-h-0 flex-1 overflow-y-auto overscroll-y-auto"
+	>
 		{@render children()}
 	</main>
 </div>

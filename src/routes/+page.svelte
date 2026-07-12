@@ -2,7 +2,8 @@
 	import { onMount } from 'svelte';
 	import { formatDate } from '$lib/utils';
 
-	let { data }: { data: { allPosts: { title: string; date: string; file: string }[] } } = $props();
+	let { data }: { data: { allWritings: { title: string; date: string; file: string }[] } } =
+		$props();
 
 	const SPOTIFY_API_URL = 'https://spotify.kirkr.xyz/api/now-playing';
 	const LASTFM_API_URL = 'https://lastfm.kirkr.xyz/api/lastfm-track';
@@ -172,7 +173,7 @@
 		return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 	}
 
-	const recentPostsSlice = data.allPosts.slice(0, 5);
+	const recentWritingsSlice = data.allWritings.slice(0, 5);
 
 	onMount(() => {
 		fetchSpotifyTrack();
@@ -398,25 +399,25 @@
 			<div class="mb-4 flex items-center justify-between">
 				<div class="font-serif text-[26px] text-white/85 italic">Writings</div>
 				<a
-					href="/posts"
+					href="/writings"
 					class="font-sans text-[10px] tracking-[0.15em] text-muted uppercase no-underline hover:text-white/60"
 				>
-					All posts ↗
+					All writings ↗
 				</a>
 			</div>
 
 			<div class="flex flex-col">
-				{#each recentPostsSlice as post (post.file)}
+				{#each recentWritingsSlice as writing (writing.file)}
 					<a
-						href="/post/{post.file}"
+						href="/writing/{writing.file}"
 						class="group flex w-full items-baseline justify-between border-b border-bd/30 py-3 no-underline last:border-0"
 					>
 						<span
 							class="font-sans text-[13px] text-white/70 transition-colors duration-100 group-hover:text-white"
-							>{post.title}</span
+							>{writing.title}</span
 						>
 						<span class="font-sans text-[10px] tracking-wider text-muted/60 uppercase"
-							>{formatDate(post.date)}</span
+							>{formatDate(writing.date)}</span
 						>
 					</a>
 				{/each}

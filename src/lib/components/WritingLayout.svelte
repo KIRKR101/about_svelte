@@ -15,24 +15,24 @@
 </script>
 
 <svelte:head>
-	<title>{title || 'Blog Post'} | kirkr.xyz</title>
-	<meta name="description" content={snippet || 'Read blog posts and articles.'} />
+	<title>{title || 'Writing'} | kirkr.xyz</title>
+	<meta name="description" content={snippet || 'Read writings and articles.'} />
 </svelte:head>
 
 <div class="flex min-h-screen flex-col items-center px-6 py-6 font-sans md:py-16">
 	<main class="w-full max-w-[600px]">
 		<div class="py-4">
 			<a
-				href="/posts"
+				href="/writings"
 				class="font-sans text-[11px] tracking-[0.1em] text-muted uppercase no-underline hover:text-white/60"
 			>
-				← all posts
+				← all writings
 			</a>
 		</div>
 
 		<div class="py-6">
 			<h1 class="font-serif text-[48px] leading-tight tracking-[-1px] text-white/90">
-				{longTitle || title || 'Blog Post'}
+				{longTitle || title || 'Writing'}
 			</h1>
 			<div
 				class="mt-3 flex items-center justify-between font-mono text-[11px] tracking-[0.1em] text-muted uppercase"

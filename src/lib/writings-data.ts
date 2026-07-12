@@ -1,4 +1,4 @@
-export interface Post {
+export interface Writing {
 	title: string;
 	longTitle?: string;
 	date: string;
@@ -7,12 +7,12 @@ export interface Post {
 }
 
 interface MdModule {
-	metadata: Omit<Post, 'file'>;
+	metadata: Omit<Writing, 'file'>;
 }
 
-const posts = import.meta.glob('/src/routes/post/*/+page.md', { eager: true });
+const writings = import.meta.glob('/src/routes/writing/*/+page.md', { eager: true });
 
-export const recentPosts = Object.entries(posts)
+export const recentWritings = Object.entries(writings)
 	.map(([path, module]) => {
 		const parts = path.split('/');
 		const file = parts[parts.length - 2];

@@ -69,8 +69,13 @@ The next frontier is high-performance computing. The European Processor Initiati
 Security through obscurity fails. The open nature of RISC-V is thus not a risk, but allows for public scrutiny of the ISA and its implementations. Researchers can formally verify designs and look for architectural vulnerabilities without reverse-engineering a proprietary black box. This follows Kerckhoffs's principle:[^6] a system should be secure even if everything about it is public.
 
 [^1]: Tom's Hardware — 'Chinese Government Shifts Focus from x86 and Arm CPUs, Promoting the Adoption of RISC-V Chips': https://www.tomshardware.com/pc-components/cpus/chinese-government-shifts-focus-from-x86-and-arm-cpus-promoting-the-adoption-of-risc-v-chips
+
 [^2]: Tom's Hardware — 'China's Push for Chip Independence Continues with Its First RISC-V Server CPU': https://www.tomshardware.com/pc-components/cpus/chinas-push-for-chip-independence-continues-with-its-first-risc-v-server-cpu
+
 [^3]: David Patterson — 'The Case for RISC' (1983): https://courses.cs.washington.edu/courses/cse548/08wi/papers/Case_for_RISC.pdf
+
 [^4]: Wikipedia — 'IEEE 754-2008 Revision': https://en.wikipedia.org/wiki/IEEE_754-2008_revision
+
 [^5]: Steven Rodgers and Richard A. Uhlig — 'x86: Approaching 40, Still Going Strong', Intel (8 June 2017): https://download.intel.com/newsroom/2021/archive/2017-06-08-editorials-x86-approaching-40-still-going-strong.pdf
+
 [^6]: Wikipedia — 'Kerckhoffs's Principle': https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle
