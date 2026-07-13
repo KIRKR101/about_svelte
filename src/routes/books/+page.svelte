@@ -34,10 +34,17 @@
 		percentage: number;
 	}
 
+	interface LastReadEvent {
+		event: string;
+		action_at: string;
+		entry: string | null;
+	}
+
 	interface CurrentlyReading {
 		book: Book;
 		user_book: UserBook;
 		progress: Progress;
+		last_read_event: LastReadEvent | null;
 	}
 
 	interface PreviouslyRead {
@@ -143,10 +150,22 @@
 	const formatDate = (dateStr: string | undefined) => {
 		if (!dateStr) return 'N/A';
 		return new Date(dateStr).toLocaleDateString(undefined, {
-			timeZone: 'UTC',
+			timeZone: 'Europe/London',
 			year: 'numeric',
-			month: 'long',
+			month: 'short',
 			day: 'numeric'
+		});
+	};
+
+	const formatDateTime = (dateStr: string | undefined) => {
+		if (!dateStr) return 'N/A';
+		return new Date(dateStr).toLocaleString(undefined, {
+			timeZone: 'Europe/London',
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit'
 		});
 	};
 </script>
@@ -185,7 +204,7 @@
 			</div>
 		{:else}
 			{#if currentlyReading.length > 0}
-				<div class="mb-12">
+				<div class="mb-6">
 					<div class="mb-6 font-sans text-[11px] tracking-[0.15em] text-muted uppercase">
 						Currently Reading
 					</div>
@@ -220,26 +239,27 @@
 											{item.book.title}
 										</a>
 									</div>
-									<div class="mt-1 font-mono text-[13px] text-muted">
-										{item.book.authors[0]}
+									<div class="mt-1 font-sans text-[13px] text-muted">
+										by {item.book.authors[0]}, {item.book.release_year}
 									</div>
-									<div class="mt-1 font-mono text-[13px] text-muted">{item.book.release_year}</div>
 									{#if item.progress}
 										<div class="mt-3">
-											<div class="mb-1 flex justify-between font-mono text-[11px] text-muted">
-												<span>{item.progress.pages_read} / {item.progress.total_pages} pages</span>
-												<span>{item.progress.percentage}%</span>
-											</div>
-											<div class="h-1 w-full overflow-hidden rounded-full bg-bd">
+											<div class="h-[3px] w-full overflow-hidden rounded-full bg-bd">
 												<div
 													class="h-full rounded-full bg-amber-400/80 transition-all duration-300"
 													style="width: {item.progress.percentage}%"
 												></div>
 											</div>
+											<div class="mt-3 flex items-center gap-1.5 font-sans text-[12px] text-muted">
+												<span>{item.progress.pages_read} / {item.progress.total_pages} pages</span>
+											</div>
 										</div>
 									{/if}
-									<div class="mt-2 font-mono text-[12px] tracking-wider text-muted uppercase">
+									<div class="mt-2 font-sans text-[12px] text-muted">
 										Started: {formatDate(item.user_book.started_reading)}
+										{#if item.last_read_event}
+											&middot; Last read: {formatDateTime(item.last_read_event.action_at)}
+										{/if}
 									</div>
 								</div>
 							</div>
@@ -249,13 +269,13 @@
 			{/if}
 
 			{#if previouslyRead.length > 0}
-				<div>
+				<div class="mb-6">
 					<div class="mb-6 font-sans text-[11px] tracking-[0.15em] text-muted uppercase">
 						Previously Read
 					</div>
-					<div class="space-y-4">
+					<div class="space-y-6">
 						{#each previouslyRead as item (item.book.id)}
-							<div class="flex gap-4 border-b border-sep py-3 last:border-0">
+							<div class="flex gap-4 border-b border-sep pb-6 last:border-0">
 								<div
 									class="relative flex h-48 w-32 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border border-bd bg-[#141416] text-white/20"
 								>
@@ -284,17 +304,17 @@
 											{item.book.title}
 										</a>
 									</div>
-									<div class="mt-1 font-mono text-[13px] text-muted">
-										{item.book.authors[0]}
+									<div class="mt-1 font-sans text-[13px] text-muted">
+										by {item.book.authors[0]} &middot; {item.book.release_year}
 									</div>
-									<div class="mt-1 font-mono text-[13px] text-muted">{item.book.release_year}</div>
-									{#if item.user_book.rating}
-										<div class="mt-1 text-[15px] text-amber-400/80">
-											{createStarRating(item.user_book.rating)}
-										</div>
-									{/if}
-									<div class="mt-2 font-mono text-[12px] tracking-wider text-muted uppercase">
-										Finished: {formatDate(item.user_book.last_read_date)}
+									<div class="mt-2 font-sans text-[12px] text-muted">
+										{#if item.user_book.rating}
+											<span class="text-amber-400/80"
+												>{createStarRating(item.user_book.rating)}</span
+											>
+											<span class="text-bd">&middot;</span>
+										{/if}
+										<span>Finished: {formatDate(item.user_book.last_read_date)}</span>
 									</div>
 								</div>
 							</div>

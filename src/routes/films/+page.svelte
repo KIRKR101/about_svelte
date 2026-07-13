@@ -171,9 +171,9 @@
 				</div>
 			</div>
 		{:else}
-			<div class="mb-12 space-y-4">
+			<div class="mb-12 space-y-6">
 				{#each films as film (film.link)}
-					<div class="flex gap-4 border-b border-sep py-3 last:border-0">
+					<div class="flex gap-4 border-b border-sep pb-6 last:border-0">
 						<div
 							class="relative flex h-48 w-32 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border border-bd bg-[#141416] text-white/20"
 						>
@@ -203,13 +203,13 @@
 									{film.title}
 								</a>
 							</div>
-							<div class="mt-1 font-mono text-[13px] text-muted">{film.year}</div>
+							<div class="mt-1 font-sans text-[13px] text-muted">{film.year}</div>
 							{#if film.rating}
 								<div class="mt-1 text-[15px] text-amber-400/80">
 									{createStarRating(film.rating)}
 								</div>
 							{/if}
-							<div class="mt-2 font-mono text-[12px] tracking-wider text-muted uppercase">
+							<div class="mt-2 font-sans text-[12px] text-muted">
 								Watched: {film.watchedDate}
 								{#if film.rewatch}
 									<span class="ml-2 text-amber-400/60">↻ Rewatch</span>
