@@ -13,6 +13,7 @@
 		{ name: 'Writings', path: '/writings' },
 		{ name: 'Projects', path: '/projects' },
 		{ name: 'Films', path: '/films' },
+		{ name: 'Books', path: '/books' },
 		{ name: 'Art', path: '/art' },
 		{ name: 'Photography', path: '/photography' }
 	];
