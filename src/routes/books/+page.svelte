@@ -238,28 +238,28 @@
 											href="https://hardcover.app/books/{item.book.slug}?referrer_id=120657"
 											target="_blank"
 											rel="noopener noreferrer"
-											class="text-inherit no-underline transition-colors duration-75 hover:text-amber-400/80"
+											class="text-inherit no-underline transition-colors duration-75 hover:text-white/80"
 										>
 											{item.book.title}
 										</a>
 									</div>
-									<div class="mt-1 font-sans text-[13px] text-muted">
+									<div class="mt-1 font-mono text-[11px] tracking-wider text-muted">
 										by {item.book.authors[0]}, {item.book.release_year}
 									</div>
 									{#if item.progress}
 										<div class="mt-3">
 											<div class="h-[3px] w-full overflow-hidden rounded-full bg-bd">
 												<div
-													class="h-full rounded-full bg-amber-400/80 transition-all duration-300"
+													class="h-full rounded-full bg-white/30 transition-all duration-300"
 													style="width: {item.progress.percentage}%"
 												></div>
 											</div>
-											<div class="mt-3 flex items-center gap-1.5 font-sans text-[12px] text-muted">
+											<div class="mt-3 flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-muted">
 												<span>{item.progress.pages_read} / {item.progress.total_pages} pages</span>
 											</div>
 										</div>
 									{/if}
-									<div class="mt-2 font-sans text-[12px] text-muted">
+									<div class="mt-2 font-mono text-[11px] tracking-wider text-muted">
 										Started: {formatDate(item.user_book.started_reading)}
 										{#if item.last_read_event}
 											&middot; Last read: {formatDateTime(item.last_read_event.action_at)}
@@ -305,17 +305,17 @@
 											href="https://hardcover.app/books/{item.book.slug}?referrer_id=120657"
 											target="_blank"
 											rel="noopener noreferrer"
-											class="text-inherit no-underline transition-colors duration-75 hover:text-amber-400/80"
+											class="text-inherit no-underline transition-colors duration-75 hover:text-white/80"
 										>
 											{item.book.title}
 										</a>
 									</div>
-									<div class="mt-1 font-sans text-[13px] text-muted">
+									<div class="mt-1 font-mono text-[11px] tracking-wider text-muted">
 										by {item.book.authors[0]} &middot; {item.book.release_year}
 									</div>
-									<div class="mt-2 font-sans text-[12px] text-muted">
+									<div class="mt-2 font-mono text-[11px] tracking-wider text-muted">
 										{#if item.user_book.rating}
-											<span class="text-amber-400/80"
+											<span class="text-white/50"
 												>{createStarRating(item.user_book.rating)}</span
 											>
 											<span class="text-bd">&middot;</span>

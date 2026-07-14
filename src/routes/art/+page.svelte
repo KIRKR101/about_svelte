@@ -176,7 +176,7 @@
 					</span>
 
 					<div class="mt-2 flex items-center gap-2">
-						<span class="font-sans text-[12px] tracking-wide text-white/55">
+						<span class="font-mono text-[11px] tracking-wider text-white/55">
 							{entry.artist}
 						</span>
 						{#if entry.year}

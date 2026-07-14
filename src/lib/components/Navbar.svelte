@@ -23,15 +23,10 @@
 		{ name: 'Writings', path: '/writings' },
 		{ name: 'Projects', path: '/projects' },
 		{
-			name: 'Library',
+			name: 'Collections',
 			children: [
 				{ name: 'Films', path: '/films' },
-				{ name: 'Books', path: '/books' }
-			]
-		},
-		{
-			name: 'Gallery',
-			children: [
+				{ name: 'Books', path: '/books' },
 				{ name: 'Art', path: '/art' },
 				{ name: 'Photography', path: '/photography' }
 			]

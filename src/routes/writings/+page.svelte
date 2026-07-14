@@ -67,7 +67,7 @@
 										class="font-sans text-[14px] text-white/70 transition-colors duration-100 group-hover:text-white"
 										>{writing.title}</span
 									>
-									<span class="font-sans text-[11px] tracking-wider text-muted/60"
+									<span class="font-mono text-[11px] tracking-wider text-muted/60"
 										>{formatShortDate(writing.date)}</span
 									>
 								</a>

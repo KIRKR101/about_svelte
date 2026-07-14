@@ -357,10 +357,7 @@
 									class="linear absolute inset-y-0 left-0 h-full bg-prog"
 									style="width: {progressPercentage}%"
 								></div>
-								<div
-									class="absolute top-[-3.5px] h-2 w-2 -translate-x-1/2 rounded-full bg-white"
-									style="left: {progressPercentage}%"
-								></div>
+
 							</div>
 							<div class="mt-1.5 flex justify-between text-[9px] text-muted sm:text-[10px]">
 								<span>{formatTime(currentTrack.progress)}</span>
@@ -416,7 +413,7 @@
 							class="font-sans text-[13px] text-white/70 transition-colors duration-100 group-hover:text-white"
 							>{writing.title}</span
 						>
-						<span class="font-sans text-[10px] tracking-wider text-muted/60 uppercase"
+						<span class="font-mono text-[11px] tracking-wider text-muted/60 uppercase"
 							>{formatDate(writing.date)}</span
 						>
 					</a>

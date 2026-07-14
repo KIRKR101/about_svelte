@@ -198,21 +198,21 @@
 									href={film.link}
 									target="_blank"
 									rel="noopener noreferrer"
-									class="text-inherit no-underline transition-colors duration-75 hover:text-amber-400/80"
+									class="text-inherit no-underline transition-colors duration-75 hover:text-white/80"
 								>
 									{film.title}
 								</a>
 							</div>
-							<div class="mt-1 font-sans text-[13px] text-muted">{film.year}</div>
+							<div class="mt-1 font-mono text-[11px] tracking-wider text-muted">{film.year}</div>
 							{#if film.rating}
-								<div class="mt-1 text-[15px] text-amber-400/80">
+								<div class="mt-1 text-[15px] text-white/50">
 									{createStarRating(film.rating)}
 								</div>
 							{/if}
-							<div class="mt-2 font-sans text-[12px] text-muted">
+							<div class="mt-2 font-mono text-[11px] tracking-wider text-muted">
 								Watched: {film.watchedDate}
 								{#if film.rewatch}
-									<span class="ml-2 text-amber-400/60">↻ Rewatch</span>
+									<span class="ml-2 text-white/35">↻ Rewatch</span>
 								{/if}
 							</div>
 						</div>
