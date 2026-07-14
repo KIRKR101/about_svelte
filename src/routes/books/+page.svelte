@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getHardcoverSrcset } from '$lib/utils';
+
 	interface Book {
 		id: number;
 		title: string;
@@ -222,6 +224,8 @@
 									</span>
 									<img
 										src={item.book.cover_url}
+										srcset={getHardcoverSrcset(item.book.cover_url)}
+										sizes="128px"
 										alt={item.book.title}
 										class="absolute inset-0 h-full w-full rounded-sm object-cover"
 										loading="lazy"
@@ -287,6 +291,8 @@
 									</span>
 									<img
 										src={item.book.cover_url}
+										srcset={getHardcoverSrcset(item.book.cover_url)}
+										sizes="128px"
 										alt={item.book.title}
 										class="absolute inset-0 h-full w-full rounded-sm object-cover"
 										loading="lazy"
