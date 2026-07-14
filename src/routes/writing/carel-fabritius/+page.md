@@ -2,7 +2,7 @@
 title: 'Carel Fabritius'
 longTitle: 'The Short Corpus of Works by Carel Fabritius'
 date: '2025-10-25'
-snippet: 'A look into the paintings of Carel Fabritius.'
+snippet: 'A look into the paintings of Carel Fabritius'
 ---
 
 The town of Delft was a serene place, known for its namesake _Delftware_ and the concentration of artists at the Guild of St. Luke. This flourishing cultural market emerged from the town's position in the midst of the Dutch Golden Age, an era when even middle-class families adorned their walls with portraits. It is estimated that around two-thirds of households possessed some kind of art.[^1] Dutch painters could sustain themselves through open market sales, unlike their counterparts elsewhere in Europe, who depended on aristocratic patronage or church commissions. The Guild of St. Luke reflected this prosperity, attracting talented artists who could make a respectable living painting grand civic portraits and intimate domestic scenes. In Delft alone, dozens of masters competed for commissions, each developing a distinctive style to stand out in an increasingly crowded marketplace.

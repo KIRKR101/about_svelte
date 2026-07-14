@@ -2,7 +2,7 @@
 title: 'RISC-V, an Overview'
 longTitle: 'RISC-V: The Open-Source Instruction Set'
 date: '2025-08-28'
-snippet: 'An introduction to the RISC-V Instruction Set.'
+snippet: 'An introduction to the RISC-V Instruction Set'
 ---
 
 Proprietary instruction set architectures (ISAs) like x86 and Arm have held processor design in a chokehold for decades. These architectures impose big licencing fees and rigid restrictions that prevent hardware customisation. RISC-V is the open alternative, a royalty-free ISA that permits anyone to build custom processors without asking for permission or paying a tax. This is the democratisation of hardware. Recent developments in China, including Beijing's hedge on RISC-V[^1] and new chips[^2] that rival Western designs in performance, show that the architecture is moving from an academic experiment to a geopolitical necessity.

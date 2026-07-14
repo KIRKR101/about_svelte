@@ -19,6 +19,10 @@
 	let contributions = $state<ContributionCalendar | null>(null);
 	let loading = $state(true);
 
+	let touchStartX: number | null = null;
+	let touchStartY: number | null = null;
+	let touchStartTime = 0;
+
 	let tooltip = $state<{ visible: boolean; date: string; count: number; x: number; y: number }>({
 		visible: false,
 		date: '',
@@ -165,6 +169,41 @@
 		if (!related || !related.closest?.('[data-day]')) {
 			tooltip = { ...tooltip, visible: false };
 		}
+	}
+
+	function handleTouchStart(e: TouchEvent) {
+		if (e.touches.length > 1) return;
+		const touch = e.touches[0];
+		if (!touch) return;
+		touchStartX = touch.clientX;
+		touchStartY = touch.clientY;
+		touchStartTime = Date.now();
+	}
+
+	function handleTouchEnd(e: TouchEvent) {
+		if (touchStartX === null || touchStartY === null) return;
+		const touch = e.changedTouches[0];
+		if (!touch) return;
+
+		const elapsed = Date.now() - touchStartTime;
+		if (elapsed > 300) {
+			touchStartX = null;
+			touchStartY = null;
+			return;
+		}
+
+		const diffX = touch.clientX - touchStartX;
+		const diffY = touch.clientY - touchStartY;
+
+		if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+			if (diffX > 0) {
+				if (selectedYear > 2024) selectedYear--;
+			} else {
+				if (selectedYear < currentYear) selectedYear++;
+			}
+		}
+		touchStartX = null;
+		touchStartY = null;
 	}
 
 	let lightboxOpen = $state(false);
@@ -324,7 +363,10 @@
 			</div>
 		</div>
 
-		<div class="contribution-graph relative min-w-0" bind:this={graphContainer}>
+		<div class="contribution-graph relative min-w-0 [touch-action:pan-y]" bind:this={graphContainer}
+			ontouchstart={handleTouchStart}
+			ontouchend={handleTouchEnd}
+		>
 			{#if tooltip.visible && !isMobile}
 				<div
 					class="pointer-events-none absolute z-20 -translate-x-1/2 -translate-y-full"
@@ -416,7 +458,7 @@
 	<main class="mt-8 w-full max-w-[850px]">
 		<div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-2">
 			{#each projects as project (project.title)}
-				<div class="flex flex-col border-b border-sep pb-8 last:border-0 md:last:border-b">
+				<div class="project-card flex flex-col border-b border-sep pb-8 last:border-0">
 					<h2 class="mb-2 font-sans text-[16px] font-bold text-white/80">
 						{project.title}
 					</h2>
@@ -487,3 +529,14 @@
 		onPrev={prevMedia}
 	/>
 {/if}
+
+<style>
+	.project-card:last-child {
+		border-bottom-width: 0;
+	}
+	@media (min-width: 768px) {
+		.project-card:nth-last-child(-n + 2) {
+			border-bottom-width: 0;
+		}
+	}
+</style>

@@ -32,18 +32,49 @@
 	let touchStartX: number | null = null;
 	let touchStartY: number | null = null;
 	let swipeTimestamp = 0;
+	let previousFocus: HTMLElement | null = $state(null);
+	let preloadLinks: string[] = [];
 
 	function prefetchMedia(href: string | undefined) {
 		if (!browser || !href) return;
 		if (isVideoUrl(href)) return;
-		const existing = document.head.querySelector('link[data-lightbox-prefetch="' + href + '"]');
-		if (existing) return;
+		if (preloadLinks.includes(href)) return;
 		const link = document.createElement('link');
 		link.rel = 'preload';
 		link.as = 'image';
 		link.href = href;
-		link.setAttribute('data-lightbox-prefetch', href);
+		link.setAttribute('data-lightbox-prefetch', '');
 		document.head.appendChild(link);
+		preloadLinks.push(href);
+	}
+
+	function cleanupPreloadLinks() {
+		const links = document.head.querySelectorAll('link[data-lightbox-prefetch]');
+		links.forEach((l) => l.remove());
+		preloadLinks = [];
+	}
+
+	function trapFocus(e: KeyboardEvent) {
+		if (e.key !== 'Tab' || !dialogEl) return;
+		const focusable = Array.from(
+			dialogEl.querySelectorAll<HTMLElement>(
+				'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+			)
+		);
+		if (focusable.length === 0) return;
+		const first = focusable[0] as HTMLElement;
+		const last = focusable[focusable.length - 1] as HTMLElement;
+		if (e.shiftKey) {
+			if (document.activeElement === first || document.activeElement === dialogEl) {
+				e.preventDefault();
+				last.focus();
+			}
+		} else {
+			if (document.activeElement === last) {
+				e.preventDefault();
+				first.focus();
+			}
+		}
 	}
 
 	$effect(() => {
@@ -120,10 +151,16 @@
 		touchStartY = null;
 	}
 
+	function allKeydown(e: KeyboardEvent) {
+		handleKeyDown(e);
+		trapFocus(e);
+	}
+
 	$effect(() => {
 		if (browser) {
 			isMounted = true;
-			window.addEventListener('keydown', handleKeyDown);
+			previousFocus = document.activeElement as HTMLElement | null;
+			window.addEventListener('keydown', allKeydown);
 
 			const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 			if (scrollbarWidth > 0) {
@@ -136,10 +173,14 @@
 
 		return () => {
 			if (browser) {
-				window.removeEventListener('keydown', handleKeyDown);
+				window.removeEventListener('keydown', allKeydown);
 
 				document.body.style.overflow = '';
 				document.body.style.paddingRight = '';
+
+				cleanupPreloadLinks();
+				previousFocus?.focus();
+				previousFocus = null;
 			}
 		};
 	});
@@ -157,13 +198,14 @@
 	const title = $derived(item.title || item.city);
 </script>
 
+<!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
 	bind:this={dialogEl}
-	class="fixed inset-0 z-50 bg-[#0b0b0b]/95 transition-opacity duration-300 ease-in-out outline-none select-none {isMounted &&
+	class="fixed inset-0 z-60 bg-[#0b0b0b]/95 transition-opacity duration-300 ease-in-out outline-none select-none {isMounted &&
 	!isClosing
 		? 'opacity-100'
 		: 'opacity-0'}"
-	onmousedown={(e) => {
+	onclick={(e) => {
 		if (Date.now() - swipeTimestamp < 300) return;
 		if (!(e.target as Element).closest('img, video, button, .text-container')) {
 			handleClose();
@@ -226,7 +268,7 @@
 	{/if}
 
 	<div
-		class="absolute inset-x-1 top-2 bottom-2 flex cursor-default items-center justify-center"
+		class="absolute inset-x-1 top-2 bottom-2 flex items-center justify-center [touch-action:pinch-zoom]"
 		onclick={toggleFooter}
 		onkeydown={(e) => {
 			if (e.key === 'Enter' || e.key === ' ') {

@@ -150,7 +150,7 @@
 			{#each entriesWithMeta as entry (entry.id)}
 				<button
 					use:cardAction={entry.id}
-					class="group mb-12 flex w-full break-inside-avoid flex-col text-left focus:outline-none"
+					class="group mb-12 flex w-full break-inside-avoid flex-col text-left focus-visible:ring-1 focus-visible:ring-white/40"
 					onclick={() => openLightbox(entry.id)}
 					onkeydown={(e) => handleKeydown(e, entry.id)}
 				>

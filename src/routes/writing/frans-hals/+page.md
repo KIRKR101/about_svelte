@@ -2,7 +2,7 @@
 title: 'Frans Hals'
 longTitle: 'The Art of Frans Hals'
 date: '2026-05-02'
-snippet: 'Frans Hals is quite unique.'
+snippet: 'Frans Hals is quite unique'
 ---
 
 I will call this a WIP for the time being. I may elaborate on this essay at a later date.

@@ -2,7 +2,7 @@
 title: 'Palestine, an Early History'
 longTitle: 'Palestine: An Early History and the Origins of Zionism'
 date: '2025-04-22'
-snippet: 'An early history of Palestine and Zionism.'
+snippet: 'An early history of Palestine and Zionism'
 ---
 
 For the Palestinian Arabs, the end of the Second World War was a period of intensified existential threat. While Allied rhetoric promised self-determination for the victims of fascism, the indigenous inhabitants of Palestine found their homeland offered up as a solution to European crimes. The political movement of Zionism, supported by international powers, moved to exploit the aftermath of the Holocaust. Their objective was to complete a colonial project: the establishment of an exclusive Jewish state on land already inhabited for millennia by an Arab majority. The years 1945 and 1946 were the critical period where the infrastructure for the Nakba was finalised.

@@ -2,7 +2,7 @@
 title: 'Intro to ASICs'
 longTitle: 'Application-Specific Integrated Circuits'
 date: '2025-10-04'
-snippet: 'A starting point to ASIC architecture.'
+snippet: 'A starting point to ASIC architecture'
 ---
 
 A CPU can do pretty much anything. An ASIC does a single thing, which is why they're faster, cheaper to run at scale, and more power-efficient than anything general-purpose. The problem is, you can't reprogram one. Once the silicon is cut, the function is fixed. Using something reconfigurable is an easier decision to make, but sometimes the ASIC is the better one.

@@ -35,7 +35,7 @@
 
 <a
 	href="#main-content"
-	class="fixed top-2 left-2 z-[100] -translate-y-20 rounded bg-white px-4 py-2 font-sans text-[14px] text-black no-underline transition-transform duration-200 focus:translate-y-0"
+	class="fixed top-2 left-2 z-[999] -translate-y-20 rounded bg-white px-4 py-2 font-sans text-[14px] text-black no-underline transition-transform duration-200 focus:translate-y-0"
 >
 	Skip to content
 </a>

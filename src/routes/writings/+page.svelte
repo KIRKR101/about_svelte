@@ -5,7 +5,7 @@
 		file: string;
 		title: string;
 		date: string;
-		snippet: string;
+		snippet?: string;
 	}
 
 	interface PageData {
@@ -61,15 +61,23 @@
 							{#each group.writings as writing (writing.file)}
 								<a
 									href={`/writing/${writing.file}`}
-									class="group flex w-full items-baseline justify-between border-b border-bd/30 py-3 no-underline last:border-0"
+									class="group flex w-full flex-col border-b border-bd/30 py-3 no-underline last:border-0"
 								>
-									<span
-										class="font-sans text-[14px] text-white/70 transition-colors duration-100 group-hover:text-white"
-										>{writing.title}</span
-									>
-									<span class="font-mono text-[11px] tracking-wider text-muted/60"
-										>{formatShortDate(writing.date)}</span
-									>
+									<div class="flex w-full items-baseline justify-between">
+										<span
+											class="font-sans text-[14px] text-white/70 transition-colors duration-100 group-hover:text-white"
+											>{writing.title}</span
+										>
+										<span class="shrink-0 font-mono text-[11px] tracking-wider text-muted/60"
+											>{formatShortDate(writing.date)}</span
+										>
+									</div>
+									{#if writing.snippet}
+										<span
+											class="mt-1 font-sans text-[12px] leading-relaxed text-white/40 line-clamp-2"
+											>{writing.snippet}</span
+										>
+									{/if}
 								</a>
 							{/each}
 						</div>

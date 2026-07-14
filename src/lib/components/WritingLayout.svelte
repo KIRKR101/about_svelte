@@ -9,6 +9,10 @@
 			if (link.hostname && link.hostname !== window.location.hostname) {
 				link.setAttribute('target', '_blank');
 				link.setAttribute('rel', 'noreferrer noopener');
+				const sr = document.createElement('span');
+				sr.className = 'sr-only';
+				sr.textContent = '(opens in new tab)';
+				link.appendChild(sr);
 			}
 		}
 	}

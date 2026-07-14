@@ -2,7 +2,7 @@
 title: 'Rooms, Light, Reverence'
 longTitle: 'The Sacred Ordinary: The Domestic Vision of Pieter de Hooch'
 date: '2025-12-31'
-snippet: 'A short essay on the life and art of Pieter de Hooch.'
+snippet: 'A short essay on the life and art of Pieter de Hooch'
 ---
 
 Pieter de Hooch rendered the domestic interior with a precision and restraint that few of his contemporaries matched. Born in Rotterdam in 1629 to a master bricklayer, his life remains largely opaque, known less through biography than through the steady accumulation of his paintings. By the early 1650s he had settled in Delft, the city that would provide the setting for his most accomplished works. Earlier scholarly accounts long maintained that he ended his life in an Amsterdam asylum; modern research has since corrected this error, establishing that it was his son (also named Pieter) who died in the Amsterdam Dolhuis.[^1] The elder De Hooch continued working into the 1680s, a patient observer of the order, labour, and domestic rhythms of seventeenth-century Dutch life.

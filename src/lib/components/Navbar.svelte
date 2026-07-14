@@ -207,8 +207,8 @@
 			<div class="flex items-center md:hidden">
 				<button
 					onclick={toggleMenu}
-					class="flex h-10 w-10 items-center justify-center focus:outline-none"
-					aria-label="Toggle menu"
+					class="flex h-10 w-10 items-center justify-center focus-visible:ring-1 focus-visible:ring-white/40"
+					aria-label={menuOpen ? 'Close menu' : 'Open menu'}
 					aria-expanded={menuOpen}
 				>
 					<svg

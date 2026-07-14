@@ -94,13 +94,6 @@
 		currentImageIndex = (currentImageIndex - 1 + visualOrder.length) % visualOrder.length;
 	};
 
-	function handleKeydown(e: KeyboardEvent, id: string) {
-		if (e.key === 'Enter' || e.key === ' ') {
-			e.preventDefault();
-			openLightbox(id);
-		}
-	}
-
 	let currentItem = $derived.by(() => {
 		const id = visualOrder[currentImageIndex];
 		if (!id) return undefined;
@@ -153,13 +146,10 @@
 
 					<div class="columns-1 gap-4 sm:columns-2">
 						{#each images as image (image.id)}
-							<div
-								class="group mb-4 cursor-pointer break-inside-avoid overflow-hidden rounded-sm border border-bd transition-all duration-75 focus:ring-1 focus:ring-white/20 focus:outline-none"
+							<button
+								class="group mb-4 w-full cursor-pointer overflow-hidden rounded-sm border border-bd bg-transparent p-0 text-left transition-all duration-75 focus-visible:ring-1 focus-visible:ring-white/40"
 								use:cardAction={image.id}
 								onclick={() => openLightbox(image.id)}
-								onkeydown={(e) => handleKeydown(e, image.id)}
-								role="button"
-								tabindex="0"
 								aria-label={`View photo from ${city}`}
 							>
 								<img
@@ -173,7 +163,7 @@
 									decoding="async"
 									onload={() => updateVisualOrder()}
 								/>
-							</div>
+							</button>
 						{/each}
 					</div>
 				</section>
