@@ -7,12 +7,17 @@
 	import { SvelteMap } from 'svelte/reactivity';
 
 	let lightboxActive = $state(false);
-	let currentImageIndex = $state(0);
+	let currentImageId = $state<string | null>(null);
 	let gridContainer = $state<HTMLElement | null>(null);
 
 	const allImages = Object.entries(photographyData).flatMap(([city, images]) =>
 		images.map((img) => ({ ...img, city }))
 	);
+
+	const cityById = new SvelteMap<string, string>();
+	for (const img of allImages) {
+		cityById.set(img.id, img.city);
+	}
 
 	const cardEls = new SvelteMap<string, HTMLElement>();
 	let visualOrder = $state<string[]>(allImages.map((img) => img.id));
@@ -34,13 +39,28 @@
 	function updateVisualOrder() {
 		if (cardEls.size === 0) return;
 
-		const positions = [];
+		const positions: { id: string; left: number; top: number }[] = [];
 		for (const [id, el] of cardEls) {
 			const rect = el.getBoundingClientRect();
 			positions.push({ id, left: rect.left, top: rect.top });
 		}
 
-		visualOrder = computeVisualOrder(positions);
+		const byCity = new SvelteMap<string, typeof positions>();
+		for (const pos of positions) {
+			const city = cityById.get(pos.id);
+			if (!city) continue;
+			if (!byCity.has(city)) byCity.set(city, []);
+			byCity.get(city)!.push(pos);
+		}
+
+		const ordered: string[] = [];
+		for (const city of Object.keys(photographyData)) {
+			const cityPositions = byCity.get(city);
+			if (cityPositions) {
+				ordered.push(...computeVisualOrder(cityPositions));
+			}
+		}
+		visualOrder = ordered;
 	}
 
 	const rafObserver = createRafObserver(updateVisualOrder);
@@ -66,19 +86,25 @@
 	}
 
 	$effect(() => {
-		tick().then(updateVisualOrder);
-	});
-
-	$effect(() => {
 		return () => {
 			rafObserver.destroy();
 		};
 	});
 
+	let currentImageIndex = $derived.by(() => {
+		if (!currentImageId) return 0;
+		return visualOrder.indexOf(currentImageId);
+	});
+
+	$effect(() => {
+		if (lightboxActive && currentImageId && !visualOrder.includes(currentImageId)) {
+			closeLightbox();
+		}
+	});
+
 	const openLightbox = async (imageId: string) => {
 		await ensureExif();
-		const index = visualOrder.indexOf(imageId);
-		currentImageIndex = index >= 0 ? index : 0;
+		currentImageId = imageId;
 		lightboxActive = true;
 	};
 
@@ -87,31 +113,35 @@
 	};
 
 	const goToNext = () => {
-		currentImageIndex = (currentImageIndex + 1) % visualOrder.length;
+		if (currentImageIndex < 0) return;
+		currentImageId = visualOrder[(currentImageIndex + 1) % visualOrder.length] ?? null;
 	};
 
 	const goToPrevious = () => {
-		currentImageIndex = (currentImageIndex - 1 + visualOrder.length) % visualOrder.length;
+		if (currentImageIndex < 0) return;
+		currentImageId =
+			visualOrder[(currentImageIndex - 1 + visualOrder.length) % visualOrder.length] ?? null;
 	};
 
 	let currentItem = $derived.by(() => {
-		const id = visualOrder[currentImageIndex];
-		if (!id) return undefined;
-		const item = allImages.find((img) => img.id === id);
+		if (!currentImageId || currentImageIndex < 0) return undefined;
+		const item = allImages.find((img) => img.id === currentImageId);
 		if (!item) return undefined;
 		return {
 			...item,
-			...(exifMap ? { exif: exifMap[id] } : {})
+			...(exifMap ? { exif: exifMap[currentImageId] } : {})
 		};
 	});
 
 	let nextImageUrl = $derived.by<string | undefined>(() => {
+		if (currentImageIndex < 0) return undefined;
 		const id = visualOrder[(currentImageIndex + 1) % visualOrder.length];
 		if (!id) return undefined;
 		return allImages.find((img) => img.id === id)?.url;
 	});
 
 	let prevImageUrl = $derived.by<string | undefined>(() => {
+		if (currentImageIndex < 0) return undefined;
 		const id = visualOrder[(currentImageIndex - 1 + visualOrder.length) % visualOrder.length];
 		if (!id) return undefined;
 		return allImages.find((img) => img.id === id)?.url;
@@ -147,7 +177,7 @@
 					<div class="columns-1 gap-4 sm:columns-2">
 						{#each images as image (image.id)}
 							<button
-								class="group mb-4 w-full cursor-pointer overflow-hidden rounded-sm border border-bd bg-transparent p-0 text-left transition-all duration-75 focus-visible:ring-1 focus-visible:ring-white/40"
+								class="group mb-4 w-full cursor-pointer break-inside-avoid overflow-hidden rounded-sm border border-bd bg-transparent p-0 text-left transition-all duration-75 focus-visible:ring-1 focus-visible:ring-white/40"
 								use:cardAction={image.id}
 								onclick={() => openLightbox(image.id)}
 								aria-label={`View photo from ${city}`}

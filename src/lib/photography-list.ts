@@ -206,6 +206,127 @@ export const photographyData: Record<string, PhotographyImage[]> = {
 				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1766877566/berlin-11_kj2ws9.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1766877566/berlin-11_kj2ws9.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1766877566/berlin-11_kj2ws9.webp 1200w'
 		}
 	],
+	Brussels: [
+		{
+			id: 'brussels-1',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113923/brussels-1_mp2rug.webp',
+			aspectRatio: '2048/2044',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113923/brussels-1_mp2rug.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113923/brussels-1_mp2rug.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113923/brussels-1_mp2rug.webp 1200w'
+		},
+		{
+			id: 'brussels-2',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113925/brussels-10_mj8gbc.webp',
+			aspectRatio: '1530/2048',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113925/brussels-10_mj8gbc.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113925/brussels-10_mj8gbc.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113925/brussels-10_mj8gbc.webp 1200w'
+		},
+		{
+			id: 'brussels-3',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113925/brussels-11_kao6w8.webp',
+			aspectRatio: '2048/1530',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113925/brussels-11_kao6w8.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113925/brussels-11_kao6w8.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113925/brussels-11_kao6w8.webp 1200w'
+		},
+		{
+			id: 'brussels-4',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113925/brussels-12_lo0igy.webp',
+			aspectRatio: '1409/2048',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113925/brussels-12_lo0igy.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113925/brussels-12_lo0igy.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113925/brussels-12_lo0igy.webp 1200w'
+		},
+		{
+			id: 'brussels-5',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113926/brussels-13_cgaik7.webp',
+			aspectRatio: '2048/2035',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113926/brussels-13_cgaik7.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113926/brussels-13_cgaik7.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113926/brussels-13_cgaik7.webp 1200w'
+		},
+		{
+			id: 'brussels-6',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113926/brussels-14_hpx76j.webp',
+			aspectRatio: '2048/2048',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113926/brussels-14_hpx76j.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113926/brussels-14_hpx76j.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113926/brussels-14_hpx76j.webp 1200w'
+		},
+		{
+			id: 'brussels-7',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113926/brussels-15_hvnzl5.webp',
+			aspectRatio: '2048/2039',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113926/brussels-15_hvnzl5.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113926/brussels-15_hvnzl5.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113926/brussels-15_hvnzl5.webp 1200w'
+		},
+		{
+			id: 'brussels-8',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113926/brussels-16_vgulwe.webp',
+			aspectRatio: '2048/1918',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113926/brussels-16_vgulwe.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113926/brussels-16_vgulwe.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113926/brussels-16_vgulwe.webp 1200w'
+		},
+		{
+			id: 'brussels-9',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113926/brussels-17_jgcisa.webp',
+			aspectRatio: '1904/2048',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113926/brussels-17_jgcisa.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113926/brussels-17_jgcisa.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113926/brussels-17_jgcisa.webp 1200w'
+		},
+		{
+			id: 'brussels-10',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113923/brussels-2_jljw39.webp',
+			aspectRatio: '2048/1956',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113923/brussels-2_jljw39.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113923/brussels-2_jljw39.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113923/brussels-2_jljw39.webp 1200w'
+		},
+		{
+			id: 'brussels-11',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113923/brussels-3_dk92x3.webp',
+			aspectRatio: '2047/2048',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113923/brussels-3_dk92x3.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113923/brussels-3_dk92x3.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113923/brussels-3_dk92x3.webp 1200w'
+		},
+		{
+			id: 'brussels-12',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113923/brussels-4_arqe8v.webp',
+			aspectRatio: '1380/2048',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113923/brussels-4_arqe8v.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113923/brussels-4_arqe8v.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113923/brussels-4_arqe8v.webp 1200w'
+		},
+		{
+			id: 'brussels-13',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113923/brussels-5_nxa9pi.webp',
+			aspectRatio: '2048/1770',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113923/brussels-5_nxa9pi.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113923/brussels-5_nxa9pi.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113923/brussels-5_nxa9pi.webp 1200w'
+		},
+		{
+			id: 'brussels-14',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113924/brussels-6_yjj4f4.webp',
+			aspectRatio: '1770/2048',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113924/brussels-6_yjj4f4.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113924/brussels-6_yjj4f4.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113924/brussels-6_yjj4f4.webp 1200w'
+		},
+		{
+			id: 'brussels-15',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113924/brussels-7_fs0jyd.webp',
+			aspectRatio: '1548/2048',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113924/brussels-7_fs0jyd.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113924/brussels-7_fs0jyd.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113924/brussels-7_fs0jyd.webp 1200w'
+		},
+		{
+			id: 'brussels-16',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113924/brussels-8_f3pgle.webp',
+			aspectRatio: '1668/2048',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113924/brussels-8_f3pgle.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113924/brussels-8_f3pgle.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113924/brussels-8_f3pgle.webp 1200w'
+		},
+		{
+			id: 'brussels-17',
+			url: 'https://res.cloudinary.com/dvnkil9d4/image/upload/v1784113925/brussels-9_n9hpzx.webp',
+			aspectRatio: '1686/2048',
+			srcset:
+				'https://res.cloudinary.com/dvnkil9d4/image/upload/w_400/v1784113925/brussels-9_n9hpzx.webp 400w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_800/v1784113925/brussels-9_n9hpzx.webp 800w, https://res.cloudinary.com/dvnkil9d4/image/upload/w_1200/v1784113925/brussels-9_n9hpzx.webp 1200w'
+		}
+	],
 	Copenhagen: [
 		{
 			id: 'copenhagen-1',

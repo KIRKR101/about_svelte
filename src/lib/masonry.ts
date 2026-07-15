@@ -4,37 +4,29 @@ export interface CardPosition {
 	top: number;
 }
 
-export function computeVisualOrder(positions: CardPosition[], columnTolerance = 10): string[] {
+export function computeVisualOrder(positions: CardPosition[], rowTolerance = 20): string[] {
 	if (positions.length === 0) return [];
 
-	const lefts = [...new Set(positions.map((p) => Math.round(p.left)))].sort((a, b) => a - b);
-	if (lefts.length === 0) return [];
+	const sorted = [...positions].sort((a, b) => a.top - b.top);
 
-	const columns: { id: string; top: number }[][] = lefts.map(() => []);
+	const rows: CardPosition[][] = [];
+	let currentRow: CardPosition[] = [];
+	let rowAnchorTop = sorted[0]!.top;
 
-	for (const pos of positions) {
-		let colIdx = lefts.findIndex((l) => Math.abs(l - Math.round(pos.left)) <= columnTolerance);
-		if (colIdx === -1) colIdx = 0;
-
-		const targetCol = columns[colIdx];
-		if (targetCol) {
-			targetCol.push({ id: pos.id, top: pos.top });
+	for (const pos of sorted) {
+		if (currentRow.length > 0 && Math.abs(pos.top - rowAnchorTop) > rowTolerance) {
+			rows.push(currentRow);
+			currentRow = [];
+			rowAnchorTop = pos.top;
 		}
+		currentRow.push(pos);
 	}
-
-	for (const col of columns) col.sort((a, b) => a.top - b.top);
+	if (currentRow.length > 0) rows.push(currentRow);
 
 	const result: string[] = [];
-	const maxLen = Math.max(0, ...columns.map((c) => c.length));
-
-	for (let row = 0; row < maxLen; row++) {
-		for (const col of columns) {
-			const item = col[row];
-			if (item) {
-				result.push(item.id);
-			}
-		}
+	for (const row of rows) {
+		row.sort((a, b) => a.left - b.left);
+		for (const item of row) result.push(item.id);
 	}
-
 	return result;
 }

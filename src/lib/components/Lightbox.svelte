@@ -233,7 +233,7 @@
 
 	{#if totalItems > 1}
 		<button
-			class="absolute top-1/2 left-3 z-50 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-200 hover:bg-white/10 disabled:opacity-20 md:left-6 md:h-14 md:w-14"
+			class="absolute top-1/2 left-3 z-50 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-200 hover:bg-white/10 disabled:opacity-100 md:left-6 md:h-14 md:w-14"
 			onclick={handlePrev}
 			disabled={isAnimating || isClosing}
 			aria-label="Previous image"
@@ -250,7 +250,7 @@
 		</button>
 
 		<button
-			class="absolute top-1/2 right-3 z-50 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-200 hover:bg-white/10 disabled:opacity-20 md:right-6 md:h-14 md:w-14"
+			class="absolute top-1/2 right-3 z-50 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-200 hover:bg-white/10 disabled:opacity-100 md:right-6 md:h-14 md:w-14"
 			onclick={handleNext}
 			disabled={isAnimating || isClosing}
 			aria-label="Next image"
@@ -268,7 +268,7 @@
 	{/if}
 
 	<div
-		class="absolute inset-x-1 top-2 bottom-2 flex items-center justify-center [touch-action:pinch-zoom]"
+		class="absolute inset-x-1 top-2 bottom-2 flex [touch-action:pinch-zoom] items-center justify-center"
 		onclick={toggleFooter}
 		onkeydown={(e) => {
 			if (e.key === 'Enter' || e.key === ' ') {
