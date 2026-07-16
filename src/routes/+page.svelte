@@ -1,12 +1,57 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { formatDate } from '$lib/utils';
+	import { fly } from 'svelte/transition';
+	import { formatDate, getHardcoverSrcset } from '$lib/utils';
 
 	let { data }: { data: { allWritings: { title: string; date: string; file: string }[] } } =
 		$props();
 
 	const SPOTIFY_API_URL = 'https://spotify.kirkr.xyz/api/now-playing';
 	const LASTFM_API_URL = 'https://lastfm.kirkr.xyz/api/lastfm-track';
+
+	interface Book {
+		id: number;
+		title: string;
+		subtitle: string | null;
+		description: string | null;
+		pages: number;
+		release_date: string;
+		release_year: number;
+		rating: number;
+		ratings_count: number;
+		slug: string;
+		cover_url: string;
+		authors: string[];
+		series: unknown[];
+	}
+
+	interface UserBook {
+		status: string;
+		rating: number | null;
+		date_added: string;
+		started_reading?: string;
+		first_read_date?: string;
+		last_read_date?: string;
+		read_count: number;
+		owned: boolean;
+		starred: boolean;
+		review: string | null;
+	}
+
+	interface Progress {
+		pages_read: number;
+		total_pages: number;
+		percentage: number;
+	}
+
+	interface CurrentlyReading {
+		book: Book;
+		user_book: UserBook;
+		progress: Progress | null;
+		last_read_event: { event: string; action_at: string; entry: string | null } | null;
+	}
+
+	let currentlyReading: CurrentlyReading[] = $state([]);
 
 	interface SpotifyImage {
 		height: number;
@@ -177,6 +222,7 @@
 
 	onMount(() => {
 		fetchSpotifyTrack();
+		fetchCurrentlyReading();
 		intervalId = setInterval(fetchCurrentTrack, 30000);
 		return () => {
 			if (intervalId) clearInterval(intervalId);
@@ -184,6 +230,51 @@
 			if (retryTimeoutId) clearTimeout(retryTimeoutId);
 		};
 	});
+
+	const BOOKS_CACHE_TTL = 2 * 60 * 60 * 1000;
+
+	function loadCachedBooks(): CurrentlyReading[] | null {
+		try {
+			const stored = localStorage.getItem('books-cache');
+			if (!stored) return null;
+			const parsed = JSON.parse(stored);
+			if (parsed && Array.isArray(parsed.currentlyReading) && typeof parsed.timestamp === 'number') {
+				if (Date.now() - parsed.timestamp > BOOKS_CACHE_TTL) {
+					localStorage.removeItem('books-cache');
+					return null;
+				}
+				return parsed.currentlyReading;
+			}
+			return null;
+		} catch {
+			return null;
+		}
+	}
+
+	function saveCachedBooks(currentlyReading: CurrentlyReading[]) {
+		try {
+			localStorage.setItem('books-cache', JSON.stringify({ currentlyReading, timestamp: Date.now() }));
+		} catch (e) {
+			console.warn('Failed to cache books:', e);
+		}
+	}
+
+	async function fetchCurrentlyReading() {
+		const cached = loadCachedBooks();
+		if (cached) {
+			currentlyReading = cached;
+			return;
+		}
+		try {
+			const response = await fetch('https://hardcover.kirkr.xyz');
+			if (!response.ok) throw new Error(`Status ${response.status}`);
+			const data = await response.json();
+			currentlyReading = data.currently_reading || [];
+			saveCachedBooks(currentlyReading);
+		} catch (e) {
+			console.warn('Failed to fetch currently reading:', e);
+		}
+	};
 
 	let currentTrack = $derived.by(() => {
 		if (dataSource === 'spotify' && spotifyData) {
@@ -228,6 +319,24 @@
 			? (currentTrack.progress / currentTrack.duration) * 100
 			: 0
 	);
+
+	let sidebarOpen = $state(false);
+	let mainContentEl: HTMLElement | undefined = $state();
+	let sidebarTop = $state(40);
+
+	$effect(() => {
+		const el = mainContentEl;
+		if (!el) return;
+		const update = () => {
+			const r = el.getBoundingClientRect();
+			const p = el.parentElement;
+			if (p) sidebarTop = r.top - p.getBoundingClientRect().top;
+		};
+		update();
+		const ro = new ResizeObserver(update);
+		ro.observe(el);
+		return () => ro.disconnect();
+	});
 </script>
 
 <svelte:head>
@@ -235,166 +344,30 @@
 	<link rel="preconnect" href="https://i.scdn.co" />
 </svelte:head>
 
-<div class="flex items-start justify-center px-6 py-6 lg:py-8">
-	<main class="w-full max-w-[600px]">
-		<div class="py-6">
-			<div class="mb-4 flex items-center justify-between">
-				<div class="font-sans text-[11px] tracking-[0.1em] text-muted uppercase">About</div>
+<div class="flex min-h-full items-center justify-center px-6 py-10 lg:py-16 relative">
+	<main bind:this={mainContentEl} class="w-full max-w-[600px]">
+		<section class="pb-10">
+			<div class="space-y-5 font-sans text-[16px] leading-[1.75] text-white/70">
+				<p>
+					My main academic interest is in computer engineering, particularly architecture. I'm a
+					fan of C, Zig, and TypeScript, and web technologies in general; this site is built on
+					Svelte.
+				</p>
+				<p>
+					I also have an interest in politics, philosophy, and economics, as well as art, with a
+					strong inclination towards the Dutch Golden Age, especially the Delft and Hague Schools.
+				</p>
+				<p>
+				    See my <a href="/projects" class="underline decoration-white/30 underline-offset-2 transition-colors duration-75 hover:decoration-white/70">projects</a>, <a href="/writings" class="underline decoration-white/30 underline-offset-2 transition-colors duration-75 hover:decoration-white/70">writings</a>, or <a href="/photography" class="underline decoration-white/30 underline-offset-2 transition-colors duration-75 hover:decoration-white/70">photography</a>; or <button onclick={() => sidebarOpen = !sidebarOpen} class="underline decoration-white/30 underline-offset-2 transition-colors duration-75 hover:decoration-white/70 cursor-pointer bg-transparent border-none p-0 text-inherit font-inherit">see what i am doing</button>. Email me <a href="mailto:theo@kirkr.xyz" class="underline decoration-white/30 underline-offset-2 transition-colors duration-75 hover:decoration-white/70">here</a>, or take a look at my <a href="https://github.com/KIRKR101" class="underline decoration-white/30 underline-offset-2 transition-colors duration-75 hover:decoration-white/70">github</a>.
+				</p>
 			</div>
-
-			<div class="border-l border-bd/60 py-1 pl-5">
-				<div class="space-y-4 font-sans text-[14px] leading-[1.7] text-white/70">
-					<p>
-						My main academic interest is in computer engineering, particularly architecture. I'm a
-						fan of C, Zig, and TypeScript, and web technologies in general; this site is built on
-						Svelte.
-					</p>
-					<p>
-						I also have an interest in Politics, Philosophy, and Economics, as well as art, with a
-						strong inclination towards the Dutch Golden Age, especially the Delft and Hague Schools.
-					</p>
-				</div>
-
-				<div class="mt-5">
-					<a
-						href="https://github.com/KIRKR101"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="font-sans text-[10px] tracking-[0.15em] text-muted uppercase no-underline hover:text-white/60"
-					>
-						View Github ↗
-					</a>
-				</div>
-			</div>
-		</div>
+		</section>
 
 		<div class="h-px bg-bd"></div>
 
-		<div class="py-6">
-			<div class="mb-5 font-sans text-[10px] tracking-[0.15em] text-muted uppercase">
-				{#if currentTrack}
-					{#if currentTrack.isPlaying}
-						Now playing · {currentTrack.source}
-					{:else}
-						Last played · {currentTrack.source}
-					{/if}
-				{:else}
-					Initialising...
-				{/if}
-			</div>
-
-			{#if currentTrack}
-				<div class="flex items-start gap-4 sm:gap-6">
-					<div
-						class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-bd bg-art-bg sm:h-24 sm:w-24"
-					>
-						{#if currentTrack.url}
-							<a
-								href={currentTrack.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="block h-full w-full"
-							>
-								<img
-									srcset={currentTrack.imageSrcset}
-									sizes="(max-width: 768px) 80px, 96px"
-									src={currentTrack.imageUrl}
-									alt={currentTrack.title}
-									class="h-full w-full object-cover"
-									fetchpriority="high"
-								/>
-							</a>
-						{:else}
-							<img
-								srcset={currentTrack.imageSrcset}
-								sizes="(max-width: 768px) 80px, 96px"
-								src={currentTrack.imageUrl}
-								alt={currentTrack.title}
-								class="h-full w-full object-cover"
-								fetchpriority="high"
-							/>
-						{/if}
-					</div>
-					<div class="min-w-0 flex-1 pt-0.5">
-						<div class="mb-1 font-serif text-[20px] leading-tight text-white/85 italic">
-							{#if currentTrack.url}
-								<a
-									href={currentTrack.url}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="text-inherit no-underline transition-colors hover:text-white"
-								>
-									{currentTrack.title}
-								</a>
-							{:else}
-								{currentTrack.title}
-							{/if}
-						</div>
-						<div class="font-sans text-[11px] tracking-wide text-muted">
-							{#if currentTrack.artistUrl}
-								<a
-									href={currentTrack.artistUrl}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="text-inherit no-underline transition-colors duration-100 hover:text-white/78"
-								>
-									{currentTrack.artist}
-								</a>
-							{:else}
-								{currentTrack.artist}
-							{/if}
-							{#if currentTrack.album}
-								{' · ' + currentTrack.album}
-							{/if}
-						</div>
-
-						{#if currentTrack.showProgress}
-							<div
-								class="relative mt-[14px] h-px bg-rail"
-								aria-label={formatAriaLabel(currentTrack.progress, currentTrack.duration)}
-							>
-								<div
-									class="linear absolute inset-y-0 left-0 h-full bg-prog"
-									style="width: {progressPercentage}%"
-								></div>
-
-							</div>
-							<div class="mt-1.5 flex justify-between text-[9px] text-muted sm:text-[10px]">
-								<span>{formatTime(currentTrack.progress)}</span>
-								<span>{formatTime(currentTrack.duration)}</span>
-							</div>
-						{:else}
-							<div class="relative mt-[14px] h-px bg-rail"></div>
-						{/if}
-					</div>
-				</div>
-			{:else}
-				<div class="flex items-start gap-4 sm:gap-6">
-					<div
-						class="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-bd bg-art-bg sm:h-24 sm:w-24"
-					>
-						<svg viewBox="0 0 24 24" class="h-6 w-6 fill-white/12 sm:h-7 sm:w-7">
-							<path
-								d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
-							/>
-						</svg>
-					</div>
-					<div class="min-w-0 flex-1 pt-0.5">
-						<div class="mb-1 font-serif text-[20px] leading-tight text-white/85 italic">
-							Loading...
-						</div>
-						<div class="text-[11px] tracking-wide text-muted">...</div>
-						<div class="relative mt-[14px] h-px bg-rail"></div>
-					</div>
-				</div>
-			{/if}
-		</div>
-
-		<div class="h-px bg-bd"></div>
-
-		<div class="cv-auto py-6">
-			<div class="mb-4 flex items-center justify-between">
-				<div class="font-serif text-[26px] text-white/85 italic">Writings</div>
+		<section class="cv-auto py-10">
+			<div class="mb-6 flex items-baseline justify-between">
+				<div class="font-serif text-[24px] text-white/85 italic">Writings</div>
 				<a
 					href="/writings"
 					class="font-sans text-[10px] tracking-[0.15em] text-muted uppercase no-underline hover:text-white/60"
@@ -405,9 +378,9 @@
 
 			<div class="flex flex-col">
 				{#each recentWritingsSlice as writing (writing.file)}
-					<a
+				    <a
 						href="/writing/{writing.file}"
-						class="group flex w-full items-baseline justify-between border-b border-bd/30 py-3 no-underline last:border-0"
+						class="group flex w-full items-baseline justify-between py-3 no-underline"
 					>
 						<span
 							class="font-sans text-[13px] text-white/70 transition-colors duration-100 group-hover:text-white"
@@ -419,6 +392,178 @@
 					</a>
 				{/each}
 			</div>
-		</div>
+		</section>
 	</main>
+
+	<button
+		class="absolute right-8 hidden lg:flex items-center justify-center w-5 h-5 text-white/10 hover:text-white/30 transition-all duration-200 z-10 select-none"
+		style="top: {sidebarTop - 26}px"
+		onclick={() => sidebarOpen = !sidebarOpen}
+		aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
+	>
+		<svg
+			width="12"
+			height="12"
+			viewBox="0 0 12 12"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="1.5"
+			class="transition-transform duration-200"
+			class:rotate-180={sidebarOpen}
+		>
+			<path d="M4.5 9.5L8 6 4.5 2.5"/>
+		</svg>
+	</button>
+
+	{#if sidebarOpen}
+		<div
+			class="absolute right-8 hidden lg:block w-[280px]"
+			style="top: {sidebarTop}px"
+			transition:fly={{ x: 20, duration: 200 }}
+		>
+			<section class="pb-10">
+				<div class="mb-6 font-sans text-[11px] tracking-[0.14em] text-muted uppercase font-light">
+					{#if currentTrack}
+						{currentTrack.isPlaying ? 'Now playing' : 'Last played'} · {currentTrack.source}
+					{:else}
+						Initialising
+					{/if}
+				</div>
+
+				<div class="flex items-start gap-5">
+					<div class="h-20 w-20 shrink-0 overflow-hidden rounded-[2px] bg-art-bg">
+						{#if currentTrack}
+							{#if currentTrack.url}
+								<a href={currentTrack.url} target="_blank" rel="noopener noreferrer">
+									<img
+										srcset={currentTrack.imageSrcset}
+										sizes="(max-width: 768px) 80px, 96px"
+										src={currentTrack.imageUrl}
+										alt={currentTrack.title}
+										class="h-full w-full object-cover"
+										fetchpriority="high"
+									/>
+								</a>
+							{:else}
+								<img
+									srcset={currentTrack.imageSrcset}
+									sizes="(max-width: 768px) 80px, 96px"
+									src={currentTrack.imageUrl}
+									alt={currentTrack.title}
+									class="h-full w-full object-cover"
+									fetchpriority="high"
+								/>
+							{/if}
+						{/if}
+					</div>
+
+					<div class="min-w-0 flex-1 pt-0.5">
+						<div class="truncate font-serif text-[19px] leading-tight text-white/85 italic">
+							{#if currentTrack}
+								{#if currentTrack.url}
+								    <a
+										href={currentTrack.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="text-inherit no-underline transition-colors hover:text-white"
+									>
+										{currentTrack.title}
+									</a>
+								{:else}
+									{currentTrack.title}
+								{/if}
+							{:else}
+								Loading
+							{/if}
+						</div>
+						<div class="mt-1 truncate font-sans text-[11px] tracking-wide text-muted">
+							{#if currentTrack}
+								{#if currentTrack.artistUrl}
+								    <a
+										href={currentTrack.artistUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="text-inherit no-underline transition-colors hover:text-white/78"
+									>
+										{currentTrack.artist}
+									</a>
+								{:else}
+									{currentTrack.artist}
+								{/if}
+								{#if currentTrack.album}
+									{' · ' + currentTrack.album}
+								{/if}
+							{/if}
+						</div>
+
+						{#if currentTrack?.showProgress}
+							<div
+								class="relative mt-3 h-px bg-rail"
+								aria-label={formatAriaLabel(currentTrack.progress, currentTrack.duration)}
+							>
+								<div class="absolute inset-y-0 left-0 h-full bg-prog" style="width: {progressPercentage}%"></div>
+							</div>
+							<div class="mt-1.5 flex justify-between font-mono text-[9px] text-muted">
+								<span>{formatTime(currentTrack.progress)}</span>
+								<span>{formatTime(currentTrack.duration)}</span>
+							</div>
+						{/if}
+					</div>
+				</div>
+			</section>
+
+			{#if currentlyReading.length > 0}
+				<div class="mt-10">
+					<div class="mb-6 font-sans text-[11px] tracking-[0.14em] text-muted uppercase font-light">
+						Currently Reading
+					</div>
+					<div class="space-y-5">
+						{#each currentlyReading as item (item.book.id)}
+							<div class="flex gap-3">
+								<div
+									class="relative flex h-28 w-20 shrink-0 items-center justify-center overflow-hidden rounded-sm border border-bd bg-[#141416] text-white/20"
+								>
+									<span
+										class="-rotate-[315deg] text-center font-serif text-[10px] leading-tight tracking-wide select-none"
+										aria-hidden="true"
+									>
+										{item.book.title}
+									</span>
+									<img
+										src={item.book.cover_url}
+										srcset={getHardcoverSrcset(item.book.cover_url)}
+										sizes="80px"
+										alt={item.book.title}
+										class="absolute inset-0 h-full w-full rounded-sm object-cover"
+										loading="lazy"
+										onerror={(e) => ((e.target as HTMLElement).style.opacity = '0')}
+									/>
+								</div>
+								<div class="flex min-w-0 flex-1 flex-col justify-center">
+									<div class="truncate font-serif text-[16px] leading-tight text-white/90">
+										<a
+											href="https://hardcover.app/books/{item.book.slug}?referrer_id=120657"
+											target="_blank"
+											rel="noopener noreferrer"
+											class="text-inherit no-underline transition-colors duration-75 hover:text-white/80"
+										>
+											{item.book.title}
+										</a>
+									</div>
+									<div class="mt-0.5 truncate font-mono text-[10px] tracking-wider text-muted">
+										{item.book.authors[0] ?? 'Unknown author'}
+									</div>
+									{#if item.progress}
+										<div class="mt-2 font-mono text-[10px] tracking-wider text-muted">
+											{Math.round(item.progress.percentage)}% · {item.progress.pages_read}/{item.progress.total_pages}
+										</div>
+									{/if}
+								</div>
+							</div>
+						{/each}
+					</div>
+				</div>
+			{/if}
+		</div>
+	{/if}
 </div>

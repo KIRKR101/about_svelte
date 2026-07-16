@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { getHardcoverSrcset } from '$lib/utils';
 
 	interface Book {
@@ -45,7 +46,7 @@
 	interface CurrentlyReading {
 		book: Book;
 		user_book: UserBook;
-		progress: Progress;
+		progress: Progress | null;
 		last_read_event: LastReadEvent | null;
 	}
 
@@ -100,8 +101,8 @@
 					timestamp: Date.now()
 				})
 			);
-		} catch {
-			// localStorage not available
+		} catch (e) {
+			console.warn('Failed to cache books:', e);
 		}
 	}
 
@@ -136,7 +137,7 @@
 		}
 	}
 
-	$effect(() => {
+	onMount(() => {
 		fetchBooks();
 	});
 
@@ -244,7 +245,7 @@
 										</a>
 									</div>
 									<div class="mt-1 font-mono text-[11px] tracking-wider text-muted">
-										by {item.book.authors[0]}, {item.book.release_year}
+										by {item.book.authors[0] ?? 'Unknown author'}, {item.book.release_year}
 									</div>
 									{#if item.progress}
 										<div class="mt-3">
@@ -311,7 +312,7 @@
 										</a>
 									</div>
 									<div class="mt-1 font-mono text-[11px] tracking-wider text-muted">
-										by {item.book.authors[0]} &middot; {item.book.release_year}
+										by {item.book.authors[0] ?? 'Unknown author'} &middot; {item.book.release_year}
 									</div>
 									<div class="mt-2 font-mono text-[11px] tracking-wider text-muted">
 										{#if item.user_book.rating}
