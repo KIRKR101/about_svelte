@@ -332,6 +332,46 @@ body {
 	.prose sup a:hover {
 		color: white;
 	}
+
+	.prose sup[id^='fnref-'] {
+		scroll-margin-top: 80px;
+	}
+
+	.prose .footnotes li[id^='fn-'] {
+		scroll-margin-top: 80px;
+	}
+
+	@keyframes fn-flash {
+		0% {
+			background-color: rgba(255, 255, 255, 0.12);
+			box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+			border-radius: 2px;
+		}
+		100% {
+			background-color: transparent;
+			box-shadow: 0 0 0 3px transparent;
+		}
+	}
+
+	@keyframes fnref-flash {
+		0% {
+			background-color: rgba(255, 255, 255, 0.22);
+			box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.14);
+			border-radius: 2px;
+		}
+		100% {
+			background-color: transparent;
+			box-shadow: 0 0 0 4px transparent;
+		}
+	}
+
+	.prose sup:target {
+		animation: fnref-flash 2s ease-out forwards;
+	}
+
+	.prose .footnotes li:target {
+		animation: fn-flash 2s ease-out forwards;
+	}
 }
 
 @layer components {
