@@ -4,7 +4,7 @@ export const projects = [
 		id: 'wasmagick',
 		title: 'WASMagick',
 		link: 'https://wasmagick.kirkr.xyz',
-		github: 'https://github.com/Kirkr101/WASMagick-svelte',
+		github: 'https://github.com/Kirkr101/wasmagick',
 		description:
 			'Run ImageMagick filters directly in the browser through WebAssembly. Everything is local: no servers, no uploads.',
 		tech: ['Svelte 5', 'WebAssembly', 'TypeScript'],
